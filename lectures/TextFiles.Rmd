@@ -1,0 +1,53 @@
+---
+title: "Working with Text Files"
+author: "A Hessl"
+date: "5/31/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Problem/Questions
+Everyone seems to be using a different text file editor. What is their purpose and why are text files so important?
+
+*	How are text files different from excel files?
+*	Which text editor is right for me?  
+* What's the difference between .csv, .txt, tab-delimited and other kinds of text files?
+*	How can I write to a text file?
+
+### Objectives
+*	Compare several different text file editors.
+*	Examine the anatomy of different kinds of text files.
+*	Learn to write, edit and save a text file from the Shell.
+
+### Tools/Terms
+*	__Text file__ - aka flatfile, is a computer file structured as a sequence of lines of text. These lines of text are human readable and machine readable. This is in opposition to the other major type of computer file, binary (not human readable).
+* __Plain text__ - content of a text file without formatting, for example, does not contain bold or italic.
+* __ASCII__ - character set most commonly used for text files in English language. Other character sets include Unicode, UTF-8
+*	__POSIX__ - the Unix text file format.
+*	__Text editor__ - computer program that edits plain text. Ex: Nano, Notepad, TextEdit, Atom
+*	__Delimiter__ - one or more characters that separate independent regions/items in plain text. Ex: comma, space, tab.  But others can be defined and used.
+
+
+### Anatomy of a Text File
+Open the two MorgPre.txt and MorgPre.csv files in /data.  Open them in your text editor.  
+
+* What are they?  
+* How do they differ?  
+* How is each delimited?  
+* Which is the better format?  
+* What happens if you open them in excel?  
+
+>__Challenge: What is MorgPre (with no extension)? Why are extensions important?__
+
+
+### Key Points
+*	Text is a machine and human readable format that has remained stable since the beginning of computing.  
+*	Text files are the holders for scripts and data.  
+*	Many data files, especially from government sources, are stored as raw data in text files.  
+*	Text is usually delimited by a comma, space or other separator.  
+*	Many text editors will do the job of viewing, searching and editing text files.  
+
+
