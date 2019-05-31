@@ -1,0 +1,75 @@
+---
+title: "RStudio"
+author: "A Hessl"
+date: "5/31/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Setup
+This lesson assumes you have the R and RStudio software installed on your computer. RStudio runs on R so download R first. R can be downloaded here <https://www.r-project.org/>. RStudio is an environment for developing using R. The desktop open source (free!) license can be downloaded here <https://www.rstudio.com/products/rstudio/download/>. You will need the Desktop version for your computer.
+
+
+## RStudio
+
+RStudio <https://www.rstudio.com/> is an integrated development environment (IDE) for R. What does that mean? It's like a toolbox for your analytical projects where all the tools you need are in one place, working together.
+
+RStudio includes:  
+  * console with command line  
+  * syntax-highlighting text editor that supports direct code execution   
+    * tools for plotting   
+    * history   
+    * debugging  
+    * workspace management  
+    * version control and collaboration with GitHub <https:www.github.com>  
+
+*Let's get started!*
+
+### Tour the Four Workspaces
+RStudio has four main workspaces:  
+
+1. Editing (Upper Left) 
+2. Terminal/Console (Lower Left)  
+3. Environment/History/Connections/Git (Upper Right)  
+4. Files/Plots/Packages/Help  
+
+We will be starting with the terminal (LL) and Git (UR).  Later in the semester, we will make use of the other tools. There are so many tools, we will not be able to cover them all - be sure to take the tour <https://www.rstudio.com/products/rstudio/features/>.
+
+### The Terminal
+
+*What is a Unix Shell?*  
+The shell is a program that enables us to send commands to the computer and receive output. It is also referred to as the terminal.
+•	terminal - the user interface with the console.
+• Unix/Linux/like - operating system that allows direct communication with the computer. First developed by AT&T and then Bell Labs in the 1970s, became the basis for MAC OSX, most mainframes.  
+    + modular  
+    + each tool performs a simple task  
+    + tools can be combined together to do more complex operations  
+•	shell - UNIX or Linux term for the terminal. The bash shell is one kind of shell and is the default for Linux and OSX  
+•	command line - the actual line in a console where a command is entered  
+•	prompt - the start of the command line. It typically includes your computer and user names (+ path) and ends with a dollar sign ($). Commands are typed after the prompt  
+
+*Why use the terminal?*  
+•	Facilitates complex processes with minimal keystrokes.  
+•	Automate repetitive tasks, rather than re-creating the task each time.  
+•	Forces user to become intimate with data stored on their machine and used in analysis.  
+•	Familiarizes user with computing language and is a “gateway” to mastering computing techniques in R, C, Python, and others.  
+•	Can record each task as a script that can be stored and edited.   
+
+#### Let's Play with the Terminal
+In order to see if the shell is working, type the following after the prompt:
+
+```{bash echo, echo=TRUE}
+    echo "hello bash"
+```
+
+Try getting the shell to type something else, like your name.
+
+To find out if you are using bash (and what version), type bash. If bash exists, you will get a new prompt, such as: 
+
+```{bash bash exists}
+    bash
+```
+

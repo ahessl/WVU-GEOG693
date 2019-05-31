@@ -1,0 +1,207 @@
+---
+title: "Shell Basics"
+author: "A Hessl"
+date: "5/31/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem
+Sara is new to R.  She borrowed a script from a colleague that reads in climate station data and then converts it to a format she can use.  But when she runs the script, the script can't find any of the files her friend gave her.  Her colleague confirmed that the script works perfectly on her computer.  
+
+*Why won't it work on Sara's computer?*
+
+## Questions
+*	How can I move around on my computer?  
+*	How can I see what files and directories I have?  
+*	How can I specify the location of a file or directory on my computer?  
+*	How can I define a file destination consistent on anyone's computer?  
+
+## Objectives
+* Explain the similarities and differences between a file and a directory.  
+* Translate an absolute path into a relative path and vice versa.  
+* Construct absolute and relative paths that identify specific files and directories.  
+* Demonstrate the use of tab completion and explain its advantages.  
+
+## Terms
+* __file system__ - the part of the operating system that organizes files and folders (aka - 'directories')  
+* __root directory__ - top of the file system; may be same as home  
+* __home directory__ - the “user’s” directory, i.e. the directory a user is in upon login  
+* __working directory__ - the current directory (i.e., “folder”) that you are in. By default, this is your home directory. 
+*	__path__ - the unique file or folder location within a directory. Here the path is also the working directory: /Users/amyhessl
+
+You can print your working directory (pwd):
+
+```{bash pwd}
+pwd
+```
+
+### On Slashes
+
+Unix based operating systems use a forward slash ('/'), Windows use a backward slash ('\').  Some applications like R were written for Unix, therefore use a /.
+
+### Why Directories?
+Your computer is organized in a hierarchy of folders and files that can be navigated using paths. You might want to access files and documents that are located in different places on your machine or online.  Each can be called using their unique path.
+		
+List files and folders in your working directory
+If you want to check which files are in your current directory, you can use ls: 
+
+```{bash ls}
+ls  
+```
+
+Use a flag -F (also known as a switch or an option), show which items are files vs folders (trailing '/'):
+
+```{bash ls flag}
+ls -F
+```
+
+### Getting help
+ls has other flags as well. 
+```{bash help, echo=TRUE, eval=FALSE}
+ls -help
+```
+
+OR
+
+```{bash manual,  echo=TRUE, eval=FALSE}
+man ls
+```
+
+q - quits out of the manual!  
+
+>__Challenge: Try using a legal flag ( -l or -h) and an illegal flag ( -j).__
+
+### Change Working Directory - cd and pwd
+You can change your working directory to any directory currently on your system.  Anything you 'make' will now be in that directory, unless directed otherwise.
+		
+__Option 1__ - cd to the full path name of directory: 
+```{bash cd}
+cd /Users/amyhessl/desktop
+```
+
+By typing pwd, I can see the full path to my current directory is:
+
+```{bash pwd now}
+pwd
+```
+	
+__Option 2__ - If the directory you wish to set as working directory is under your current working directory, you can eliminate all items preceding the wd (this is a __relative path__!): 
+
+```{bash cd relative, eval=FALSE}		
+cd desktop
+```
+
+__Option 3__ - Use “~” as a stand-in for your home directory.  
+
+```{bash cd tilda} 
+cd ~
+cd ~/Desktop
+```
+		 	
+### Navigate up the directory:
+../ takes us up one level in the directory. It refers to a __parent directory__
+```{bash parent} 
+pwd
+cd ..
+pwd
+```
+
+```{bash uptwo}
+cd ../../
+pwd
+```
+
+Navigate down to a folder on your desktop.
+```{bash downtwo, eval=FALSE}
+cd ~/Desktop/Emma
+```
+
+>__Challenge: Can you navigate up a directory and then down to a different directory in one command?__
+```{bash upover, eval=FALSE}
+cd ../Aiden
+```
+
+### Create new directory
+mkdir creates a new directory from the terminal.  Create a new directory under you current wd:
+			
+```{bash newdir, eval=FALSE} 
+cd ~/Desktop
+mkdir GEOG693
+cd GEOG693
+pwd
+
+```
+
+
+Delete this directory rmdir
+```{bash rmdir, eval=FALSE}
+rmdir GEOG693
+```
+_Why can't you delete it?_
+
+```{bash upone, eval=FALSE}
+cd ../
+rmdir GEOG693
+```
+
+Create a new directory under a directory that is _not_ your current working directory:
+
+```{bash mkdir tilda, eval=FALSE}
+mkdir ~/desktop/GEOG693
+```
+
+Now the power: create a directory with a subdirectory, all in one swipe: 
+```{bash mkdir flag}
+mkdir -p data/proj1
+```
+
+_What does the -p flag do?_
+
+
+>__Challenge: Delete those two directories with one command.  How can you do it?__	
+
+Hint: what does the -r flag do?  BE VERY CAREFUL! Why?		
+
+### Absolute and Relative Paths
+So far, when specifying directory names, or even a directory path (as above), we have been using relative paths. When you use a relative path with a command like ls or cd, it tries to find that location from where we are, rather than from the root of the file system.  There are two ways to make an absolute path - a path that will take anyone to the same place regardless of their directory structure.
+
+* cd ~ directs to the users home directory.
+* cd / directs to the root directory
+
+The leading / tells the computer to follow the path from the root of the file system, so it always refers to exactly one directory, no matter where we are when we run the command.
+
+>__Challenge: Where does cd / take you? Which is better to use relative or absolute path? When? Why?__
+
+
+
+### Shortcuts
+The shell interprets the character ~ (tilde) at the start of a path to mean “the current user’s home directory”. For example, if my home directory is /Users/amyhessl, then ~/Desktop is equivalent to /Users/amyhessl/Desktop. This only works if it is the first character in the path: 
+here/there/~/elsewhere is not here/there/Users/nelle/elsewhere.
+
+Another shortcut is the - (dash) character. cd will translate - into the previous directory I was in, which is faster than having to remember, then type, the full path. This is a very efficient way of moving back and forth between directories. The difference between cd .. and cd - is that the former brings you up, while the latter brings you back. You can think of it as the Last Channel button on a TV remote.
+
+### Make a Class Directory
+Make a new directory on your desktop (or other location) to be used in this  course called "GEOG693" using the mkdir command. Add a subdirectory (folder) called "shell". Then, make this your working directory.  When you pwd, you should get:
+			~/desktop/ESDA/shell
+		
+
+## Key Points
+* The file system is responsible for managing information on the disk.  
+* Information is stored in files, which are stored in directories (folders).  
+*	Directories can also store other directories, which forms a directory tree.  
+*	cd path changes the current working directory.  
+*	ls path prints a listing of a specific file or directory; ls on its own lists the current working directory.  
+*	pwd prints the user’s current working directory.  
+*	/ on its own is the root directory of the whole file system - this may or may not be your home directory.  
+*	A relative path specifies a location starting from the current location.  
+*	An absolute path specifies a location from the root of the file system.  
+*	Directory names in a path are separated with / on Unix, but \ on Windows.  
+*	.. means ‘the directory above the current one’; . on its own means ‘the current directory’.  
+*	Most files’ names are something.extension. The extension isn’t required, and doesn’t guarantee anything, but is normally used to indicate the type of data in the file.  
+
+
+
