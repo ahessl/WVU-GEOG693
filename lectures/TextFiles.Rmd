@@ -9,18 +9,22 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Problem/Questions
-Everyone seems to be using a different text file editor. What is their purpose and why are text files so important?
+### Problem
+Demetrius' advisor gave him a folder full of files produced by a remote data logger that he is supposed to analyze.  The files are named 'data_file_1', 'data_file_2', etc.  He notices that there is no extension and excel won't open the file.  How can Demetrius figure out what format the files are in and find a way to analyze the data?
 
-*	How are text files different from excel files?
-*	Which text editor is right for me?  
+### Questions
+
+*	What is a text file?  
+* How are text files different from excel files?
+*	How can text files be opened and edited?  
 * What's the difference between .csv, .txt, tab-delimited and other kinds of text files?
-*	How can I write to a text file?
+*	How can I create my own text files?
 
 ### Objectives
-*	Compare several different text file editors.
-*	Examine the anatomy of different kinds of text files.
-*	Learn to write, edit and save a text file from the Shell.
+*	Recognize different kinds of text files.  
+* Compare several different text file editors.  
+*	Examine the anatomy of different kinds of text files.  
+*	Learn to write, edit and save a text file.  
 
 ### Tools/Terms
 *	__Text file__ - aka flatfile, is a computer file structured as a sequence of lines of text. These lines of text are human readable and machine readable. This is in opposition to the other major type of computer file, binary (not human readable).
@@ -32,8 +36,9 @@ Everyone seems to be using a different text file editor. What is their purpose a
 
 
 ### Anatomy of a Text File
-Open the two MorgPre.txt and MorgPre.csv files in /data.  Open them in your text editor.  
+Double click on MorgPre.txt and MorgPre.csv files located in /data.
 
+* What program opened the files?  
 * What are they?  
 * How do they differ?  
 * How is each delimited?  
@@ -45,9 +50,10 @@ Open the two MorgPre.txt and MorgPre.csv files in /data.  Open them in your text
 
 ### Key Points
 *	Text is a machine and human readable format that has remained stable since the beginning of computing.  
-*	Text files are the holders for scripts and data.  
-*	Many data files, especially from government sources, are stored as raw data in text files.  
+*	Text files are the holders for scripts (code) and data.  
+*	Many data files, especially from government sources, are stored as 'raw' data in text files.  
 *	Text is usually delimited by a comma, space or other separator.  
 *	Many text editors will do the job of viewing, searching and editing text files.  
+* RStudio includes a text editor (upper left window).
 
 
