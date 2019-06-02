@@ -1,0 +1,66 @@
+---
+title: "Schedule"
+subtitle: GEOG693 Open Data Science
+author: "A Hessl"
+date: "Last Updated: 6/1/2019"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Please check this schedule early and often - schedule will be adjusted based on the pace of our class.  
+
+__The Shell__
+
+1) Intro to Class Concept _00/00/00_  
+    + RStudio  
+    + GitHub  
+2) Shell Basics _00/00/00_  
+
+3) Working with Text Files _00/00/00_  
+
+4) Files and Directories _00/00/00_ 
+
+5) Wildcards, Pipes, and Filters _00/00/00_  
+
+6) Rapidly Accessing Data from Web
+    + wget
+    + APIs
+    
+7) Loops
+
+8) Shell Scripts
+
+10) Finding Things 
+    + grep
+    + find  
+    
+__Project Management and Collaboration__
+
+1) Version Control Using Git
+    + Branching
+    + Merging
+
+2) Collaboration and Sharing Using GitHub
+
+3) Project Management in R Studio
+
+4) R Markdown
+
+__R__  
+
+1) Data Structures  
+
+2) Data Frames  
+
+3) Subsetting/Indexing Data  
+
+4) Control Flow: Functions in R  
+Control Flow: Apply  
+Control Flow: Loops  
+Split, Apply, Combine   
+Plotting Using Base R  
+Plotting Using ggplot  
+
