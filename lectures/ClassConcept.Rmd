@@ -1,0 +1,72 @@
+---
+title: "Class Concept"
+author: "A Hessl"
+date: "6/5/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Open Data Science
+_"Stand on the Shoulders of Giants"_  
+Dwarfs standing on the shoulders of giants is a famous metaphor explaining how we make progress in science.  We build on the discoveries and techniques already developed.  
+
+But this progress is only possible if we can reproduce what the giants have achieved. In the past, this meant carefully reading the methods section of a paper. But have you ever read the methods and thought: __"I'm not sure exactly what they did here"__?  
+
+In the digital age, we have the capacity to make the exact computational methods and data open to everyone so that we may truly stand on the shoulders of giants, even though we may be dwarfs.
+
+### Open Data Science
+This course teaches students how to think and work programatically so that we dwarfs can borrow from today's giants and in future, share our data and methods with the next generation of dwarfs. In this course, we will learn computational approaches to address scientific questions.  And, we will learn how to share not only our results, but our exact methods with others.  
+
+__Good News:__ Writing code, debugging, getting help online, and collaborating with others has gotten a lot easier!  IDE's (Integrated Development Environments) like RStudio allow us to use multipe programming tools in a single environment, online communities like Stack Overflow can help you solve problems, and version control systems like GitHub allow us to keep track of our code and collaborate with other programmers.
+
+Much of computer programming involves translating what you wish to do into a set of computational instructions. This requires a language.  There are many languages available to us (Python, Java, Matlab, etc.), and they all have their sweet spot. R is the language of choice for statistical analysis and has a massive community of users in academics.
+
+In this course, we will learn how to use [R](https://www.r-project.org/) for computational analysis, [RStudio](https://www.rstudio.com/) for writing, editing, running code, and [GitHub](https://github.com/) for tracking changes in your code and collaborating with other dwarves.
+
+### Why R?
+__Open-source__
+R is open-source software, which means using it is completely free. Open-source software is developed collaboratively, meaning the source code is open to public inspection, modification, and improvement. 
+
+__Popular__  
+R is widely used in the physical and social sciences, as well as in government, non-profits, and the private sector.
+
+Many developers and social scientists write programs in R. As a result, there is also a large support community available to help troubleshoot problematic code. As seen in the Redmonk programming language rankings (which compare languages’ appearances on Github [usage] and StackOverflow [support]), R appears near the top of both rankings.
+
+![RedMonk Rankings](http://sogrady-media.redmonk.com/sogrady/files/2019/03/lang.rank_.119.png)
+
+__R is a computing language__  
+As a computing language, R does not have a point-and-click interface, instead it relies on  execution of __functions__. For us, this means that to do anything, you must write code. This differs from popular statistical software such as Stata or SPSS which at their core utilize a command language but overlay them with drop-down menus that enable a point-and-click interface. While much easier to operate, there are several downsides to this approach - mainly that it makes it _impossible to reproduce one’s analysis_.
+
+__Things R does well__  
+Data analysis - R was written by statisticians for statisticians, so it is designed first and foremost as a language for statistical and data analysis. Much of the cutting-edge research in machine learning occurs in R, and every week there are packages added to CRAN implementing these new methods. Furthermore, many models in R can be exported to other programming languages such as C, C++, Python, tensorflow, stan, etc.
+
+Data visualization - while the base R graphics package is comprehensive and powerful, additional libraries such as ggplot2 and lattice make R the go-to language for power data visualization approaches.
+
+__Things R does not do as well__  
+Speed - while by no means a slug, R is not written to be a fast, speedy language. Depending on the complexity of the task and the size of your data, you may find R taking a long time to execute your program.
+
+
+### Install R and RStudio
+Before we can become open data scientists, sharing our amazing results on the interwebs, we need to install a language (R), and IDE (RStudio) and a version control system (GitHub). I encourage you to install these on your laptop if you have one.  If you do not, you can use the computers in Brooks 418.  Regardless, you will need to set up an account on GitHub (see #3 below).
+
+### Git
+What is Git?
+
+Register a free GitHub account. As a university student, also check to see if you are eligible for GitHub Education offers. Some of these are very useful, such as unlimited private repositories. Remember that once you create a GitHub account, you are stuck with that username. Choose something professional and start building a positive social media presence.
+Install Git
+Install Git client
+Configure Git/GitHub
+Personalize Git
+Git -> GitHub
+Configure Git
+Using Git within RStudio
+GitHub credentials and avoiding monotony
+Complete homework 01
+
+
+
+
+_This page was derived in part from Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University of Chicago_

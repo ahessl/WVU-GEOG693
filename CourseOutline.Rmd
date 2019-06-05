@@ -12,12 +12,15 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 Please check this schedule early and often - schedule will be adjusted based on the pace of our class.  
 
+__Before You Come to Class__  
+[Installing Software](./lectures/InstallingSoftware.Rmd) - Please complete this before the first day of class.
+
 __The Shell__
 
 1) Intro to Class Concept _00/00/00_  
     + RStudio  
     + GitHub  
-2) Shell Basics _00/00/00_  
+2) [Shell Basics](./lectures/ShellBasics.html) _00/00/00_  
 
 3) Working with Text Files _00/00/00_  
 

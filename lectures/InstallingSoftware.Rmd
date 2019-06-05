@@ -1,0 +1,36 @@
+---
+title: "Installing Git and R"
+author: "A Hessl"
+date: "6/5/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Before Day 1: Install Software
+
+#### Install R and RStudio
+Before we can become open data scientists, sharing our amazing results on the interwebs, we need to install a language (R), and IDE (RStudio) and a version control system (GitHub). I encourage you to install these on your laptop if you have one.  If you do not, you can use the computers in Brooks 418.  Regardless, you will need to set up an account on GitHub (see #3 below).
+
+Setup R
+
+Setup RStudio
+
+Register a free GitHub account. As a university student, also check to see if you are eligible for GitHub Education offers. Some of these are very useful, such as unlimited private repositories. Remember that once you create a GitHub account, you are stuck with that username. Choose something professional and start building a positive social media presence.
+
+Install Git
+Install Git client
+Configure Git/GitHub
+Personalize Git
+Git -> GitHub
+Configure Git
+Using Git within RStudio
+GitHub credentials and avoiding monotony
+
+Complete homework 01
+
+
+
+_This page was derived in part from Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University of Chicago_
