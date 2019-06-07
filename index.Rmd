@@ -2,13 +2,26 @@
 title: "GEOG693: Open Data Science"
 ---
     
-Welcome!
+#### _Welcome!_
 
-New tools and techniques in data science are enabling collaboration and discovery in the Earth and environmental sciences at unprecedented rates and scales.
-In this course, students will learn how to:  
-  * Rapidly download data from online sources  
-  *	Use the terminal to search, organize, and edit files  
-  *	Develop a projects, functions, and reports in R  
-  *	Wrangle data into the shape you need for analysis  
-*	Collaborate online using version control in GitHub   
-We will work with data typical of the Earth sciences, but techniques and skills are broadly applicable across fields.  Course will be taught in a workshop setting.  Students will develop projects that simulate real-life collaboration with other scientists.
+New tools and techniques in data science are enabling collaboration and discovery in the Earth and environmental sciences at unprecedented rates and scales. In this course, students will learn how to:  
+
+- Rapidly download data from online sources  
+*	Use the terminal to search, organize, and edit files  
+*	Develop a projects, functions, and reports in R  
+*	Wrangle data into the shape you need for analysis  
+*	Collaborate online using version control in GitHub  
+
+We will work with data typical of the Earth sciences, but techniques and skills are broadly applicable across fields.  You will learn this material in a workshop setting to allow for experimentation and support.  Students will develop projects that simulate real-life collaboration with other scientists.
+
+#### Expected Learning Outcomes:   
+Upon successful completion of this course, students will be able to:  
+
+1.	Execute basic commands and scripts in Bash Shell.  
+2. Develop, read, and write basic scripts in R.  
+3.	Import, organize, and summarize data in R.
+4.	Create publication quality figures in R.
+5.	Share and collaborate on scripts/projects using GitHub.
+6.	Complete a project integrating the Shell, R and GitHub.
+
+#### [_Let's get started!_](./CourseOutline.html)
