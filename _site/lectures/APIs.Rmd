@@ -1,0 +1,396 @@
+---
+title: "Getting Data with APIs"
+author: "A Hessl"
+date: "6/5/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+You will need to install these libraries for this unit:
+```{r libraries}
+library(rebird)
+library(tidyverse)
+library(forcats)
+library(broom)
+library(wordcloud)
+library(tidytext)
+library(viridis)
+
+set.seed(1234)
+theme_set(theme_minimal())
+```
+
+There are many ways to obtain data from the Internet. Four major categories are:
+
+* click-and-download on the internet as a “flat” file, such as .csv, .xls  
+* use wget through the shell to download lots of files (scraping)  
+* install-and-play an API for which someone has written a handy R package  
+* API-query published with an unwrapped API  
+
+#### Click-and-Download
+In the simplest case, the data you need is already on the internet in a tabular format. There are a couple of strategies here:
+
+Use read.csv('url/to/filename',...) to read the data straight into R. (Similar options include: download.file, downloader package). From the shell, one could use wget or curl to download the file and store a local copy, then use read_csv or something similar to read the data into R. Even if the file disappears from the internet, you have a local copy cached. Regardless, files may need cleaning and transformation when you bring them into R.
+
+#### Getting Data Through an API
+Many times, the data that you want is not already organized into one or a few tables that you can read directly into R. More frequently, you find access to the data allowed through an API. Application Programming Interfaces (APIs) are descriptions of the kind of requests that can be made of a certain piece of software, and descriptions of the kind of answers that are returned. Many sources of data - databases, websites, services - have made all (or part) of their data available via APIs over the internet. Computer programs (“clients”) can make requests of the server, and the server will respond by sending data (or an error message). This client can be many kinds of other programs or websites, including R running from your laptop.
+
+#### Install and play packages
+Many common web services and APIs have been “wrapped”, i.e. R functions have been written around them which send your query to the server and format the response.
+
+_Why do we want this?_
+
+* provenance is recorded in script
+* reproducible
+* data can be easily updated
+* ease of use
+* scaling to lots of files
+
+#### Sightings of birds: rebird
+rebird is an R interface for the [e-Bird database](https://ebird.org). e-Bird lets birders upload sightings of birds, and allows everyone access to those data.
+
+
+##### Search birds by geography
+The ebird website categorizes some popular locations as “Hotspots”. These are areas where there are both lots of birds and lots of birders. Once such location is at [Core Arboretum](https://ebird.org/hotspot/L723492)
+
+At that link, you can see a page like this:
+
+![](images/CoreEBird.png)
+
+The data already look to be organized in a data frame! rebird allows us to read these data directly into R.
+
+The ID code for Core Arboretum is L723492.  We will also need a 'key'.  This is required by eBird and many other APIs to ensure that we are a registered user and not a bot.  You can get one for eBird [here]().  If you plant to use it again, you can save it in your .Renviron file that is read on startup of R.  (Alternatively you can use your .Rprofile file).  Either way, you can locate this in your project directory and everytime you start that project, R will read those variables upon startup.
+
+In the terminal, from the project directory:
+OpenDataSci/
+```{bash setkey, eval=FALSE}
+file.edit(".Renviron")
+```
+
+`EBIRD_KEY = 'yourcode'`
+Now you must restart RStudio for R to read .Renviron file on startup.  It's a useful place to store any variable you wish to use often.
+
+We can use the function ebirdgeo to get a list for an area:
+
+```{r ebrirdgeo}
+arbobirds <- ebirdgeo(lat = 39.645810, lng = -79.978924, key = getOption("EBIRD_KEY"))
+chibirds %>%
+  as_tibble() %>%
+  glimpse()
+```
+
+
+Note: Check the defaults on this function. e.g. radius of circle, time of year.
+
+We can also search by “region”, which refers to short codes which serve as common shorthands for different political units. For example, France is represented by the letters FR:
+
+```{r ebirdregion}
+DCbirds <- ebirdregion("US-DC", key = getOption("EBIRD_KEY"))
+
+frenchbirds %>%
+  as_tibble() %>%
+  glimpse()
+```
+
+Searching geographic info: geonames
+# install.packages(geonames)
+```{r geonames}
+library(geonames)
+```
+API authentication
+Many APIs require you to register for access. This allows them to track which users are submitting queries and manage demand - if you submit too many queries too quickly, you might be rate-limited and your requests de-prioritized or blocked. Always check the API access policy of the web site to determine what these limits are.
+
+There are a few things we need to do to be able to use this package to access the geonames API:
+
+Go to the geonames site and register an account.
+
+Add your geonames username to your  R your geonames username to your .Renviron in your .Rproj directory. 
+
+```{bash setusername, eval=FALSE}
+file.edit(".Renviron")
+```
+
+
+Add to the text file (replacing my_user_name with your Geonames username).
+```{r geonames username}
+geonamesUsername = "my_user_name")
+```
+
+
+_Important_  
+Make sure your .Renviron ends with a blank line
+Make sure .Renviron is included in your .gitignore file, otherwise it will be synced with Github
+Restart RStudio after modifying .Renviron in order to load any new keys into memory
+Spelling is important when you set the option in your .Renviron
+
+This is a simple means to keep your keys and usernames private, especially if you are sharing the same authentication across several projects. Remember that using .Renviron makes your code un-reproducible. In this case, that is exactly what we want!
+
+Using Geonames
+What can we do? Get access to lots of geographical information via the various “web services”
+
+countryInfo <- GNcountryInfo()
+countryInfo %>%
+  as_tibble() %>%
+  glimpse()
+
+This country info dataset is very helpful for accessing the rest of the data, because it gives us the standardized codes for country and language.
+
+The Manifesto Project: manifestoR
+The Manifesto Project collects and organizes political party manifestos from around the world. It currently covers over 1000 parties from 1945 until today in over 50 countries on five continents. We can use the manifestoR package to access the API and download those manifestos for analysis in R.
+
+Load library and set API key
+Accessing data from the Manifesto Project API requires an authentication key. You can create an account and key here. Here I store my key in .Rprofile and retrieve it using mp_setapikey().
+
+library(manifestoR)
+
+# retrieve API key stored in .Rprofile
+mp_setapikey(key = getOption("manifesto_key"))
+Retrieve the database
+(mpds <- mp_maindataset())
+## Connecting to Manifesto Project DB API... 
+## Connecting to Manifesto Project DB API... corpus version: 2018-2
+## # A tibble: 4,388 x 174
+##    country countryname oecdmember eumember edate        date party
+##      <dbl> <chr>            <dbl>    <dbl> <date>      <dbl> <dbl>
+##  1      11 Sweden               0        0 1944-09-17 194409 11220
+##  2      11 Sweden               0        0 1944-09-17 194409 11320
+##  3      11 Sweden               0        0 1944-09-17 194409 11420
+##  4      11 Sweden               0        0 1944-09-17 194409 11620
+##  5      11 Sweden               0        0 1944-09-17 194409 11810
+##  6      11 Sweden               0        0 1948-09-19 194809 11220
+##  7      11 Sweden               0        0 1948-09-19 194809 11320
+##  8      11 Sweden               0        0 1948-09-19 194809 11420
+##  9      11 Sweden               0        0 1948-09-19 194809 11620
+## 10      11 Sweden               0        0 1948-09-19 194809 11810
+## # … with 4,378 more rows, and 167 more variables: partyname <chr>,
+## #   partyabbrev <chr>, parfam <dbl>, coderid <dbl>, manual <dbl>,
+## #   coderyear <dbl>, testresult <dbl>, testeditsim <dbl>, pervote <dbl>,
+## #   voteest <dbl>, presvote <dbl>, absseat <dbl>, totseats <dbl>,
+## #   progtype <dbl>, datasetorigin <dbl>, corpusversion <chr>, total <dbl>,
+## #   peruncod <dbl>, per101 <dbl>, per102 <dbl>, per103 <dbl>,
+## #   per104 <dbl>, per105 <dbl>, per106 <dbl>, per107 <dbl>, per108 <dbl>,
+## #   per109 <dbl>, per110 <dbl>, per201 <dbl>, per202 <dbl>, per203 <dbl>,
+## #   per204 <dbl>, per301 <dbl>, per302 <dbl>, per303 <dbl>, per304 <dbl>,
+## #   per305 <dbl>, per401 <dbl>, per402 <dbl>, per403 <dbl>, per404 <dbl>,
+## #   per405 <dbl>, per406 <dbl>, per407 <dbl>, per408 <dbl>, per409 <dbl>,
+## #   per410 <dbl>, per411 <dbl>, per412 <dbl>, per413 <dbl>, per414 <dbl>,
+## #   per415 <dbl>, per416 <dbl>, per501 <dbl>, per502 <dbl>, per503 <dbl>,
+## #   per504 <dbl>, per505 <dbl>, per506 <dbl>, per507 <dbl>, per601 <dbl>,
+## #   per602 <dbl>, per603 <dbl>, per604 <dbl>, per605 <dbl>, per606 <dbl>,
+## #   per607 <dbl>, per608 <dbl>, per701 <dbl>, per702 <dbl>, per703 <dbl>,
+## #   per704 <dbl>, per705 <dbl>, per706 <dbl>, per1011 <dbl>,
+## #   per1012 <dbl>, per1013 <dbl>, per1014 <dbl>, per1015 <dbl>,
+## #   per1016 <dbl>, per1021 <dbl>, per1022 <dbl>, per1023 <dbl>,
+## #   per1024 <dbl>, per1025 <dbl>, per1026 <dbl>, per1031 <dbl>,
+## #   per1032 <dbl>, per1033 <dbl>, per2021 <dbl>, per2022 <dbl>,
+## #   per2023 <dbl>, per2031 <dbl>, per2032 <dbl>, per2033 <dbl>,
+## #   per2041 <dbl>, per3011 <dbl>, per3051 <dbl>, per3052 <dbl>,
+## #   per3053 <dbl>, …
+mp_maindataset() includes a data frame describing each manifesto included in the database. You can use this database for some exploratory data analysis. For instance, how many manifestos have been published by each political party in Sweden?
+
+mpds %>%
+  filter(countryname == "Sweden") %>%
+  count(partyname) %>%
+  ggplot(aes(fct_reorder(partyname, n), n)) +
+  geom_col() +
+  labs(title = "Political manifestos published in Sweden",
+       x = NULL,
+       y = "Total (1948-present)") +
+  coord_flip()
+
+
+Or we can use scaling functions to identify each party manifesto on an ideological dimension. For example, how have the Democratic and Republican Party manifestos in the United States changed over time?
+
+mpds %>%
+  filter(party == 61320 | party == 61620) %>%
+  mutate(ideo = mp_scale(.)) %>%
+  select(partyname, edate, ideo) %>%
+  ggplot(aes(edate, ideo, color = partyname)) +
+  geom_line() +
+  scale_color_manual(values = c("blue", "red")) +
+  labs(title = "Ideological scaling of major US political parties",
+       x = "Year",
+       y = "Ideological position",
+       color = NULL) +
+  theme(legend.position = "bottom")
+
+
+Download manifestos
+mp_corpus() can be used to download the original manifestos as full text documents stored as a corpus. Once you obtain the corpus, you can perform text analysis. As an example, let’s compare the most common words in the Democratic and Republican Party manifestos from the 2012 U.S. presidential election:
+
+# download documents
+(docs <- mp_corpus(countryname == "United States" & edate > as.Date("2012-01-01")))
+## Connecting to Manifesto Project DB API... 
+## Connecting to Manifesto Project DB API... corpus version: 2018-2 
+## Connecting to Manifesto Project DB API... corpus version: 2018-2 
+## Connecting to Manifesto Project DB API... corpus version: 2018-2
+## <<ManifestoCorpus>>
+## Metadata:  corpus specific: 0, document level (indexed): 0
+## Content:  documents: 4
+# generate wordcloud of most common terms
+docs %>%
+  tidy() %>%
+  mutate(party = factor(party, levels = c(61320, 61620),
+                        labels = c("Democratic Party", "Republican Party"))) %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words) %>%
+  count(party, word, sort = TRUE) %>%
+  na.omit() %>%
+  reshape2::acast(word ~ party, value.var = "n", fill = 0) %>%
+  comparison.cloud(max.words = 200)
+
+
+Census data with tidycensus
+tidycensus provides an interface with the US Census Bureau’s decennial census and American Community APIs and returns tidy data frames with optional simple feature geometry. These APIs require a free key you can obtain here. Rather than storing your key in .Rprofile, tidycensus includes census_api_key() which automatically stores your key in .Renviron, which is basically a global version of .Rprofile. Anything stored in .Renviron is automatically loaded anytime you initiate R on your computer, regardless of the project or file location. Once you get your key, load it:
+
+library(tidycensus)
+census_api_key("YOUR API KEY GOES HERE")
+Obtaining data
+get_decennial() allows you to obtain data from the 1990, 2000, and 2010 decennial US censuses. Let’s look at the number of individuals of Asian ethnicity by state in 2010:
+
+asia10 <- get_decennial(geography = "state", variables = "P008006", year = 2010)
+## Getting data from the 2010 decennial Census
+asia10
+## # A tibble: 52 x 4
+##    GEOID NAME        variable   value
+##    <chr> <chr>       <chr>      <dbl>
+##  1 01    Alabama     P008006    53595
+##  2 02    Alaska      P008006    38135
+##  3 04    Arizona     P008006   176695
+##  4 05    Arkansas    P008006    36102
+##  5 06    California  P008006  4861007
+##  6 22    Louisiana   P008006    70132
+##  7 21    Kentucky    P008006    48930
+##  8 08    Colorado    P008006   139028
+##  9 09    Connecticut P008006   135565
+## 10 10    Delaware    P008006    28549
+## # … with 42 more rows
+The result of get_decennial() is a tidy data frame with one row per geographic unit-variable.
+
+GEOID - identifier for the geographical unit associated with the row
+NAME - descriptive name of the geographical unit
+variable - the Census variable encoded in the row
+value - the value of the variable for that geographic unit
+We can quickly visualize this data frame using ggplot2:
+
+ggplot(asia10, aes(x = reorder(NAME, value), y = value)) +
+  geom_point() +
+  coord_flip()
+
+
+Of course this graph is not entirely useful since it is based on the raw frequency of Asian individuals. California is at the top of the list, but it is also the most populous city. Instead, we could normalize this value as a percentage of the entire state population. To do that, we need to retrieve another variable:
+
+asia_pop <- get_decennial(geography = "state",
+                          variables = c("P008006", "P008001"),
+                          year = 2010) %>%
+  spread(variable, value) %>%
+  mutate(pct_asia = P008006 / P008001)
+## Getting data from the 2010 decennial Census
+asia_pop
+## # A tibble: 52 x 5
+##    GEOID NAME                  P008001 P008006 pct_asia
+##    <chr> <chr>                   <dbl>   <dbl>    <dbl>
+##  1 01    Alabama               4779736   53595   0.0112
+##  2 02    Alaska                 710231   38135   0.0537
+##  3 04    Arizona               6392017  176695   0.0276
+##  4 05    Arkansas              2915918   36102   0.0124
+##  5 06    California           37253956 4861007   0.130 
+##  6 08    Colorado              5029196  139028   0.0276
+##  7 09    Connecticut           3574097  135565   0.0379
+##  8 10    Delaware               897934   28549   0.0318
+##  9 11    District of Columbia   601723   21056   0.0350
+## 10 12    Florida              18801310  454821   0.0242
+## # … with 42 more rows
+ggplot(asia_pop, aes(x = reorder(NAME, pct_asia), y = pct_asia)) +
+  geom_point() +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip()
+
+
+get_acs() retrieves data from the American Community Survey. This survey is administered to a sample of 3 million households on an annual basis, so the data points are estimates characterized by a margin of error. tidycensus returns both the original estimate and margin of error. Let’s get median household income data from the 2012-2016 ACS for counties in Illinois.
+
+usa_inc <- get_acs(geography = "state", 
+                   variables = c(medincome = "B19013_001"), 
+                   year = 2016)
+## Getting data from the 2012-2016 5-year ACS
+usa_inc
+## # A tibble: 52 x 5
+##    GEOID NAME                 variable  estimate   moe
+##    <chr> <chr>                <chr>        <dbl> <dbl>
+##  1 01    Alabama              medincome    44758   314
+##  2 02    Alaska               medincome    74444   809
+##  3 04    Arizona              medincome    51340   231
+##  4 05    Arkansas             medincome    42336   234
+##  5 06    California           medincome    63783   188
+##  6 08    Colorado             medincome    62520   287
+##  7 09    Connecticut          medincome    71755   473
+##  8 10    Delaware             medincome    61017   723
+##  9 11    District of Columbia medincome    72935  1164
+## 10 12    Florida              medincome    48900   200
+## # … with 42 more rows
+Now we return both an estimate column for the ACS estimate and moe for the margin of error (defaults to 90% confidence interval).
+
+usa_inc %>%
+  ggplot(aes(x = reorder(NAME, estimate), y = estimate)) +
+  geom_pointrange(aes(ymin = estimate - moe,
+                     ymax = estimate + moe),
+                  size = .25) +
+  coord_flip() +
+  labs(title = "Household income by state",
+       subtitle = "2012-2016 American Community Survey",
+       x = "",
+       y = "ACS estimate (bars represent margin of error)")
+
+
+Search for variables
+get_acs() or get_decennial() requires knowing the variable ID, of which there are thousands. load_variables() downloads a list of variable IDs and labels for a given Census or ACS and dataset. You can then use View() to interactively browse through and filter for variables in RStudio.
+
+Drawing maps
+tidycensus also can return simple feature geometry for geographic units along with variables from the decennial Census or ACS, which can then be visualized using geom_sf(). Let’s look at median household income by Census tracts from the 2012-2016 ACS in Loudoun County, Virginia:
+
+loudoun <- get_acs(state = "VA",
+                   county = "Loudoun",
+                   geography = "tract", 
+                   variables = c(medincome = "B19013_001"), 
+                   year = 2016,
+                   geometry = TRUE)
+loudoun
+## Simple feature collection with 65 features and 5 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -77.96196 ymin: 38.84645 xmax: -77.32828 ymax: 39.32419
+## epsg (SRID):    4269
+## proj4string:    +proj=longlat +datum=NAD83 +no_defs
+## First 10 features:
+##          GEOID                                           NAME  variable
+## 1  51107610101 Census Tract 6101.01, Loudoun County, Virginia medincome
+## 2  51107610102 Census Tract 6101.02, Loudoun County, Virginia medincome
+## 3  51107610201 Census Tract 6102.01, Loudoun County, Virginia medincome
+## 4  51107610202 Census Tract 6102.02, Loudoun County, Virginia medincome
+## 5  51107610300    Census Tract 6103, Loudoun County, Virginia medincome
+## 6  51107610400    Census Tract 6104, Loudoun County, Virginia medincome
+## 7  51107610503 Census Tract 6105.03, Loudoun County, Virginia medincome
+## 8  51107610504 Census Tract 6105.04, Loudoun County, Virginia medincome
+## 9  51107610505 Census Tract 6105.05, Loudoun County, Virginia medincome
+## 10 51107610506 Census Tract 6105.06, Loudoun County, Virginia medincome
+##    estimate   moe                       geometry
+## 1    132833 19347 MULTIPOLYGON (((-77.76219 3...
+## 2    124659 16679 MULTIPOLYGON (((-77.66133 3...
+## 3    141250  6709 MULTIPOLYGON (((-77.79794 3...
+## 4    140481 10796 MULTIPOLYGON (((-77.84565 3...
+## 5    148583  9368 MULTIPOLYGON (((-77.65754 3...
+## 6    128657  9107 MULTIPOLYGON (((-77.60321 3...
+## 7    150982  6323 MULTIPOLYGON (((-77.54714 3...
+## 8    108042  4652 MULTIPOLYGON (((-77.56114 3...
+## 9     45226  7533 MULTIPOLYGON (((-77.56454 3...
+## 10   118750 17032 MULTIPOLYGON (((-77.5484 39...
+This looks similar to the previous output but because we set geometry = TRUE it is now a simple features data frame with a geometry column defining the geographic feature. We can visualize it using geom_sf() and viridis::scale_*_viridis() to adjust the color palette.
+
+ggplot(data = loudoun) +
+  geom_sf(aes(fill = estimate, color = estimate)) + 
+  coord_sf(crs = 26911) + 
+  scale_fill_viridis(option = "magma") + 
+  scale_color_viridis(option = "magma")

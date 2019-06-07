@@ -1,0 +1,14 @@
+---
+title: "GEOG693: Open Data Science"
+---
+    
+Welcome!
+
+New tools and techniques in data science are enabling collaboration and discovery in the Earth and environmental sciences at unprecedented rates and scales.
+In this course, students will learn how to:  
+  * Rapidly download data from online sources  
+  *	Use the terminal to search, organize, and edit files  
+  *	Develop a projects, functions, and reports in R  
+  *	Wrangle data into the shape you need for analysis  
+*	Collaborate online using version control in GitHub   
+We will work with data typical of the Earth sciences, but techniques and skills are broadly applicable across fields.  Course will be taught in a workshop setting.  Students will develop projects that simulate real-life collaboration with other scientists.

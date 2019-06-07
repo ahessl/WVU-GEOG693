@@ -1,0 +1,17 @@
+---
+title: "Contact Info"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### Professor Amy E. Hessl
+Department of Geography
+West Virginia University
+
+email: `amy.hessl[at]mail.wvu.edu`
+
+Office: G49 Brooks Hall
+Office Hours: TBD

@@ -1,0 +1,255 @@
+---
+title: "WorkingWithFilesDirectories"
+author: "A Hessl"
+date: "6/1/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Problem
+
+In the lesson, you will find out how to access the data in this folder.
+
+
+### Questions
+*	How can I create, copy, and delete files and directories?  
+*	How can I edit files?  
+
+### Objectives
+*	Create a directory hierarchy that matches a given diagram.  
+*	Create files in that hierarchy using an editor or by copying and renaming existing files.  
+*	Delete specified files and/or directories.  
+
+We now know how to explore files and directories, let's review how to make a directory. Go back to our ~/Desktop/ESDA/shell/data-shell directory and use ls -F to see what it contains:
+
+Amys-MacBook-Pro-7:data-shell amyhessl$ pwd
+/Users/amyhessl/Desktop/ESDA/shell/data-shell
+Amys-MacBook-Pro-7:data-shell amyhessl$ ls -F
+
+creatures/		north-pacific-gyre/	solar.pdf
+data/			notes.txt		thesis/
+molecules/		pizza.cfg		writing/
+
+
+Let’s create a new directory called thesis using the command mkdir thesis (which has no output): 
+$ mkdir thesis
+
+
+Since thesis is a relative path (i.e., doesn’t have a leading slash), the new directory is created in the current working directory:
+$ ls -F
+creatures/		north-pacific-gyre/	solar.pdf
+data/			notes.txt		thesis/
+molecules/		pizza.cfg		writing/
+Use File Explorer or Finder 
+Using the shell to create a directory is no different than using a file explorer. If you open the current directory using your operating system’s graphical file explorer, the thesis directory will appear there too. While they are two different ways of interacting with the files, the files and directories themselves are the same.
+
+Good names for files and directories
+Useful tips for the names of your files.
+1.	Don’t use whitespaces. Use - or _ instead.
+2.	Whitespaces can make a name more meaningful but since whitespace is used to break arguments on the command line it is better to avoid them in names of files and directories.
+3.	Don’t begin the name with - (dash). Commands treat names starting with - as options.
+4.	Stick with letters, numbers, . (period or ‘full stop’), - (dash) and _ (underscore). Avoid special characters (*, ^, etc.)
+
+If you need to refer to names of files or directories that have whitespace or another non-alphanumeric character, you should surround the name in quotes ("").
+
+Since we’ve just created the thesis directory, there’s nothing in it yet:
+
+$ ls -F thesis
+
+Let’s change our working directory to thesis using cd, then run a text editor called Nano to create a file called draft.txt:
+Why Plain Text/Flatfiles Are Cool
+1.	Interoperable - read/write in all operating systems
+2.	Small - file size is tiny even for large files
+3.	Stability - been around since computers had monitors, late 60s
+4.	Search and replace is a breeze
+5.	Preferred format for scripts, data
+Which Editor?
+When we say, “nano is a text editor,” we really do mean “text”: it can only work with plain character data, not tables, images, or any other human-friendly media. 
+
+On Unix systems (such as Linux and Mac OS X), many programmers use Emacs or Vim (both of which require more time to learn), or a graphical editor such as Gedit and Atom. On Windows, you may wish to use Notepad++. Windows also has a built-in editor called notepad that can be run from the command line in the same way as nano for the purposes of this lesson.
+
+Let’s type in a few lines of text. Once we’re happy with our text, we can press Ctrl-O (press the Ctrl or Control key and, while holding it down, press the O key) to write our data to disk (we’ll be asked what file we want to save this to: press Return to accept the suggested default of draft.txt).
+ 
+Once our file is saved, we can use Ctrl-X to quit the editor and return to the shell.
+Control, Ctrl, or ^ Key
+The Control key is also called the “Ctrl” key. There are various ways in which using the Control key may be described. For example, you may see an instruction to press the Control key and, while holding it down, press the X key, described as any of:
+*	Control-X
+*	Control+X
+*	Ctrl-X
+*	Ctrl+X
+*	^X
+*	C-x
+In nano, along the bottom of the screen you’ll see ^G Get Help ^O WriteOut. This means that you can use Control-G to get help and Control-O to save your file.
+nano doesn’t leave any output on the screen after it exits, but ls now shows that we have created a file called draft.txt:
+
+$ ls
+draft.txt
+Creating Files a Different Way
+We have seen how to create text files using the nano editor. Now, try the following command in your home directory:
+
+$ cd
+$ touch my_file.txt
+
+*	What did the touch command do? When you look at your home directory using the GUI file explorer, does the file show up?
+*	Use ls -l to inspect the files. How large is my_file.txt?
+*	When might you want to create a file this way?
+
+Returning to the data-shell directory, let’s tidy up the thesis directory by removing the draft we created:
+$ cd thesis
+$ rm draft.txt
+
+This command removes files (rm is short for “remove”). If we run ls again, its output is empty once more, which tells us that our file is gone:
+
+$ ls
+Deleting Is Forever
+The Unix shell doesn’t have a trash bin that we can recover deleted files from (though most graphical interfaces to Unix do). Instead, when we delete files, they are unhooked from the file system so that their storage space on disk can be recycled. Tools for finding and recovering deleted files do exist, but there’s no guarantee they’ll work in any particular situation, since the computer may recycle the file’s disk space right away.
+
+Let’s re-create that file and then move up one directory to /Users/nelle/Desktop/data-shell using cd ..:
+
+$ pwd
+/Users/amyhessl/desktop/ESDA/shell/data-shell/thesis
+$ nano draft.txt
+$ ls
+draft.txt
+$ cd ..
+
+If we try to remove the entire thesis directory using rm thesis, we get an error message:
+$ rm thesis
+rm: thesis: is a directory
+
+This happens because rm by default only works on files, not directories.
+
+Try:
+
+$ rmdir thesis
+
+What went wrong in this case?
+
+To really get rid of thesis we must also delete the file draft.txt. We can do this with the recursive option for rm:
+
+$ rm -r thesis
+Using rm Safely
+What happens when we type rm -i thesis/quotations.txt? Why would we want this protection when using rm?
+
+With Great Power Comes Great Responsibility
+Removing the files in a directory recursively can be a very dangerous operation. If we’re concerned about what we might be deleting we can add the “interactive” flag -i to rm which will ask us for confirmation before each step
+$ rm -r -i thesis
+examine files in directory thesis? y
+remove thesis/draft.txt? y
+remove thesis? y
+
+This removes everything in the directory, then the directory itself, asking at each step for you to confirm the deletion.
+
+Let’s create that directory and file one more time. (Note that this time we’re running nano with the path thesis/draft.txt, rather than going into the thesis directory and running nano on draft.txt there.)
+
+$ mkdir thesis
+$ nano/thesis/draft.txt
+-bash: nano/thesis/draft.txt: No such file or directory
+
+What did I do wrong? Can you fix it?
+
+draft.txt isn’t a particularly informative name, so let’s change the file’s name using mv, which is short for “move”:
+
+$ mv thesis/draft.txt thesis/quotes.txt
+
+The first argument tells mv what we’re “moving”, while the second is where it’s to go. In this case, we’re moving thesis/draft.txt to thesis/quotes.txt, which has the same effect as renaming the file. Sure enough, ls shows us that thesis now contains one file called quotes.txt:
+
+$ ls thesis
+quotes.txt
+
+One has to be careful when specifying the target file name, since mv will silently overwrite any existing file with the same name, which could lead to data loss. An additional flag, mv -i (or mv --interactive), can be used to make mv ask you for confirmation before overwriting.
+Just for the sake of consistency, mv also works on directories.
+
+Let’s move quotes.txt into the current working directory. We use mv once again, but this time we’ll just use the name of a directory as the second argument to tell mv that we want to keep the filename, but put the file somewhere new. (This is why the command is called “move”.) In this case, the directory name we use is the special directory name . that we mentioned earlier.
+
+$ mv thesis/quotes.txt .
+The effect is to move the file from the directory it was in to the current working directory. ls now shows us that thesis is empty:
+
+		$ ls thesis
+
+Further, ls with a filename or directory name as an argument only lists that file or directory. We can use this to confirm that quotes.txt is still in our current directory:
+
+$ ls quotes.txt
+quotes.txt
+
+Moving to the Current Folder
+After running the following commands, Jamie realizes that she put the files sucrose.dat and maltose.dat into the wrong folder:
+
+$ ls -F
+	analyzed/ raw/
+$ ls -F analyzed
+Fructose.dat glucose.dat maltose.dat sucrose.dat
+$cd raw/
+
+Fill in the blanks to move these files to the current folder (i.e., the one she is currently in):
+
+$ mv __/sucrose.dat __maltose.dat __
+
+Hint: Recall that .. refers to the parent directory (i.e. one above the current directory) and that . refers to the current directory. Solution:
+
+$ mv ../sucrose.dat  ../maltose.dat .
+
+The cp command works very much like mv, except it copies a file instead of moving it. We can check that it did the right thing using ls with two paths as arguments — like most Unix commands, ls can be given multiple paths at once:
+
+$ cp quotes.txt thesis/quotations.txt
+$ ls . thesis
+
+To prove that we made a copy, let’s delete the quotes.txt file in the current directory and then run that same ls again.
+
+$ rm quotes.txt
+$ ls quotes.txt thesis/quotations.txt
+ls: quotes.txt: No such file or directory
+thesis/quotations.txt
+
+
+This time it tells us that it can’t find quotes.txt in the current directory, but it does find the copy in thesis that we didn’t delete.
+
+What’s In A Name?
+You may have noticed that all of Nelle’s files’ names are “something dot something”, and in this part of the lesson, we always used the extension .txt. This is just a convention: we can call a file mythesis or almost anything else we want. However, most people use two-part names most of the time to help them (and their programs) tell different kinds of files apart. The second part of such a name is called the filename extension, and indicates what type of data the file holds: .txt signals a plain text file, .pdf indicates a PDF document, .cfg is a configuration file full of parameters for some program or other, .png is a PNG image, and so on.
+
+Naming a PNG image of a whale as whale.mp3 doesn’t somehow magically turn it into a recording of whalesong, though it might cause the operating system to try to open it with a music player when someone double-clicks it.
+
+Renaming Files
+Suppose that you created a .txt file in your current directory to contain a list of the statistical tests you will need to do to analyze your data, and named it: statstics.txt
+After creating and saving this file you realize you misspelled the filename! You want to correct the mistake, which of the following commands could you use to do so?
+1.	cp statstics.txt statistics.txt
+2.	mv statstics.txt statistics.txt
+3.	mv statstics.txt .
+4.	cp statstics.txt .
+
+Copy with Multiple Filenames
+For this exercise, you can test the commands in the data-shell/data directory.
+In the example below, what does cp do when given several filenames and a directory name?
+$ mkdir backup
+$ cp amino-acids.txt animals.txt backup/
+
+In the example below, what does cp do when given three or more file names?
+
+Copy a folder structure but not the files
+You’re starting a new experiment, and would like to duplicate the file structure from your previous experiment without the data files so you can add new data.
+Assume that the file structure is in a folder called ‘2016-05-18-data’, which contains a data folder that in turn contains folders named raw and processed that contain data files. The goal is to copy the file structure of the 2016-05-18-data folder into a folder called 2016-05-20-data and remove the data files from the directory you just created.
+Which of the following set of commands would achieve this objective? What would the other commands do?
+$ cp -r 2016-05-18-data/ 2016-05-20-data/
+$ rm 2016-05-20-data/raw/*
+$ rm 2016-05-20-data/processed/*
+
+$ rm 2016-05-20-data/raw/*
+$ rm 2016-05-20-data/processed/*
+$ cp -r 2016-05-18-data/ 2016-5-20-data/
+
+$ cp -r 2016-05-18-data/ 2016-05-20-data/
+$ rm -r -i 2016-05-20-data/
+
+Key Points
+*	cp old new copies a file.
+*	mkdir path creates a new directory.
+*	mv old new moves (renames) a file or directory.
+*	rm path removes (deletes) a file.
+*	Use of the Control key may be described in many ways, including Ctrl-X, Control-X, and ^X.
+*	The shell does not have a trash bin: once something is deleted, it’s really gone.
+*	Depending on the type of work you do, you may need a more powerful text editor than Nano.
+
+

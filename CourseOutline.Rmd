@@ -5,7 +5,7 @@ author: "A Hessl"
 date: "Last Updated: 6/1/2019"
 output: html_document
 ---
-
+<br/>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -13,11 +13,12 @@ knitr::opts_chunk$set(echo = TRUE)
 Please check this schedule early and often - schedule will be adjusted based on the pace of our class.  
 
 __Before You Come to Class__  
-[Installing Software](./lectures/InstallingSoftware.Rmd) - Please complete this before the first day of class.
-
+Please complete this before the first day of class.  
+[Installing Software](./lectures/InstallingSoftware.Rmd)    
+<br/>
 __The Shell__
 
-1) Intro to Class Concept _00/00/00_  
+1) Intro to [Class Concept](.lectures/ClassConcept.Rmd) _00/00/00_  
     + RStudio  
     + GitHub  
 2) [Shell Basics](./lectures/ShellBasics.html) _00/00/00_  
@@ -30,7 +31,6 @@ __The Shell__
 
 6) Rapidly Accessing Data from Web
     + wget
-    + APIs
     
 7) Loops
 
@@ -39,19 +39,21 @@ __The Shell__
 10) Finding Things 
     + grep
     + find  
-    
+
+<br/> 
 __Project Management and Collaboration__
 
-1) Version Control Using Git
+1) Project Management in R Studio
+
+2) R Markdown  Version Control Using Git
     + Branching
     + Merging
 
-2) Collaboration and Sharing Using GitHub
+3) Collaboration and Sharing Using GitHub
+    + Making a README.md
+    + Other git clients
 
-3) Project Management in R Studio
-
-4) R Markdown
-
+<br/>
 __R__  
 
 1) Data Structures  
@@ -66,4 +68,5 @@ Control Flow: Loops
 Split, Apply, Combine   
 Plotting Using Base R  
 Plotting Using ggplot  
-
+APIs to Download Data
+Editing a Package
