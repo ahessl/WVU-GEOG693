@@ -1,0 +1,60 @@
+---
+title: "Course Requirements"
+author: "A Hessl"
+date: "6/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Attendance:
+Attendance is required.  Each assignment and lecture builds on previous material.  Students may miss one class meeting, however each additional unexcused absence will reduce the student’s grade by one letter grade.  Students are responsible for careful review of class materials and exercises they missed.
+
+### Course Materials and Readings
+All course materials will be distributed through this GitHub website including: lecture notes, readings, and assignments.  Students will turn in their own work via GitHub as well.
+
+### Assessment:  
+
+#### Exercises: 
+Following in class tutorials, students will be assigned coding tasks that directly implement methods they just learned.  Students are expected to work independently on these short assignments typically due within one week.  Assignments should take between 1-3 hours and are worth 40% of the student's grade in total.  
+
+#### Presentation of a Single Topic:
+In the second half of the semester, each student will present a topic of their choice related to class.  Presentations should include background, relevance to class as well as a short tutorial/demonstration. Possible topics include:  
+
+*	Using stack overflow effectively
+*	Alternate GitHub clients like 
+*	R-Shiny
+*	R markdown storyboards, dashboards or websites 
+*	Archiving data/scripts using LiPD/JSON
+*	Connecting GIS or SQL with R
+
+#### Final Project and Proposal [More Detail Here](./FinalProject.Rmd)  
+In the second half of the semester, students will apply tools learned in class to a project of their own design.  Students will be expected to apply all three major tools (Bash shell, R and GitHub) in their project.  Students may use their own data or online data sources.  The project in total should take approximately 30-40 hours of work. The final project is worth 40% of the student's final grade.
+
+Students must get their project approved by the instructor by submitting a Project Proposal. Project proposals should, in a one page README.md, describe: 1) Objectives; 2) Data Sources; 3) Implementation; 4) Expected Products.  Project proposals are worth 10% of the student's final grade.  
+
+#### Response Time and Feedback Plan:  
+The instructor will return all exercises within one week, project proposals within one week and final assignments within two weeks of submission.
+
+__Assessment Breakdown:__
+ 
+40% Exercises	
+10% Presentation on a single topic	
+10% Project Proposal	
+40% Final project	
+100% Total Grade	
+
+#### Late Assignments:  
+Students must submit assignments before class begins on the day they are due.  For each week that the assignment is late (up to three weeks), the grade will be reduced by a single letter grade.  After three weeks, assignments will no longer be accepted. The final project is due on or prior to the last day of class.  No exceptions.
+
+#### Grading Rubric For All Coding Assignments
+
+- A:	Code works as intended with no edits from grader, code is concise, well-documented, formatted clearly and elegant.  
+- B:	Code works but may require a small edit, may include some repetition, includes enough documentation to follow purpose and result, some formatting needed.  
+- C: 	Most of the code works, little documentation is included, code is repetitive, not formatted.  
+- D: 	Little of the code works, no documentation, not formatted.  
+- F: 	Minimal code works, problem was not addressed, no documentation or formatting included.
+

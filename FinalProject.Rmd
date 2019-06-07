@@ -1,0 +1,56 @@
+---
+title: "FinalProject"
+author: "A Hessl"
+date: "6/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Final Project  
+### Goals
+
+Course projects are intended to give you the opportunity to engage in a larger project on a data set of your choice. If possible, choose a project that is directly related to your research. The goal of the project is to both learn how to work on bigger data and computational tools beyond the confines of an exercise, and to give you the opportunity to learn the specific computing tools you will need for your research while you have access to experienced teachers to help you figure out how to make them work.  
+
+#### What does a project involve?  
+Projects will involve programming in R and/or the Bash shell as well as work in GitHub. They should be on something you are excited about. As a rough guideline projects should represent ~30-40 hours of work. Some class time will be provided for working on projects. Project should be original.  
+
+_What makes a project original?_ 
+We spend a lot of time building on code from others. Consider similar rules as you would for plagiarism in writing. As well, you should understand and be able to clearly comment every line of code you write.
+
+#### Project Proposal  
+Project proposals should, in one page README.md submitted on your GitHub repo, describe: 
+
+1) Objectives  
+2) Data Sources 
+3) Languages used (bash, R, Python, etc.)
+3) Implementation  
+4) Expected Products  
+5) Questions for instructor  
+
+Your instructor will provide feedback on these proposals about whether the work is sufficient for the project, whether it is reasonable to accomplish it in ~30-40 hours, and what tools or approaches you should look into for the project. Feedback will be returned via modifications to the Readme.md in GitHub.
+
+#### Final Project Submission
+The final project will be submitted as a GitHub repository with a thorough README.md that documents the project (See [here](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) for template).  The instructor should be able to clone the repo and run the code locally. I strongly recommend asking a friend to try your project on their machine before submitting for your final grade!
+
+Examples of possible projects:
+
+- Cleaned four datasets on leaf architecture, which had varying lengths, structures, and creators, so that they could be used together for future analyses.  
+-	Used an existing R package to compare/analyze two datasets in the same way.  
+- Created a web application for users to explore data associated with condor flight paths using RShiny package.   
+-	Developed code to download NOAA climate station data and provide summaries of local climate with pretty figures.  
+
+__What makes a project earn an 'A'?__
+
+-	Instructor can reproduce the results using only materials in the GitHub repository.  
+-	All code, data, and products are stored in an RStudio project.  
+-	Functions are used and sourced from different files.  
+-	Loops or apply functions are implemented (rather than repeated sections of code).  
+-	Output (figures or data) are logical, clear.  
+-	README.md clearly conveys the project and provides examples of code.  
+-	Code is clear, well-organized and commented. 
+
+
+

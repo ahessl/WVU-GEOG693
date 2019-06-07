@@ -12,7 +12,7 @@
 <meta name="author" content="A Hessl" />
 
 
-<title>Schedule</title>
+<title>FinalProject</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -192,10 +192,10 @@ $(document).ready(function () {
   <a href="CourseOutline.html">Course Outline</a>
 </li>
 <li>
-  <a href="CourseRequirements.html">Course Requirements</a>
+  <a href="contact.html">Contact Info</a>
 </li>
 <li>
-  <a href="contact.html">Contact Info</a>
+  <a href="CourseRequirements.html">Course Requirements</a>
 </li>
 <li>
   <a href="http://github.com/ahessl">
@@ -221,81 +221,70 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Schedule</h1>
-<h3 class="subtitle"><em>GEOG693 Open Data Science</em></h3>
+<h1 class="title toc-ignore">FinalProject</h1>
 <h4 class="author"><em>A Hessl</em></h4>
-<h4 class="date"><em>Last Updated: 6/1/2019</em></h4>
+<h4 class="date"><em>6/7/2019</em></h4>
 
 </div>
 
 
-<p>Please check this schedule early and often - schedule will be adjusted based on the pace of our class.<br />
-<br/></p>
-<div id="before-you-come-to-class" class="section level3">
-<h3><strong>Before You Come to Class</strong></h3>
-<p>Please complete this before the first day of class.<br />
-<a href="./lectures/InstallingSoftware.Rmd">Installing Software</a><br />
-<br/></p>
+<div id="final-project" class="section level3">
+<h3>Final Project</h3>
 </div>
-<div id="the-shell" class="section level3">
-<h3><strong>The Shell</strong></h3>
+<div id="goals" class="section level3">
+<h3>Goals</h3>
+<p>Course projects are intended to give you the opportunity to engage in a larger project on a data set of your choice. If possible, choose a project that is directly related to your research. The goal of the project is to both learn how to work on bigger data and computational tools beyond the confines of an exercise, and to give you the opportunity to learn the specific computing tools you will need for your research while you have access to experienced teachers to help you figure out how to make them work.</p>
+<div id="what-does-a-project-involve" class="section level4">
+<h4>What does a project involve?</h4>
+<p>Projects will involve programming in R and/or the Bash shell as well as work in GitHub. They should be on something you are excited about. As a rough guideline projects should represent ~30-40 hours of work. Some class time will be provided for working on projects. Project should be original.</p>
+<p><em>What makes a project original?</em> We spend a lot of time building on code from others. Consider similar rules as you would for plagiarism in writing. As well, you should understand and be able to clearly comment every line of code you write.</p>
+</div>
+<div id="project-proposal" class="section level4">
+<h4>Project Proposal</h4>
+<p>Project proposals should, in one page README.md submitted on your GitHub repo, describe:</p>
 <ol style="list-style-type: decimal">
-<li>Intro to <a href=".lectures/ClassConcept.Rmd">Class Concept</a> <em>00/00/00</em>
-<ul>
-<li>RStudio<br />
+<li>Objectives<br />
 </li>
-<li>GitHub<br />
+<li>Data Sources</li>
+<li>Languages used (bash, R, Python, etc.)</li>
+<li>Implementation<br />
 </li>
-</ul></li>
-<li><p><a href="./lectures/ShellBasics.html">Shell Basics</a> <em>00/00/00</em></p></li>
-<li><p>Working with Text Files <em>00/00/00</em></p></li>
-<li><p>Files and Directories <em>00/00/00</em></p></li>
-<li><p>Wildcards, Pipes, and Filters <em>00/00/00</em></p></li>
-<li>Rapidly Accessing Data from Web
-<ul>
-<li>wget</li>
-</ul></li>
-<li><p>Loops</p></li>
-<li><p>Shell Scripts</p></li>
-<li>Finding Things
-<ul>
-<li>grep</li>
-<li>find</li>
-</ul></li>
+<li>Expected Products<br />
+</li>
+<li>Questions for instructor</li>
 </ol>
-<p><br/></p>
+<p>Your instructor will provide feedback on these proposals about whether the work is sufficient for the project, whether it is reasonable to accomplish it in ~30-40 hours, and what tools or approaches you should look into for the project. Feedback will be returned via modifications to the Readme.md in GitHub.</p>
 </div>
-<div id="project-management-and-collaboration" class="section level3">
-<h3><strong>Project Management and Collaboration</strong></h3>
-<ol style="list-style-type: decimal">
-<li><p>Project Management in R Studio</p></li>
-<li>R Markdown Version Control Using Git
+<div id="final-project-submission" class="section level4">
+<h4>Final Project Submission</h4>
+<p>The final project will be submitted as a GitHub repository with a thorough README.md that documents the project (See <a href="https://gist.github.com/PurpleBooth/109311bb0361f32d87a2">here</a> for template). The instructor should be able to clone the repo and run the code locally. I strongly recommend asking a friend to try your project on their machine before submitting for your final grade!</p>
+<p>Examples of possible projects:</p>
 <ul>
-<li>Branching</li>
-<li>Merging</li>
-</ul></li>
-<li>Collaboration and Sharing Using GitHub
+<li>Cleaned four datasets on leaf architecture, which had varying lengths, structures, and creators, so that they could be used together for future analyses.<br />
+</li>
+<li>Used an existing R package to compare/analyze two datasets in the same way.<br />
+</li>
+<li>Created a web application for users to explore data associated with condor flight paths using RShiny package.<br />
+</li>
+<li>Developed code to download NOAA climate station data and provide summaries of local climate with pretty figures.</li>
+</ul>
+<p><strong>What makes a project earn an ‘A’?</strong></p>
 <ul>
-<li>Making a README.md</li>
-<li>Other git clients</li>
-</ul></li>
-</ol>
-<p><br/></p>
+<li>Instructor can reproduce the results using only materials in the GitHub repository.<br />
+</li>
+<li>All code, data, and products are stored in an RStudio project.<br />
+</li>
+<li>Functions are used and sourced from different files.<br />
+</li>
+<li>Loops or apply functions are implemented (rather than repeated sections of code).<br />
+</li>
+<li>Output (figures or data) are logical, clear.<br />
+</li>
+<li>README.md clearly conveys the project and provides examples of code.<br />
+</li>
+<li>Code is clear, well-organized and commented.</li>
+</ul>
 </div>
-<div id="working-with-data-in-r" class="section level3">
-<h3><strong>Working with Data in R</strong></h3>
-<ol style="list-style-type: decimal">
-<li><p>Data Structures</p></li>
-<li><p>Data Frames</p></li>
-<li><p>Subsetting/Indexing Data</p></li>
-<li><p>Control Flow: Functions in R<br />
-Control Flow: Apply<br />
-Control Flow: Loops<br />
-Split, Apply, Combine<br />
-Plotting Using Base R<br />
-Plotting Using ggplot<br />
-APIs to Download Data Editing a Package</p></li>
-</ol>
 </div>
 
 

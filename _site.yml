@@ -7,10 +7,12 @@ navbar:
       href: index.html
     - text: "Course Outline"
       href: CourseOutline.html
-    - text: "Contact Info"
-      href: contact.html
+    - text: Course Requirements
+      href: CourseRequirements.html
       
       right:
+    - text: "Contact Info"
+      href: contact.html
     - icon: fa-github fa-lg
       href: http://github.com/ahessl
     - icon: fa-twitter fa-lg

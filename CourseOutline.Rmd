@@ -5,18 +5,19 @@ author: "A Hessl"
 date: "Last Updated: 6/1/2019"
 output: html_document
 ---
-<br/>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 Please check this schedule early and often - schedule will be adjusted based on the pace of our class.  
+<br/>
 
-__Before You Come to Class__  
+### __Before You Come to Class__  
 Please complete this before the first day of class.  
 [Installing Software](./lectures/InstallingSoftware.Rmd)    
 <br/>
-__The Shell__
+
+### __The Shell__
 
 1) Intro to [Class Concept](.lectures/ClassConcept.Rmd) _00/00/00_  
     + RStudio  
@@ -41,7 +42,8 @@ __The Shell__
     + find  
 
 <br/> 
-__Project Management and Collaboration__
+
+### __Project Management and Collaboration__
 
 1) Project Management in R Studio
 
@@ -54,7 +56,8 @@ __Project Management and Collaboration__
     + Other git clients
 
 <br/>
-__R__  
+
+### __Working with Data in R__  
 
 1) Data Structures  
 
