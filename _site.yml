@@ -1,4 +1,5 @@
 name: "WVU-GEOG693"
+output_dir: "."
 navbar:
   title: "GEOG693: Open Data Science"
   left:
