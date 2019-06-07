@@ -370,22 +370,40 @@ $(document).ready(function () {
 <p>Your computer is organized in a hierarchy of folders and files that can be navigated using paths. You might want to access files and documents that are located in different places on your machine or online. Each can be called using their unique path.</p>
 <p>List files and folders in your working directory If you want to check which files are in your current directory, you can use ls:</p>
 <pre class="bash"><code>ls  </code></pre>
-<pre><code>## RStudio_Terminal.Rmd
+<pre><code>## APIs.Rmd
+## APIs.html
+## ClassConcept.Rmd
+## ClassConcept.html
+## InstallingSoftware.Rmd
+## InstallingSoftware.html
+## RStudioTerminal.Rmd
 ## RStudio_Terminal.html
-## Shell_Basics.Rmd
+## ShellBasics.Rmd
+## ShellBasics.html
 ## Shell_Basics.html
 ## TextFiles.Rmd
 ## TextFiles.html
-## data</code></pre>
+## WorkingWithFilesDirectories.Rmd
+## data
+## images</code></pre>
 <p>Use a flag -F (also known as a switch or an option), show which items are files vs folders (trailing ‘/’):</p>
 <pre class="bash"><code>ls -F</code></pre>
-<pre><code>## RStudio_Terminal.Rmd
+<pre><code>## APIs.Rmd
+## APIs.html
+## ClassConcept.Rmd
+## ClassConcept.html
+## InstallingSoftware.Rmd
+## InstallingSoftware.html
+## RStudioTerminal.Rmd
 ## RStudio_Terminal.html
-## Shell_Basics.Rmd
+## ShellBasics.Rmd
+## ShellBasics.html
 ## Shell_Basics.html
 ## TextFiles.Rmd
 ## TextFiles.html
-## data/</code></pre>
+## WorkingWithFilesDirectories.Rmd
+## data/
+## images/</code></pre>
 </div>
 <div id="getting-help" class="section level3">
 <h3>Getting help</h3>
@@ -504,7 +522,7 @@ cd  ~/Desktop/GEOG693/shell</code></pre>
 </li>
 <li>An <strong>absolute path</strong> specifies a location from the root of the file system.<br />
 </li>
-<li>Directory names in a path are separated with [/] on Unix, but ’' on Windows.<br />
+<li>Directory names in a path are separated with forward slash on Unix, but backward slash on Windows.<br />
 </li>
 <li><strong>..</strong> means ‘the directory above the current one’; . on its own means ‘the current directory’.<br />
 </li>
