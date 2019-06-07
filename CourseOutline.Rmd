@@ -14,12 +14,12 @@ Please check this schedule early and often - schedule will be adjusted based on 
 
 ### __Before You Come to Class__  
 Please complete this before the first day of class.  
-[Installing Software](./lectures/InstallingSoftware.Rmd)    
+[Installing Software](./lectures/InstallingSoftware.html)    
 <br/>
 
 ### __The Shell__
 
-1) Intro to [Class Concept](.lectures/ClassConcept.Rmd) _00/00/00_  
+1) Intro to [Class Concept](.lectures/ClassConcept.html) _00/00/00_  
     + RStudio  
     + GitHub  
 2) [Shell Basics](./lectures/ShellBasics.html) _00/00/00_  
