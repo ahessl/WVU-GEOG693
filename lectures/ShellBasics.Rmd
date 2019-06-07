@@ -124,14 +124,14 @@ pwd
 ```
 You should be in OpenDataSci/
 
-On my Desktop, I have a folder for each of my two kids. Navigate down to a folder called 'Emma' on my desktop.
+On my Desktop, I have a folder for each of my two kids. Navigate down to a folder called 'Jane' on my desktop.
 ```{bash downtwo, eval=FALSE}
-cd ~/Desktop/Emma
+cd ~/Desktop/Jane
 ```
 
 >__Challenge: Can you navigate up a directory and then down to a different directory in one command?__
 ```{bash upover, eval=FALSE}
-cd ../Aiden
+cd ../Tom
 ```
 
 ### Create new directory
