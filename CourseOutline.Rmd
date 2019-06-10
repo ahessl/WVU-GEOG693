@@ -19,7 +19,7 @@ Please complete this before the first day of class.
 
 ### __The Shell__
 
-1) Intro to [Class Concept](.lectures/ClassConcept.html) _00/00/00_  
+1) Intro to [Class Concept](./lectures/ClassConcept.html) _00/00/00_  
     + RStudio  
     + GitHub  
 2) [Shell Basics](./lectures/ShellBasics.html) _00/00/00_  

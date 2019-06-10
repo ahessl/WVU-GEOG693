@@ -17,7 +17,6 @@ But this progress is only possible if we can reproduce what the giants have achi
 
 In the digital age, we have the capacity to make the exact computational methods and data open to everyone so that we may truly stand on the shoulders of giants, even though we may be dwarfs.
 
-### Open Data Science
 This course teaches students how to think and work programatically so that we dwarfs can borrow from today's giants and in future, share our data and methods with the next generation of dwarfs. In this course, we will learn computational approaches to address scientific questions.  And, we will learn how to share not only our results, but our exact methods with others.  
 
 __Good News:__ Writing code, debugging, getting help online, and collaborating with others has gotten a lot easier!  IDE's (Integrated Development Environments) like RStudio allow us to use multipe programming tools in a single environment, online communities like Stack Overflow can help you solve problems, and version control systems like GitHub allow us to keep track of our code and collaborate with other programmers.
@@ -53,9 +52,9 @@ Speed - while by no means a slug, R is not written to be a fast, speedy language
 Before we can become open data scientists, sharing our amazing results on the interwebs, we need to install a language (R), and IDE (RStudio) and a version control system (GitHub). I encourage you to install these on your laptop if you have one.  If you do not, you can use the computers in Brooks 418.  Regardless, you will need to set up an account on GitHub (see #3 below).
 
 ### Git
-What is Git?
+_What is Git?_ Git is a version control system that allows you to track all changes in a project stored both on your local computer and in the cloud.  It also allows you to collaborate with others on coding and analysis projects and keep track of their changes too. 
 
-Register a free GitHub account. As a university student, also check to see if you are eligible for GitHub Education offers. Some of these are very useful, such as unlimited private repositories. Remember that once you create a GitHub account, you are stuck with that username. Choose something professional and start building a positive social media presence.
+Register a free [GitHub account](https://github.com/). As a university student, also check to see if you are eligible for GitHub Education offers. Some of these are very useful, such as unlimited private repositories. Remember that once you create a GitHub account, you are stuck with that username. Choose something professional and start building a positive social media presence.
 Install Git
 Install Git client
 Configure Git/GitHub

@@ -43,11 +43,21 @@ Many common web services and APIs have been “wrapped”, i.e. R functions have
 
 _Why do we want this?_
 
-* provenance is recorded in script
+* provenance of data is recorded in script
 * reproducible
 * data can be easily updated
 * ease of use
 * scaling to lots of files
+
+#### Something Fun: Dr. Hessl's Coauthor Network from Google Scholar
+```{r}
+# install.packages("devtools")
+devtools::install_github("cimentadaj/coauthornetwork")
+library('coauthornetwork')
+
+hessl_network <- grab_network('citations?hl=en&user=7_BWrfIAAAAJ',n_coauthors = 10, n_deep=1)
+plot_coauthors(hessl_network, size_labels = 3)
+```
 
 #### Sightings of birds: rebird
 rebird is an R interface for the [e-Bird database](https://ebird.org). e-Bird lets birders upload sightings of birds, and allows everyone access to those data.
@@ -77,7 +87,7 @@ We can use the function ebirdgeo to get a list for an area:
 
 ```{r ebrirdgeo}
 arbobirds <- ebirdgeo(lat = 39.645810, lng = -79.978924, key = getOption("EBIRD_KEY"))
-chibirds %>%
+arbobirds %>%
   as_tibble() %>%
   glimpse()
 ```
@@ -90,7 +100,7 @@ We can also search by “region”, which refers to short codes which serve as c
 ```{r ebirdregion}
 DCbirds <- ebirdregion("US-DC", key = getOption("EBIRD_KEY"))
 
-frenchbirds %>%
+DCbirds %>%
   as_tibble() %>%
   glimpse()
 ```
@@ -116,7 +126,7 @@ file.edit(".Renviron")
 
 Add to the text file (replacing my_user_name with your Geonames username).
 ```{r geonames username}
-geonamesUsername = "my_user_name")
+geonamesUsername = "my_user_name"
 ```
 
 
@@ -128,67 +138,34 @@ Spelling is important when you set the option in your .Renviron
 
 This is a simple means to keep your keys and usernames private, especially if you are sharing the same authentication across several projects. Remember that using .Renviron makes your code un-reproducible. In this case, that is exactly what we want!
 
-Using Geonames
-What can we do? Get access to lots of geographical information via the various “web services”
-
+#### Using Geonames
+Get access to lots of geographical information via the various “web services”
+```{r}
+options(geonamesUsername="ahessl")
 countryInfo <- GNcountryInfo()
 countryInfo %>%
   as_tibble() %>%
   glimpse()
+```
 
 This country info dataset is very helpful for accessing the rest of the data, because it gives us the standardized codes for country and language.
 
-The Manifesto Project: manifestoR
+#### The Manifesto Project: `manifestoR`
 The Manifesto Project collects and organizes political party manifestos from around the world. It currently covers over 1000 parties from 1945 until today in over 50 countries on five continents. We can use the manifestoR package to access the API and download those manifestos for analysis in R.
 
-Load library and set API key
+##### Load library and set API key
 Accessing data from the Manifesto Project API requires an authentication key. You can create an account and key here. Here I store my key in .Rprofile and retrieve it using mp_setapikey().
-
+```{r, warning=FALSE}
 library(manifestoR)
+```
 
-# retrieve API key stored in .Rprofile
-mp_setapikey(key = getOption("manifesto_key"))
-Retrieve the database
+##### retrieve API key stored in .Rprofile
+```{r}
+mp_setapikey(key=getOption("manifesto_key"))
+#Retrieve the database
 (mpds <- mp_maindataset())
-## Connecting to Manifesto Project DB API... 
-## Connecting to Manifesto Project DB API... corpus version: 2018-2
-## # A tibble: 4,388 x 174
-##    country countryname oecdmember eumember edate        date party
-##      <dbl> <chr>            <dbl>    <dbl> <date>      <dbl> <dbl>
-##  1      11 Sweden               0        0 1944-09-17 194409 11220
-##  2      11 Sweden               0        0 1944-09-17 194409 11320
-##  3      11 Sweden               0        0 1944-09-17 194409 11420
-##  4      11 Sweden               0        0 1944-09-17 194409 11620
-##  5      11 Sweden               0        0 1944-09-17 194409 11810
-##  6      11 Sweden               0        0 1948-09-19 194809 11220
-##  7      11 Sweden               0        0 1948-09-19 194809 11320
-##  8      11 Sweden               0        0 1948-09-19 194809 11420
-##  9      11 Sweden               0        0 1948-09-19 194809 11620
-## 10      11 Sweden               0        0 1948-09-19 194809 11810
-## # … with 4,378 more rows, and 167 more variables: partyname <chr>,
-## #   partyabbrev <chr>, parfam <dbl>, coderid <dbl>, manual <dbl>,
-## #   coderyear <dbl>, testresult <dbl>, testeditsim <dbl>, pervote <dbl>,
-## #   voteest <dbl>, presvote <dbl>, absseat <dbl>, totseats <dbl>,
-## #   progtype <dbl>, datasetorigin <dbl>, corpusversion <chr>, total <dbl>,
-## #   peruncod <dbl>, per101 <dbl>, per102 <dbl>, per103 <dbl>,
-## #   per104 <dbl>, per105 <dbl>, per106 <dbl>, per107 <dbl>, per108 <dbl>,
-## #   per109 <dbl>, per110 <dbl>, per201 <dbl>, per202 <dbl>, per203 <dbl>,
-## #   per204 <dbl>, per301 <dbl>, per302 <dbl>, per303 <dbl>, per304 <dbl>,
-## #   per305 <dbl>, per401 <dbl>, per402 <dbl>, per403 <dbl>, per404 <dbl>,
-## #   per405 <dbl>, per406 <dbl>, per407 <dbl>, per408 <dbl>, per409 <dbl>,
-## #   per410 <dbl>, per411 <dbl>, per412 <dbl>, per413 <dbl>, per414 <dbl>,
-## #   per415 <dbl>, per416 <dbl>, per501 <dbl>, per502 <dbl>, per503 <dbl>,
-## #   per504 <dbl>, per505 <dbl>, per506 <dbl>, per507 <dbl>, per601 <dbl>,
-## #   per602 <dbl>, per603 <dbl>, per604 <dbl>, per605 <dbl>, per606 <dbl>,
-## #   per607 <dbl>, per608 <dbl>, per701 <dbl>, per702 <dbl>, per703 <dbl>,
-## #   per704 <dbl>, per705 <dbl>, per706 <dbl>, per1011 <dbl>,
-## #   per1012 <dbl>, per1013 <dbl>, per1014 <dbl>, per1015 <dbl>,
-## #   per1016 <dbl>, per1021 <dbl>, per1022 <dbl>, per1023 <dbl>,
-## #   per1024 <dbl>, per1025 <dbl>, per1026 <dbl>, per1031 <dbl>,
-## #   per1032 <dbl>, per1033 <dbl>, per2021 <dbl>, per2022 <dbl>,
-## #   per2023 <dbl>, per2031 <dbl>, per2032 <dbl>, per2033 <dbl>,
-## #   per2041 <dbl>, per3011 <dbl>, per3051 <dbl>, per3052 <dbl>,
-## #   per3053 <dbl>, …
+```
+
 mp_maindataset() includes a data frame describing each manifesto included in the database. You can use this database for some exploratory data analysis. For instance, how many manifestos have been published by each political party in Sweden?
 
 mpds %>%
@@ -218,18 +195,13 @@ mpds %>%
   theme(legend.position = "bottom")
 
 
-Download manifestos
+#### Download manifestos
 mp_corpus() can be used to download the original manifestos as full text documents stored as a corpus. Once you obtain the corpus, you can perform text analysis. As an example, let’s compare the most common words in the Democratic and Republican Party manifestos from the 2012 U.S. presidential election:
 
-# download documents
+### download documents
+```{r}
 (docs <- mp_corpus(countryname == "United States" & edate > as.Date("2012-01-01")))
-## Connecting to Manifesto Project DB API... 
-## Connecting to Manifesto Project DB API... corpus version: 2018-2 
-## Connecting to Manifesto Project DB API... corpus version: 2018-2 
-## Connecting to Manifesto Project DB API... corpus version: 2018-2
-## <<ManifestoCorpus>>
-## Metadata:  corpus specific: 0, document level (indexed): 0
-## Content:  documents: 4
+
 # generate wordcloud of most common terms
 docs %>%
   tidy() %>%
@@ -241,11 +213,12 @@ docs %>%
   na.omit() %>%
   reshape2::acast(word ~ party, value.var = "n", fill = 0) %>%
   comparison.cloud(max.words = 200)
+```
 
-
-Census data with tidycensus
+#### Census data with tidycensus
 tidycensus provides an interface with the US Census Bureau’s decennial census and American Community APIs and returns tidy data frames with optional simple feature geometry. These APIs require a free key you can obtain here. Rather than storing your key in .Rprofile, tidycensus includes census_api_key() which automatically stores your key in .Renviron, which is basically a global version of .Rprofile. Anything stored in .Renviron is automatically loaded anytime you initiate R on your computer, regardless of the project or file location. Once you get your key, load it:
 
+```{r}
 library(tidycensus)
 census_api_key("YOUR API KEY GOES HERE")
 Obtaining data
@@ -394,3 +367,5 @@ ggplot(data = loudoun) +
   coord_sf(crs = 26911) + 
   scale_fill_viridis(option = "magma") + 
   scale_color_viridis(option = "magma")
+
+
