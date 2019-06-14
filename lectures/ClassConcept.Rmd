@@ -54,16 +54,13 @@ Before we can become open data scientists, sharing our amazing results on the in
 ### Git
 _What is Git?_ Git is a version control system that allows you to track all changes in a project stored both on your local computer and in the cloud.  It also allows you to collaborate with others on coding and analysis projects and keep track of their changes too. 
 
-Register a free [GitHub account](https://github.com/). As a university student, also check to see if you are eligible for GitHub Education offers. Some of these are very useful, such as unlimited private repositories. Remember that once you create a GitHub account, you are stuck with that username. Choose something professional and start building a positive social media presence.
-Install Git
-Install Git client
-Configure Git/GitHub
-Personalize Git
-Git -> GitHub
-Configure Git
+If you completed [Installing Software]() before the first class, you would have already registered for a free [GitHub account](https://github.com/). As a university student, also check to see if you are eligible for GitHub Education offers. Some of these are very useful, such as unlimited private repositories. Remember that once you create a GitHub account, you are stuck with that username. Choose something professional and start building a positive social media presence.
+
+
+
 Using Git within RStudio
 GitHub credentials and avoiding monotony
-Complete homework 01
+
 
 
 

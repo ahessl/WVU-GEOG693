@@ -22,6 +22,9 @@ Please complete this before the first day of class.
 1) [Class Concept](./lectures/ClassConcept.html) _00/00/00_  
     + RStudio  
     + GitHub  
+    
+2) [Basic Git](./lectures/Git.html) _00/00/00_
+
 2) [Shell Basics](./lectures/ShellBasics.html) _00/00/00_  
 
 3) Working with Text Files _00/00/00_  
