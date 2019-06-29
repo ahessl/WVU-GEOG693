@@ -23,7 +23,7 @@ What if you want to let someone else break your bike and build a better version,
 ### GitHub
 All of our work in Git so far is useful to track your own versions of files.  Sometimes, you just want to git back to a previous version. You can do this by viewing the log plus careful ```-m``` commit message to remind you of what you changed in that version.  This is extremely useful in coding as you can easily break your script, just like I broke my BMX bike.  But what if you are working with other people - like a whole world of collaborators? How does "open source" work anyway?
 
-[GitHub](https://www.github.com) (as opposed to plain old Git) is a commonly used remote repository where multiple users can fork or clone repositories to their local workspace, make changes, add/commit those changes, push them back to the remote repo and view logs etc. The primary benefits of using a remote repository include the ability to have a central hub for your version control that can be accessed by many collaborators, even when separated by time and distance. 
+[GitHub](https://www.github.com) (as opposed to plain old Git) is a commonly used collaborative site where multiple users can fork or clone repositories to their local workspace, make changes, add/commit those changes, push them back to the remote repo and view logs etc. The primary benefits of using a remote repository include the ability to have a central hub for your version control that can be accessed by many collaborators, even when separated by time and distance. 
 
 ### Create a Remote Repo
 First be sure you have already signed up for a free account at github.com. For this in class activity, you will need to team up with one other classmate.
@@ -35,9 +35,9 @@ Now you have a remote repository called ```Rivers```, but it is empty. Next, we 
 ```https://github.com/JaneSmith/Rivers.git```
 
 ### RStudio Client for GitHub
-RStudio allows us to connect directly with GitHub through R-Projects.  An ```R-Project``` is a directory that contains all your scripts, data, functions, and output.  The extension is ```.Rproj```. To start a new project that will link to our new Rivers repo, click on ```File-New Project``` and select ```Version Control``` with ```Git```.  Give your new R-Project a name (```RiversProj```) and place it in your root directory. 
+RStudio allows us to connect directly with GitHub through R-Projects.  An ```R-Project``` is a directory that contains all your scripts, data, functions, and output.  The extension is ```.Rproj```. To start a new project that will link to our Rivers GitHub repo, click on ```File-New Project``` and select ```Version Control``` with ```Git```.  Give your new R-Project a name (```RiversProj```) and place it in your root directory. 
 
-Now connect Jane should her remote repo by pasting the URL from GitHub into the ```Repository URL```.
+Now Jane should connect to her remote repo by pasting the URL from GitHub into the ```Repository URL```.
 
 Ensure the remote link is worked by typing:
 
@@ -46,23 +46,22 @@ cd ~/RiversProj
 git remote -v
 ```
 
-
-
 #### Is RStudio Having Trouble Connecting to GitHub?
 Try the following:  
 * Restart RStudio and try again.  
 * At the bash terminal, type:  
     + ```git remote add origin https://github.com/mygitusername/myrepo.git```  
     + ```git push -u origin master```  
-* All questions can be answered here: https://happygitwithr.com/ especially see [Chapter 13](https://happygitwithr.com/rstudio-see-git.html)
-
+* Still having issues? All Git-R questions can be answered here: https://happygitwithr.com/ especially see [Chapter 13](https://happygitwithr.com/rstudio-see-git.html)
 
 ### Jane Makes a Change
 Jane should now move the ```Rivers.txt``` file to the new project and then tell Git to track it.  We can do this from either the bash terminal or from RStudio's Git interface.
 
 From bash:
-```{bash}
+```{bash, eval=F}
 mv ~/Rivers/Rivers.txt ~/RiversProj/Rivers.txt
+cd ~/RiversProj
+git add Rivers.txt
 ```
 From RStudio:
 Under the files tab (lower right), click the box for the file you want to move, then click on the cog wheel icon and select ```Move...```. 
@@ -70,9 +69,8 @@ Under the files tab (lower right), click the box for the file you want to move, 
 #### Jane Adds Files
 Now ```add``` new files in Git by clicking on the Git tab (upper right).  In yellow are the new untracked files.  Click on both the ```.RProj``` and on the ```Rivers.txt``` files. They should now have a green A denoting that they have been added. This is equivalent to ```git add```. 
 
-
 #### Jane Is Not Afraid of Committment
-Click on ```Commit```.  Now you can add a commit message and observe any changes you have made since the last commit.  Since this is your first commit everything is new and there are not conflicts!
+Click on ```Commit```.  Now you can add a commit message and observe any changes you have made since the last commit.  Since this is your first commit everything is new and there are no conflicts!
 
 When Jane is done typing her message, she clicks ```Commit```
 
@@ -89,66 +87,64 @@ git push origin master
 At this time, go back over to GitHub and check that ```WVRivers.txt```, along with comments and changes, has now arrived in your remote repository! Now others can access and make changes to speed up the collaboration process. 
 
 #### Cloning
-Jane who created the Rivers repository now needs to invite her partner, Tom, to collaborate on the remote repository. Click the ```Settings``` tab in the upper right of your repository, and then click ```Collaborators```. In the space for ```Add collaborator``` Jane must enter Tom’s user name or email address associated with his account and click add collaborator.  
+Jane, who created the Rivers repository, now needs to invite her partner, Tom, to collaborate on the remote repository. Click the ```Settings``` tab in the upper right of your repository, and then click ```Collaborators```. In the space for ```Add collaborator``` Jane must enter Tom’s user name or email address associated with his account and click add collaborator.  
 
-Once the Jane has sent an email collaboration request, Tom can accept the button in the email.  Tom will be redirected to GitHub notifications: https://github.com/notifications, where he can accept access to the ```Rivers``` repository.  Tom will need to hit the ```clone or download``` button to get the URL for the remote repo, in my case:
-	https://github.com/ahessl/Rivers.git
+Once the Jane has sent an email collaboration request, Tom can accept the button in the email.  Tom will be redirected to GitHub notifications: https://github.com/notifications, where he can accept access to the ```Rivers``` repository.  Tom will need to hit the ```clone or download``` button to get the URL for the remote repo, for ex:
+	https://github.com/JaneSmith/Rivers.git
 
 Now Tom needs to copy the remote repository to his local machine, a step called cloning. He can do this in several ways:  
 
-* From Rstudio by creating a new project (as above) 
+* From Rstudio by creating a new project (as above)   
 * From bash:  
 ```git clone https://github.com/ahessl/Rivers.git ~/TomsRiversProj/```  
 
 
 #### Tom Makes a Committment
-Next, the partner can start making changes to files in the repository. Make sure that your working directory is the cloned repository, and then make a new text file in that directory called INRivers.txt populated with the names of rivers in Indiana:
+Next, Tom can start making changes to files in the repository. Make sure that Tom's working directory is the cloned repository, and then make a new text file in that directory called `INRivers.txt` populated with the names of rivers in Indiana:
 
-$ cd ~/Desktop/ahessl-Rivers
-$ cat INRivers.txt
-Wabash River
-Muscatatuck River
-Fall Creek
-St. Joseph River
-White River
-Tippecanoe River
-Whitewater River
-Driftwood River
-Ohio River
-Iroquois River
-East Fork White River
+```{bash}
+cd ~/Rivers
+touch INRivers.txt
+```
+Open your new text file and add these rivers:  
 
-add and commit this new file to the repository using the push and commit commands: 
+Wabash River  
+Muscatatuck River  
+Fall Creek  
+St. Joseph River  
+White River  
+Tippecanoe River  
+Whitewater River   
+Driftwood River  
+Ohio River  
+Iroquois River  
+East Fork White River  
 
-$ git add INRivers.txt
-$ git commit -m “Added names of some rivers in Indiana to your list of state rivers”
+Now add and commit this new file to the repository using the push and commit commands (or using RStudio) 
+```{bash eval=FALSE, include=FALSE}
+cd ~/Rivers
+git add INRivers.txt
+git commit -m “Added names of some rivers in Indiana to your list of state rivers”
+```
 
-IMPORTANT NOTE: You have only committed these files to your local repository.  You still need to push them to the online master at GitHub: 
-
-$ git push origin master
-Counting objects: 3, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 420 bytes | 420.00 KiB/s, done.
-Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/awdye/Rivers.git
-   f634674..a2bd910  master -> master
+IMPORTANT NOTE: You have only committed these files to your local repository.  You still need to push them to the online master at GitHub.  Either push using the up arrow in RStudio or push from bash using ```git push origin master```
 
 Check back in on the owner’s remote repository at GitHub - you should see a new file called INRivers.txt. 
 
-Now, the owner of the repository can pull the partner’s changes from the remote repository to their own local make additional changes: 
+Jane can now pull the Tom’s changes from the remote repository to her own local and make additional changes, either with RStudio or ```git pull origin master```
 
-$ git pull origin master
-
-At this point, all three repositories, i.e. the owner’s GitHub repo, and both partner’s local repositories are now in sync. 
+At this point, all three repositories, i.e. the Jane's GitHub repo, and Jane and Tom's local repositories are now in sync. If only it were so easy in relationships...
 
 
-How to Resolve Merge Conflicts
+#### How to Resolve Merge Conflicts
 
-What if you and your collaborator(s) modify the same file in different ways?  This creates a conflict. To see what happens when you have a file in conflict, you and your partner should both modify WVRivers.txt, then attempt to commit and push the revised files to the remote repo. 
+What if Tom and Jane modify the same file in different ways?  This creates a conflict. To see what happens when you have a file in conflict, you and your partner should both modify WVRivers.txt, then attempt to commit and push the revised files to the remote repo. 
 
 Git should throw an error like:
-$git push origin master
+```{bash, eval=F}
+cd ~/Rivers
+git push origin master
+```
 To https://github.com/ahessl/Rivers.git
  ! [rejected]        master -> master (fetch first)
 error: failed to push some refs to 'https://github.com/ahessl/Rivers.git'
@@ -160,7 +156,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 Git rejects the push because it detects that the remote repository has new updates that have not been incorporated into the local branch. What we have to do is pull the changes from GitHub, merge them into the copy we’re currently working in, and then push that. Let’s start by pulling:
 
-$ git pull origin master
+```git pull origin master```
 remote: Counting objects: 3, done.
 remote: Compressing objects: 100% (2/2), done.
 remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
