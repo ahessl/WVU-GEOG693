@@ -65,4 +65,6 @@ GitHub credentials and avoiding monotony
 
 
 
-_This page was derived in part from Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University of Chicago_
+#### __Acknowledgments__
+_This page was derived in part from Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University of Chicago and from [UBC STAT 545A and 547M](http://stat545.com/Classroom/), licensed under the CC BY-NC 3.0 Creative Commons License._
+

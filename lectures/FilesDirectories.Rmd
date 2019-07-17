@@ -1,7 +1,7 @@
 ---
-title: "WorkingWithFilesDirectories"
+title: "Working with Files and Directories"
 author: "A Hessl"
-date: "6/1/2019"
+date: "6/29/2019"
 output: html_document
 ---
 
@@ -9,102 +9,114 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Problem
 
-In the lesson, you will find out how to access the data in this folder.
+### Problem: Nelle’s Pipeline
+Nelle Nemo, a marine biologist, has just returned from a six-month survey of the North Pacific Gyre, where she has been sampling gelatinous marine life in the Great Pacific Garbage Patch. She has 1520 samples in all and now needs to:   
 
+1)	Run each sample through an assay machine that will measure the relative abundance of 300 different proteins. The machine’s output for a single sample is a file with one line for each protein.  
+2) 	Calculate statistics for each of the proteins separately using a program her supervisor wrote called `goostats`.  
+3)	Write up results. Her supervisor would really like her to do this by the end of the month so that her paper can appear in an upcoming special issue of Aquatic Goo Letters.  
+
+It takes about half an hour for the assay machine to process each sample. The good news is that it only takes two minutes to set each one up. Since her lab has eight assay machines that she can use in parallel, this step will “only” take about two weeks.  
+
+The bad news is that if she has to run `goostats` by hand, she’ll have to enter filenames and click “OK” 1520 times. At 30 seconds per sample, the whole process will take more than 12 hours (and that’s assuming the best-case scenario where she is ready to enter the next file name as soon as the previous sample analysis has finished). This zero-breaks always-ready scenario is only achievable by a machine so it would likely take much longer than 12 hours, not to mention that the chances of her typing all of those commands correctly are practically zero. Missing that paper deadline is looking increasingly likely.  
+
+The next few lessons will explore what she should do instead. More specifically, they explain how she can use the `bash shell` to automate the repetitive steps in her processing pipeline so that her computer can work 24 hours a day while she writes her paper. As a bonus, once she has put a processing pipeline together, she will be able to use it again whenever she collects more data.  
+
+You need to download some files to follow this lesson:  
+
+* Download [data-shell.zip](../data/data-shell.zip) and move the `shell` file to your directory for this course (`~/OpenDataSci/data/` or similar).    
+* Unzip/extract the folder.      
+*	Open a terminal using RStudio (lower left).    
 
 ### Questions
 *	How can I create, copy, and delete files and directories?  
 *	How can I edit files?  
+* What exactly is a text file?  
 
 ### Objectives
 *	Create a directory hierarchy that matches a given diagram.  
 *	Create files in that hierarchy using an editor or by copying and renaming existing files.  
 *	Delete specified files and/or directories.  
 
-We now know how to explore files and directories, let's review how to make a directory. Go back to our ~/Desktop/ESDA/shell/data-shell directory and use ls -F to see what it contains:
+We now know how to explore files and directories, let's review how to make a directory. Be sure you are in the directory for the folder we just unzipped and use `ls -F` to see what it contains:
+```{bash, eval=T}
+cd ../data/data-shell
+ls -F
+```
 
-Amys-MacBook-Pro-7:data-shell amyhessl$ pwd
-/Users/amyhessl/Desktop/ESDA/shell/data-shell
-Amys-MacBook-Pro-7:data-shell amyhessl$ ls -F
+Let’s create a new directory called `thesis` using the command `mkdir`. Note this command has no output: 
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell
+mkdir thesis
+```
 
-creatures/		north-pacific-gyre/	solar.pdf
-data/			notes.txt		thesis/
-molecules/		pizza.cfg		writing/
+Since thesis is a relative path (i.e., doesn’t have specific path), the new directory is created in the current working directory:
 
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell
+ls -F
+```
 
-Let’s create a new directory called thesis using the command mkdir thesis (which has no output): 
-$ mkdir thesis
-
-
-Since thesis is a relative path (i.e., doesn’t have a leading slash), the new directory is created in the current working directory:
-$ ls -F
-creatures/		north-pacific-gyre/	solar.pdf
-data/			notes.txt		thesis/
-molecules/		pizza.cfg		writing/
-Use File Explorer or Finder 
+#### Use File Explorer, Finder or RStudio>Files
 Using the shell to create a directory is no different than using a file explorer. If you open the current directory using your operating system’s graphical file explorer, the thesis directory will appear there too. While they are two different ways of interacting with the files, the files and directories themselves are the same.
 
-Good names for files and directories
+#### Good names for files and directories
 Useful tips for the names of your files.
-1.	Don’t use whitespaces. Use - or _ instead.
-2.	Whitespaces can make a name more meaningful but since whitespace is used to break arguments on the command line it is better to avoid them in names of files and directories.
-3.	Don’t begin the name with - (dash). Commands treat names starting with - as options.
-4.	Stick with letters, numbers, . (period or ‘full stop’), - (dash) and _ (underscore). Avoid special characters (*, ^, etc.)
 
-If you need to refer to names of files or directories that have whitespace or another non-alphanumeric character, you should surround the name in quotes ("").
+1.	Don’t use whitespaces. Use - or _ instead.  
+2.	Whitespaces can make a name more meaningful but since whitespace is used to break arguments on the command line it is better to avoid them in names of files and directories.  
+3.	Don’t begin the name with - (dash). Commands treat names starting with - as options.  
+4.	Stick with letters, numbers, . (period or ‘full stop’), - (dash) and _ (underscore). Avoid special characters (*, ^, etc.)  
+5. If you must to refer to names of files or directories that have whitespace or another non-alphanumeric character, you should surround the name in quotes ("").
 
-Since we’ve just created the thesis directory, there’s nothing in it yet:
+Since we’ve just created the thesis directory, there’s nothing in it yet and nothing is returned if we ls the directory:
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell
+ls -F thesis
+```
 
-$ ls -F thesis
+Let’s change our working directory to thesis using cd, then create a new file called draft.txt, but first 
 
-Let’s change our working directory to thesis using cd, then run a text editor called Nano to create a file called draft.txt:
-Why Plain Text/Flatfiles Are Cool
-1.	Interoperable - read/write in all operating systems
-2.	Small - file size is tiny even for large files
-3.	Stability - been around since computers had monitors, late 60s
-4.	Search and replace is a breeze
-5.	Preferred format for scripts, data
-Which Editor?
-When we say, “nano is a text editor,” we really do mean “text”: it can only work with plain character data, not tables, images, or any other human-friendly media. 
+#### _An Interlude on Text  
+_Plain Text/Flatfiles Are Cool_
 
-On Unix systems (such as Linux and Mac OS X), many programmers use Emacs or Vim (both of which require more time to learn), or a graphical editor such as Gedit and Atom. On Windows, you may wish to use Notepad++. Windows also has a built-in editor called notepad that can be run from the command line in the same way as nano for the purposes of this lesson.
+1.	Interoperable - read/write in all operating systems  
+2.	Small - file size is tiny even for large files  
+3.	Stable - been around since computers had monitors, late 60s  
+4.	Search and replace is a breeze  
+5.	Preferred format for scripts, data  
 
-Let’s type in a few lines of text. Once we’re happy with our text, we can press Ctrl-O (press the Ctrl or Control key and, while holding it down, press the O key) to write our data to disk (we’ll be asked what file we want to save this to: press Return to accept the suggested default of draft.txt).
- 
-Once our file is saved, we can use Ctrl-X to quit the editor and return to the shell.
-Control, Ctrl, or ^ Key
-The Control key is also called the “Ctrl” key. There are various ways in which using the Control key may be described. For example, you may see an instruction to press the Control key and, while holding it down, press the X key, described as any of:
-*	Control-X
-*	Control+X
-*	Ctrl-X
-*	Ctrl+X
-*	^X
-*	C-x
-In nano, along the bottom of the screen you’ll see ^G Get Help ^O WriteOut. This means that you can use Control-G to get help and Control-O to save your file.
-nano doesn’t leave any output on the screen after it exits, but ls now shows that we have created a file called draft.txt:
+_Which Editor?_
+When we say, “atom is a text editor,” we really do mean “text”: it can only work with plain character data, not tables, images, or any other human-friendly media. 
 
-$ ls
-draft.txt
-Creating Files a Different Way
-We have seen how to create text files using the nano editor. Now, try the following command in your home directory:
+On Unix systems (such as Linux and Mac OS X), many programmers use Emacs or Vim (both of which require more time to learn), or a graphical editor such as Sublime and Atom. On Windows, you may wish to use Notepad++. Windows also has a built-in editor called Notepad.
 
-$ cd
-$ touch my_file.txt
+#### _Interlude Over!_
 
-*	What did the touch command do? When you look at your home directory using the GUI file explorer, does the file show up?
-*	Use ls -l to inspect the files. How large is my_file.txt?
-*	When might you want to create a file this way?
+Let's make the file with a command:
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/thesis
+touch draft.txt
+```
+
+Use `RStudio>Files` to access the file. If you click on it, it will open in upper left as a `.txt` file.  Type your thesis.  Done.
+
+Now an `ls` in the thesis folder will show the file:
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/thesis
+ls -l
+```
 
 Returning to the data-shell directory, let’s tidy up the thesis directory by removing the draft we created:
-$ cd thesis
-$ rm draft.txt
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/thesis
+rm draft.txt
+```
 
-This command removes files (rm is short for “remove”). If we run ls again, its output is empty once more, which tells us that our file is gone:
+This command removes files (rm is short for “remove”). If we run `ls` again, its output is empty once more, which tells us that our file is gone:
 
-$ ls
-Deleting Is Forever
+### Deleting Is Forever
 The Unix shell doesn’t have a trash bin that we can recover deleted files from (though most graphical interfaces to Unix do). Instead, when we delete files, they are unhooked from the file system so that their storage space on disk can be recycled. Tools for finding and recovering deleted files do exist, but there’s no guarantee they’ll work in any particular situation, since the computer may recycle the file’s disk space right away.
 
 Let’s re-create that file and then move up one directory to /Users/nelle/Desktop/data-shell using cd ..:
@@ -244,12 +256,18 @@ $ cp -r 2016-05-18-data/ 2016-05-20-data/
 $ rm -r -i 2016-05-20-data/
 
 Key Points
-*	cp old new copies a file.
-*	mkdir path creates a new directory.
-*	mv old new moves (renames) a file or directory.
-*	rm path removes (deletes) a file.
-*	Use of the Control key may be described in many ways, including Ctrl-X, Control-X, and ^X.
-*	The shell does not have a trash bin: once something is deleted, it’s really gone.
-*	Depending on the type of work you do, you may need a more powerful text editor than Nano.
+•	cp old new copies a file.
+•	mkdir path creates a new directory.
+•	mv old new moves (renames) a file or directory.
+•	rm path removes (deletes) a file.
+•	Use of the Control key may be described in many ways, including Ctrl-X, Control-X, and ^X.
+•	The shell does not have a trash bin: once something is deleted, it’s really gone.
+•	Depending on the type of work you do, you may need a more powerful text editor than Nano.
 
+
+```{bash}
+cd ../data/data-shell/
+rm thesis/*.*
+rmdir thesis
+```
 
