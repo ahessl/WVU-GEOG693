@@ -23,13 +23,11 @@ Please complete this before the first day of class.
     + RStudio  
     + GitHub  
 
-2) [Shell Basics](./lectures/ShellBasics.html) _00/00/00_  
+2) [Shell Basics](./lectures/ShellBasics.html) _00/00/00_   
 
-3) Working with Text Files _00/00/00_  
+4) [Files and Directories](./lectures/FilesDirectories.html) _00/00/00_  
 
-4) Files and Directories _00/00/00_ 
-
-5) Wildcards, Pipes, and Filters _00/00/00_  
+5) [Wildcards, Pipes, and Filters](./lectures/WildcardsPipesFilters.html) _00/00/00_  
 
 6) Finding Things 
     + grep

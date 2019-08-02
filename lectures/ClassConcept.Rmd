@@ -58,8 +58,6 @@ If you completed [Installing Software]() before the first class, you would have 
 
 
 
-Using Git within RStudio
-GitHub credentials and avoiding monotony
 
 
 

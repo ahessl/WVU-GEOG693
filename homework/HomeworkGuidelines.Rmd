@@ -21,11 +21,14 @@ Homework assignments will be stored in separate Git repositories under the `hess
 * __Clone__ the repository to your computer    
 * Modify and add files  
 * __Commit__ changes 
-* __Push__ the changes up to GitHub  
+* __Push__ the changes up to GitHub (not necessary if working from website)
 * Create a __pull request__ on the original repository to turn in the assignment. Make sure to include your name in the pull request.
 
 
 ### Which files to commit
+* README.md   
+Usually you will create a README.md file that explains what your code is for and how to use it.  
+
 * Source Document  
 Always commit the main source document, e.g., bash script,  R script, or R Markdown document. Commit early, commit often! It's just like hitting save - but with additional benefits.
 

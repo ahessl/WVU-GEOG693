@@ -1,0 +1,30 @@
+---
+title: "Xargs"
+author: "Amy Hessl"
+date: "8/1/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+###Can you add example of xargs here?
+`Xargs` is a powerful utility; it can help you pass output of one command as an _argument_ of another command for processing. Let's say you want to find the word count of every file in a directory using a wildcard:
+
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/molecules
+ls *ane* | xargs wc
+```
+Or let's say you have a list of file names for which you want to read the first two lines:
+
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/molecules
+ls *ane* | xargs head -n 2 
+```
+
+Remember the lengths.txt file? You can use xargs to...
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/molecules
+xargs -a lengths.txt
+```

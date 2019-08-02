@@ -9,31 +9,31 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Problem
+### Problem
 Sara is new to R.  She borrowed a script from a colleague that reads in climate station data and then converts it to a format she can use.  But when she runs the script, the script can't find any of the files her friend gave her.  Her colleague confirmed that the script works perfectly on her computer.  
 
 *Why won't it work on Sara's computer?*
 
-## Questions
+### Questions
 *	How can I move around on my computer?  
 *	How can I see what files and directories I have?  
 *	How can I specify the location of a file or directory on my computer?  
 *	How can I define a file destination consistent on anyone's computer?  
 
-## Objectives
+### Objectives
 * Explain the similarities and differences between a file and a directory.  
 * Translate an absolute path into a relative path and vice versa.  
 * Construct absolute and relative paths that identify specific files and directories.  
 * Demonstrate the use of tab completion and explain its advantages.  
 
-## Terms
+### Terms
 * __file system__ - the part of the operating system that organizes files and folders (aka - 'directories')  
 * __root directory__ - top of the file system; may be same as home  
 * __home directory__ - the “user’s” directory, i.e. the directory a user is in upon login  
 * __working directory__ - the current directory (i.e., “folder”) that you are in. By default, this is your home directory. 
 *	__path__ - the unique file or folder location within a directory. Here the path is also the working directory: /Users/amyhessl
 
-### BIG HINT: watch your progress in the lower right window of RStudio under the 'Files' tab.
+#### BIG HINT: watch your progress in the lower right window of RStudio under the 'Files' tab.
 
 You can print your working directory (pwd):
 
