@@ -30,10 +30,12 @@ Please complete this before the first day of class.
 5) [Wildcards, Pipes, and Filters](./lectures/WildcardsPipesFilters.html) _00/00/00_  
 
 6) Finding Things 
-    + grep
-    + find  
+    + `grep`
+    + `find`  
     
-7) Loops
+7) Accessing Data with `wget`
+
+8) Loops  
 
 8) Shell Scripts
 
@@ -49,10 +51,6 @@ Please complete this before the first day of class.
 
 3) [Collaboration and Sharing Using GitHub](./lectures/GitHib.html) _00/00/00_
 
-4) Making a README.md
-    + Other git clients
-    
-
 <br/>
 
 ### __Working with Data in R__  
@@ -64,13 +62,20 @@ Please complete this before the first day of class.
 3) Subsetting/Indexing Data  
 
 4) Control Flow: Functions in R  
-Control Flow: Apply  
-Control Flow: Loops  
-Split, Apply, Combine   
-Plotting Using Base R  
-Plotting Using ggplot  
-APIs to Download Data
-Editing a Package
+
+5) Control Flow: Apply  
+
+6) Control Flow: Loops  
+
+7) Split, Apply, Combine   
+
+8) Plotting Using Base R  
+
+9) Plotting Using ggplot  
+
+10) APIs to Download Data  
+
+11) Editing a Package  
 
 #### __Acknowledgments__
 _This page was derived in part from Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University of Chicago and from [UBC STAT 545A and 547M](http://stat545.com/Classroom/), licensed under the CC BY-NC 3.0 Creative Commons License._
