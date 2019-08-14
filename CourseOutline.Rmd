@@ -29,15 +29,15 @@ Please complete this before the first day of class.
 
 5) [Wildcards, Pipes, and Filters](./lectures/WildcardsPipesFilters.html) _00/00/00_  
 
-6) Finding Things 
+6) [Accessing Data with `wget`](./lectures/wget.html) _00/00/00_
+
+7) Loops  
+
+8) Finding Things 
     + `grep`
-    + `find`  
-    
-7) Accessing Data with `wget`
+    + `find`
 
-8) Loops  
-
-8) Shell Scripts
+9) Shell Scripts
 
 
 

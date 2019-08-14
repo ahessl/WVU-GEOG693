@@ -1,0 +1,188 @@
+---
+title: "wget"
+author: "Amy Hessl"
+date: "8/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### Getting Data
+### Problem
+Jon wants to develop his own multi-proxy reconstruction of past temperature from existing paleoclimate data for the last 2000 years.  Luckily, he found the PAGES2k website which includes ample paleoclimate proxy data.   PAGES2k data files are stored at NOAA National Centers for Environmental Information where there are thousands of files hosted. Some of those files are data files (`.txt`) but others are metadata files (`.lpd`). How will Jon efficiently download only those that he wants? Say just those for North America? What if Jon decides he really wants all of files?
+
+#### Objectives
+*	Download a new utility for bash (`wget`) to use in the terminal  
+*	Use `wget` to download single files from a `url`  
+*	Use `wget` to download multiple files from a nested `url` directory structure 
+*	Use `wget` to download only those files from a list stored in a `txt` file
+
+#### What is wget?
+`wget` is a simple tool developed for the GNU Project that downloads files with the HTTP, HTTPS and FTP protocols. It is widely used by Unix-like users and is available with most Linux distributions. Other similar programs like `curl` also work, but `wget` has more functionality. Later in the semester, we will learn how new tools work with APIs to generate the appropriate `urls` for you.
+
+_In other words…_
+`wget` is a command line utility that allows you to download files from the web easily and quickly. This is particularly useful when you want to download multiple files at once without manually downloading each file individually. 
+
+You may remember that the strength of the shell is that you can combine little programs together in powerful ways.  Some of these programs come pre-installed, but others you need to add to your library yourself.
+
+#### Installing wget
+##### MAC OSX
+Unless you have previously used it, `wget` is probably not installed on your computer.
+
+Option 1: Straight from the Free Software Foundation: https://www.gnu.org/software/wget/  
+Option 2: First download `HomeBrew`, a package installer that allows you to install popular free packages like `wget` and `git` straight from your shell. 
+	A step-by-step guide on preparing HomeBrew: https://						www.howtogeek.com/211541/homebrew-for-os-x-easily-installs-				desktop-apps-and-terminal-utilities/
+
+On a mac, use these commands.  You may need to enter your password.
+	
+`xcode-select --install`
+`ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+`brew doctor` #checks that you have it installed properly
+
+Once brewer is installed you can access tons of free utilities such as wget:
+
+`brew install wget`
+
+##### Git for Windows Instructions (and for other utilities too)
+Git for Windows comes with the "Git Bash" terminal which we have been using for unix-like commands on a windows machine. Additional utilities/packages can be added if a windows binary file is available. Git Bash is being run from C:\Program Files\Git\mingw64\ . From the start menu, right click on the Git Bash icon and open file location. It might be something like C:\Users\name\AppData\Local\Programs\Git, the mingw64 in this directory is your root. Find your root for Git for Windows by using `pwd -W`. If you go to that directory, you will find the typical linux root folder structure (`bin`, `etc`, `lib` and so on).
+
+If you are missing a utility, such as `wget`, track down a binary for windows and copy the files to the corresponding directories. Sometimes the windows binary have funny prefixes, so you should rename the `.exe` file to the standard name. Since `bin` is on the PATH, it will be automatically available to Git Bash.
+
+__Wget__
+*	Download the lastest wget binary for windows from [eternallybored](https://eternallybored.org/misc/wget/) (they are available as a zip with documentation, or just an exe)  
+*	If you downloaded the zip, extract all (if windows built in zip utility gives an error, use 7-zip).  
+*	Rename the file wget64.exe to wget.exe if necessary.  
+*	Move `wget.exe` to your Git\mingw64\bin\		
+Once wget is on your machine
+you can access the version details:  
+	`wget --version`
+and help information:   
+	`wget -h`
+OR 
+	`man wget`
+
+#### Retrieve One File From a url
+Say you want to download a single climate station file from NOAA (with an eye towards writing code to download a whole bunch of files). To download a single dataset from a url and save in your working directory:
+
+```{bash, one file, echo=TRUE, warning=FALSE, message=FALSE, eval=FALSE}
+mkdir ../data/data-shell/wget
+cd ../data/data-shell/wget
+wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all/USW00013736.dly
+```
+Check in your working directory to see that you now have a file named `USW0013736.dly`. You can look at this file using cat, nano or any text editor, even though it has a `.dly` extension (NOAA specific extension for 'daily' climate data).  Let's take a look at the url, and consider how NOAA is storing all these individual station records.
+
+Paste just this part of the url into a browser:
+ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/
+
+If you add all/ or click on that folder, it will take a long time to load, because that is a list of all the climate stations in the Global Historical Climatology Network maintained by NOAA, as well as their daily data.  So, if you know the station number (can be retrieved using the inventory), then you can download just that station.  Open the readme file to learn about the formatting of the data and how to download it.
+
+##### Naming the Files
+Better than simply downloading a file, you can manually specify the file name and destination in the original command using the `-O` flag:
+
+```console
+cd ../data/data-shell/wget
+wget -O morgdata.txt ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all/USW00013736.dly 
+```
+Here, the `-O` option is used to indicate that the contents of the url will be sent to a file in your working directory called `morgdata.txt`
+
+Try it again with another dataset: 
+```console
+wget -O SeasonalTempIndex.txt https://data.giss.nasa.gov/gistemp/graphs/graph_data/Temperature_Anomaly_Seasonal_Resolution/graph.txt
+```
+What are these data?  Where are they from?  What might you use them for?  Why might you want automatically download data, rather than storing a copy for your use?
+
+#### Retrieve multiple files from url
+Downloading a single file, for example as your data source in a script is valuable but being able to pull many files at once is extremely powerful.		
+	
+##### Example 1. Pulling publicly archived scientific datasets to increase research efficiency.__
+
+In earth science, lots of data are archived in publicly available online storage. Much of today’s cutting-edge research depends on utilizing these large datasets. Downloading individual data files is usually impractical - with a basic understanding of the terminal, you can pull large quantities of data simultaneously, immediately improving the efficiency of your research. 
+
+##### Jon's Problem
+Jon can read about PAGES2k here: http://www.pages-igbp.org/ini/wg/2k-network/intro
+Click on "Data" and "Phase 2 data".
+
+Where are the actual data stored?
+
+The Pages 2k data are stored publicly online in a NOAA Paleo archive. Before we download a ton of data we don't know much about, let us examine carefully how the data are stored and help Jon design a plan to download it.
+
+Using a command like the one below, you can immediately download all files from the Pages2k dataset and put them in your working directory. DON’T DO IT YET!  Let's examine the flags first. Run `man wget` or use help to explore the flags in this command:
+
+```console
+wget -r -e robots=off -A.txt -np https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/
+```
+
+The `-r` option tells wget to recursively download. This means that it not only pulls the website at face value, but also all files included under that website. Try it without `-r` and see what happens.
+
+Enabling the `-A` option allows you to only pull files of a certain type. For example, `-A.txt` pulls all `.txt` files, which in this case, is what you want. Alternatively, you could specify `-A.pdf`, `-A.csv`, `-A.doc`, etc.
+
+The robots option [`-e`] is set to `robots=off` in the above wget command. This is called robot exclusion (https://www.gnu.org/software/wget/manual/html_node/Robot-Exclusion.html), and sometimes can help wget more directly access your desired files if `robots.txt` discourages a complete search of the website. Remove this option, and notice that wget will only download a `robots.txt` file, which is useless for your current situation. 
+
+The `-np` option stands for “no parent. wget will follow the directory index on the website. In the case of the Pages 2k directory, wget will continue up one directory to the parent directory, and then continue to download all files in that directory as well. If you want to disallow this feature, set the `-np` option. In the current example, IF we were to re-run your command without the -np option specified - you will see that not only are the files in the data-current-version folder downloaded, but also the files in the data-version-2.0.0 folder (and ALL of the files in successive directories above that!!) This is a ton of files, and you probably don’t need them all!
+	
+In this case, you can achieve the same effect as `-np` by specifying the option `-l1`. By default, wget will search and download files from up to 5 directories (`-l5`) in the current webpage file structure. This means it will follow all links on the first page (`-l1`), the second page (`-l2`), etc up to the fifth page (`-l5`). `-l0` is “infinity” - this could download the entire Internet, because wget keeps following every link it finds. For goodness sakes, don't ever do this unless it's the end of the world and you are trying to save Wikipedia.
+
+You can see the file directory structure of the website when you go into your Finder to observe your downloaded files. Note that you will have a structure of empty folders.  This is useful if you are trying to mirror an entire website, but not so great for this problem specifically.
+
+What if you only wanted those files from Africa? In this case, the files are named conveniently so a wildcard will work.  Add to this `-nd` which copies only the files, without the directory structure.
+
+```console
+wget -r -e robots=off -A 'Afr*.txt' -np -nd https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/
+```
+
+What if you had a specific list of files you wanted? For example, create a .txt file named `PAGES2k_toget.txt` that contains the following URLs:
+
+https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/Arc-Yukon.DArrigo.2006.txt  
+https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/NAm-Pintlers.Littell.2011-1.txt  
+https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/SAm-CentralAndes6.Villalba.2014.txt  
+
+You will need the full URL for each file (PAGES2k_toget.txt) and remove the -r, -e and -np flags. This is neater as you won't get all the extra directories in your download - just the files.
+
+```console
+wget  -i PAGES2k_toget.txt https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/
+```
+
+If you plan to download a lot of files, you might add a pause between downloads to prevent overloading the server using the `-w` flag:  
+
+```console
+wget -w 3 -i PAGES2k_toget.txt https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/
+```
+
+##### Example 2. Pulling public domain literature for your own use offline
+You don’t have to use wget just for research! Play around with it a bit in situations of 
+personal and professional interest - the best way to learn something is to start trying 
+things. 
+
+Here is a “fun” example, where wget is used to download a copy of Mark Twain’s Adventures of Huckleberry Finn to your personal computer.  Many copies of works of world literature that have entered into the public domain phase are available for free on a site called Project Gutenberg, gutenberg.org. You can use wget to download entire copies of these works:
+
+```	
+wget -r -A.txt -np -e robots=off -l1 https://www.gutenberg.org/files/76/ 
+
+```
+This downloads only the .txt version of the book and saves it to your working directory, but it also saves the folders that contained it because of the `-r` flag. Note that like in the previous example, you will have to navigate through the website’s file structure to access your copy of the book. 
+
+To cut to the chase and just get the material from files/ which is 4 levels down:
+
+```{bash twain echo=-1}
+cd ../data/data-shell/wget
+wget -r -A.txt -nH --cut-dirs 5 -np -e robots=off -l1 https://www.gutenberg.org/files/76/ 
+```
+Let's find out how many times Jim versus Tom are mentioned:
+```{bash jim, echo=-1}
+cd ../data/data-shell/wget
+mv 76-0.txt huck.txt
+grep -ow Tom huck.txt | wc -l
+grep -ow Jim huck.txt | wc -l
+```
+
+##### Key Points
+*	`wget` is a utility that you can download to expand the value of the shell  
+* `wget` allows you to directly download files from urls  
+*	Use flags and wildcards to allow for multiple downloads in a single line  
+*	Be careful with the amount of data you download at any given time  
+
+
+
+

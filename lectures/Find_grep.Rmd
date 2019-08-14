@@ -1,0 +1,337 @@
+---
+title: "Finding Things"
+author: "Amy Hessl"
+date: "8/2/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Problem: As scientists, we make a lot of files with a lot of data.  The problem is amplified if you use machines that can make superfast. How can we quickly find text or values, not just in a single file, but in large numbers of files?
+
+#### Questions
+*	How can I find files?  
+*	How can I find things in files?  
+* What is a regular expression?  
+
+#### Objectives
+*	Use `grep` to select lines from text files that match simple patterns.  
+*	Use `find` to find files whose names match simple patterns.  
+*	Use the output of one command as the command-line argument(s) to another command.  
+*	Explain what is meant by ‘text’ and ‘binary’ files, and why many common tools don’t handle the latter well.  
+
+#### Tools/Terms
+*	Regular expressions (`regexp`)- special text string for describing a search pattern  
+*	`find` finds files with specific properties that match patterns.  
+*	`grep` selects lines in files that match patterns.  
+*	`paste` combines output horizontally.    
+*	`--help` is a flag supported by many bash commands, and programs that can be run from within Bash, to display more information on how to use these commands or programs.  
+*	`man` command displays the manual page for a given command.  
+*	`$(command)` inserts a command’s output in place. Like the parentheses in an equation.  
+*	`sed` a stream editor, often used for search and replace operations.  
+
+### grep
+In the same way that many of us now use “Google” as a verb meaning “to find”, Unix programmers often use the word “grep”. “grep” is a contraction of “global/regular expression/print”, a common sequence of operations in early Unix text editors. It is also the name of a very useful command-line program.
+`grep` finds and prints lines in files that match a pattern. For our examples, we will use a file that contains three haikus taken from a 1998 competition in Salon magazine. For this set of examples, we’re going to be working in the `writing/` subdirectory of `data-shell/`
+
+```{bash, echo=TRUE, eval=T}
+cd ../data/data-shell/writing
+cat haiku.txt
+```
+
+We haven’t linked to the original haikus because they don’t appear to be on Salon’s site any longer. As Jeff Rothenberg said, “Digital information lasts forever — or five years, whichever comes first.” Luckily, popular content often has backups.
+
+Let’s use `grep` find lines that contain the word “not”:
+
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/writing
+grep not haiku.txt
+```
+
+Here, _not_ is the pattern we’re searching for. The `grep` command searches through the file, looking for matches to the pattern specified. To use it type: `grep`, then the pattern we’re searching for and finally the name of the file (or files) we’re searching in.
+The output is the three lines in the file that contain the letters “not”.
+Let’s try a different pattern: “The”.
+
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/writing
+grep The haiku.txt
+```
+
+This time, two lines that include the letters “The” are outputted. However, one instance of those letters is contained within a larger word, “Thesis”. To restrict matches to lines containing the word “The” on its own, we can give grep with the `-w` flag. This will limit matches to word boundaries.
+
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/writing
+grep -w The haiku.txt
+```
+
+Note that a “word boundary” includes the start and end of a line, so not just letters surrounded by spaces. Sometimes we don’t want to search for a single word, but a phrase. This is also easy to do with grep by putting the phrase in quotes.
+
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/writing
+grep -w "is not" haiku.txt
+```
+
+We’ve now seen that you don’t have to have quotes around single words, but it is useful to use quotes when searching for multiple words. It also helps to make it easier to distinguish between the search term or phrase and the file being searched. We will use quotes in the remaining examples.  
+
+Another useful option is `-n`, which numbers the lines that match:
+
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/writing
+grep -n "it" haiku.txt
+```
+
+Here, we can see that lines 5, 9, and 10 contain the letters “it”.
+We can combine options (i.e. flags) as we do with other Unix commands. For example, let’s find the lines that contain the word “the”. We can combine the option `-w` to find the lines that contain the word “the” and `-n` to number the lines that match:
+
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/writing
+grep -n -w "the" haiku.txt
+```
+
+Now we add the option `-i` to make our search case-insensitive:
+
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/writing
+grep -n -w -i "the" haiku.txt
+```
+Now, we want to use the option `-v` to invert our search, i.e., we want to output the lines that do _not_ contain the word “the”.
+
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/writing
+grep -n -w -v "the" haiku.txt 
+```
+grep has lots of other options. To find out what they are, we can type:
+```{bash, echo=TRUE, eval=T}
+grep --help
+```
+
+Regexp selection and interpretation:
+  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)
+  -F, --fixed-strings       PATTERN is a set of newline-separated fixed strings
+  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)
+  -P, --perl-regexp         PATTERN is a Perl regular expression
+  -e, --regexp=PATTERN      use PATTERN for matching
+  -f, --file=FILE           obtain PATTERN from FILE
+  -i, --ignore-case         ignore case distinctions
+  -w, --word-regexp         force PATTERN to match only whole words
+  -x, --line-regexp         force PATTERN to match only whole lines
+  -z, --null-data           a data line ends in 0 byte, not newline
+
+Or for more info, try the manual
+```{bash, echo=-1, eval=T}
+man grep
+```
+
+>__Challenge: How can we return the file without blank lines?
+Which line numbers contain blank lines?__
+
+> __Challenge: Which command would result in the following output:
+and the presence of absence:__  
+
+1.	grep "of" haiku.txt  
+2.	grep -E "of" haiku.txt  
+3.	grep -w "of" haiku.txt  
+4.	grep -i "of" haiku.txt  
+
+### Wildcards
+grep’s real power doesn’t come from its options, though; it comes from the fact that patterns can include wildcards. (The technical name for these is _regular expressions_, which is what the “re” in “grep” stands for.) Regular expressions are both complex and powerful. REGEX is a real artform. As a taster, we can find lines that have an ‘o’ in the second position like this:
+
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell/writing
+grep -E '^.o' haiku.txt
+```
+
+We use the `-E` flag and put the pattern in quotes to prevent the shell from trying to interpret it. (If the pattern contained a *, for example, the shell would try to expand it before running grep.) The `^` in the pattern anchors the match to the start of the line. The `.` matches a single character (just like `?` in the shell), while the `o` matches an actual ‘o’.
+
+#### Tracking a Species
+>__Challenge: Leah has several hundred data files saved in one directory, each of which is formatted like this:
+2013-11-05,deer,5  
+2013-11-05,rabbit,22  
+2013-11-05,raccoon,7  
+2013-11-06,rabbit,19  
+2013-11-06,deer,2  
+She wants to write a shell script that takes a species as the first command-line argument and a directory as the second argument. The script should return one file called `speciesname.txt` containing a list of dates and the number of that species seen on each date. For example using the data shown above, `rabbit.txt` would contain:
+2013-11-05,22  
+2013-11-06,19  
+An example of such a file is provided in `data-shell/data/animal-counts/animals.txt`__
+
+
+_Solution Hints_
+*	Use man grep to look for how to grep text recursively in a directory and man cut to select more than one field in a line.
+*	Start by selecting all the lines of animals.txt with "rabbit" as an example.
+*	Examine this output.
+*	Then cut those lines to cut out junk, then cut again to preserve just the date and frequency
+*	Send the final output to a file called "rabbit.txt"
+
+
+
+
+
+grep -w rabbit -r animals.txt | cut -d : -f 2 | cut -d , -f 1,3 > rabbit.txt
+
+Now replace "rabbit" and "animals.txt" with variables ($1, $2)
+
+
+Put these commands and pipes in the right order to achieve this:
+cut -d : -f 2  
+>  
+|  
+grep -w $1 -r $2  
+|  
+$1.txt  
+cut -d , -f 1,3  
+
+
+Solution:
+grep -w $1 -r $2 | cut -d : -f 2 | cut -d , -f 1,3  > $1.txt
+called by: $ bash count-species.sh bear .
+
+
+Little Women
+You and your friend, having just finished reading Little Women by Louisa May Alcott, are in an argument. Of the four sisters in the book, Jo, Meg, Beth, and Amy, your friend thinks that Jo was the most mentioned. You, however, are certain it was Amy. Luckily, you have a file LittleWomen.txt containing the full text of the novel (data-shell/writing/data/LittleWomen.txt). Using a for loop, how would you tabulate the number of times each of the four sisters is mentioned?
+Hint: one solution might employ the commands grep and wc and a |, while another might utilize grep options. There is often more than one way to solve a programming task, so a particular solution is usually chosen based on a combination of yielding the correct result, elegance, readability, and speed.
+
+Compare Your Numbers!
+One solution has Amy at 645. Another 643. Why? Multiple mentions per line? Does that include "Amy's"?
+Solution(s)
+for sis in Jo Meg Beth Amy
+do
+	echo $sis:
+	grep -ow $sis LittleWomen.txt | wc -l
+done
+Why is this solution slightly inferior?
+for sis in Jo Meg Beth Amy
+do
+	echo $sis:
+	grep -ocw $sis LittleWomen.txt
+done
+This solution is inferior because grep -c only reports the number of lines matched. The total number of matches reported by this method will be lower if there is more than one match per line.
+
+What other applications can you imagine for this type of loop?
+egrep - For more detailed regular expressions
+If you need to use more detailed expressions to match strings, try using egrep which has more options than grep.
+Some more building blocks for regular expressions using egrep:
+*	. (dot) - a single character.
+*	? - the preceding character matches 0 or 1 times only.
+*	* - the preceding character matches 0 or more times.
+*	+ - the preceding character matches 1 or more times.
+*	{n} - the preceding character matches exactly n times.
+*	[agd] - the character is one of those included within the square brackets.
+*	[^agd] - the character is not one of those included within the square brackets.
+*	[c-f] - the dash within the square brackets operates as a range. In this case it means either the letters c, d, e or f.
+*	| (pipe symbol) - the logical OR operation
+*	() - allows us to group several characters to behave as one.
+*	^ - matches the beginning of the line.
+*	$ - matches the end of the line.
+Example: fruit.txt
+1.	Fred apples 20
+2.	Susy oranges 5
+3.	Mark watermellons 12
+4.	Robert pears 4
+5.	Terry oranges 9
+
+6.	Lisa peaches 7
+7.	Susy oranges 12
+8.	Mark grapes 39
+9.	Anne mangoes 7
+10.	Greg pineapples 3
+11.	Oliver ^rockmellons 2
+12.	Betty limes 14
+What do these do? What would they return?
+egrep 'p{2}' fruit.txt
+egrep '2$' fruit.txt 
+egrep '[w-z]' fruit.txt
+egrep '[^w-z]' fruit.txt
+egrep '^1' fruit.txt
+egrep 'or|is|go' fruit.txt
+egrep '^$' fruit.txt
+egrep '\^' fruit.txt
+
+#### Find Files
+While grep finds lines in files, the find command finds files themselves. Again, it has a lot of options. 
+Nelle’s writing directory contains one file called haiku.txt and three subdirectories: thesis (which contains a sadly empty file, empty-draft.md); data (which contains three files LittleWomen.txt, one.txt and two.txt); and a tools directory that contains the programs format and stats, and a subdirectory called old, with a file oldtool.
+For our first command, let’s run find . from within Nelle's writing/.
+$ find .
+.
+./data
+./data/one.txt
+./data/LittleWomen.txt
+./data/two.txt
+./tools
+./tools/format
+./tools/old
+./tools/old/oldtool
+./tools/stats
+./haiku.txt
+./thesis
+./thesis/empty-draft.md
+As always, the . on its own means the current working directory, which is where we want our search to start. find’s output is the names of every file and directory under the current working directory. This can seem useless at first but find has many options to filter the output and in this lesson we will discover some of them.
+The first option in our list is -type d that means “things that are directories”. Sure enough, find’s output is the names of the five directories in our little tree (including .):
+$ find . -type d
+./
+./data
+./thesis
+./tools
+./tools/old
+Notice that the objects find finds are not listed in any particular order. If we change -type d to -type f, we get a listing of all the files instead:
+$ find . -type f
+./haiku.txt
+./tools/stats
+./tools/old/oldtool
+./tools/format
+./thesis/empty-draft.md
+./data/one.txt
+./data/LittleWomen.txt
+./data/two.txt
+Now let’s try matching by name:
+$ find . -name *.txt
+./haiku.txt
+We expected it to find all the text files, but it only prints out ./haiku.txt. The problem is that the shell expands wildcard characters like * before commands run. Since *.txt in the current directory expands to haiku.txt, the command we actually ran was:
+$ find . -name haiku.txt
+find did what we asked; we just asked for the wrong thing.
+To get what we want, let’s do what we did with grep: put *.txt in single quotes to prevent the shell from expanding the * wildcard. This way, find actually gets the pattern *.txt, not the expanded filename haiku.txt:
+$ find . -name '*.txt'
+./data/one.txt
+./data/LittleWomen.txt
+./data/two.txt
+./haiku.txt
+Listing vs. Finding
+ls and find can be made to do similar things given the right options, but under normal circumstances, ls lists everything it can, while find searches for things with certain properties and shows them.
+
+As we said earlier, the command line’s power lies in combining tools. We’ve seen how to do that with pipes; let’s look at another technique. As we just saw, find . -name '*.txt'gives us a list of all text files in or below the current directory. How can we combine that with wc -l to count the lines in all those files?
+The simplest way is to put the find command inside $():
+$ wc -l $(find . -name '*.txt')
+11 ./haiku.txt
+300 ./data/two.txt
+21022 ./data/LittleWomen.txt
+70 ./data/one.txt
+21403 total
+When the shell executes this command, the first thing it does is run whatever is inside the $(). It then replaces the $() expression with that command’s output. Since the output of find is the four filenames ./data/one.txt, ./data/LittleWomen.txt, ./data/two.txt, and ./haiku.txt, the shell constructs the command:
+$ wc -l ./data/one.txt ./data/LittleWomen.txt ./data/two.txt ./haiku.txt
+which is what we wanted. This expansion is exactly what the shell does when it expands wildcards like * and ?, but lets us use any command we want as our own “wildcard”.
+It’s very common to use find and grep together. The first finds files that match a pattern; the second looks for lines inside those files that match another pattern. Here, for example, we can find PDB files that contain iron atoms by looking for the string “FE” in all the .pdb files above the current directory:
+$ grep "FE" $(find . -name '*.pdb')
+../data/pdb/heme.pdb:ATOM     25 FE           1      -0.924   0.535  -0.518
+Matching and Subtracting
+The -v flag to grep inverts pattern matching, so that only lines which do not match the pattern are printed. Given that, which of the following commands will find all files in /data whose names end in s.txt (e.g., animals.txt or planets.txt), but do not contain the word net? Once you have thought about your answer, you can test the commands in the data-shell directory.
+1.	find data -name '*s.txt' | grep -v net
+2.	find data -name *s.txt | grep -v net
+3.	grep -v "temp" $(find data -name '*s.txt')
+4.	None of the above.
+Pipeline Reading Comprehension
+Write a short explanatory comment for the following shell script:
+wc -l $(find . -name '*.dat') | sort -n
+
+Finding Files with Different Properties
+The find command can be given several other criteria known as “tests” to locate files with specific attributes, such as creation time, size, permissions, or ownership. Use man find to explore these, and then write a single command to find all files in or below the current directory that were modified by the user ahmed in the last 24 hours.
+Hint 1: you will need to use three tests: -type, -mtime, and -user.
+Hint 2: The value for -mtime will need to be negative—why?
+Key Points
+*	find finds files with specific properties that match patterns.
+*	grep and egrep selects lines in files that match patterns.
+*	--help is a flag supported by many bash commands, and programs that can be run from within Bash, to display more information on how to use these commands or programs.
+*	man command displays the manual page for a given command.
+*	$(command) inserts a command’s output in place.
+

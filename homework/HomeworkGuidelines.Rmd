@@ -11,11 +11,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### GitHub Pre-Requisites
 
-You should already know how to pull and push from a GitHub repo using RStudio.
+You should already know how to pull and push from a GitHub repo using either command line or RStudio.
 
 ### Accessing and Submitting Homework
 
-Homework assignments will be stored in separate Git repositories under the `hessllab` organization on GitHub. To complete a homework assignment, you need to:  
+Homework assignments will be stored in separate Git repositories under [hessllab](https://github.com/hessllab) organization on GitHub. To complete a homework assignment, you need to:  
 
 * __Fork__ the repository  
 * __Clone__ the repository to your computer    

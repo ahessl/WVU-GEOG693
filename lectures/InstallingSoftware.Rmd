@@ -77,6 +77,8 @@ This method of installing Git for Windows leaves the Git executable in a convent
 
 When asked about “Adjusting your PATH environment”, make sure to select _“Git from the command line and also from 3rd-party software”_. Otherwise,accept the defaults.  
 
+Once you have installed Git for Windows, open RStudio and click on `Terminal`.  Type `ls` at the prompt.  If you get a list of files, great - you are good to go.  If you get a warning, try going to Rstudio tab and clicking on `Preferences`, then select `Terminal` and select `New Terminals Open with Bash`.
+
 If you follow these instructions and install RStudio version 1.1 or higher, you can use the shell (also called the terminal) directly from within RStudio. 
 
 __Git Installation: Mac OS X__  

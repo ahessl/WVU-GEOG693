@@ -6,11 +6,11 @@ title: "GEOG693: Open Data Science"
 
 New tools and techniques in data science are enabling collaboration and discovery in the Earth and environmental sciences at unprecedented rates and scales. Most of these tools are free and easy to access. In this course, students will learn how to:  
 
-- Rapidly download data from online sources  
-*	Use the terminal to search, organize, and edit files  
-*	Develop a projects, functions, and reports in R  
-*	Wrangle data into the shape you need for analysis  
-*	Collaborate online using version control in GitHub  
+* Rapidly download data from online sources  
+*	Use the __bash terminal__ to search, organize, and edit files  
+*	Develop a projects, functions, and reports in __R__   
+* __Wrangle__ data into the shape you need for analysis  
+*	Collaborate online using version control in __GitHub__  
 
 We will work with data typical of the Earth sciences, but techniques and skills are broadly applicable across fields.  You will learn this material in a workshop setting to allow for experimentation and support.  Students will develop projects that simulate real-life collaboration with other scientists.
 
@@ -18,7 +18,7 @@ We will work with data typical of the Earth sciences, but techniques and skills 
 Upon successful completion of this course, students will be able to:  
 
 1.	Execute basic commands and scripts in the bash shell.  
-2. Develop, read, and write basic scripts in R.  
+2.  Develop, read, and write basic scripts in R.  
 3.	Import, organize, and summarize data in R.
 4.	Create publication quality figures in R.
 5.	Share and collaborate on scripts and projects using GitHub.
