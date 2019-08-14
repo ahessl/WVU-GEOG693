@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="A Hessl" />
+
+
+<title>Homework Guide</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">GEOG693: Open Data Science</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="CourseOutline.html">Course Outline</a>
+</li>
+<li>
+  <a href="CourseRequirements.html">Course Requirements</a>
+</li>
+<li>
+  <a href="HomeworkGuidelines.html">Homework Guidelines</a>
+</li>
+<li>
+  <a href="contact.html">Contact Info</a>
+</li>
+<li>
+  <a href="http://github.com/ahessl">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/ahessl">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Homework Guide</h1>
+<h4 class="author">A Hessl</h4>
+<h4 class="date">6/11/2019</h4>
+
+</div>
+
+
+<div id="github-pre-requisites" class="section level3">
+<h3>GitHub Pre-Requisites</h3>
+<p>You should already know how to pull and push from a GitHub repo using either command line or RStudio.</p>
+</div>
+<div id="accessing-and-submitting-homework" class="section level3">
+<h3>Accessing and Submitting Homework</h3>
+<p>Homework assignments will be stored in separate Git repositories under <a href="https://github.com/hessllab">hessllab</a> organization on GitHub. To complete a homework assignment, you need to:</p>
+<ul>
+<li><strong>Fork</strong> the repository<br />
+</li>
+<li><strong>Clone</strong> the repository to your computer<br />
+</li>
+<li>Modify and add files<br />
+</li>
+<li><strong>Commit</strong> changes</li>
+<li><strong>Push</strong> the changes up to GitHub (not necessary if working from website)</li>
+<li>Create a <strong>pull request</strong> on the original repository to turn in the assignment. Make sure to include your name in the pull request.</li>
+</ul>
+</div>
+<div id="which-files-to-commit" class="section level3">
+<h3>Which files to commit</h3>
+<ul>
+<li><p>README.md<br />
+Usually you will create a README.md file that explains what your code is for and how to use it.</p></li>
+<li><p>Source Document<br />
+Always commit the main source document, e.g., bash script, R script, or R Markdown document. Commit early, commit often! It’s just like hitting save - but with additional benefits.</p></li>
+<li><p>Data<br />
+If there are any data files needed to run the code, you need to commit those in /data. If you used an online source, you can reference that in the readme.md or the .Rmd</p></li>
+<li><p>Figures and other products<br />
+One should be able to reproduce your figures from the .md or the .Rmd and the data, but you might include these or any products in /products just to be sure.</p></li>
+</ul>
+</div>
+<div id="markdown-files-.md" class="section level3">
+<h3>Markdown Files (<code>.md</code>)</h3>
+<p><strong>Markdown</strong> is simple text markup language that can be rendered as html easily on GitHub. You will be authoring a single Markdown file for each repository (homework) called <code>README.md</code>. GitHub provides an attractive HTML-like preview for Markdown documents. RStudio’s “Preview HTML” button will compile the open document to actual HTML and open a preview.</p>
+<p>Whenever you are editing Markdown documents in RStudio, you can display a Markdown cheatsheet by going to Help &gt; Markdown Quick Reference.</p>
+</div>
+<div id="r-markdown-files-.rmd" class="section level3">
+<h3>R Markdown files (<code>.Rmd</code>)</h3>
+<p>If your document is describing a data analysis, author it in R Markdown, which is like Markdown, but with the addition of R “code chunks” that are can be implemented directly from the <code>.Rmd</code> file. RStudio’s <code>Knit HTML</code> button will compile the open document to HTML and open a preview.</p>
+<p>Whenever you are editing R Markdown documents in RStudio, you can display an R Markdown cheatsheet by going to Help &gt; Cheatsheets &gt; R Markdown Cheat Sheet. A basic introduction to R Markdown can also be found in <a href="https://r4ds.had.co.nz/">R for Data Science</a></p>
+</div>
+<div id="knit-your-files" class="section level3">
+<h3>Knit Your Files</h3>
+<p>You may not want to push the Markdown and/or HTML until the work is fairly advanced, maybe even until submission. Ideally, you should <code>knit</code> or render them each time you commit changes to the Markdown source, so that the Git history reflects the way these files should evolve as an ensemble.</p>
+<p>Never ever edit the intermediate/output documents “by hand”. Only edit the source code and then regenerate the downstream products from that.</p>
+</div>
+<div id="make-your-work-shine" class="section level3">
+<h3>Make your work shine!</h3>
+<p>Here are a few things that can make a big difference in how awesome your product is.</p>
+<ul>
+<li>Always create a README.md to make it easy for people to access your work. A <code>README.md</code> in the homework’s main directory serves as the landing page for your submission. Whenever anyone visits this repo, this will be automatically rendered nicely! In particular, hyperlinks will work. With this README.md file, create annotated links to the documents graders will need to access. Such as:
+<ul>
+<li>Your main R Markdown document<br />
+</li>
+<li>The Markdown product (usually .html) that comes from knitting your main R Markdown document<br />
+</li>
+</ul></li>
+<li>Make it easy for others to run your code: in exactly one, very early R chunk, load any necessary packages, so your dependencies are obvious.<br />
+</li>
+<li>In exactly one, very early R chunk, import anything coming from an external file. This will make it easy for someone to see which data files are required, edit to reflect their locals paths if necessary, etc. There are situations where you might not keep data in the repo itself.<br />
+</li>
+<li>In exactly one, very last R chunk, report your session information. This prints version information about R, the operating system, and loaded packages so the reader knows the state of your machine when you rendered the R Markdown document.</li>
+</ul>
+<pre class="r"><code>devtools::session_info() </code></pre>
+<pre><code>## ─ Session info ──────────────────────────────────────────────────────────
+##  setting  value                       
+##  version  R version 3.6.1 (2019-07-05)
+##  os       macOS Mojave 10.14.5        
+##  system   x86_64, darwin15.6.0        
+##  ui       X11                         
+##  language (EN)                        
+##  collate  en_US.UTF-8                 
+##  ctype    en_US.UTF-8                 
+##  tz       America/New_York            
+##  date     2019-08-14                  
+## 
+## ─ Packages ──────────────────────────────────────────────────────────────
+##  package     * version date       lib source        
+##  assertthat    0.2.1   2019-03-21 [1] CRAN (R 3.6.0)
+##  backports     1.1.4   2019-04-10 [1] CRAN (R 3.6.0)
+##  callr         3.3.0   2019-07-04 [1] CRAN (R 3.6.0)
+##  cli           1.1.0   2019-03-19 [1] CRAN (R 3.6.0)
+##  crayon        1.3.4   2017-09-16 [1] CRAN (R 3.6.0)
+##  desc          1.2.0   2018-05-01 [1] CRAN (R 3.6.0)
+##  devtools      2.1.0   2019-07-06 [1] CRAN (R 3.6.0)
+##  digest        0.6.20  2019-07-04 [1] CRAN (R 3.6.0)
+##  evaluate      0.14    2019-05-28 [1] CRAN (R 3.6.0)
+##  fs            1.3.1   2019-05-06 [1] CRAN (R 3.6.0)
+##  glue          1.3.1   2019-03-12 [1] CRAN (R 3.6.0)
+##  htmltools     0.3.6   2017-04-28 [1] CRAN (R 3.6.0)
+##  knitr         1.23    2019-05-18 [1] CRAN (R 3.6.0)
+##  magrittr      1.5     2014-11-22 [1] CRAN (R 3.6.0)
+##  memoise       1.1.0   2017-04-21 [1] CRAN (R 3.6.0)
+##  pkgbuild      1.0.3   2019-03-20 [1] CRAN (R 3.6.0)
+##  pkgload       1.0.2   2018-10-29 [1] CRAN (R 3.6.0)
+##  prettyunits   1.0.2   2015-07-13 [1] CRAN (R 3.6.0)
+##  processx      3.4.0   2019-07-03 [1] CRAN (R 3.6.0)
+##  ps            1.3.0   2018-12-21 [1] CRAN (R 3.6.0)
+##  R6            2.4.0   2019-02-14 [1] CRAN (R 3.6.0)
+##  Rcpp          1.0.1   2019-03-17 [1] CRAN (R 3.6.0)
+##  remotes       2.1.0   2019-06-24 [1] CRAN (R 3.6.0)
+##  rlang         0.4.0   2019-06-25 [1] CRAN (R 3.6.0)
+##  rmarkdown     1.14    2019-07-12 [1] CRAN (R 3.6.0)
+##  rprojroot     1.3-2   2018-01-03 [1] CRAN (R 3.6.0)
+##  sessioninfo   1.1.1   2018-11-05 [1] CRAN (R 3.6.0)
+##  stringi       1.4.3   2019-03-12 [1] CRAN (R 3.6.0)
+##  stringr       1.4.0   2019-02-10 [1] CRAN (R 3.6.0)
+##  testthat      2.1.1   2019-04-23 [1] CRAN (R 3.6.0)
+##  usethis       1.5.1   2019-07-04 [1] CRAN (R 3.6.0)
+##  withr         2.1.2   2018-03-15 [1] CRAN (R 3.6.0)
+##  xfun          0.8     2019-06-25 [1] CRAN (R 3.6.0)
+##  yaml          2.2.0   2018-07-25 [1] CRAN (R 3.6.0)
+## 
+## [1] /Library/Frameworks/R.framework/Versions/3.6/Resources/library</code></pre>
+<ul>
+<li><p>Pretend you are someone else. Clone a fresh copy of your own repo from GitHub, fire up a new RStudio session and try to knit your R Markdown file. Does it work automagically?</p></li>
+<li><p>Make pretty tables<br />
+Instead of just printing an object with R, you could format the info in an attractive table. Some leads:</p>
+<ul>
+<li>kable() function from knitr<br />
+</li>
+<li>packages xtable, pander</li>
+</ul></li>
+</ul>
+<div id="acknowledgments" class="section level4">
+<h4><strong>Acknowledgments</strong></h4>
+<p><em>This page was derived in part from Benjamin Soltoff’s MACS 30500 - <a href="https://cfss.uchicago.edu/">Computing for the Social Sciences</a> at University of Chicago and from <a href="http://stat545.com/Classroom/">UBC STAT 545A and 547M</a>, licensed under the CC BY-NC 3.0 Creative Commons License.</em></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
