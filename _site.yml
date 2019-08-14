@@ -7,10 +7,10 @@ navbar:
       href: index.html
     - text: "Course Outline"
       href: CourseOutline.html
-    - text: Course Requirements
+    - text: "Course Requirements"
       href: CourseRequirements.html
-    - text: Homework Guidelines
-      href: ./homework/HomeworkGuidelines.html
+    - text: "Homework Guidelines"
+      href: HomeworkGuidelines.html
       right:
     - text: "Contact Info"
       href: contact.html

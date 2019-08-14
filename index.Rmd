@@ -1,5 +1,5 @@
 ---
-title: "GEOG693: Open Data Science"
+title: 'GEOG693: Open Data Science'
 ---
     
 #### _Welcome!_
