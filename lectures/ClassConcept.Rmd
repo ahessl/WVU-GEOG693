@@ -56,7 +56,8 @@ _What is Git?_ Git is a version control system that allows you to track all chan
 
 If you completed [Installing Software]() before the first class, you would have already registered for a free [GitHub account](https://github.com/). As a university student, also check to see if you are eligible for GitHub Education offers. Some of these are very useful, such as unlimited private repositories. Remember that once you create a GitHub account, you are stuck with that username. Choose something professional and start building a positive social media presence.
 
-
+### Markdown and R Markdown 
+We will be submitting written assignments using [Markdown.](https://www.markdownguide.org) Markdown (`.md`) is a lightweight markup language that will convert plain text into formatted text.  In other words, it can take plain text and convert to html tool. Because it is lightweight and easy to use. It is integrated directly into [R Markdown](https://rmarkdown.rstudio.com/), which combines R code, output, and written text into a single document (`.Rmd`). Regular Markdown files (`.md`) are rendered on the GitHub website and can be directly read on the website. GitHub includes a [guide](https://guides.github.com/features/mastering-markdown/) for writing Markdown documents that will be handy for you as you complete your first assignment.
 
 
 

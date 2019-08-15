@@ -78,5 +78,5 @@ Please complete this before the first day of class.
 11) Editing a Package  
 
 #### __Acknowledgments__
-_This page was derived in part from Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University of Chicago and from [UBC STAT 545A and 547M](http://stat545.com/Classroom/), licensed under the CC BY-NC 3.0 Creative Commons License._
+_This page was derived in part from:Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University, and from [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_
 
