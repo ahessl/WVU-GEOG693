@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### GitHub Pre-Requisites
 
-You should already know how to pull and push from a GitHub repo using either command line or RStudio.
+These guidelines will make more sense to you when we learn how to pull and push from a GitHub repo using either command line or RStudio. 
 
 ### Accessing and Submitting Homework
 
