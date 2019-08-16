@@ -59,7 +59,7 @@ If you completed [Installing Software]() before the first class, you would have 
 ### Markdown and R Markdown 
 We will be submitting written assignments using [Markdown.](https://www.markdownguide.org) Markdown (`.md`) is a lightweight markup language that will convert plain text into formatted text.  In other words, it can take plain text and convert to html tool. Because it is lightweight and easy to use. It is integrated directly into [R Markdown](https://rmarkdown.rstudio.com/), which combines R code, output, and written text into a single document (`.Rmd`). Regular Markdown files (`.md`) are rendered on the GitHub website and can be directly read on the website. GitHub includes a [guide](https://guides.github.com/features/mastering-markdown/) for writing Markdown documents that will be handy for you as you complete your first assignment.
 
-__Let's get started with [HW_0](./lectures/HW_0_guide.html)__
+__Let's get started with [HW_0](HW_0_guide.html)__
 
 #### __Acknowledgments__
 _This page was derived in part from Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University of Chicago and from [UBC STAT 545A and 547M](http://stat545.com/Classroom/), licensed under the CC BY-NC 3.0 Creative Commons License._
