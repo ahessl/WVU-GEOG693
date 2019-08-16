@@ -31,7 +31,7 @@ Forking in GitHub means that you are downloading a copy ('clone') of an existing
 
 #### Make, Add, and Commit Changes
 1) Click on the _README.md_ file. GitHub will render that file as you would see it on the web.  It will also keep track of changes.
-2) Click on the pencil (far right) to view the _.md_ file. Make some edits - any edits - no need to save. You will make a commit instead.
+2) Click on the pencil (far right) to view the _.md_ file. Make some edits - any edits - no need to save. You will make a commit instead.  Try making a `new file`!
 3) Type a commit message describing the change(s).
 
 ##### What is a commit message?
