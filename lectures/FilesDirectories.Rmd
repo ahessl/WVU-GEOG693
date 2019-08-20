@@ -14,14 +14,14 @@ knitr::opts_chunk$set(echo = TRUE)
 Nelle Nemo, a marine biologist, has just returned from a six-month survey of the North Pacific Gyre, where she has been sampling gelatinous marine life in the Great Pacific Garbage Patch. She has 1520 samples in all and now needs to:   
 
 1)	Run each sample through an assay machine that will measure the relative abundance of 300 different proteins. The machine’s output for a single sample is a file with one line for each protein.  
-2) 	Calculate statistics for each of the proteins separately using a program her supervisor wrote called `goostats`.  
+2) 	Calculate statistics for each of the proteins separately using a program her supervisor wrote called _goostats_.  
 3)	Write up results. Her supervisor would really like her to do this by the end of the month so that her paper can appear in an upcoming special issue of Aquatic Goo Letters.  
 
 It takes about half an hour for the assay machine to process each sample. The good news is that it only takes two minutes to set each one up. Since her lab has eight assay machines that she can use in parallel, this step will “only” take about two weeks.  
 
 The bad news is that if she has to run `goostats` by hand, she’ll have to enter filenames and click “OK” 1520 times. At 30 seconds per sample, the whole process will take more than 12 hours (and that’s assuming the best-case scenario where she is ready to enter the next file name as soon as the previous sample analysis has finished). This zero-breaks always-ready scenario is only achievable by a machine so it would likely take much longer than 12 hours, not to mention that the chances of her typing all of those commands correctly are practically zero. Missing that paper deadline is looking increasingly likely.  
 
-The next few lessons will explore what she should do instead. More specifically, they explain how she can use the `bash shell` to automate the repetitive steps in her processing pipeline so that her computer can work 24 hours a day while she writes her paper. As a bonus, once she has put a processing pipeline together, she will be able to use it again whenever she collects more data.  
+The next few lessons will explore what she should do instead. More specifically, they explain how she can use the _bash shell_ to automate the repetitive steps in her processing pipeline so that her computer can work 24 hours a day while she writes her paper. As a bonus, once she has put a processing pipeline together, she will be able to use it again whenever she collects more data.  
 
 You need to download some files to follow this lesson:  
 
@@ -45,7 +45,7 @@ cd ../data/data-shell
 ls -F
 ```
 
-Let’s create a new directory called `thesis` using the command `mkdir`. Note this command has no output: 
+Let’s create a new directory called _thesis_ using the command `mkdir`. Note this command has no output: 
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
 mkdir thesis
@@ -76,7 +76,7 @@ cd ../data/data-shell
 ls -F thesis
 ```
 
-Let’s change our working directory to thesis using cd, then create a new file called draft.txt, but first 
+Let’s change our working directory to thesis using `cd`, then create a new file called _draft.txt_, but first... 
 
 #### An Interlude on Text 
 
@@ -87,11 +87,12 @@ _Plain Text/Flatfiles Are Cool_
 3.	Stable - been around since computers had monitors, late 60s  
 4.	Search and replace is a breeze  
 5.	Preferred format for scripts, data  
+6.  End in extensions like: _.txt_, _.csv_, but can be random (instruments etc.)  
 
 _Which Editor?_
 When we say, “atom is a text editor,” we really do mean “text”: it can only work with plain character data, not tables, images, or any other human-friendly media. 
 
-On Unix systems (such as Linux and Mac OS X), many programmers use Emacs or Vim (both of which require more time to learn), or a graphical editor such as Sublime and Atom. On Windows, you may wish to use Notepad++. Windows also has a built-in editor called Notepad.
+On Unix systems (such as Linux and Mac OS X), many programmers use Emacs or Vim (both of which require more time to learn), or a graphical editor such as Sublime or Atom. On Windows, you may wish to use Notepad++. Windows also has a built-in editor called Notepad.
 
 #### _Interlude Over!_
 
@@ -101,7 +102,7 @@ cd ../data/data-shell/thesis
 touch draft.txt
 ```
 
-Use `RStudio>Files` to access the file. If you click on it, it will open in upper left as a `.txt` file.  Type your thesis.  Done.
+Use `RStudio>Files` to access the file. If you click on it, it will open in upper left as a _.txt_ file.  Type your thesis.  Done.
 
 Now an `ls` in the thesis folder will show the file:
 ```{bash, echo=-1, eval=T}
@@ -109,18 +110,18 @@ cd ../data/data-shell/thesis
 ls -l
 ```
 
-Returning to the data-shell directory, let’s tidy up the thesis directory by removing the draft we created:
+Returning to the _data-shell_ directory, let’s tidy up the _thesis_ directory by removing the draft we created:
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell/thesis
 rm draft.txt
 ```
 
-This command removes files (rm is short for “remove”). If we run `ls` again, its output is empty once more, which tells us that our file is gone:
+This command removes files (rm is short for “remove”). If we run `ls` again, its output is empty once more, which tells us that our file is gone.
 
 ### Deleting Is Forever
 The Unix shell doesn’t have a trash bin that we can recover deleted files from (though most graphical interfaces to Unix do). Instead, when we delete files, they are unhooked from the file system so that their storage space on disk can be recycled. Tools for finding and recovering deleted files do exist, but there’s no guarantee they’ll work in any particular situation, since the computer may recycle the file’s disk space right away.
 
-Let’s re-create that file and then move up one directory to `~/OpenDataSci/data/data-shell` using `cd ..`:
+Let’s re-create that file and then move up one directory to _~/OpenDataSci/data/data-shell_ using `cd ..`:
 
 
 ```{bash, echo=-1, eval=T}
@@ -137,7 +138,7 @@ cd ..
 
 What happens if we try to remove the entire thesis directory using `rm thesis`?
 
-This happens because rm by default only works on files, not directories.
+This happens because `rm` by default only works on files, not directories.
 
 Try: `rmdir thesis`
 
@@ -150,7 +151,7 @@ To really get rid of thesis we must also delete the file draft.txt. We can do th
 #### Using rm Safely
 What happens when we type 
 `rm -i thesis/quotations.txt`
-Why would we want this protection when using rm?
+Why would we want this protection when using `rm`?
 
 _With Great Power Comes Great Responsibility_
 Removing the files in a directory recursively can be a very dangerous operation. If we’re concerned about what we might be deleting we can add the “interactive” flag `-i` to rm which will ask us for confirmation before each step.
@@ -166,9 +167,10 @@ This removes everything in the directory, then the directory itself, asking at e
 Let’s create that directory and file one more time. (Note that this time we’re running nano with the path `thesis/draft.txt`, rather than going into the thesis directory and running nano on draft.txt there.)
 
 >__Challenge: Try making the draft and directory at the same time. Which is it?__  
-A) `touch \thesis\draft.txt`  
-B) `touch/thesis/draft.txt`  
-C) `touch thesis/draft.txt'  
+
+A) `touch \thesis\draft.txt`    
+B) `touch/thesis/draft.txt`    
+C) `touch thesis/draft.txt`    
 
 `draft.txt` isn’t a particularly informative name, so let’s change the file’s name using `mv`, which is short for “move”:
 
@@ -179,30 +181,30 @@ touch thesis/draft.txt
 mv thesis/draft.txt thesis/quotes.txt
 ```
 
-The first argument tells mv what we’re “moving”, while the second is where it’s to go. In this case, we’re moving `thesis/draft.txt` to `thesis/quotes.txt`, which has the same effect as renaming the file. Sure enough, ls shows us that thesis now contains one file called quotes.txt:
+The first argument tells mv what we’re “moving”, while the second is where it’s to go. In this case, we’re moving _thesis/draft.txt_ to _thesis/quotes.txt_, which has the same effect as renaming the file. Sure enough, ls shows us that thesis now contains one file called _quotes.txt_:
 
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
 ls thesis
 ```
 
-One has to be careful when specifying the target file name, since mv will silently overwrite any existing file with the same name, which could lead to data loss. An additional flag, mv -i (or mv --interactive), can be used to make mv ask you for confirmation before overwriting.
+One has to be careful when specifying the target file name, since `mv` will silently overwrite any existing file with the same name, which could lead to data loss. An additional flag, `mv -i` (or `mv --interactive`), can be used to make mv ask you for confirmation before overwriting.
 Note: `mv` also works on directories.
 
-Let’s move `quotes.txt` into the current working directory. We use `mv` once again, but this time we’ll just use the name of a directory as the second argument to tell `mv` that we want to keep the filename, but put the file somewhere new. (This is why the command is called “move”.) In this case, the directory name we use is the special directory name `.` that we mentioned earlier.
+Let’s move _quotes.txt_ into the current working directory. We use `mv` once again, but this time we’ll just use the name of a directory as the second argument to tell `mv` that we want to keep the filename, but put the file somewhere new. (This is why the command is called “move”.) In this case, the directory name we use is the special directory name `.` that we mentioned earlier.
 
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
 mv thesis/quotes.txt .
 ```
-The effect is to move the file from the directory it was in to the current working directory. ls now shows us that thesis is empty:
+The effect is to move the file from the directory it was in to the current working directory. `ls` now shows us that thesis is empty:
 
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
 ls thesis
 ```
 
-Further, `ls` with a filename or directory name as an argument only lists that file or directory. We can use this to confirm that `quotes.txt` is still in our current directory:
+Further, `ls` with a filename or directory name as an argument only lists that file or directory. We can use this to confirm that _quotes.txt_ is still in our current directory:
 
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
@@ -212,7 +214,7 @@ ls quotes.txt
 >__Challenge:
 After running the following commands, Jamie realizes that she put the files sucrose.dat and maltose.dat into the wrong folder:__  
 
-```{bash eval=FALSE, include=FALSE}
+```{bash eval=FALSE, engine='bash'}
 ls -F
 	analyzed/ raw/
 ls -F analyzed
@@ -226,11 +228,7 @@ cd raw/
 
 _Hint:_ Recall that `..` refers to the parent directory (i.e. one above the current directory) and that `.` refers to the current directory. 
 
-Solution:
-`mv ../sucrose.dat  ../maltose.dat .`
-
 #### Copy
-
 The `cp` command works very much like `mv`, except it copies a file instead of moving it. We can check that it did the right thing using `ls` with two paths as arguments — like most Unix commands, `ls` can be given multiple paths at once:
 
 ```{bash, echo=-1, eval=T}
@@ -239,9 +237,9 @@ cp quotes.txt thesis/quotations.txt
 ls . thesis
 ```
 
-To prove that we made a copy, let’s delete the `quotes.txt` file in the current directory and then run that same `ls` again.
+To prove that we made a copy, let’s delete the _quotes.txt_ file in the current directory and then run that same `ls` again.
 
-```{bash eval=FALSE, include=FALSE}
+```{bash eval=FALSE, engine='bash' }
 cd ../data/data-shell
 rm quotes.txt
 ls quotes.txt thesis/quotations.txt
@@ -260,22 +258,22 @@ Ahhhh. Feels so good.
 
 
 #### What’s In A Name?
-You may have noticed that all of Nelle’s files’ names are “something dot something”, and in this part of the lesson, we always used the extension `.txt`. This is just a convention: we can call a file mythesis or almost anything else we want. However, most people use two-part names most of the time to help them (and their programs) tell different kinds of files apart. The second part of such a name is called the filename extension, and indicates what type of data the file holds: `.txt` signals a plain text file, .pdf indicates a PDF document, `.cfg` is a configuration file full of parameters for some program or other, `.png` is a PNG image, and so on.
+You may have noticed that all of Nelle’s files’ names are “something dot something”, and in this part of the lesson, we always used the extension `.txt`. This is just a convention: we can call a file _mythesis_ or almost anything else we want. However, most people use two-part names most of the time to help them (and their programs) tell different kinds of files apart. The second part of such a name is called the filename extension, and indicates what type of data the file holds: _.txt_ signals a plain text file, _.pdf_ indicates a PDF document, _.cfg_ is a configuration file full of parameters for some program or other, _.png_ is a PNG image, and so on.
 
-Naming a PNG image of a whale as `whale.mp3` doesn’t somehow magically turn it into a recording of whalesong, though it might cause the operating system to try to open it with a music player when someone double-clicks it.
+Naming a PNG image of a whale as _whale.mp3_ doesn’t somehow magically turn it into a recording of whalesong, though it might cause the operating system to try to open it with a music player when someone double-clicks it.
 
 #### Renaming Files
-Suppose that you created a `.txt` file in your current directory to contain a list of the statistical tests you will need to do to analyze your data, and named it: statstics.txt
+Suppose that you created a _.txt_ file in your current directory to contain a list of the statistical tests you will need to do to analyze your data, and named it: _statstics.txt_
 
 >__Challenge: After creating and saving this file you realize you misspelled the filename! You want to correct the mistake, which of the following commands could you use to do so?__  
 
-A)	`cp statstics.txt statistics.txt`
-B)	`mv statstics.txt statistics.txt`
-C)	`mv statstics.txt .`
-D)	`cp statstics.txt .`
+A)	`cp statstics.txt statistics.txt`  
+B)	`mv statstics.txt statistics.txt`  
+C)	`mv statstics.txt .`  
+D)	`cp statstics.txt .`  
 
 #### Copy with Multiple Filenames
-For this exercise, you can test the commands in the `data-shell/data` directory.
+For this exercise, you can test the commands in the _data-shell/data_ directory.
 
 In the example below, what does `cp` do when given several filenames and a directory name?
 
@@ -286,37 +284,41 @@ In the example below, what does `cp` do when given several filenames and a direc
 
 #### Copy a folder structure but not the files
 You’re starting a new experiment, and would like to duplicate the file structure from your previous experiment without the data files so you can add new data.
-Assume that the file structure is in a folder called `2016-05-18-data`, which contains a data folder that in turn contains folders named raw and processed that contain data files. The goal is to copy the file structure of the `2016-05-18-data folder` into a folder called `2016-05-20-data` and remove the data files from the directory you just created.
+Assume that the file structure is in a folder called _2016-05-18-data_, which contains a data folder that in turn contains folders named raw and processed that contain data files. The goal is to copy the file structure of the _2016-05-18-data_ folder into a folder called _2016-05-20-data_ and remove the data files from the directory you just created.
 
 >__Challenge: Which of the following set of commands would achieve this objective? What would the other commands do?__  
 
 Option A
-```{bash eval=FALSE, include=TRUE}
+```{bash eval=FALSE, include=TRUE, engine='bash'}
 cp -r 2016-05-18-data/ 2016-05-20-data/
 rm 2016-05-20-data/raw/*
 rm 2016-05-20-data/processed/*
 ```
 
 Option B
-```{bash eval=FALSE, include=TRUE}
+```{bash eval=FALSE, include=TRUE, engine='bash'}
 rm 2016-05-20-data/raw/*
 rm 2016-05-20-data/processed/*
 cp -r 2016-05-18-data/ 2016-5-20-data/
 ```
 
 Option C
-```{bash eval=FALSE, include=TRUE}
+```{bash eval=FALSE, include=TRUE, engine='bash'}
 cp -r 2016-05-18-data/ 2016-05-20-data/
 rm -r -i 2016-05-20-data/
 ```
 
 #### Key Points
-•	`cp` old new copies a file.
-•	`mkdir` path creates a new directory.
-•	`mv` old new moves (renames) a file or directory.
-•	`rm` path removes (deletes) a file.
-•	Use of the Control key may be described in many ways, including Ctrl-X, Control-X, and ^X.
-•	The shell does not have a trash bin: once something is deleted, it’s really gone.
-•	Depending on the type of work you do, you may need a more powerful text editor like [Atom](https://atom.io/)
+•	`cp` old new copies a file.  
+•	`mkdir` path creates a new directory.  
+•	`mv` old new moves (renames) a file or directory.  
+•	`rm` path removes (deletes) a file.  
+•	Use of the Control key may be described in many ways, including Ctrl-X, Control-X, and ^X.  
+•	The shell does not have a trash bin: once something is deleted, it’s really gone.  
+•	Depending on the type of work you do, you may need a more powerful text editor like [Atom](https://atom.io/).  
+
+#### __Acknowledgments__
+_This page was derived in part from: [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_
+
 
 

@@ -19,17 +19,17 @@ Please complete this before the first day of class.
 
 ### __The Shell__
 
-1) [Class Concept](./lectures/ClassConcept.html) _00/00/00_  
+1) [Class Concept](./lectures/ClassConcept.html) _08/21/19_  
     + RStudio  
     + GitHub  
 
-2) [Shell Basics](./lectures/ShellBasics.html) _00/00/00_   
+2) [Shell Basics](./lectures/ShellBasics.html) _08/23/19_   
 
-4) [Files and Directories](./lectures/FilesDirectories.html) _00/00/00_  
+4) [Files and Directories](./lectures/FilesDirectories.html) _08/28/19_  
 
-5) [Wildcards, Pipes, and Filters](./lectures/WildcardsPipesFilters.html) _00/00/00_  
+5) [Wildcards, Pipes, and Filters](./lectures/WildcardsPipesFilters.html) _08/30/19_  
 
-6) [Accessing Data with `wget`](./lectures/wget.html) _00/00/00_
+6) [Accessing Data with `wget`](./lectures/wget.html) _09/04/09_
 
 7) Loops  
 

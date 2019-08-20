@@ -376,13 +376,13 @@ summary {
 <ol style="list-style-type: decimal">
 <li>Run each sample through an assay machine that will measure the relative abundance of 300 different proteins. The machine’s output for a single sample is a file with one line for each protein.<br />
 </li>
-<li>Calculate statistics for each of the proteins separately using a program her supervisor wrote called <code>goostats</code>.<br />
+<li>Calculate statistics for each of the proteins separately using a program her supervisor wrote called <em>goostats</em>.<br />
 </li>
 <li>Write up results. Her supervisor would really like her to do this by the end of the month so that her paper can appear in an upcoming special issue of Aquatic Goo Letters.</li>
 </ol>
 <p>It takes about half an hour for the assay machine to process each sample. The good news is that it only takes two minutes to set each one up. Since her lab has eight assay machines that she can use in parallel, this step will “only” take about two weeks.</p>
 <p>The bad news is that if she has to run <code>goostats</code> by hand, she’ll have to enter filenames and click “OK” 1520 times. At 30 seconds per sample, the whole process will take more than 12 hours (and that’s assuming the best-case scenario where she is ready to enter the next file name as soon as the previous sample analysis has finished). This zero-breaks always-ready scenario is only achievable by a machine so it would likely take much longer than 12 hours, not to mention that the chances of her typing all of those commands correctly are practically zero. Missing that paper deadline is looking increasingly likely.</p>
-<p>The next few lessons will explore what she should do instead. More specifically, they explain how she can use the <code>bash shell</code> to automate the repetitive steps in her processing pipeline so that her computer can work 24 hours a day while she writes her paper. As a bonus, once she has put a processing pipeline together, she will be able to use it again whenever she collects more data.</p>
+<p>The next few lessons will explore what she should do instead. More specifically, they explain how she can use the <em>bash shell</em> to automate the repetitive steps in her processing pipeline so that her computer can work 24 hours a day while she writes her paper. As a bonus, once she has put a processing pipeline together, she will be able to use it again whenever she collects more data.</p>
 <p>You need to download some files to follow this lesson:</p>
 <ul>
 <li>Download <a href="https://ahessl.github.io/WVU-GEOG693/data/data-shell.zip">data-shell.zip</a> and move the <code>data-shell</code> file to your directory for this course (<code>~/OpenDataSci/data/</code> or similar).<br />
@@ -423,8 +423,9 @@ ls -F</code></pre>
 ## pizza.cfg
 ## quotes.txt
 ## solar.pdf
+## wget/
 ## writing/</code></pre>
-<p>Let’s create a new directory called <code>thesis</code> using the command <code>mkdir</code>. Note this command has no output:</p>
+<p>Let’s create a new directory called <em>thesis</em> using the command <code>mkdir</code>. Note this command has no output:</p>
 <pre class="bash"><code>mkdir thesis</code></pre>
 <p>Since thesis is a relative path (i.e., doesn’t have specific path), the new directory is created in the current working directory:</p>
 <pre class="bash"><code>ls -F</code></pre>
@@ -438,6 +439,7 @@ ls -F</code></pre>
 ## quotes.txt
 ## solar.pdf
 ## thesis/
+## wget/
 ## writing/</code></pre>
 <div id="use-file-explorer-finder-or-rstudiofiles" class="section level4">
 <h4>Use File Explorer, Finder or RStudio&gt;Files</h4>
@@ -459,7 +461,7 @@ ls -F</code></pre>
 </ol>
 <p>Since we’ve just created the thesis directory, there’s nothing in it yet and nothing is returned if we ls the directory:</p>
 <pre class="bash"><code>ls -F thesis</code></pre>
-<p>Let’s change our working directory to thesis using cd, then create a new file called draft.txt, but first</p>
+<p>Let’s change our working directory to thesis using <code>cd</code>, then create a new file called <em>draft.txt</em>, but first…</p>
 </div>
 <div id="an-interlude-on-text" class="section level4">
 <h4>An Interlude on Text</h4>
@@ -473,29 +475,31 @@ ls -F</code></pre>
 </li>
 <li>Search and replace is a breeze<br />
 </li>
-<li>Preferred format for scripts, data</li>
+<li>Preferred format for scripts, data<br />
+</li>
+<li>End in extensions like: <em>.txt</em>, <em>.csv</em>, but can be random (instruments etc.)</li>
 </ol>
 <p><em>Which Editor?</em> When we say, “atom is a text editor,” we really do mean “text”: it can only work with plain character data, not tables, images, or any other human-friendly media.</p>
-<p>On Unix systems (such as Linux and Mac OS X), many programmers use Emacs or Vim (both of which require more time to learn), or a graphical editor such as Sublime and Atom. On Windows, you may wish to use Notepad++. Windows also has a built-in editor called Notepad.</p>
+<p>On Unix systems (such as Linux and Mac OS X), many programmers use Emacs or Vim (both of which require more time to learn), or a graphical editor such as Sublime or Atom. On Windows, you may wish to use Notepad++. Windows also has a built-in editor called Notepad.</p>
 </div>
 <div id="interlude-over" class="section level4">
 <h4><em>Interlude Over!</em></h4>
 <p>Let’s make the file with a command:</p>
 <pre class="bash"><code>touch draft.txt</code></pre>
-<p>Use <code>RStudio&gt;Files</code> to access the file. If you click on it, it will open in upper left as a <code>.txt</code> file. Type your thesis. Done.</p>
+<p>Use <code>RStudio&gt;Files</code> to access the file. If you click on it, it will open in upper left as a <em>.txt</em> file. Type your thesis. Done.</p>
 <p>Now an <code>ls</code> in the thesis folder will show the file:</p>
 <pre class="bash"><code>ls -l</code></pre>
 <pre><code>## total 0
-## -rw-r--r--  1 amyhessl  staff  0 Aug  1 10:49 draft.txt</code></pre>
-<p>Returning to the data-shell directory, let’s tidy up the thesis directory by removing the draft we created:</p>
+## -rw-r--r--  1 amyhessl  staff  0 Aug 20 11:51 draft.txt</code></pre>
+<p>Returning to the <em>data-shell</em> directory, let’s tidy up the <em>thesis</em> directory by removing the draft we created:</p>
 <pre class="bash"><code>rm draft.txt</code></pre>
-<p>This command removes files (rm is short for “remove”). If we run <code>ls</code> again, its output is empty once more, which tells us that our file is gone:</p>
+<p>This command removes files (rm is short for “remove”). If we run <code>ls</code> again, its output is empty once more, which tells us that our file is gone.</p>
 </div>
 </div>
 <div id="deleting-is-forever" class="section level3">
 <h3>Deleting Is Forever</h3>
 <p>The Unix shell doesn’t have a trash bin that we can recover deleted files from (though most graphical interfaces to Unix do). Instead, when we delete files, they are unhooked from the file system so that their storage space on disk can be recycled. Tools for finding and recovering deleted files do exist, but there’s no guarantee they’ll work in any particular situation, since the computer may recycle the file’s disk space right away.</p>
-<p>Let’s re-create that file and then move up one directory to <code>~/OpenDataSci/data/data-shell</code> using <code>cd ..</code>:</p>
+<p>Let’s re-create that file and then move up one directory to <em>~/OpenDataSci/data/data-shell</em> using <code>cd ..</code>:</p>
 <pre class="bash"><code>pwd</code></pre>
 <pre><code>## /Users/amyhessl/Dropbox/Hessl/Teaching/Courses/EarthSciDigAge/OpenDataSci/data/data-shell</code></pre>
 <pre class="bash"><code>mkdir thesis
@@ -504,50 +508,59 @@ touch draft.txt
 cd ..</code></pre>
 <pre><code>## mkdir: thesis: File exists</code></pre>
 <p>What happens if we try to remove the entire thesis directory using <code>rm thesis</code>?</p>
-<p>This happens because rm by default only works on files, not directories.</p>
+<p>This happens because <code>rm</code> by default only works on files, not directories.</p>
 <p>Try: <code>rmdir thesis</code></p>
 <blockquote>
-<p>Challenge: What went wrong in this case?</p>
+<p><strong>Challenge: What went wrong in this case?</strong></p>
 </blockquote>
 <p>To really get rid of thesis we must also delete the file draft.txt. We can do this with the recursive option for rm:</p>
 <p><code>rm -r thesis</code></p>
 <div id="using-rm-safely" class="section level4">
 <h4>Using rm Safely</h4>
-<p>What happens when we type <code>rm -i thesis/quotations.txt</code> Why would we want this protection when using rm?</p>
+<p>What happens when we type <code>rm -i thesis/quotations.txt</code> Why would we want this protection when using <code>rm</code>?</p>
 <p><em>With Great Power Comes Great Responsibility</em> Removing the files in a directory recursively can be a very dangerous operation. If we’re concerned about what we might be deleting we can add the “interactive” flag <code>-i</code> to rm which will ask us for confirmation before each step.</p>
 <pre class="bash"><code>rm -r thesis #note I cannot use interactive mode from .Rmd
 </code></pre>
 <p>This removes everything in the directory, then the directory itself, asking at each step for you to confirm the deletion.</p>
 <p>Let’s create that directory and file one more time. (Note that this time we’re running nano with the path <code>thesis/draft.txt</code>, rather than going into the thesis directory and running nano on draft.txt there.)</p>
 <blockquote>
-<p>_Challenge: Try making the draft and directory at the same time. Which is it? A) <code>touch \thesis\draft.txt</code><br />
-B) <code>touch/thesis/draft.txt</code><br />
-C) `touch thesis/draft.txt’</p>
+<p><strong>Challenge: Try making the draft and directory at the same time. Which is it?</strong></p>
 </blockquote>
+<ol style="list-style-type: upper-alpha">
+<li><code>touch \thesis\draft.txt</code><br />
+</li>
+<li><code>touch/thesis/draft.txt</code><br />
+</li>
+<li><code>touch thesis/draft.txt</code></li>
+</ol>
 <p><code>draft.txt</code> isn’t a particularly informative name, so let’s change the file’s name using <code>mv</code>, which is short for “move”:</p>
 <pre class="bash"><code>mkdir thesis
 touch thesis/draft.txt
 mv thesis/draft.txt thesis/quotes.txt</code></pre>
-<p>The first argument tells mv what we’re “moving”, while the second is where it’s to go. In this case, we’re moving <code>thesis/draft.txt</code> to <code>thesis/quotes.txt</code>, which has the same effect as renaming the file. Sure enough, ls shows us that thesis now contains one file called quotes.txt:</p>
+<p>The first argument tells mv what we’re “moving”, while the second is where it’s to go. In this case, we’re moving <em>thesis/draft.txt</em> to <em>thesis/quotes.txt</em>, which has the same effect as renaming the file. Sure enough, ls shows us that thesis now contains one file called <em>quotes.txt</em>:</p>
 <pre class="bash"><code>ls thesis</code></pre>
 <pre><code>## quotes.txt</code></pre>
-<p>One has to be careful when specifying the target file name, since mv will silently overwrite any existing file with the same name, which could lead to data loss. An additional flag, mv -i (or mv –interactive), can be used to make mv ask you for confirmation before overwriting. Note: <code>mv</code> also works on directories.</p>
-<p>Let’s move <code>quotes.txt</code> into the current working directory. We use <code>mv</code> once again, but this time we’ll just use the name of a directory as the second argument to tell <code>mv</code> that we want to keep the filename, but put the file somewhere new. (This is why the command is called “move”.) In this case, the directory name we use is the special directory name <code>.</code> that we mentioned earlier.</p>
+<p>One has to be careful when specifying the target file name, since <code>mv</code> will silently overwrite any existing file with the same name, which could lead to data loss. An additional flag, <code>mv -i</code> (or <code>mv --interactive</code>), can be used to make mv ask you for confirmation before overwriting. Note: <code>mv</code> also works on directories.</p>
+<p>Let’s move <em>quotes.txt</em> into the current working directory. We use <code>mv</code> once again, but this time we’ll just use the name of a directory as the second argument to tell <code>mv</code> that we want to keep the filename, but put the file somewhere new. (This is why the command is called “move”.) In this case, the directory name we use is the special directory name <code>.</code> that we mentioned earlier.</p>
 <pre class="bash"><code>mv thesis/quotes.txt .</code></pre>
-<p>The effect is to move the file from the directory it was in to the current working directory. ls now shows us that thesis is empty:</p>
+<p>The effect is to move the file from the directory it was in to the current working directory. <code>ls</code> now shows us that thesis is empty:</p>
 <pre class="bash"><code>ls thesis</code></pre>
-<p>Further, <code>ls</code> with a filename or directory name as an argument only lists that file or directory. We can use this to confirm that <code>quotes.txt</code> is still in our current directory:</p>
+<p>Further, <code>ls</code> with a filename or directory name as an argument only lists that file or directory. We can use this to confirm that <em>quotes.txt</em> is still in our current directory:</p>
 <pre class="bash"><code>ls quotes.txt</code></pre>
 <pre><code>## quotes.txt</code></pre>
 <blockquote>
-<p>Challenge: After running the following commands, Jamie realizes that she put the files sucrose.dat and maltose.dat into the wrong folder:</p>
+<p><strong>Challenge: After running the following commands, Jamie realizes that she put the files sucrose.dat and maltose.dat into the wrong folder:</strong></p>
 </blockquote>
+<pre class="bash"><code>ls -F
+    analyzed/ raw/
+ls -F analyzed
+  Fructose.dat glucose.dat maltose.dat sucrose.dat
+cd raw/</code></pre>
 <blockquote>
-<p>Challenge: Fill in the blanks to move these files to the current folder (i.e., the one she is currently in):</p>
+<p><strong>Challenge: Fill in the blanks to move these files to the current folder (i.e., the one she is currently in):</strong></p>
 </blockquote>
 <p><code>mv __/sucrose.dat __maltose.dat __</code></p>
 <p><em>Hint:</em> Recall that <code>..</code> refers to the parent directory (i.e. one above the current directory) and that <code>.</code> refers to the current directory.</p>
-<p>Solution: <code>mv ../sucrose.dat  ../maltose.dat .</code></p>
 </div>
 <div id="copy" class="section level4">
 <h4>Copy</h4>
@@ -565,11 +578,15 @@ ls . thesis</code></pre>
 ## quotes.txt
 ## solar.pdf
 ## thesis
+## wget
 ## writing
 ## 
 ## thesis:
 ## quotations.txt</code></pre>
-<p>To prove that we made a copy, let’s delete the <code>quotes.txt</code> file in the current directory and then run that same <code>ls</code> again.</p>
+<p>To prove that we made a copy, let’s delete the <em>quotes.txt</em> file in the current directory and then run that same <code>ls</code> again.</p>
+<pre class="bash"><code>cd ../data/data-shell
+rm quotes.txt
+ls quotes.txt thesis/quotations.txt</code></pre>
 <p>This time it tells us that it can’t find quotes.txt in the current directory, but it does find the copy in thesis that we didn’t delete.</p>
 <p>Let’s remove that thesis directory and all it’s contents.</p>
 <pre class="bash"><code>cd ../data/data-shell/
@@ -579,36 +596,39 @@ rmdir thesis</code></pre>
 </div>
 <div id="whats-in-a-name" class="section level4">
 <h4>What’s In A Name?</h4>
-<p>You may have noticed that all of Nelle’s files’ names are “something dot something”, and in this part of the lesson, we always used the extension <code>.txt</code>. This is just a convention: we can call a file mythesis or almost anything else we want. However, most people use two-part names most of the time to help them (and their programs) tell different kinds of files apart. The second part of such a name is called the filename extension, and indicates what type of data the file holds: <code>.txt</code> signals a plain text file, .pdf indicates a PDF document, <code>.cfg</code> is a configuration file full of parameters for some program or other, <code>.png</code> is a PNG image, and so on.</p>
-<p>Naming a PNG image of a whale as <code>whale.mp3</code> doesn’t somehow magically turn it into a recording of whalesong, though it might cause the operating system to try to open it with a music player when someone double-clicks it.</p>
+<p>You may have noticed that all of Nelle’s files’ names are “something dot something”, and in this part of the lesson, we always used the extension <code>.txt</code>. This is just a convention: we can call a file <em>mythesis</em> or almost anything else we want. However, most people use two-part names most of the time to help them (and their programs) tell different kinds of files apart. The second part of such a name is called the filename extension, and indicates what type of data the file holds: <em>.txt</em> signals a plain text file, <em>.pdf</em> indicates a PDF document, <em>.cfg</em> is a configuration file full of parameters for some program or other, <em>.png</em> is a PNG image, and so on.</p>
+<p>Naming a PNG image of a whale as <em>whale.mp3</em> doesn’t somehow magically turn it into a recording of whalesong, though it might cause the operating system to try to open it with a music player when someone double-clicks it.</p>
 </div>
 <div id="renaming-files" class="section level4">
 <h4>Renaming Files</h4>
-<p>Suppose that you created a <code>.txt</code> file in your current directory to contain a list of the statistical tests you will need to do to analyze your data, and named it: statstics.txt</p>
+<p>Suppose that you created a <em>.txt</em> file in your current directory to contain a list of the statistical tests you will need to do to analyze your data, and named it: <em>statstics.txt</em></p>
 <blockquote>
-<p>Challenge: After creating and saving this file you realize you misspelled the filename! You want to correct the mistake, which of the following commands could you use to do so?</p>
+<p><strong>Challenge: After creating and saving this file you realize you misspelled the filename! You want to correct the mistake, which of the following commands could you use to do so?</strong></p>
 </blockquote>
 <ol style="list-style-type: upper-alpha">
-<li><code>cp statstics.txt statistics.txt</code></li>
-<li><code>mv statstics.txt statistics.txt</code></li>
-<li><code>mv statstics.txt .</code></li>
+<li><code>cp statstics.txt statistics.txt</code><br />
+</li>
+<li><code>mv statstics.txt statistics.txt</code><br />
+</li>
+<li><code>mv statstics.txt .</code><br />
+</li>
 <li><code>cp statstics.txt .</code></li>
 </ol>
 </div>
 <div id="copy-with-multiple-filenames" class="section level4">
 <h4>Copy with Multiple Filenames</h4>
-<p>For this exercise, you can test the commands in the <code>data-shell/data</code> directory.</p>
+<p>For this exercise, you can test the commands in the <em>data-shell/data</em> directory.</p>
 <p>In the example below, what does <code>cp</code> do when given several filenames and a directory name?</p>
 <p><code>mkdir backup</code> <code>cp amino-acids.txt animals.txt backup/</code></p>
 <blockquote>
-<p>Challenge: What does cp do when given three or more file names?</p>
+<p><strong>Challenge: What does cp do when given three or more file names?</strong></p>
 </blockquote>
 </div>
 <div id="copy-a-folder-structure-but-not-the-files" class="section level4">
 <h4>Copy a folder structure but not the files</h4>
-<p>You’re starting a new experiment, and would like to duplicate the file structure from your previous experiment without the data files so you can add new data. Assume that the file structure is in a folder called <code>2016-05-18-data</code>, which contains a data folder that in turn contains folders named raw and processed that contain data files. The goal is to copy the file structure of the <code>2016-05-18-data folder</code> into a folder called <code>2016-05-20-data</code> and remove the data files from the directory you just created.</p>
+<p>You’re starting a new experiment, and would like to duplicate the file structure from your previous experiment without the data files so you can add new data. Assume that the file structure is in a folder called <em>2016-05-18-data</em>, which contains a data folder that in turn contains folders named raw and processed that contain data files. The goal is to copy the file structure of the <em>2016-05-18-data</em> folder into a folder called <em>2016-05-20-data</em> and remove the data files from the directory you just created.</p>
 <blockquote>
-<p>Challenge: Which of the following set of commands would achieve this objective? What would the other commands do?</p>
+<p><strong>Challenge: Which of the following set of commands would achieve this objective? What would the other commands do?</strong></p>
 </blockquote>
 <p>Option A</p>
 <pre class="bash"><code>cp -r 2016-05-18-data/ 2016-05-20-data/
