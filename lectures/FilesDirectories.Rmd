@@ -27,7 +27,7 @@ You need to download some files to follow this lesson:
 
 * Download [data-shell.zip](https://ahessl.github.io/WVU-GEOG693/data/data-shell.zip) and move the `data-shell` file to your directory for this course (`~/OpenDataSci/data/` or similar).    
 * Unzip/extract the folder.      
-*	Open a terminal using RStudio (lower left).    
+*	Open `RStudio` and open a new project in a new working directory titled _OpenDataSci._    
 
 ### Questions
 *	How can I create, copy, and delete files and directories?  
@@ -59,7 +59,7 @@ ls -F
 ```
 
 #### Use File Explorer, Finder or RStudio>Files
-Using the shell to create a directory is no different than using a file explorer. If you open the current directory using your operating system’s graphical file explorer, the thesis directory will appear there too. While they are two different ways of interacting with the files, the files and directories themselves are the same.
+Using the shell to create a directory is no different than using a file explorer. If you open the current directory using your operating system’s graphical file explorer, the _thesis_ directory will appear there too. You can also see the new directoy in RStudio's graphical file finder __Files__ on the lower right window. While they are different ways of interacting with the files, the files and directories themselves are the same.
 
 #### Good names for files and directories
 Useful tips for the names of your files.
@@ -119,7 +119,7 @@ rm draft.txt
 This command removes files (rm is short for “remove”). If we run `ls` again, its output is empty once more, which tells us that our file is gone.
 
 ### Deleting Is Forever
-The Unix shell doesn’t have a trash bin that we can recover deleted files from (though most graphical interfaces to Unix do). Instead, when we delete files, they are unhooked from the file system so that their storage space on disk can be recycled. Tools for finding and recovering deleted files do exist, but there’s no guarantee they’ll work in any particular situation, since the computer may recycle the file’s disk space right away.
+The bash shell doesn’t have a trash bin that we can recover deleted files from (though most graphical interfaces to bash do). Instead, when we delete files, they are unhooked from the file system so that their storage space on disk can be recycled. Tools for finding and recovering deleted files do exist, but there’s no guarantee they’ll work in any particular situation, since the computer may recycle the file’s disk space right away.
 
 Let’s re-create that file and then move up one directory to _~/OpenDataSci/data/data-shell_ using `cd ..`:
 
@@ -130,7 +130,6 @@ pwd
 ```
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
-mkdir thesis
 cd thesis
 touch draft.txt
 cd ..
@@ -146,25 +145,39 @@ Try: `rmdir thesis`
 
 To really get rid of thesis we must also delete the file draft.txt. We can do this with the recursive option for rm:
 
-`rm -r thesis`
+```{bash, echo=-1, eval=T, engine='bash'}
+cd ../data/data-shell
+rm -r thesis
+```
 
 #### Using rm Safely
-What happens when we type 
-`rm -i thesis/quotations.txt`
+
+Add the thesis directory back in and make a _draft.txt_ and a _quotations.txt_ file in that directory.
+```{bash, echo=-1, eval=T, engine='bash'}
+cd ../data/data-shell
+mkdir thesis
+touch thesis/draft.txt thesis/quotations.txt
+```
+
+What happens when we type:
+```{bash, echo=-1, eval=F, engine='bash'}
+cd ../data/data-shell
+rm -i thesis/quotations.txt
+```
+
 Why would we want this protection when using `rm`?
 
 _With Great Power Comes Great Responsibility_
 Removing the files in a directory recursively can be a very dangerous operation. If we’re concerned about what we might be deleting we can add the “interactive” flag `-i` to rm which will ask us for confirmation before each step.
 
-```{bash, echo=-1, eval=T}
+```{bash, echo=-1, eval=F, engine='bash'}
 cd ../data/data-shell
-rm -r thesis #note I cannot use interactive mode from .Rmd
-
+rm -r -i thesis 
 ```
 
 This removes everything in the directory, then the directory itself, asking at each step for you to confirm the deletion.
 
-Let’s create that directory and file one more time. (Note that this time we’re running nano with the path `thesis/draft.txt`, rather than going into the thesis directory and running nano on draft.txt there.)
+Let’s create that directory and file one more time. (Note that this time we’re running touch with the path `thesis/draft.txt`, rather than going into the thesis directory and running nano on draft.txt there.)
 
 >__Challenge: Try making the draft and directory at the same time. Which is it?__  
 
@@ -172,7 +185,7 @@ A) `touch \thesis\draft.txt`
 B) `touch/thesis/draft.txt`    
 C) `touch thesis/draft.txt`    
 
-`draft.txt` isn’t a particularly informative name, so let’s change the file’s name using `mv`, which is short for “move”:
+_draft.txt_ isn’t a particularly informative name, so let’s change the file’s name using `mv`, which is short for “move”:
 
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
@@ -181,7 +194,7 @@ touch thesis/draft.txt
 mv thesis/draft.txt thesis/quotes.txt
 ```
 
-The first argument tells mv what we’re “moving”, while the second is where it’s to go. In this case, we’re moving _thesis/draft.txt_ to _thesis/quotes.txt_, which has the same effect as renaming the file. Sure enough, ls shows us that thesis now contains one file called _quotes.txt_:
+The first argument tells `mv` what we’re “moving”, while the second is where it’s to go. In this case, we’re moving _thesis/draft.txt_ to _thesis/quotes.txt_, which has the same effect as renaming the file. Sure enough, `ls` shows us that thesis now contains one file called _quotes.txt_:
 
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
@@ -191,7 +204,8 @@ ls thesis
 One has to be careful when specifying the target file name, since `mv` will silently overwrite any existing file with the same name, which could lead to data loss. An additional flag, `mv -i` (or `mv --interactive`), can be used to make mv ask you for confirmation before overwriting.
 Note: `mv` also works on directories.
 
-Let’s move _quotes.txt_ into the current working directory. We use `mv` once again, but this time we’ll just use the name of a directory as the second argument to tell `mv` that we want to keep the filename, but put the file somewhere new. (This is why the command is called “move”.) In this case, the directory name we use is the special directory name `.` that we mentioned earlier.
+Let’s move _quotes.txt_ into the current working directory. We use `mv` once again, but this time we’ll just use the name of a directory as the second argument to tell `mv` that we want to keep the filename, but put the file somewhere new. (This is why the command is called “move”.) In this case, the directory name we use is the special directory name `.` 
+I use `.` all the time!  It confirms that you use the current working directory.
 
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
@@ -245,7 +259,7 @@ rm quotes.txt
 ls quotes.txt thesis/quotations.txt
 ```
 
-This time it tells us that it can’t find quotes.txt in the current directory, but it does find the copy in thesis that we didn’t delete.
+This time it tells us that it can’t find _quotes.txt_ in the current directory, but it does find the copy in thesis that we didn’t delete.
 
 Let's remove that thesis directory and all it's contents.  
 
@@ -277,8 +291,11 @@ For this exercise, you can test the commands in the _data-shell/data_ directory.
 
 In the example below, what does `cp` do when given several filenames and a directory name?
 
-`mkdir backup`
-`cp amino-acids.txt animals.txt backup/`
+```{bash eval=FALSE, engine='bash' }
+cd ../data/data-shell
+mkdir backup
+cp amino-acids.txt animals.txt backup/
+```
 
 >__Challenge: What does cp do when given three or more file names?__  
 
@@ -312,8 +329,7 @@ rm -r -i 2016-05-20-data/
 •	`cp` old new copies a file.  
 •	`mkdir` path creates a new directory.  
 •	`mv` old new moves (renames) a file or directory.  
-•	`rm` path removes (deletes) a file.  
-•	Use of the Control key may be described in many ways, including Ctrl-X, Control-X, and ^X.  
+•	`rm` path removes (deletes) a file.   
 •	The shell does not have a trash bin: once something is deleted, it’s really gone.  
 •	Depending on the type of work you do, you may need a more powerful text editor like [Atom](https://atom.io/).  
 
