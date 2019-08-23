@@ -25,9 +25,9 @@ The next few lessons will explore what she should do instead. More specifically,
 
 You need to download some files to follow this lesson:  
 
-* Download [data-shell.zip](https://ahessl.github.io/WVU-GEOG693/data/data-shell.zip) and move the `data-shell` file to your directory for this course (`~/OpenDataSci/data/` or similar).    
-* Unzip/extract the folder.      
-*	Open `RStudio` and open a new project in a new working directory titled _OpenDataSci._    
+* Download [data-shell.zip](https://ahessl.github.io/WVU-GEOG693/data/data-shell.zip) and move the `data-shell` file to your directory for this course (`~/GEOG693/data/` or similar).    
+* Unzip/extract the folder. You can do this from Windows Finder by double-clicking or from the terminal using the command `unzip data-shell.zip`.       
+*	Open `RStudio` and open a new project in a new working directory in teh _data-shell/_ directory entitled _DirectoryProject_    
 
 ### Questions
 *	How can I create, copy, and delete files and directories?  
@@ -70,7 +70,7 @@ Useful tips for the names of your files.
 4.	Stick with letters, numbers, . (period or ‘full stop’), - (dash) and _ (underscore). Avoid special characters (*, ^, etc.)  
 5. If you must to refer to names of files or directories that have whitespace or another non-alphanumeric character, you should surround the name in quotes ("").
 
-Since we’ve just created the thesis directory, there’s nothing in it yet and nothing is returned if we ls the directory:
+Since we’ve just created the thesis directory, there’s nothing in it yet and nothing is returned if we `ls` the directory:
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
 ls -F thesis
@@ -97,7 +97,7 @@ On Unix systems (such as Linux and Mac OS X), many programmers use Emacs or Vim 
 #### _Interlude Over!_
 
 Let's make the file with a command:
-```{bash, echo=-1, eval=T}
+```{bash, echo=T, eval=T}
 cd ../data/data-shell/thesis
 touch draft.txt
 ```
@@ -116,7 +116,7 @@ cd ../data/data-shell/thesis
 rm draft.txt
 ```
 
-This command removes files (rm is short for “remove”). If we run `ls` again, its output is empty once more, which tells us that our file is gone.
+This command removes files (`rm` is short for “remove”). If we run `ls` again, its output is empty once more, which tells us that our file is gone.
 
 ### Deleting Is Forever
 The bash shell doesn’t have a trash bin that we can recover deleted files from (though most graphical interfaces to bash do). Instead, when we delete files, they are unhooked from the file system so that their storage space on disk can be recycled. Tools for finding and recovering deleted files do exist, but there’s no guarantee they’ll work in any particular situation, since the computer may recycle the file’s disk space right away.
@@ -139,20 +139,24 @@ What happens if we try to remove the entire thesis directory using `rm thesis`?
 
 This happens because `rm` by default only works on files, not directories.
 
-Try: `rmdir thesis`
+Instead try: `rmdir thesis`
 
 > __Challenge: What went wrong in this case?__
 
-To really get rid of thesis we must also delete the file draft.txt. We can do this with the recursive option for rm:
+To really get rid of thesis we must also delete the file _draft.txt_. We can do this with the recursive option for `rm`:
 
-```{bash, echo=-1, eval=T, engine='bash'}
+```{bash, echo=-1, eval=F, engine='bash'}
+cd ../data/data-shell
+rm -r -i thesis
+```
+
+```{bash, echo=F}
 cd ../data/data-shell
 rm -r thesis
 ```
-
 #### Using rm Safely
 
-Add the thesis directory back in and make a _draft.txt_ and a _quotations.txt_ file in that directory.
+Add the thesis directory back in and make a _draft.txt_ and a _quotations.txt_ file in that directory. You can do it in one command!
 ```{bash, echo=-1, eval=T, engine='bash'}
 cd ../data/data-shell
 mkdir thesis
@@ -173,6 +177,11 @@ Removing the files in a directory recursively can be a very dangerous operation.
 ```{bash, echo=-1, eval=F, engine='bash'}
 cd ../data/data-shell
 rm -r -i thesis 
+```
+
+```{bash, echo=F}
+cd ../data/data-shell
+rm -r thesis
 ```
 
 This removes everything in the directory, then the directory itself, asking at each step for you to confirm the deletion.
@@ -228,7 +237,7 @@ ls quotes.txt
 >__Challenge:
 After running the following commands, Jamie realizes that she put the files sucrose.dat and maltose.dat into the wrong folder:__  
 
-```{bash eval=FALSE, engine='bash'}
+```{bash eval=FALSE, include=TRUE, engine='bash'}
 ls -F
 	analyzed/ raw/
 ls -F analyzed
@@ -257,6 +266,10 @@ To prove that we made a copy, let’s delete the _quotes.txt_ file in the curren
 cd ../data/data-shell
 rm quotes.txt
 ls quotes.txt thesis/quotations.txt
+```
+```{bash eval=T, echo=F, engine='bash'}
+cd ../data/data-shell
+rm quotes.txt
 ```
 
 This time it tells us that it can’t find _quotes.txt_ in the current directory, but it does find the copy in thesis that we didn’t delete.
@@ -291,7 +304,7 @@ For this exercise, you can test the commands in the _data-shell/data_ directory.
 
 In the example below, what does `cp` do when given several filenames and a directory name?
 
-```{bash eval=FALSE, engine='bash' }
+```{bash eval=FALSE, include=TRUE, engine='bash'}
 cd ../data/data-shell
 mkdir backup
 cp amino-acids.txt animals.txt backup/

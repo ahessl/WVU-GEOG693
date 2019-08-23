@@ -44,7 +44,7 @@ My working directory will not match yours.  What things are different? What aspe
 
 ### On Slashes
 
-Unix based operating systems use a forward slash ('/'), Windows use a backward slash ('\').  Some applications like R were written for Unix, therefore use a /.
+Unix based operating systems use a forward slash (`/`), Windows uses a backward slash (`\`).  Some applications like R were written for Unix, therefore use a `/`.
 
 ### Why Directories?
 Your computer is organized in a hierarchy of folders and files that can be navigated using paths. You might want to access files and documents that are located in different places on your machine or online.  Each can be called using their unique path.
@@ -85,7 +85,7 @@ __Option 1__ - cd to the full path name of directory, in this case we are moving
 ```{bash cd}
 #Note: the beginning of your path will be different, but should end in OpenDataSci/data/
 
-cd /Users/amyhessl/Dropbox/Hessl/Courses/EarthSciDigAge/OpenDataSci/data/
+cd /Users/amyhessl//Dropbox/Hessl/Teaching/Courses/EarthSciDigAge/OpenDataSci/data/
 ```
 
 By typing pwd, I can see the full path to my current directory is:

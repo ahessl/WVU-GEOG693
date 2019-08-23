@@ -385,11 +385,11 @@ summary {
 <p>The next few lessons will explore what she should do instead. More specifically, they explain how she can use the <em>bash shell</em> to automate the repetitive steps in her processing pipeline so that her computer can work 24 hours a day while she writes her paper. As a bonus, once she has put a processing pipeline together, she will be able to use it again whenever she collects more data.</p>
 <p>You need to download some files to follow this lesson:</p>
 <ul>
-<li>Download <a href="https://ahessl.github.io/WVU-GEOG693/data/data-shell.zip">data-shell.zip</a> and move the <code>data-shell</code> file to your directory for this course (<code>~/OpenDataSci/data/</code> or similar).<br />
+<li>Download <a href="https://ahessl.github.io/WVU-GEOG693/data/data-shell.zip">data-shell.zip</a> and move the <code>data-shell</code> file to your directory for this course (<code>~/GEOG693/data/</code> or similar).<br />
 </li>
-<li>Unzip/extract the folder.<br />
+<li>Unzip/extract the folder. You can do this from Windows Finder by double-clicking or from the terminal using the command <code>unzip data-shell.zip</code>.<br />
 </li>
-<li>Open <code>RStudio</code> and open a new project in a new working directory titled <em>OpenDataSci.</em></li>
+<li>Open <code>RStudio</code> and open a new project in a new working directory in teh <em>data-shell/</em> directory entitled <em>DirectoryProject</em></li>
 </ul>
 </div>
 <div id="questions" class="section level3">
@@ -422,7 +422,6 @@ ls -F</code></pre>
 ## pizza.cfg
 ## quotes.txt
 ## solar.pdf
-## wget/
 ## writing/</code></pre>
 <p>Let’s create a new directory called <em>thesis</em> using the command <code>mkdir</code>. Note this command has no output:</p>
 <pre class="bash"><code>mkdir thesis</code></pre>
@@ -437,7 +436,6 @@ ls -F</code></pre>
 ## quotes.txt
 ## solar.pdf
 ## thesis/
-## wget/
 ## writing/</code></pre>
 <div id="use-file-explorer-finder-or-rstudiofiles" class="section level4">
 <h4>Use File Explorer, Finder or RStudio&gt;Files</h4>
@@ -457,7 +455,7 @@ ls -F</code></pre>
 </li>
 <li>If you must to refer to names of files or directories that have whitespace or another non-alphanumeric character, you should surround the name in quotes (&quot;&quot;).</li>
 </ol>
-<p>Since we’ve just created the thesis directory, there’s nothing in it yet and nothing is returned if we ls the directory:</p>
+<p>Since we’ve just created the thesis directory, there’s nothing in it yet and nothing is returned if we <code>ls</code> the directory:</p>
 <pre class="bash"><code>ls -F thesis</code></pre>
 <p>Let’s change our working directory to thesis using <code>cd</code>, then create a new file called <em>draft.txt</em>, but first…</p>
 </div>
@@ -483,15 +481,16 @@ ls -F</code></pre>
 <div id="interlude-over" class="section level4">
 <h4><em>Interlude Over!</em></h4>
 <p>Let’s make the file with a command:</p>
-<pre class="bash"><code>touch draft.txt</code></pre>
+<pre class="bash"><code>cd ../data/data-shell/thesis
+touch draft.txt</code></pre>
 <p>Use <code>RStudio&gt;Files</code> to access the file. If you click on it, it will open in upper left as a <em>.txt</em> file. Type your thesis. Done.</p>
 <p>Now an <code>ls</code> in the thesis folder will show the file:</p>
 <pre class="bash"><code>ls -l</code></pre>
 <pre><code>## total 0
-## -rw-r--r--  1 amyhessl  staff  0 Aug 22 12:08 draft.txt</code></pre>
+## -rw-r--r--  1 amyhessl  staff  0 Aug 23 11:55 draft.txt</code></pre>
 <p>Returning to the <em>data-shell</em> directory, let’s tidy up the <em>thesis</em> directory by removing the draft we created:</p>
 <pre class="bash"><code>rm draft.txt</code></pre>
-<p>This command removes files (rm is short for “remove”). If we run <code>ls</code> again, its output is empty once more, which tells us that our file is gone.</p>
+<p>This command removes files (<code>rm</code> is short for “remove”). If we run <code>ls</code> again, its output is empty once more, which tells us that our file is gone.</p>
 </div>
 </div>
 <div id="deleting-is-forever" class="section level3">
@@ -505,15 +504,15 @@ touch draft.txt
 cd ..</code></pre>
 <p>What happens if we try to remove the entire thesis directory using <code>rm thesis</code>?</p>
 <p>This happens because <code>rm</code> by default only works on files, not directories.</p>
-<p>Try: <code>rmdir thesis</code></p>
+<p>Instead try: <code>rmdir thesis</code></p>
 <blockquote>
 <p><strong>Challenge: What went wrong in this case?</strong></p>
 </blockquote>
-<p>To really get rid of thesis we must also delete the file draft.txt. We can do this with the recursive option for rm:</p>
-<pre class="bash"><code>rm -r thesis</code></pre>
+<p>To really get rid of thesis we must also delete the file <em>draft.txt</em>. We can do this with the recursive option for <code>rm</code>:</p>
+<pre class="bash"><code>rm -r -i thesis</code></pre>
 <div id="using-rm-safely" class="section level4">
 <h4>Using rm Safely</h4>
-<p>Add the thesis directory back in and make a <em>draft.txt</em> and a <em>quotations.txt</em> file in that directory.</p>
+<p>Add the thesis directory back in and make a <em>draft.txt</em> and a <em>quotations.txt</em> file in that directory. You can do it in one command!</p>
 <pre class="bash"><code>mkdir thesis
 touch thesis/draft.txt thesis/quotations.txt</code></pre>
 <p>What happens when we type:</p>
@@ -537,17 +536,14 @@ touch thesis/draft.txt thesis/quotations.txt</code></pre>
 <pre class="bash"><code>mkdir thesis
 touch thesis/draft.txt
 mv thesis/draft.txt thesis/quotes.txt</code></pre>
-<pre><code>## mkdir: thesis: File exists</code></pre>
 <p>The first argument tells <code>mv</code> what we’re “moving”, while the second is where it’s to go. In this case, we’re moving <em>thesis/draft.txt</em> to <em>thesis/quotes.txt</em>, which has the same effect as renaming the file. Sure enough, <code>ls</code> shows us that thesis now contains one file called <em>quotes.txt</em>:</p>
 <pre class="bash"><code>ls thesis</code></pre>
-<pre><code>## quotations.txt
-## quotes.txt</code></pre>
+<pre><code>## quotes.txt</code></pre>
 <p>One has to be careful when specifying the target file name, since <code>mv</code> will silently overwrite any existing file with the same name, which could lead to data loss. An additional flag, <code>mv -i</code> (or <code>mv --interactive</code>), can be used to make mv ask you for confirmation before overwriting. Note: <code>mv</code> also works on directories.</p>
 <p>Let’s move <em>quotes.txt</em> into the current working directory. We use <code>mv</code> once again, but this time we’ll just use the name of a directory as the second argument to tell <code>mv</code> that we want to keep the filename, but put the file somewhere new. (This is why the command is called “move”.) In this case, the directory name we use is the special directory name <code>.</code> I use <code>.</code> all the time! It confirms that you use the current working directory.</p>
 <pre class="bash"><code>mv thesis/quotes.txt .</code></pre>
 <p>The effect is to move the file from the directory it was in to the current working directory. <code>ls</code> now shows us that thesis is empty:</p>
 <pre class="bash"><code>ls thesis</code></pre>
-<pre><code>## quotations.txt</code></pre>
 <p>Further, <code>ls</code> with a filename or directory name as an argument only lists that file or directory. We can use this to confirm that <em>quotes.txt</em> is still in our current directory:</p>
 <pre class="bash"><code>ls quotes.txt</code></pre>
 <pre><code>## quotes.txt</code></pre>
@@ -580,7 +576,6 @@ ls . thesis</code></pre>
 ## quotes.txt
 ## solar.pdf
 ## thesis
-## wget
 ## writing
 ## 
 ## thesis:

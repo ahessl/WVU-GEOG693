@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="A Hessl" />
@@ -255,9 +256,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type="text/css">
 .main-container {
@@ -282,22 +281,80 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -307,8 +364,8 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Shell Basics</h1>
-<h4 class="author"><em>A Hessl</em></h4>
-<h4 class="date"><em>5/31/2019</em></h4>
+<h4 class="author">A Hessl</h4>
+<h4 class="date">5/31/2019</h4>
 
 </div>
 
@@ -358,13 +415,13 @@ $(document).ready(function () {
 <h4>BIG HINT: watch your progress in the lower right window of RStudio under the ‘Files’ tab.</h4>
 <p>You can print your working directory (pwd):</p>
 <pre class="bash"><code>pwd</code></pre>
-<pre><code>## /Users/amyhessl/Dropbox/Hessl/Courses/EarthSciDigAge/OpenDataSci/lectures</code></pre>
+<pre><code>## /Users/amyhessl/Dropbox/Hessl/Teaching/Courses/EarthSciDigAge/OpenDataSci/lectures</code></pre>
 <p>My working directory will not match yours. What things are different? What aspects are the same?</p>
 </div>
 </div>
 <div id="on-slashes" class="section level3">
 <h3>On Slashes</h3>
-<p>Unix based operating systems use a forward slash (‘/’), Windows use a backward slash (’'). Some applications like R were written for Unix, therefore use a /.</p>
+<p>Unix based operating systems use a forward slash (<code>/</code>), Windows uses a backward slash (<code>\</code>). Some applications like R were written for Unix, therefore use a <code>/</code>.</p>
 </div>
 <div id="why-directories" class="section level3">
 <h3>Why Directories?</h3>
@@ -376,22 +433,31 @@ $(document).ready(function () {
 ## APIs_files
 ## ClassConcept.Rmd
 ## ClassConcept.html
-## ClassGitRepo.Rmd
+## FilesDirectories.Rmd
+## FilesDirectories.html
+## Find_grep.Rmd
 ## Git.Rmd
 ## Git.html
 ## GitHub.Rmd
 ## GitHub.html
+## HW_0_guide.Rmd
+## HW_0_guide.html
 ## InstallingSoftware.Rmd
 ## InstallingSoftware.html
+## Loops.Rmd
+## Loops.html
 ## RStudioTerminal.Rmd
 ## RStudio_Terminal.html
 ## ShellBasics.Rmd
 ## ShellBasics.html
 ## TextFiles.Rmd
 ## TextFiles.html
-## WorkingWithFilesDirectories.Rmd
-## data
-## images</code></pre>
+## WildcardsPipesFilters.Rmd
+## WildcardsPipesFilters.html
+## Xargs.Rmd
+## images
+## wget.Rmd
+## wget.html</code></pre>
 <p>Use a flag -F (also known as a switch or an option), show which items are files vs folders (trailing ‘/’):</p>
 <pre class="bash"><code>ls -F</code></pre>
 <pre><code>## APIs.Rmd
@@ -399,22 +465,31 @@ $(document).ready(function () {
 ## APIs_files/
 ## ClassConcept.Rmd
 ## ClassConcept.html
-## ClassGitRepo.Rmd
+## FilesDirectories.Rmd
+## FilesDirectories.html
+## Find_grep.Rmd
 ## Git.Rmd
 ## Git.html
 ## GitHub.Rmd
 ## GitHub.html
+## HW_0_guide.Rmd
+## HW_0_guide.html
 ## InstallingSoftware.Rmd
 ## InstallingSoftware.html
+## Loops.Rmd
+## Loops.html
 ## RStudioTerminal.Rmd
 ## RStudio_Terminal.html
 ## ShellBasics.Rmd
 ## ShellBasics.html
 ## TextFiles.Rmd
 ## TextFiles.html
-## WorkingWithFilesDirectories.Rmd
-## data/
-## images/</code></pre>
+## WildcardsPipesFilters.Rmd
+## WildcardsPipesFilters.html
+## Xargs.Rmd
+## images/
+## wget.Rmd
+## wget.html</code></pre>
 </div>
 <div id="getting-help" class="section level3">
 <h3>Getting help</h3>
@@ -433,7 +508,7 @@ $(document).ready(function () {
 <p><strong>Option 1</strong> - cd to the full path name of directory, in this case we are moving to OpenDataSci/data/:</p>
 <pre class="bash"><code>#Note: the beginning of your path will be different, but should end in OpenDataSci/data/
 
-cd /Users/amyhessl/Dropbox/Hessl/Courses/EarthSciDigAge/OpenDataSci/data/</code></pre>
+cd /Users/amyhessl//Dropbox/Hessl/Teaching/Courses/EarthSciDigAge/OpenDataSci/data/</code></pre>
 <p>By typing pwd, I can see the full path to my current directory is:</p>
 <pre class="bash"><code>pwd</code></pre>
 <p><strong>Option 2</strong> - If the directory you wish to set as working directory is below your current working directory, you can eliminate all items preceding the wd (this is a <strong>relative path</strong>!). We will go one down to EarthSciDigAge/OpenDataSci/data/data-shell/:</p>
@@ -448,14 +523,15 @@ cd ~/Desktop</code></pre>
 <pre class="bash"><code>pwd
 cd ..
 pwd</code></pre>
-<pre><code>## /Users/amyhessl/Dropbox/Hessl/Courses/EarthSciDigAge/OpenDataSci/lectures
-## /Users/amyhessl/Dropbox/Hessl/Courses/EarthSciDigAge/OpenDataSci</code></pre>
+<pre><code>## /Users/amyhessl/Dropbox/Hessl/Teaching/Courses/EarthSciDigAge/OpenDataSci/lectures
+## /Users/amyhessl/Dropbox/Hessl/Teaching/Courses/EarthSciDigAge/OpenDataSci</code></pre>
 <p>Now you should be back in your home directory.</p>
 <p>What if we want to move up two directories? Return to data-shell/ first. Then move up two levels.</p>
 <pre class="bash"><code>cd ~/Dropbox/Hessl/Courses/EarthSciDigAge/OpenDataSci/data/data-shell
 cd ../../
 pwd</code></pre>
-<pre><code>## /Users/amyhessl/Dropbox/Hessl/Courses/EarthSciDigAge/OpenDataSci</code></pre>
+<pre><code>## bash: line 0: cd: /Users/amyhessl/Dropbox/Hessl/Courses/EarthSciDigAge/OpenDataSci/data/data-shell: No such file or directory
+## /Users/amyhessl/Dropbox/Hessl/Teaching/Courses/EarthSciDigAge</code></pre>
 <p>You should be in OpenDataSci/</p>
 <p>On my Desktop, I have a folder for each of my two kids. Navigate down to a folder called ‘Jane’ on my desktop.</p>
 <pre class="bash"><code>cd ~/Desktop/Jane</code></pre>
@@ -510,8 +586,7 @@ rmdir GEOG693</code></pre>
 <pre class="bash"><code>mkdir ~/Desktop/GEOG693
 mkdir ~/Desktop/GEOG693/shell
 cd  ~/Desktop/GEOG693/shell</code></pre>
-<pre><code>## mkdir: /Users/amyhessl/Desktop/GEOG693: File exists
-## mkdir: /Users/amyhessl/Desktop/GEOG693/shell: File exists</code></pre>
+<pre><code>## mkdir: /Users/amyhessl/Desktop/GEOG693: File exists</code></pre>
 </div>
 <div id="key-points" class="section level2">
 <h2>Key Points</h2>
@@ -557,6 +632,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
