@@ -26,7 +26,7 @@ The next few lessons will explore what she should do instead. More specifically,
 You need to download some files to follow this lesson:  
 
 * Download [data-shell.zip](https://ahessl.github.io/WVU-GEOG693/data/data-shell.zip) and move the `data-shell` file to your directory for this course (`~/GEOG693/data/` or similar).    
-* Unzip/extract the folder. You can do this from Windows Finder by double-clicking or from the terminal using the command `unzip data-shell.zip`.       
+* Unzip/extract the folder. You can do this from Windows Finder by double-clicking or from the terminal using the command `unzip data-shell.zip`         
 *	Open `RStudio` and open a new project in a new working directory in teh _data-shell/_ directory entitled _DirectoryProject_    
 
 ### Questions
@@ -96,7 +96,7 @@ On Unix systems (such as Linux and Mac OS X), many programmers use Emacs or Vim 
 
 #### _Interlude Over!_
 
-Let's make the file with a command:
+Let's make a text file called _draft.txt_ with a command:
 ```{bash, echo=T, eval=T}
 cd ../data/data-shell/thesis
 touch draft.txt
@@ -186,7 +186,7 @@ rm -r thesis
 
 This removes everything in the directory, then the directory itself, asking at each step for you to confirm the deletion.
 
-Let’s create that directory and file one more time. (Note that this time we’re running touch with the path `thesis/draft.txt`, rather than going into the thesis directory and running nano on draft.txt there.)
+Let’s create that directory and file one more time. (Note that this time we’re running touch with the path `thesis/draft.txt`, rather than going into the thesis directory and running nano or notepadd++ on _draft.txt_ there.)
 
 >__Challenge: Try making the draft and directory at the same time. Which is it?__  
 
@@ -210,7 +210,7 @@ cd ../data/data-shell
 ls thesis
 ```
 
-One has to be careful when specifying the target file name, since `mv` will silently overwrite any existing file with the same name, which could lead to data loss. An additional flag, `mv -i` (or `mv --interactive`), can be used to make mv ask you for confirmation before overwriting.
+One has to be careful when specifying the target file name, since `mv` will silently overwrite any existing file with the same name, which could lead to data loss. An additional flag, `mv -i` (or `mv --interactive`), can be used to make `mv` ask you for confirmation before overwriting.
 Note: `mv` also works on directories.
 
 Let’s move _quotes.txt_ into the current working directory. We use `mv` once again, but this time we’ll just use the name of a directory as the second argument to tell `mv` that we want to keep the filename, but put the file somewhere new. (This is why the command is called “move”.) In this case, the directory name we use is the special directory name `.` 
@@ -252,7 +252,7 @@ cd raw/
 _Hint:_ Recall that `..` refers to the parent directory (i.e. one above the current directory) and that `.` refers to the current directory. 
 
 #### Copy
-The `cp` command works very much like `mv`, except it copies a file instead of moving it. We can check that it did the right thing using `ls` with two paths as arguments — like most Unix commands, `ls` can be given multiple paths at once:
+The `cp` command works very much like `mv`, except it copies a file instead of moving it. We can check that it did the right thing using `ls` with two paths as arguments — like most Unix/bash commands, `ls` can be given multiple paths at once:
 
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
@@ -314,7 +314,7 @@ cp amino-acids.txt animals.txt backup/
 
 #### Copy a folder structure but not the files
 You’re starting a new experiment, and would like to duplicate the file structure from your previous experiment without the data files so you can add new data.
-Assume that the file structure is in a folder called _2016-05-18-data_, which contains a data folder that in turn contains folders named raw and processed that contain data files. The goal is to copy the file structure of the _2016-05-18-data_ folder into a folder called _2016-05-20-data_ and remove the data files from the directory you just created.
+Assume that the file structure is in a folder called _2016-05-18-data_, which contains a data folder that in turn contains folders named _raw_ and _processed_ that contain data files. The goal is to copy the file structure of the _2016-05-18-data_ folder into a folder called _2016-05-20-data_ and remove the data files from the directory you just created.
 
 >__Challenge: Which of the following set of commands would achieve this objective? What would the other commands do?__  
 

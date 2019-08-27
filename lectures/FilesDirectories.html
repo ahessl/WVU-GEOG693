@@ -387,7 +387,7 @@ summary {
 <ul>
 <li>Download <a href="https://ahessl.github.io/WVU-GEOG693/data/data-shell.zip">data-shell.zip</a> and move the <code>data-shell</code> file to your directory for this course (<code>~/GEOG693/data/</code> or similar).<br />
 </li>
-<li>Unzip/extract the folder. You can do this from Windows Finder by double-clicking or from the terminal using the command <code>unzip data-shell.zip</code>.<br />
+<li>Unzip/extract the folder. You can do this from Windows Finder by double-clicking or from the terminal using the command <code>unzip data-shell.zip</code><br />
 </li>
 <li>Open <code>RStudio</code> and open a new project in a new working directory in teh <em>data-shell/</em> directory entitled <em>DirectoryProject</em></li>
 </ul>
@@ -416,11 +416,11 @@ summary {
 ls -F</code></pre>
 <pre><code>## creatures/
 ## data/
+## junk/
 ## molecules/
 ## north-pacific-gyre/
 ## notes.txt
 ## pizza.cfg
-## quotes.txt
 ## solar.pdf
 ## writing/</code></pre>
 <p>Let’s create a new directory called <em>thesis</em> using the command <code>mkdir</code>. Note this command has no output:</p>
@@ -429,11 +429,11 @@ ls -F</code></pre>
 <pre class="bash"><code>ls -F</code></pre>
 <pre><code>## creatures/
 ## data/
+## junk/
 ## molecules/
 ## north-pacific-gyre/
 ## notes.txt
 ## pizza.cfg
-## quotes.txt
 ## solar.pdf
 ## thesis/
 ## writing/</code></pre>
@@ -480,14 +480,14 @@ ls -F</code></pre>
 </div>
 <div id="interlude-over" class="section level4">
 <h4><em>Interlude Over!</em></h4>
-<p>Let’s make the file with a command:</p>
+<p>Let’s make a text file called <em>draft.txt</em> with a command:</p>
 <pre class="bash"><code>cd ../data/data-shell/thesis
 touch draft.txt</code></pre>
 <p>Use <code>RStudio&gt;Files</code> to access the file. If you click on it, it will open in upper left as a <em>.txt</em> file. Type your thesis. Done.</p>
 <p>Now an <code>ls</code> in the thesis folder will show the file:</p>
 <pre class="bash"><code>ls -l</code></pre>
 <pre><code>## total 0
-## -rw-r--r--  1 amyhessl  staff  0 Aug 23 11:55 draft.txt</code></pre>
+## -rw-r--r--  1 amyhessl  staff  0 Aug 27 19:55 draft.txt</code></pre>
 <p>Returning to the <em>data-shell</em> directory, let’s tidy up the <em>thesis</em> directory by removing the draft we created:</p>
 <pre class="bash"><code>rm draft.txt</code></pre>
 <p>This command removes files (<code>rm</code> is short for “remove”). If we run <code>ls</code> again, its output is empty once more, which tells us that our file is gone.</p>
@@ -521,7 +521,7 @@ touch thesis/draft.txt thesis/quotations.txt</code></pre>
 <p><em>With Great Power Comes Great Responsibility</em> Removing the files in a directory recursively can be a very dangerous operation. If we’re concerned about what we might be deleting we can add the “interactive” flag <code>-i</code> to rm which will ask us for confirmation before each step.</p>
 <pre class="bash"><code>rm -r -i thesis </code></pre>
 <p>This removes everything in the directory, then the directory itself, asking at each step for you to confirm the deletion.</p>
-<p>Let’s create that directory and file one more time. (Note that this time we’re running touch with the path <code>thesis/draft.txt</code>, rather than going into the thesis directory and running nano on draft.txt there.)</p>
+<p>Let’s create that directory and file one more time. (Note that this time we’re running touch with the path <code>thesis/draft.txt</code>, rather than going into the thesis directory and running nano or notepadd++ on <em>draft.txt</em> there.)</p>
 <blockquote>
 <p><strong>Challenge: Try making the draft and directory at the same time. Which is it?</strong></p>
 </blockquote>
@@ -539,7 +539,7 @@ mv thesis/draft.txt thesis/quotes.txt</code></pre>
 <p>The first argument tells <code>mv</code> what we’re “moving”, while the second is where it’s to go. In this case, we’re moving <em>thesis/draft.txt</em> to <em>thesis/quotes.txt</em>, which has the same effect as renaming the file. Sure enough, <code>ls</code> shows us that thesis now contains one file called <em>quotes.txt</em>:</p>
 <pre class="bash"><code>ls thesis</code></pre>
 <pre><code>## quotes.txt</code></pre>
-<p>One has to be careful when specifying the target file name, since <code>mv</code> will silently overwrite any existing file with the same name, which could lead to data loss. An additional flag, <code>mv -i</code> (or <code>mv --interactive</code>), can be used to make mv ask you for confirmation before overwriting. Note: <code>mv</code> also works on directories.</p>
+<p>One has to be careful when specifying the target file name, since <code>mv</code> will silently overwrite any existing file with the same name, which could lead to data loss. An additional flag, <code>mv -i</code> (or <code>mv --interactive</code>), can be used to make <code>mv</code> ask you for confirmation before overwriting. Note: <code>mv</code> also works on directories.</p>
 <p>Let’s move <em>quotes.txt</em> into the current working directory. We use <code>mv</code> once again, but this time we’ll just use the name of a directory as the second argument to tell <code>mv</code> that we want to keep the filename, but put the file somewhere new. (This is why the command is called “move”.) In this case, the directory name we use is the special directory name <code>.</code> I use <code>.</code> all the time! It confirms that you use the current working directory.</p>
 <pre class="bash"><code>mv thesis/quotes.txt .</code></pre>
 <p>The effect is to move the file from the directory it was in to the current working directory. <code>ls</code> now shows us that thesis is empty:</p>
@@ -563,12 +563,13 @@ cd raw/</code></pre>
 </div>
 <div id="copy" class="section level4">
 <h4>Copy</h4>
-<p>The <code>cp</code> command works very much like <code>mv</code>, except it copies a file instead of moving it. We can check that it did the right thing using <code>ls</code> with two paths as arguments — like most Unix commands, <code>ls</code> can be given multiple paths at once:</p>
+<p>The <code>cp</code> command works very much like <code>mv</code>, except it copies a file instead of moving it. We can check that it did the right thing using <code>ls</code> with two paths as arguments — like most Unix/bash commands, <code>ls</code> can be given multiple paths at once:</p>
 <pre class="bash"><code>cp quotes.txt thesis/quotations.txt
 ls . thesis</code></pre>
 <pre><code>## .:
 ## creatures
 ## data
+## junk
 ## molecules
 ## north-pacific-gyre
 ## notes.txt
@@ -625,7 +626,7 @@ cp amino-acids.txt animals.txt backup/</code></pre>
 </div>
 <div id="copy-a-folder-structure-but-not-the-files" class="section level4">
 <h4>Copy a folder structure but not the files</h4>
-<p>You’re starting a new experiment, and would like to duplicate the file structure from your previous experiment without the data files so you can add new data. Assume that the file structure is in a folder called <em>2016-05-18-data</em>, which contains a data folder that in turn contains folders named raw and processed that contain data files. The goal is to copy the file structure of the <em>2016-05-18-data</em> folder into a folder called <em>2016-05-20-data</em> and remove the data files from the directory you just created.</p>
+<p>You’re starting a new experiment, and would like to duplicate the file structure from your previous experiment without the data files so you can add new data. Assume that the file structure is in a folder called <em>2016-05-18-data</em>, which contains a data folder that in turn contains folders named <em>raw</em> and <em>processed</em> that contain data files. The goal is to copy the file structure of the <em>2016-05-18-data</em> folder into a folder called <em>2016-05-20-data</em> and remove the data files from the directory you just created.</p>
 <blockquote>
 <p><strong>Challenge: Which of the following set of commands would achieve this objective? What would the other commands do?</strong></p>
 </blockquote>
