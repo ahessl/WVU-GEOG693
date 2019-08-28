@@ -442,9 +442,6 @@ summary {
 </blockquote>
 <p>Anything that starts with a ‘p’ and ends with ‘.’, ‘p’, and at least one more character (since the ? has to match one character, and the final <code>*</code>can match any number of characters). Thus, <code>p*.p?*</code>would match preferred.practice, and even p.pi(since the first *can match no characters at all), but not quality.practice (doesn’t start with ‘p’) or preferred.p (there isn’t at least one character after the ‘.p’).</p>
 <p>When the shell sees a wildcard, it expands the wildcard to create a list of matching filenames before running the command that was asked for. As an exception, if a wildcard expression does not match any file, Bash will pass the expression as an argument to the command as it is. For example typing <code>ls *.pdf</code> in the molecules directory (which contains only files with names ending with .pdb) results in an error message that there is no file called <code>*.pdf</code>. However, generally commands like <code>wc</code> and <code>ls</code> see the lists of file names matching these expressions, but not the wildcards themselves. It is the shell, not the other programs, that deals with expanding wildcards, and this is another example of orthogonal design.</p>
-</div>
-<div id="using-wildcards" class="section level4">
-<h4>Using Wildcards</h4>
 <blockquote>
 <p><strong>Challenge: When run in the molecules directory, which ls command(s) will produce this output?</strong></p>
 </blockquote>
@@ -456,13 +453,24 @@ summary {
 <blockquote>
 <p><strong>Challenge: Sam has a directory containing calibration data, datasets, and descriptions of the datasets:</strong></p>
 </blockquote>
-<p>2015-10-23-calibration.txt 2015-10-23-dataset1.txt 2015-10-23-dataset2.txt 2015-10-23-dataset_overview.txt 2015-10-26-calibration.txt 2015-10-26-dataset1.txt 2015-10-26-dataset2.txt 2015-10-26-dataset_overview.txt 2015-11-23-calibration.txt 2015-11-23-dataset1.txt 2015-11-23-dataset2.txt 2015-11-23-dataset_overview.txt</p>
+<p>2015-10-23-calibration.txt<br />
+2015-10-23-dataset1.txt<br />
+2015-10-23-dataset2.txt<br />
+2015-10-23-dataset_overview.txt<br />
+2015-10-26-calibration.txt<br />
+2015-10-26-dataset1.txt<br />
+2015-10-26-dataset2.txt<br />
+2015-10-26-dataset_overview.txt<br />
+2015-11-23-calibration.txt<br />
+2015-11-23-dataset1.txt<br />
+2015-11-23-dataset2.txt<br />
+2015-11-23-dataset_overview.txt</p>
 <p>Before heading off to another field trip, she wants to back up her data and send some datasets to her colleague Bob. Sam uses the following commands to get the job done:</p>
 <p><code>cp *dataset*/backup/datasets</code><br />
 <code>cp ____calibration____ /backup/calibration</code><br />
 <code>cp 2015-____-____ ~/send_to_bob/all_november_files/</code><br />
-<code>cp ____ ~/send_to_bob/all_datasets_created_on_a_23rd/</code><br />
-Help Sam by filling in the blanks.</p>
+<code>cp ____ ~/send_to_bob/all_datasets_created_on_a_23rd/</code></p>
+<p>Help Sam by filling in the blanks.</p>
 </div>
 <div id="counting-words-and-lines" class="section level4">
 <h4>Counting Words and Lines</h4>
@@ -481,7 +489,7 @@ Help Sam by filling in the blanks.</p>
 <h4>Redirecting Output to a File</h4>
 <p>Which of these files is shortest? It’s an easy question to answer when there are only six files, but what if there were 6000? Our first step toward a solution is to run the command:</p>
 <pre class="bash"><code>wc -l *.pdb &gt; lengths.txt</code></pre>
-<p>The greater than symbol, &gt;, tells the shell to redirect the command’s output to a file instead of printing it to the screen. (This is why there is no screen output: everything that wc would have printed has gone into the file <code>lengths.txt</code> instead.) The shell will create the file if it doesn’t exist. If the file exists, it will be silently <strong>overwritten</strong>, which may lead to data loss and thus requires some caution. <code>ls lengths.txt</code> confirms that the file exists:</p>
+<p>The greater than symbol, <code>&gt;</code>, tells the shell to redirect the command’s output to a file instead of printing it to the screen. (This is why there is no screen output: everything that wc would have printed has gone into the file <code>lengths.txt</code> instead.) The shell will create the file if it doesn’t exist. If the file exists, it will be silently <strong>overwritten</strong>, which may lead to data loss and thus requires some caution. <code>ls lengths.txt</code> confirms that the file exists:</p>
 <pre class="bash"><code>ls lengths.txt</code></pre>
 <pre><code>## lengths.txt</code></pre>
 <p>We can now send the content of <code>lengths.txt</code> to the screen using <code>cat lengths.txt</code>. <code>cat</code> stands for “concatenate”: it prints the contents of files one after another. There’s only one file in this case, so cat just shows us what it contains:</p>
@@ -496,7 +504,7 @@ Help Sam by filling in the blanks.</p>
 </div>
 <div id="output-page-by-page" class="section level4">
 <h4>Output Page by Page</h4>
-<p>We’ll continue to use <code>cat</code> in this lesson, for convenience and consistency, but it has the disadvantage that it always dumps the whole file onto your screen. More useful in practice is the command <code>less</code>, for example <code>less lengths.txt</code>. This displays a screenful of the file, and then stops. You can go forward one screenful by pressing the spacebar, or back one by pressing b. Press q to quit.</p>
+<p>We’ll continue to use <code>cat</code> in this lesson, for convenience and consistency, but it has the disadvantage that it always dumps the whole file onto your screen. More useful in practice is the command <code>less</code>, for example <code>less lengths.txt</code>. This displays a screenful of the file, and then stops. You can go forward one screenful by pressing the spacebar, or back one by pressing <code>b</code>. Press <code>q</code> to quit.</p>
 <p>Now let’s use the <code>sort</code> command to sort its contents.</p>
 <p><em>What Does <code>sort -n</code> Do?</em></p>
 <p>If we run sort on a file containing the following lines: 10<br />
@@ -539,7 +547,7 @@ head -n 1 sorted-lengths.txt</code></pre>
 <h4>Redirecting to the Same File</h4>
 <p>It’s a very bad idea to try redirecting the output of a command that operates on a file to the same file. For example:</p>
 <p><code>sort -n lengths.txt &gt; lengths.txt</code></p>
-<p>Doing something like this may give you incorrect results and/or delete the contents of lengths.txt.</p>
+<p>Doing something like this may give you incorrect results and/or delete the contents of <em>lengths.txt</em>.</p>
 </div>
 <div id="what-does-mean" class="section level4">
 <h4>What Does &gt;&gt; Mean?</h4>
@@ -554,17 +562,17 @@ head -n 1 sorted-lengths.txt</code></pre>
 <div id="appending-data" class="section level4">
 <h4>Appending Data</h4>
 <p>We have already met the <code>head</code> command, which prints lines from the start of a file. <code>tail</code> is similar, but prints lines from the end of a file instead.<br />
-Consider the file <code>data-shell/data/animals.txt</code>. After these commands, select which contents would be in <code>animalsUpd.txt</code>:</p>
+Consider the file <em>data-shell/data/animals.txt</em>. After these commands, select which contents would be in <em>animalsUpd.txt</em>:</p>
 <p><code>head -n 3 animals.txt &gt; animalsUpd.txt</code><br />
 <code>tail -n 2 animals.txt &gt;&gt; animalsUpd.txt</code></p>
 <ol style="list-style-type: decimal">
-<li>The first three lines of animals.txt<br />
+<li>The first three lines of <em>animals.txt</em><br />
 </li>
-<li>The last two lines of animals.txt<br />
+<li>The last two lines of <em>animals.txt</em><br />
 </li>
-<li>The first three lines and the last two lines of animals.txt<br />
+<li>The first three lines and the last two lines of <em>animals.txt</em><br />
 </li>
-<li>The second and third lines of animals.txt</li>
+<li>The second and third lines of <em>animals.txt</em></li>
 </ol>
 </div>
 </div>
@@ -573,7 +581,7 @@ Consider the file <code>data-shell/data/animals.txt</code>. After these commands
 <p>If you think this is confusing, you’re in good company: even once you understand what <code>wc</code>, <code>sort</code>, and <code>head</code> do, all those intermediate files make it hard to follow what’s going on. We can make it easier to understand by running sort and head together:</p>
 <pre class="bash"><code>sort -n lengths.txt | head -n 1</code></pre>
 <pre><code>##        9 methane.pdb</code></pre>
-<p>The vertical bar, |, between the two commands is called a pipe. It tells the shell that we want to use the output of the command on the left as the input to the command on the right. The computer might create a temporary file if it needs to, or copy data from one program to the other in memory, or something else entirely; we don’t have to know or care.<br />
+<p>The vertical bar, <code>|</code>, between the two commands is called a pipe. It tells the shell that we want to use the output of the command on the left as the input to the command on the right. The computer might create a temporary file if it needs to, or copy data from one program to the other in memory, or something else entirely; we don’t have to know or care.<br />
 Nothing prevents us from chaining pipes consecutively. That is, we can for example send the output of <code>wc</code> directly to <code>sort</code>, and then the resulting output to <code>head.</code> Thus we first use a pipe to send the output of wc to sort:</p>
 <pre class="bash"><code>wc -l *.pdb | sort -n</code></pre>
 <pre><code>##        9 methane.pdb
@@ -586,55 +594,63 @@ Nothing prevents us from chaining pipes consecutively. That is, we can for examp
 <p>And now we send the output of this pipe, through another pipe, to <code>head</code>, so that the full pipeline becomes:</p>
 <pre class="bash"><code>wc -l *.pdb | sort -n | head -n 1</code></pre>
 <pre><code>##        9 methane.pdb</code></pre>
-<p>This is exactly like a mathematician nesting functions like log(3x) and saying “the log of three times x”. In our case, the calculation is “head of sort of line count of *.pdb”.</p>
+<p>This is exactly like a mathematician nesting functions like log(3x) and saying “the log of three times x”. In our case, the calculation is “<code>head</code> of <code>sort</code> of <code>line count</code> of _*.pdb_”.</p>
 <div id="piping-commands-together" class="section level4">
 <h4>Piping Commands Together</h4>
 <blockquote>
 <p><strong>Challenge: In our current directory, we want to find the 3 files which have the least number of lines. Which command listed below would work?</strong></p>
 </blockquote>
 <ol style="list-style-type: decimal">
-<li>wc -l *&gt; sort -n &gt; head -n 3<br />
+<li><code>wc -l *&gt; sort -n &gt; head -n 3</code><br />
 </li>
-<li>wc -l *| sort -n | head -n 1-3<br />
+<li><code>wc -l *| sort -n | head -n 1-3</code><br />
 </li>
-<li>wc -l *| head -n 3 | sort -n<br />
+<li><code>wc -l *| head -n 3 | sort -n</code><br />
 </li>
-<li>wc -l *| sort -n | head -n 3</li>
+<li><code>wc -l *| sort -n | head -n 3</code></li>
 </ol>
-<p>Here’s what actually happens behind the scenes when we create a pipe. The shell is actually just another program. Under normal circumstances, whatever we type on the keyboard is sent to the shell on its standard input, and whatever it produces on standard output is displayed on our screen. When we tell the shell to run a program, it creates a new process and temporarily sends whatever we type on our keyboard to that process’s standard input, and whatever the process sends to standard output to the screen. Here’s what happens when we run <code>wc -l *.pdb &gt; lengths.txt</code>. The shell starts by telling the computer to create a new process to run the wc program. Since we’ve provided some filenames as arguments, wc reads from them instead of from standard input. And since we’ve used &gt; to redirect output to a file, the shell connects the process’s standard output to that file. If we run <code>wc -l *.pdb | sort -n</code> instead, the shell creates two processes (one for each process in the pipe) so that <code>wc</code> and sort run simultaneously. The standard output of wc is fed directly to the standard input of sort; since there’s no redirection with &gt;, sort’s output goes to the screen. And if we run <code>wc -l *.pdb | sort -n | head -n 1</code>, we get three processes with data flowing from the files, through wc to sort, and from sort through head to the screen.</p>
-<p>This simple idea is why Unix has been so successful. Instead of creating enormous programs that try to do many different things, Unix programmers focus on creating <em>lots of simple tools that each do one job well</em>, and that work well with each other. This programming model is called <em>“pipes and filters”</em>. We’ve already seen pipes; a filter is a program like wc or sort that transforms a stream of input into a stream of output. Almost all of the standard Unix tools can work this way: unless told to do otherwise, they read from standard input, do something with what they’ve read, and write to standard output. The key is that any program that reads lines of text from standard input and writes lines of text to standard output can be combined with every other program that behaves this way as well. You can and should write your programs this way so that you and other people can put those programs into pipes to multiply their power.</p>
+</div>
+<div id="what-actually-happens-behind-the-scenes-when-we-create-a-pipe." class="section level4">
+<h4>What actually happens behind the scenes when we create a pipe.</h4>
+<p>The shell is actually just another program. Under normal circumstances, whatever we type on the keyboard is sent to the shell on its standard input, and whatever it produces on standard output is displayed on our screen. When we tell the shell to run a program, it creates a new process and temporarily sends whatever we type on our keyboard to that process’s standard input, and whatever the process sends to standard output to the screen.</p>
+<p>Here’s what happens when we run <code>wc -l *.pdb &gt; lengths.txt</code>. The shell starts by telling the computer to create a new process to run the <code>wc</code> program. Since we’ve provided some filenames as arguments, <code>wc</code> reads from them instead of from standard input. And since we’ve used <code>&gt;</code> to redirect output to a file, the shell connects the process’s standard output to that file.</p>
+<p>If we run <code>wc -l *.pdb | sort -n</code> instead, the shell creates two processes (one for each process in the pipe) so that <code>wc</code> and sort run simultaneously. The standard output of <code>wc</code> is fed directly to the standard input of <code>sort</code>; since there’s no redirection with <code>&gt;</code>, sort’s output goes to the screen. And if we run <code>wc -l *.pdb | sort -n | head -n 1</code>, we get three processes with data flowing from the files, through <code>wc</code> to <code>sort</code>, and from <code>sort</code> through <code>head</code> to the screen.</p>
+<p>This simple idea is why Unix (and bash by extension) has been so successful. Instead of creating enormous programs that try to do many different things, Unix programmers focus on creating <em>lots of simple tools that each do one job well</em>, and that work well with each other. This programming model is called <em>“pipes and filters”</em>. We’ve already seen pipes; a filter is a program like <code>wc</code> or <code>sort</code> that transforms a stream of input into a stream of output. Almost all of the standard Unix tools can work this way: unless told to do otherwise, they read from standard input, do something with what they’ve read, and write to standard output.</p>
+<p>The key is that any program that reads lines of text from standard input and writes lines of text to standard output can be combined with every other program that behaves this way as well. Movig forward, you can and should write your programs this way so that you and other people can put those programs into pipes to multiply their power.</p>
 </div>
 </div>
 <div id="redirecting-input" class="section level3">
 <h3>Redirecting Input <code>&gt;</code></h3>
-<p>As well as using <code>&gt;</code> to redirect a program’s output, we can use <code>&lt;</code> to redirect its input, i.e., to read from a file instead of from standard input. For example, instead of writing wc ammonia.pdb, we could write wc &lt; ammonia.pdb. In the first case, wc gets a command line argument telling it what file to open. In the second, wc doesn’t have any command line arguments, so it reads from standard input, but we have told the shell to send the contents of ammonia.pdb to wc’s standard input.</p>
-<p>Change directory to <code>data-shell</code> (the top level of our downloaded example data).</p>
+<p>As well as using <code>&gt;</code> to redirect a program’s output, we can use <code>&lt;</code> to redirect its input, i.e., to read from a file instead of from standard input. For example, instead of writing <code>wc ammonia.pdb</code>, we could write <code>wc &lt; ammonia.pdb</code>. In the first case, <code>wc</code> gets a command line argument telling it what file to open. In the second, <code>wc</code> doesn’t have any command line arguments, so it reads from standard input, but we have told the shell to send the contents of <em>ammonia.pdb</em> to wc’s standard input.</p>
+<p>Change directory to <em>data-shell</em> (the top level of our downloaded example data).</p>
 <blockquote>
 <p><strong>Challenge: What is the difference between:</strong></p>
 </blockquote>
-<p><code>wc -l notes.txt</code> and: <code>wc -l &lt; notes.txt</code></p>
-<p>In the first case, the input is <code>notes.txt</code> but in the second example, it is the contents of <code>notes.txt</code> that is the input.</p>
-<p>Compare with: <code>wc -l</code> <code>this</code> <code>is</code> <code>a</code> <code>test</code> <code>Control-D</code> #to tell shell you are done entering stuff for wc</p>
+<p><code>wc -l notes.txt</code><br />
+and:<br />
+<code>wc -l &lt; notes.txt</code></p>
+<p>In the first case, the input is <em>notes.txt</em> but in the second example, it is the contents of <em>notes.txt</em> that is the input.</p>
+<p>Compare with: <code>wc -l</code> <code>this</code> <code>is</code> <code>a</code> <code>test</code> <code>Control-D</code> #to tell bash shell you are done entering stuff for <code>wc</code></p>
 <div id="removing-duplicates-using-uniq" class="section level4">
 <h4>Removing Duplicates Using <code>uniq</code></h4>
-<p>The command <code>uniq</code> removes adjacent duplicated lines from its input. For example, the file <code>data-shell/data/salmon.txt</code> contains: <code>coho</code><br />
+<p>The command <code>uniq</code> removes adjacent duplicated lines from its input. For example, the file <em>data-shell/data/salmon.txt</em> contains: <code>coho</code><br />
 <code>coho</code><br />
 <code>steelhead</code><br />
 <code>coho</code><br />
 <code>steelhead</code><br />
 <code>steelhead</code></p>
-<p>Running the command <code>uniq salmon.txt</code> from the data-shell/data directory produces: <code>coho</code><br />
+<p>Running the command <code>uniq salmon.txt</code> from the <em>data-shell/data</em> directory produces: <code>coho</code><br />
 <code>steelhead</code><br />
 <code>coho</code><br />
 <code>steelhead</code></p>
-<p>Why do you think uniq only removes adjacent duplicated lines? (Hint: think about very large data sets.)</p>
+<p>Why do you think <code>uniq</code> only removes adjacent duplicated lines? (Hint: think about very large data sets.)</p>
 <blockquote>
 <p><strong>Challenge: What other command could you combine with it in a pipe to remove all duplicated lines? Do you use &gt; , &gt;&gt;, or | ? </strong></p>
 </blockquote>
 </div>
 <div id="nelles-pipeline-checking-files" class="section level4">
 <h4>Nelle’s Pipeline: Checking Files</h4>
-<p>Nelle has run her samples through the assay machines and created 17 files in the <code>north-pacific-gyre/2012-07-03</code> directory contained within <code>data-shell</code>. As a quick sanity check, starting from her home directory, Nelle lists here files:</p>
+<p>Nelle has run her samples through the assay machines and created 17 files in the <em>north-pacific-gyre/2012-07-03</em> directory contained within <em>data-shell</em>. As a quick sanity check, starting from her home directory, Nelle lists here files:</p>
 <pre class="bash"><code>cd ../data/data-shell/north-pacific-gyre/2012-07-03
 wc -l *.txt</code></pre>
 <pre><code>##      300 NENE01729A.txt
@@ -674,15 +690,16 @@ wc -l *.txt</code></pre>
 ls *Z.txt</code></pre>
 <pre><code>## NENE01971Z.txt
 ## NENE02040Z.txt</code></pre>
-<p>Sure enough, when she checks the log on her laptop, there’s no depth recorded for either of those samples. Since it’s too late to get the information any other way, she must <em>exclude</em> those two files from her analysis. She could just delete them using rm, but there are actually some analyses she might do later where depth doesn’t matter.</p>
+<p>Sure enough, when she checks the log on her laptop, there’s no depth recorded for either of those samples. Since it’s too late to get the information any other way, she must <em>exclude</em> those two files from her analysis. She could just delete them using <code>rm</code>, but there are actually some analyses she might do later where depth doesn’t matter.</p>
 <p><strong>An Important Lesson: Never Delete Data. Use Your Code to Exclude It or Fix It</strong></p>
 <p>Nelle is wise to the NDD principle, so she’ll just be careful later on to select files using the wildcard expression <code>*[AB].txt</code>. As always, the <code>*</code> matches any number of characters; the expression <code>[AB]</code> matches either an ‘A’ or a ‘B’, so this matches all the valid data files she has.</p>
 </div>
 <div id="wildcard-expressions" class="section level4">
 <h4>Wildcard Expressions</h4>
-<p>Wildcard expressions can be very complex, but you can sometimes write them in ways that only use simple syntax, at the expense of being a bit more verbose. Consider the directory <code>data-shell/north-pacific-gyre/2012-07-03</code> : the wildcard expression <code>*[AB].txt</code> matches all files ending in <code>A.txt</code> or <code>B.txt</code>. Imagine you forgot about this. 1. Can you match the same set of files with basic wildcard expressions that do not use the [] syntax? Hint: You may need more than one expression.<br />
+<p>Wildcard expressions can be very complex, but you can sometimes write them in ways that only use simple syntax, at the expense of being a bit more verbose. Consider the directory <code>data-shell/north-pacific-gyre/2012-07-03</code> : the wildcard expression <code>*[AB].txt</code> matches all files ending in <code>A.txt</code> or <code>B.txt</code>. Imagine you forgot about this.<br />
+1. Can you match the same set of files with basic wildcard expressions that do not use the [] syntax? Hint: You may need more than one expression.<br />
 2. Under what circumstances would your new expression produce an error message where the original one would not?</p>
-<p>Hint: Experiment with the files in data/elements</p>
+<p>Hint: Experiment with the files in <em>data/elements</em></p>
 </div>
 <div id="key-points" class="section level4">
 <h4>Key Points</h4>
