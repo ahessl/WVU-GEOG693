@@ -417,12 +417,10 @@ summary {
 <pre class="bash"><code>ls molecules</code></pre>
 <pre><code>## cubane.pdb
 ## ethane.pdb
-## lengths.txt
 ## methane.pdb
 ## octane.pdb
 ## pentane.pdb
-## propane.pdb
-## sorted-lengths.txt</code></pre>
+## propane.pdb</code></pre>
 <p>Let’s makes <code>molecules</code> the working directory then run the command <code>wc *.pdb</code>. <code>wc</code> is the “word count” command: it counts the number of lines, words, and characters in files. The <code>*</code> in <code>*.pdb</code> matches zero or more characters, so the shell turns <code>*.pdb</code> into a list of all <code>.pdb</code> files in the current directory:</p>
 <pre class="bash"><code> cd molecules
  wc *.pdb</code></pre>
@@ -507,21 +505,24 @@ summary {
 <p>We’ll continue to use <code>cat</code> in this lesson, for convenience and consistency, but it has the disadvantage that it always dumps the whole file onto your screen. More useful in practice is the command <code>less</code>, for example <code>less lengths.txt</code>. This displays a screenful of the file, and then stops. You can go forward one screenful by pressing the spacebar, or back one by pressing <code>b</code>. Press <code>q</code> to quit.</p>
 <p>Now let’s use the <code>sort</code> command to sort its contents.</p>
 <p><em>What Does <code>sort -n</code> Do?</em></p>
-<p>If we run sort on a file containing the following lines: 10<br />
-2<br />
-19<br />
-22<br />
-6</p>
-<p>the output is: 10<br />
-19<br />
-2<br />
-22<br />
-6</p>
-<p>If we run <code>sort -n</code> on the same input, we get this instead: 2<br />
-6<br />
-10<br />
-19<br />
-22</p>
+<p>If we run sort on a file containing the following lines:</p>
+<pre><code>10  
+2  
+19  
+22  
+6</code></pre>
+<p>the output is:</p>
+<pre><code>10  
+19  
+2  
+22  
+6</code></pre>
+<p>If we run <code>sort -n</code> on the same input, we get this instead:</p>
+<pre><code>2  
+6  
+10  
+19  
+22  </code></pre>
 <blockquote>
 <p><strong>Challenge: Explain why -n has this effect.</strong></p>
 </blockquote>
@@ -614,9 +615,9 @@ Nothing prevents us from chaining pipes consecutively. That is, we can for examp
 <h4>What actually happens behind the scenes when we create a pipe.</h4>
 <p>The shell is actually just another program. Under normal circumstances, whatever we type on the keyboard is sent to the shell on its standard input, and whatever it produces on standard output is displayed on our screen. When we tell the shell to run a program, it creates a new process and temporarily sends whatever we type on our keyboard to that process’s standard input, and whatever the process sends to standard output to the screen.</p>
 <p>Here’s what happens when we run <code>wc -l *.pdb &gt; lengths.txt</code>. The shell starts by telling the computer to create a new process to run the <code>wc</code> program. Since we’ve provided some filenames as arguments, <code>wc</code> reads from them instead of from standard input. And since we’ve used <code>&gt;</code> to redirect output to a file, the shell connects the process’s standard output to that file.</p>
-<p>If we run <code>wc -l *.pdb | sort -n</code> instead, the shell creates two processes (one for each process in the pipe) so that <code>wc</code> and sort run simultaneously. The standard output of <code>wc</code> is fed directly to the standard input of <code>sort</code>; since there’s no redirection with <code>&gt;</code>, sort’s output goes to the screen. And if we run <code>wc -l *.pdb | sort -n | head -n 1</code>, we get three processes with data flowing from the files, through <code>wc</code> to <code>sort</code>, and from <code>sort</code> through <code>head</code> to the screen.</p>
+<p>If we run <code>wc -l *.pdb | sort -n</code> instead, the shell creates two processes (one for each process in the pipe) so that <code>wc</code> and <code>sort</code> run simultaneously. The standard output of <code>wc</code> is fed directly to the standard input of <code>sort</code>; since there’s no redirection with <code>&gt;</code>, sort’s output goes to the screen. And if we run <code>wc -l *.pdb | sort -n | head -n 1</code>, we get three processes with data flowing from the files, through <code>wc</code> to <code>sort</code>, and from <code>sort</code> through <code>head</code> to the screen.</p>
 <p>This simple idea is why Unix (and bash by extension) has been so successful. Instead of creating enormous programs that try to do many different things, Unix programmers focus on creating <em>lots of simple tools that each do one job well</em>, and that work well with each other. This programming model is called <em>“pipes and filters”</em>. We’ve already seen pipes; a filter is a program like <code>wc</code> or <code>sort</code> that transforms a stream of input into a stream of output. Almost all of the standard Unix tools can work this way: unless told to do otherwise, they read from standard input, do something with what they’ve read, and write to standard output.</p>
-<p>The key is that any program that reads lines of text from standard input and writes lines of text to standard output can be combined with every other program that behaves this way as well. Movig forward, you can and should write your programs this way so that you and other people can put those programs into pipes to multiply their power.</p>
+<p>The key is that any program that reads lines of text from standard input and writes lines of text to standard output can be combined with every other program that behaves this way as well. Moving forward, you can and should write your programs this way so that you and other people can put those programs into pipes to multiply their power.</p>
 </div>
 </div>
 <div id="redirecting-input" class="section level3">
@@ -630,19 +631,29 @@ Nothing prevents us from chaining pipes consecutively. That is, we can for examp
 and:<br />
 <code>wc -l &lt; notes.txt</code></p>
 <p>In the first case, the input is <em>notes.txt</em> but in the second example, it is the contents of <em>notes.txt</em> that is the input.</p>
-<p>Compare with: <code>wc -l</code> <code>this</code> <code>is</code> <code>a</code> <code>test</code> <code>Control-D</code> #to tell bash shell you are done entering stuff for <code>wc</code></p>
+<p>Compare with:</p>
+<pre class="bash"><code>wc -l
+this
+is 
+a
+test
+#Control-D to tell bash shell you are done entering stuff for `wc`</code></pre>
 <div id="removing-duplicates-using-uniq" class="section level4">
 <h4>Removing Duplicates Using <code>uniq</code></h4>
-<p>The command <code>uniq</code> removes adjacent duplicated lines from its input. For example, the file <em>data-shell/data/salmon.txt</em> contains: <code>coho</code><br />
-<code>coho</code><br />
-<code>steelhead</code><br />
-<code>coho</code><br />
-<code>steelhead</code><br />
-<code>steelhead</code></p>
-<p>Running the command <code>uniq salmon.txt</code> from the <em>data-shell/data</em> directory produces: <code>coho</code><br />
-<code>steelhead</code><br />
-<code>coho</code><br />
-<code>steelhead</code></p>
+<p>The command <code>uniq</code> removes adjacent duplicated lines from its input. For example, the file <em>data-shell/data/salmon.txt</em> contains:</p>
+<pre class="bash"><code>cat salmon.txt</code></pre>
+<pre><code>## coho
+## coho
+## steelhead
+## coho
+## steelhead
+## steelhead</code></pre>
+<p>Running the command <code>uniq salmon.txt</code> from the <em>data-shell/data</em> directory produces:</p>
+<pre class="bash"><code>uniq salmon.txt</code></pre>
+<pre><code>## coho
+## steelhead
+## coho
+## steelhead</code></pre>
 <p>Why do you think <code>uniq</code> only removes adjacent duplicated lines? (Hint: think about very large data sets.)</p>
 <blockquote>
 <p><strong>Challenge: What other command could you combine with it in a pipe to remove all duplicated lines? Do you use &gt; , &gt;&gt;, or | ? </strong></p>
@@ -650,9 +661,8 @@ and:<br />
 </div>
 <div id="nelles-pipeline-checking-files" class="section level4">
 <h4>Nelle’s Pipeline: Checking Files</h4>
-<p>Nelle has run her samples through the assay machines and created 17 files in the <em>north-pacific-gyre/2012-07-03</em> directory contained within <em>data-shell</em>. As a quick sanity check, starting from her home directory, Nelle lists here files:</p>
-<pre class="bash"><code>cd ../data/data-shell/north-pacific-gyre/2012-07-03
-wc -l *.txt</code></pre>
+<p>Nelle has run her samples through the assay machines and created 17 files in the <em>data-shell/north-pacific-gyre/2012-07-03</em> directory. As a quick sanity check, starting from her home directory, Nelle lists here files:</p>
+<pre class="bash"><code>wc -l *.txt | head</code></pre>
 <pre><code>##      300 NENE01729A.txt
 ##      300 NENE01729B.txt
 ##      300 NENE01736A.txt
@@ -662,29 +672,21 @@ wc -l *.txt</code></pre>
 ##      300 NENE01843A.txt
 ##      300 NENE01843B.txt
 ##      300 NENE01971Z.txt
-##      300 NENE01978A.txt
-##      300 NENE01978B.txt
-##      240 NENE02018B.txt
-##      300 NENE02040A.txt
-##      300 NENE02040B.txt
-##      300 NENE02040Z.txt
-##      300 NENE02043A.txt
-##      300 NENE02043B.txt
-##     5040 total</code></pre>
+##      300 NENE01978A.txt</code></pre>
 <p>Now she types this:</p>
 <pre class="bash"><code>wc -l *.txt | sort -n | head -n 5</code></pre>
-<pre><code>##      240 NENE02018B.txt
-##      300 NENE01729A.txt
-##      300 NENE01729B.txt
-##      300 NENE01736A.txt
-##      300 NENE01751A.txt</code></pre>
+<pre><code>##        3 stats-NENE01729A.txt
+##        3 stats-NENE01729B.txt
+##        3 stats-NENE01736A.txt
+##        3 stats-NENE01751A.txt
+##        3 stats-NENE01751B.txt</code></pre>
 <p>Whoops: one of the files is 60 lines shorter than the others. When she goes back and checks it, she sees that she did that assay at 8:00 on a Monday morning — someone was probably in using the machine on the weekend, and she forgot to reset it. Before re-running that sample, she checks to see if any files have too much data:</p>
 <pre class="bash"><code>wc -l *.txt | sort -n | tail -n 5</code></pre>
 <pre><code>##      300 NENE02040B.txt
 ##      300 NENE02040Z.txt
 ##      300 NENE02043A.txt
 ##      300 NENE02043B.txt
-##     5040 total</code></pre>
+##     5085 total</code></pre>
 <p>Those numbers look good — but what’s that ‘Z’ doing there in the third-to-last line? All of her samples should be marked ‘A’ or ‘B’; by convention, her lab uses ‘Z’ to indicate samples with missing information. To find others like it, she does this:</p>
 <pre class="bash"><code>cd ../data/data-shell/north-pacific-gyre/2012-07-03
 ls *Z.txt</code></pre>
@@ -696,9 +698,15 @@ ls *Z.txt</code></pre>
 </div>
 <div id="wildcard-expressions" class="section level4">
 <h4>Wildcard Expressions</h4>
-<p>Wildcard expressions can be very complex, but you can sometimes write them in ways that only use simple syntax, at the expense of being a bit more verbose. Consider the directory <code>data-shell/north-pacific-gyre/2012-07-03</code> : the wildcard expression <code>*[AB].txt</code> matches all files ending in <code>A.txt</code> or <code>B.txt</code>. Imagine you forgot about this.<br />
-1. Can you match the same set of files with basic wildcard expressions that do not use the [] syntax? Hint: You may need more than one expression.<br />
-2. Under what circumstances would your new expression produce an error message where the original one would not?</p>
+<p>Wildcard expressions can be very complex, but you can sometimes write them in ways that only use simple syntax, at the expense of being a bit more verbose.</p>
+<blockquote>
+<p><strong>Challenge: Consider the directory <code>data-shell/north-pacific-gyre/2012-07-03</code> : the wildcard expression <code>*[AB].txt</code> matches all files ending in <code>A.txt</code> or <code>B.txt</code>. Imagine you forgot about this.</strong></p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li>Can you match the same set of files with basic wildcard expressions that do not use the [] syntax? Hint: You may need more than one expression.<br />
+</li>
+<li>Under what circumstances would your new expression produce an error message where the original one would not?</li>
+</ol>
 <p>Hint: Experiment with the files in <em>data/elements</em></p>
 </div>
 <div id="key-points" class="section level4">
@@ -724,6 +732,10 @@ ls *Z.txt</code></pre>
 </li>
 <li>The best way to use the shell is to use pipes to combine simple single-purpose programs (filters).</li>
 </ul>
+</div>
+<div id="acknowledgments" class="section level4">
+<h4><strong>Acknowledgments</strong></h4>
+<p><em>This page was derived in part from: <a href="software-carpentry.org">Software Carpentry</a>, licensed under the CC BY-NC 3.0 Creative Commons</em></p>
 </div>
 </div>
 

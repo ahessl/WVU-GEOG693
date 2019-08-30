@@ -409,10 +409,24 @@ summary {
 <li><strong>home directory</strong> - the “user’s” directory, i.e. the directory a user is in upon login<br />
 </li>
 <li><strong>working directory</strong> - the current directory (i.e., “folder”) that you are in. By default, this is your home directory.</li>
-<li><strong>path</strong> - the unique file or folder location within a directory. Here the path is also the working directory: /Users/amyhessl</li>
+<li><strong>path</strong> - the unique file or folder location within a directory. Here the path is also the working directory: <em>/Users/amyhessl</em></li>
 </ul>
-<div id="big-hint-watch-your-progress-in-the-lower-right-window-of-rstudio-under-the-files-tab." class="section level4">
-<h4>BIG HINT: watch your progress in the lower right window of RStudio under the ‘Files’ tab.</h4>
+</div>
+<div id="tips-on-reading-the-lessons" class="section level3">
+<h3>Tips on Reading the Lessons</h3>
+<p>Code blocks are grey blocks that look like this:</p>
+<pre class="bash"><code>pwd
+ls molecules</code></pre>
+<pre><code>## /Users/amyhessl/Dropbox/Hessl/Teaching/Courses/EarthSciDigAge/OpenDataSci/data/data-shell
+## cubane.pdb
+## ethane.pdb
+## methane.pdb
+## octane.pdb
+## pentane.pdb
+## propane.pdb</code></pre>
+<p>Code blocks are often followed by white blocks of bash output. When you are entering commands at the $ prompt, you will want to enter the code from the code chunks and expect to see the same output in your terminal window, preceded by ##.</p>
+<div id="big-hint-as-you-make-new-files-or-directories-watch-your-progress-in-the-lower-right-window-of-rstudio-under-the-files-tab." class="section level4">
+<h4>BIG HINT: As you make new files or directories watch your progress in the lower right window of RStudio under the ‘Files’ tab.</h4>
 <p>You can print your working directory (pwd):</p>
 <pre class="bash"><code>pwd</code></pre>
 <pre><code>## /Users/amyhessl/Dropbox/Hessl/Teaching/Courses/EarthSciDigAge/OpenDataSci/lectures</code></pre>
@@ -455,6 +469,7 @@ summary {
 ## WildcardsPipesFilters.Rmd
 ## WildcardsPipesFilters.html
 ## Xargs.Rmd
+## data
 ## images
 ## wget.Rmd
 ## wget.html</code></pre>
@@ -487,6 +502,7 @@ summary {
 ## WildcardsPipesFilters.Rmd
 ## WildcardsPipesFilters.html
 ## Xargs.Rmd
+## data/
 ## images/
 ## wget.Rmd
 ## wget.html</code></pre>
@@ -565,10 +581,11 @@ rmdir GEOG693</code></pre>
 </div>
 <div id="absolute-and-relative-paths" class="section level3">
 <h3>Absolute and Relative Paths</h3>
-<p>So far, when specifying directory names, or even a directory path (as above), we have been using relative paths. When you use a relative path with a command like ls or cd, it tries to find that location from where we are, rather than from the root of the file system. There are two ways to make an absolute path - a path that will take anyone to the same place regardless of their directory structure.</p>
+<p>So far, when specifying directory names, or even a directory path (as above), we have been using relative paths. When you use a relative path with a command like <code>ls</code> or <code>cd</code>, it tries to find that location from where we are, rather than from the root of the file system. There are two ways to make an relative path - a path that will take anyone to the same place regardless of their directory structure.</p>
 <ul>
 <li>cd ~ directs to the users home directory.</li>
 <li>cd / directs to the root directory</li>
+<li>cd . directs to the current working directory</li>
 </ul>
 <p>The leading / tells the computer to follow the path from the root of the file system, so it always refers to exactly one directory, no matter where we are when we run the command.</p>
 <blockquote>
@@ -586,7 +603,8 @@ rmdir GEOG693</code></pre>
 <pre class="bash"><code>mkdir ~/Desktop/GEOG693
 mkdir ~/Desktop/GEOG693/shell
 cd  ~/Desktop/GEOG693/shell</code></pre>
-<pre><code>## mkdir: /Users/amyhessl/Desktop/GEOG693: File exists</code></pre>
+<pre><code>## mkdir: /Users/amyhessl/Desktop/GEOG693: File exists
+## mkdir: /Users/amyhessl/Desktop/GEOG693/shell: File exists</code></pre>
 </div>
 <div id="key-points" class="section level2">
 <h2>Key Points</h2>
@@ -605,7 +623,7 @@ cd  ~/Desktop/GEOG693/shell</code></pre>
 </li>
 <li>A <strong>relative path</strong> specifies a location starting from the current location.<br />
 </li>
-<li>An <strong>absolute path</strong> specifies a location from the root of the file system.<br />
+<li>An <strong>absolute path</strong> specifies a location from the root of the file system along a specific path.<br />
 </li>
 <li>Directory names in a path are separated with forward slash on Unix, but backward slash on Windows.<br />
 </li>

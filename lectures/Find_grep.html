@@ -13,7 +13,7 @@
 <meta name="author" content="Amy Hessl" />
 
 
-<title>Loops</title>
+<title>Finding Things</title>
 
 <script>/*! jQuery v1.11.3 | (c) 2005, 2015 jQuery Foundation, Inc. | jquery.org/license */
 !function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(a)}:b(a)}("undefined"!=typeof window?window:this,function(a,b){var c=[],d=c.slice,e=c.concat,f=c.push,g=c.indexOf,h={},i=h.toString,j=h.hasOwnProperty,k={},l="1.11.3",m=function(a,b){return new m.fn.init(a,b)},n=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,o=/^-ms-/,p=/-([\da-z])/gi,q=function(a,b){return b.toUpperCase()};m.fn=m.prototype={jquery:l,constructor:m,selector:"",length:0,toArray:function(){return d.call(this)},get:function(a){return null!=a?0>a?this[a+this.length]:this[a]:d.call(this)},pushStack:function(a){var b=m.merge(this.constructor(),a);return b.prevObject=this,b.context=this.context,b},each:function(a,b){return m.each(this,a,b)},map:function(a){return this.pushStack(m.map(this,function(b,c){return a.call(b,c,b)}))},slice:function(){return this.pushStack(d.apply(this,arguments))},first:function(){return this.eq(0)},last:function(){return this.eq(-1)},eq:function(a){var b=this.length,c=+a+(0>a?b:0);return this.pushStack(c>=0&&b>c?[this[c]]:[])},end:function(){return this.prevObject||this.constructor(null)},push:f,sort:c.sort,splice:c.splice},m.extend=m.fn.extend=function(){var a,b,c,d,e,f,g=arguments[0]||{},h=1,i=arguments.length,j=!1;for("boolean"==typeof g&&(j=g,g=arguments[h]||{},h++),"object"==typeof g||m.isFunction(g)||(g={}),h===i&&(g=this,h--);i>h;h++)if(null!=(e=arguments[h]))for(d in e)a=g[d],c=e[d],g!==c&&(j&&c&&(m.isPlainObject(c)||(b=m.isArray(c)))?(b?(b=!1,f=a&&m.isArray(a)?a:[]):f=a&&m.isPlainObject(a)?a:{},g[d]=m.extend(j,f,c)):void 0!==c&&(g[d]=c));return g},m.extend({expando:"jQuery"+(l+Math.random()).replace(/\D/g,""),isReady:!0,error:function(a){throw new Error(a)},noop:function(){},isFunction:function(a){return"function"===m.type(a)},isArray:Array.isArray||function(a){return"array"===m.type(a)},isWindow:function(a){return null!=a&&a==a.window},isNumeric:function(a){return!m.isArray(a)&&a-parseFloat(a)+1>=0},isEmptyObject:function(a){var b;for(b in a)return!1;return!0},isPlainObject:function(a){var b;if(!a||"object"!==m.type(a)||a.nodeType||m.isWindow(a))return!1;try{if(a.constructor&&!j.call(a,"constructor")&&!j.call(a.constructor.prototype,"isPrototypeOf"))return!1}catch(c){return!1}if(k.ownLast)for(b in a)return j.call(a,b);for(b in a);return void 0===b||j.call(a,b)},type:function(a){return null==a?a+"":"object"==typeof a||"function"==typeof a?h[i.call(a)]||"object":typeof a},globalEval:function(b){b&&m.trim(b)&&(a.execScript||function(b){a.eval.call(a,b)})(b)},camelCase:function(a){return a.replace(o,"ms-").replace(p,q)},nodeName:function(a,b){return a.nodeName&&a.nodeName.toLowerCase()===b.toLowerCase()},each:function(a,b,c){var d,e=0,f=a.length,g=r(a);if(c){if(g){for(;f>e;e++)if(d=b.apply(a[e],c),d===!1)break}else for(e in a)if(d=b.apply(a[e],c),d===!1)break}else if(g){for(;f>e;e++)if(d=b.call(a[e],e,a[e]),d===!1)break}else for(e in a)if(d=b.call(a[e],e,a[e]),d===!1)break;return a},trim:function(a){return null==a?"":(a+"").replace(n,"")},makeArray:function(a,b){var c=b||[];return null!=a&&(r(Object(a))?m.merge(c,"string"==typeof a?[a]:a):f.call(c,a)),c},inArray:function(a,b,c){var d;if(b){if(g)return g.call(b,a,c);for(d=b.length,c=c?0>c?Math.max(0,d+c):c:0;d>c;c++)if(c in b&&b[c]===a)return c}return-1},merge:function(a,b){var c=+b.length,d=0,e=a.length;while(c>d)a[e++]=b[d++];if(c!==c)while(void 0!==b[d])a[e++]=b[d++];return a.length=e,a},grep:function(a,b,c){for(var d,e=[],f=0,g=a.length,h=!c;g>f;f++)d=!b(a[f],f),d!==h&&e.push(a[f]);return e},map:function(a,b,c){var d,f=0,g=a.length,h=r(a),i=[];if(h)for(;g>f;f++)d=b(a[f],f,c),null!=d&&i.push(d);else for(f in a)d=b(a[f],f,c),null!=d&&i.push(d);return e.apply([],i)},guid:1,proxy:function(a,b){var c,e,f;return"string"==typeof b&&(f=a[b],b=a,a=f),m.isFunction(a)?(c=d.call(arguments,2),e=function(){return a.apply(b||this,c.concat(d.call(arguments)))},e.guid=a.guid=a.guid||m.guid++,e):void 0},now:function(){return+new Date},support:k}),m.each("Boolean Number String Function Array Date RegExp Object Error".split(" "),function(a,b){h["[object "+b+"]"]=b.toLowerCase()});function r(a){var b="length"in a&&a.length,c=m.type(a);return"function"===c||m.isWindow(a)?!1:1===a.nodeType&&b?!0:"array"===c||0===b||"number"==typeof b&&b>0&&b-1 in a}var s=function(a){var b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u="sizzle"+1*new Date,v=a.document,w=0,x=0,y=ha(),z=ha(),A=ha(),B=function(a,b){return a===b&&(l=!0),0},C=1<<31,D={}.hasOwnProperty,E=[],F=E.pop,G=E.push,H=E.push,I=E.slice,J=function(a,b){for(var c=0,d=a.length;d>c;c++)if(a[c]===b)return c;return-1},K="checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",L="[\\x20\\t\\r\\n\\f]",M="(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",N=M.replace("w","w#"),O="\\["+L+"*("+M+")(?:"+L+"*([*^$|!~]?=)"+L+"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|("+N+"))|)"+L+"*\\]",P=":("+M+")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|"+O+")*)|.*)\\)|)",Q=new RegExp(L+"+","g"),R=new RegExp("^"+L+"+|((?:^|[^\\\\])(?:\\\\.)*)"+L+"+$","g"),S=new RegExp("^"+L+"*,"+L+"*"),T=new RegExp("^"+L+"*([>+~]|"+L+")"+L+"*"),U=new RegExp("="+L+"*([^\\]'\"]*?)"+L+"*\\]","g"),V=new RegExp(P),W=new RegExp("^"+N+"$"),X={ID:new RegExp("^#("+M+")"),CLASS:new RegExp("^\\.("+M+")"),TAG:new RegExp("^("+M.replace("w","w*")+")"),ATTR:new RegExp("^"+O),PSEUDO:new RegExp("^"+P),CHILD:new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\("+L+"*(even|odd|(([+-]|)(\\d*)n|)"+L+"*(?:([+-]|)"+L+"*(\\d+)|))"+L+"*\\)|)","i"),bool:new RegExp("^(?:"+K+")$","i"),needsContext:new RegExp("^"+L+"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\("+L+"*((?:-\\d)?\\d*)"+L+"*\\)|)(?=[^-]|$)","i")},Y=/^(?:input|select|textarea|button)$/i,Z=/^h\d$/i,$=/^[^{]+\{\s*\[native \w/,_=/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,aa=/[+~]/,ba=/'|\\/g,ca=new RegExp("\\\\([\\da-f]{1,6}"+L+"?|("+L+")|.)","ig"),da=function(a,b,c){var d="0x"+b-65536;return d!==d||c?b:0>d?String.fromCharCode(d+65536):String.fromCharCode(d>>10|55296,1023&d|56320)},ea=function(){m()};try{H.apply(E=I.call(v.childNodes),v.childNodes),E[v.childNodes.length].nodeType}catch(fa){H={apply:E.length?function(a,b){G.apply(a,I.call(b))}:function(a,b){var c=a.length,d=0;while(a[c++]=b[d++]);a.length=c-1}}}function ga(a,b,d,e){var f,h,j,k,l,o,r,s,w,x;if((b?b.ownerDocument||b:v)!==n&&m(b),b=b||n,d=d||[],k=b.nodeType,"string"!=typeof a||!a||1!==k&&9!==k&&11!==k)return d;if(!e&&p){if(11!==k&&(f=_.exec(a)))if(j=f[1]){if(9===k){if(h=b.getElementById(j),!h||!h.parentNode)return d;if(h.id===j)return d.push(h),d}else if(b.ownerDocument&&(h=b.ownerDocument.getElementById(j))&&t(b,h)&&h.id===j)return d.push(h),d}else{if(f[2])return H.apply(d,b.getElementsByTagName(a)),d;if((j=f[3])&&c.getElementsByClassName)return H.apply(d,b.getElementsByClassName(j)),d}if(c.qsa&&(!q||!q.test(a))){if(s=r=u,w=b,x=1!==k&&a,1===k&&"object"!==b.nodeName.toLowerCase()){o=g(a),(r=b.getAttribute("id"))?s=r.replace(ba,"\\$&"):b.setAttribute("id",s),s="[id='"+s+"'] ",l=o.length;while(l--)o[l]=s+ra(o[l]);w=aa.test(a)&&pa(b.parentNode)||b,x=o.join(",")}if(x)try{return H.apply(d,w.querySelectorAll(x)),d}catch(y){}finally{r||b.removeAttribute("id")}}}return i(a.replace(R,"$1"),b,d,e)}function ha(){var a=[];function b(c,e){return a.push(c+" ")>d.cacheLength&&delete b[a.shift()],b[c+" "]=e}return b}function ia(a){return a[u]=!0,a}function ja(a){var b=n.createElement("div");try{return!!a(b)}catch(c){return!1}finally{b.parentNode&&b.parentNode.removeChild(b),b=null}}function ka(a,b){var c=a.split("|"),e=a.length;while(e--)d.attrHandle[c[e]]=b}function la(a,b){var c=b&&a,d=c&&1===a.nodeType&&1===b.nodeType&&(~b.sourceIndex||C)-(~a.sourceIndex||C);if(d)return d;if(c)while(c=c.nextSibling)if(c===b)return-1;return a?1:-1}function ma(a){return function(b){var c=b.nodeName.toLowerCase();return"input"===c&&b.type===a}}function na(a){return function(b){var c=b.nodeName.toLowerCase();return("input"===c||"button"===c)&&b.type===a}}function oa(a){return ia(function(b){return b=+b,ia(function(c,d){var e,f=a([],c.length,b),g=f.length;while(g--)c[e=f[g]]&&(c[e]=!(d[e]=c[e]))})})}function pa(a){return a&&"undefined"!=typeof a.getElementsByTagName&&a}c=ga.support={},f=ga.isXML=function(a){var b=a&&(a.ownerDocument||a).documentElement;return b?"HTML"!==b.nodeName:!1},m=ga.setDocument=function(a){var b,e,g=a?a.ownerDocument||a:v;return g!==n&&9===g.nodeType&&g.documentElement?(n=g,o=g.documentElement,e=g.defaultView,e&&e!==e.top&&(e.addEventListener?e.addEventListener("unload",ea,!1):e.attachEvent&&e.attachEvent("onunload",ea)),p=!f(g),c.attributes=ja(function(a){return a.className="i",!a.getAttribute("className")}),c.getElementsByTagName=ja(function(a){return a.appendChild(g.createComment("")),!a.getElementsByTagName("*").length}),c.getElementsByClassName=$.test(g.getElementsByClassName),c.getById=ja(function(a){return o.appendChild(a).id=u,!g.getElementsByName||!g.getElementsByName(u).length}),c.getById?(d.find.ID=function(a,b){if("undefined"!=typeof b.getElementById&&p){var c=b.getElementById(a);return c&&c.parentNode?[c]:[]}},d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){return a.getAttribute("id")===b}}):(delete d.find.ID,d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){var c="undefined"!=typeof a.getAttributeNode&&a.getAttributeNode("id");return c&&c.value===b}}),d.find.TAG=c.getElementsByTagName?function(a,b){return"undefined"!=typeof b.getElementsByTagName?b.getElementsByTagName(a):c.qsa?b.querySelectorAll(a):void 0}:function(a,b){var c,d=[],e=0,f=b.getElementsByTagName(a);if("*"===a){while(c=f[e++])1===c.nodeType&&d.push(c);return d}return f},d.find.CLASS=c.getElementsByClassName&&function(a,b){return p?b.getElementsByClassName(a):void 0},r=[],q=[],(c.qsa=$.test(g.querySelectorAll))&&(ja(function(a){o.appendChild(a).innerHTML="<a id='"+u+"'></a><select id='"+u+"-\f]' msallowcapture=''><option selected=''></option></select>",a.querySelectorAll("[msallowcapture^='']").length&&q.push("[*^$]="+L+"*(?:''|\"\")"),a.querySelectorAll("[selected]").length||q.push("\\["+L+"*(?:value|"+K+")"),a.querySelectorAll("[id~="+u+"-]").length||q.push("~="),a.querySelectorAll(":checked").length||q.push(":checked"),a.querySelectorAll("a#"+u+"+*").length||q.push(".#.+[+~]")}),ja(function(a){var b=g.createElement("input");b.setAttribute("type","hidden"),a.appendChild(b).setAttribute("name","D"),a.querySelectorAll("[name=d]").length&&q.push("name"+L+"*[*^$|!~]?="),a.querySelectorAll(":enabled").length||q.push(":enabled",":disabled"),a.querySelectorAll("*,:x"),q.push(",.*:")})),(c.matchesSelector=$.test(s=o.matches||o.webkitMatchesSelector||o.mozMatchesSelector||o.oMatchesSelector||o.msMatchesSelector))&&ja(function(a){c.disconnectedMatch=s.call(a,"div"),s.call(a,"[s!='']:x"),r.push("!=",P)}),q=q.length&&new RegExp(q.join("|")),r=r.length&&new RegExp(r.join("|")),b=$.test(o.compareDocumentPosition),t=b||$.test(o.contains)?function(a,b){var c=9===a.nodeType?a.documentElement:a,d=b&&b.parentNode;return a===d||!(!d||1!==d.nodeType||!(c.contains?c.contains(d):a.compareDocumentPosition&&16&a.compareDocumentPosition(d)))}:function(a,b){if(b)while(b=b.parentNode)if(b===a)return!0;return!1},B=b?function(a,b){if(a===b)return l=!0,0;var d=!a.compareDocumentPosition-!b.compareDocumentPosition;return d?d:(d=(a.ownerDocument||a)===(b.ownerDocument||b)?a.compareDocumentPosition(b):1,1&d||!c.sortDetached&&b.compareDocumentPosition(a)===d?a===g||a.ownerDocument===v&&t(v,a)?-1:b===g||b.ownerDocument===v&&t(v,b)?1:k?J(k,a)-J(k,b):0:4&d?-1:1)}:function(a,b){if(a===b)return l=!0,0;var c,d=0,e=a.parentNode,f=b.parentNode,h=[a],i=[b];if(!e||!f)return a===g?-1:b===g?1:e?-1:f?1:k?J(k,a)-J(k,b):0;if(e===f)return la(a,b);c=a;while(c=c.parentNode)h.unshift(c);c=b;while(c=c.parentNode)i.unshift(c);while(h[d]===i[d])d++;return d?la(h[d],i[d]):h[d]===v?-1:i[d]===v?1:0},g):n},ga.matches=function(a,b){return ga(a,null,null,b)},ga.matchesSelector=function(a,b){if((a.ownerDocument||a)!==n&&m(a),b=b.replace(U,"='$1']"),!(!c.matchesSelector||!p||r&&r.test(b)||q&&q.test(b)))try{var d=s.call(a,b);if(d||c.disconnectedMatch||a.document&&11!==a.document.nodeType)return d}catch(e){}return ga(b,n,null,[a]).length>0},ga.contains=function(a,b){return(a.ownerDocument||a)!==n&&m(a),t(a,b)},ga.attr=function(a,b){(a.ownerDocument||a)!==n&&m(a);var e=d.attrHandle[b.toLowerCase()],f=e&&D.call(d.attrHandle,b.toLowerCase())?e(a,b,!p):void 0;return void 0!==f?f:c.attributes||!p?a.getAttribute(b):(f=a.getAttributeNode(b))&&f.specified?f.value:null},ga.error=function(a){throw new Error("Syntax error, unrecognized expression: "+a)},ga.uniqueSort=function(a){var b,d=[],e=0,f=0;if(l=!c.detectDuplicates,k=!c.sortStable&&a.slice(0),a.sort(B),l){while(b=a[f++])b===a[f]&&(e=d.push(f));while(e--)a.splice(d[e],1)}return k=null,a},e=ga.getText=function(a){var b,c="",d=0,f=a.nodeType;if(f){if(1===f||9===f||11===f){if("string"==typeof a.textContent)return a.textContent;for(a=a.firstChild;a;a=a.nextSibling)c+=e(a)}else if(3===f||4===f)return a.nodeValue}else while(b=a[d++])c+=e(b);return c},d=ga.selectors={cacheLength:50,createPseudo:ia,match:X,attrHandle:{},find:{},relative:{">":{dir:"parentNode",first:!0}," ":{dir:"parentNode"},"+":{dir:"previousSibling",first:!0},"~":{dir:"previousSibling"}},preFilter:{ATTR:function(a){return a[1]=a[1].replace(ca,da),a[3]=(a[3]||a[4]||a[5]||"").replace(ca,da),"~="===a[2]&&(a[3]=" "+a[3]+" "),a.slice(0,4)},CHILD:function(a){return a[1]=a[1].toLowerCase(),"nth"===a[1].slice(0,3)?(a[3]||ga.error(a[0]),a[4]=+(a[4]?a[5]+(a[6]||1):2*("even"===a[3]||"odd"===a[3])),a[5]=+(a[7]+a[8]||"odd"===a[3])):a[3]&&ga.error(a[0]),a},PSEUDO:function(a){var b,c=!a[6]&&a[2];return X.CHILD.test(a[0])?null:(a[3]?a[2]=a[4]||a[5]||"":c&&V.test(c)&&(b=g(c,!0))&&(b=c.indexOf(")",c.length-b)-c.length)&&(a[0]=a[0].slice(0,b),a[2]=c.slice(0,b)),a.slice(0,3))}},filter:{TAG:function(a){var b=a.replace(ca,da).toLowerCase();return"*"===a?function(){return!0}:function(a){return a.nodeName&&a.nodeName.toLowerCase()===b}},CLASS:function(a){var b=y[a+" "];return b||(b=new RegExp("(^|"+L+")"+a+"("+L+"|$)"))&&y(a,function(a){return b.test("string"==typeof a.className&&a.className||"undefined"!=typeof a.getAttribute&&a.getAttribute("class")||"")})},ATTR:function(a,b,c){return function(d){var e=ga.attr(d,a);return null==e?"!="===b:b?(e+="","="===b?e===c:"!="===b?e!==c:"^="===b?c&&0===e.indexOf(c):"*="===b?c&&e.indexOf(c)>-1:"$="===b?c&&e.slice(-c.length)===c:"~="===b?(" "+e.replace(Q," ")+" ").indexOf(c)>-1:"|="===b?e===c||e.slice(0,c.length+1)===c+"-":!1):!0}},CHILD:function(a,b,c,d,e){var f="nth"!==a.slice(0,3),g="last"!==a.slice(-4),h="of-type"===b;return 1===d&&0===e?function(a){return!!a.parentNode}:function(b,c,i){var j,k,l,m,n,o,p=f!==g?"nextSibling":"previousSibling",q=b.parentNode,r=h&&b.nodeName.toLowerCase(),s=!i&&!h;if(q){if(f){while(p){l=b;while(l=l[p])if(h?l.nodeName.toLowerCase()===r:1===l.nodeType)return!1;o=p="only"===a&&!o&&"nextSibling"}return!0}if(o=[g?q.firstChild:q.lastChild],g&&s){k=q[u]||(q[u]={}),j=k[a]||[],n=j[0]===w&&j[1],m=j[0]===w&&j[2],l=n&&q.childNodes[n];while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if(1===l.nodeType&&++m&&l===b){k[a]=[w,n,m];break}}else if(s&&(j=(b[u]||(b[u]={}))[a])&&j[0]===w)m=j[1];else while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if((h?l.nodeName.toLowerCase()===r:1===l.nodeType)&&++m&&(s&&((l[u]||(l[u]={}))[a]=[w,m]),l===b))break;return m-=e,m===d||m%d===0&&m/d>=0}}},PSEUDO:function(a,b){var c,e=d.pseudos[a]||d.setFilters[a.toLowerCase()]||ga.error("unsupported pseudo: "+a);return e[u]?e(b):e.length>1?(c=[a,a,"",b],d.setFilters.hasOwnProperty(a.toLowerCase())?ia(function(a,c){var d,f=e(a,b),g=f.length;while(g--)d=J(a,f[g]),a[d]=!(c[d]=f[g])}):function(a){return e(a,0,c)}):e}},pseudos:{not:ia(function(a){var b=[],c=[],d=h(a.replace(R,"$1"));return d[u]?ia(function(a,b,c,e){var f,g=d(a,null,e,[]),h=a.length;while(h--)(f=g[h])&&(a[h]=!(b[h]=f))}):function(a,e,f){return b[0]=a,d(b,null,f,c),b[0]=null,!c.pop()}}),has:ia(function(a){return function(b){return ga(a,b).length>0}}),contains:ia(function(a){return a=a.replace(ca,da),function(b){return(b.textContent||b.innerText||e(b)).indexOf(a)>-1}}),lang:ia(function(a){return W.test(a||"")||ga.error("unsupported lang: "+a),a=a.replace(ca,da).toLowerCase(),function(b){var c;do if(c=p?b.lang:b.getAttribute("xml:lang")||b.getAttribute("lang"))return c=c.toLowerCase(),c===a||0===c.indexOf(a+"-");while((b=b.parentNode)&&1===b.nodeType);return!1}}),target:function(b){var c=a.location&&a.location.hash;return c&&c.slice(1)===b.id},root:function(a){return a===o},focus:function(a){return a===n.activeElement&&(!n.hasFocus||n.hasFocus())&&!!(a.type||a.href||~a.tabIndex)},enabled:function(a){return a.disabled===!1},disabled:function(a){return a.disabled===!0},checked:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&!!a.checked||"option"===b&&!!a.selected},selected:function(a){return a.parentNode&&a.parentNode.selectedIndex,a.selected===!0},empty:function(a){for(a=a.firstChild;a;a=a.nextSibling)if(a.nodeType<6)return!1;return!0},parent:function(a){return!d.pseudos.empty(a)},header:function(a){return Z.test(a.nodeName)},input:function(a){return Y.test(a.nodeName)},button:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&"button"===a.type||"button"===b},text:function(a){var b;return"input"===a.nodeName.toLowerCase()&&"text"===a.type&&(null==(b=a.getAttribute("type"))||"text"===b.toLowerCase())},first:oa(function(){return[0]}),last:oa(function(a,b){return[b-1]}),eq:oa(function(a,b,c){return[0>c?c+b:c]}),even:oa(function(a,b){for(var c=0;b>c;c+=2)a.push(c);return a}),odd:oa(function(a,b){for(var c=1;b>c;c+=2)a.push(c);return a}),lt:oa(function(a,b,c){for(var d=0>c?c+b:c;--d>=0;)a.push(d);return a}),gt:oa(function(a,b,c){for(var d=0>c?c+b:c;++d<b;)a.push(d);return a})}},d.pseudos.nth=d.pseudos.eq;for(b in{radio:!0,checkbox:!0,file:!0,password:!0,image:!0})d.pseudos[b]=ma(b);for(b in{submit:!0,reset:!0})d.pseudos[b]=na(b);function qa(){}qa.prototype=d.filters=d.pseudos,d.setFilters=new qa,g=ga.tokenize=function(a,b){var c,e,f,g,h,i,j,k=z[a+" "];if(k)return b?0:k.slice(0);h=a,i=[],j=d.preFilter;while(h){(!c||(e=S.exec(h)))&&(e&&(h=h.slice(e[0].length)||h),i.push(f=[])),c=!1,(e=T.exec(h))&&(c=e.shift(),f.push({value:c,type:e[0].replace(R," ")}),h=h.slice(c.length));for(g in d.filter)!(e=X[g].exec(h))||j[g]&&!(e=j[g](e))||(c=e.shift(),f.push({value:c,type:g,matches:e}),h=h.slice(c.length));if(!c)break}return b?h.length:h?ga.error(a):z(a,i).slice(0)};function ra(a){for(var b=0,c=a.length,d="";c>b;b++)d+=a[b].value;return d}function sa(a,b,c){var d=b.dir,e=c&&"parentNode"===d,f=x++;return b.first?function(b,c,f){while(b=b[d])if(1===b.nodeType||e)return a(b,c,f)}:function(b,c,g){var h,i,j=[w,f];if(g){while(b=b[d])if((1===b.nodeType||e)&&a(b,c,g))return!0}else while(b=b[d])if(1===b.nodeType||e){if(i=b[u]||(b[u]={}),(h=i[d])&&h[0]===w&&h[1]===f)return j[2]=h[2];if(i[d]=j,j[2]=a(b,c,g))return!0}}}function ta(a){return a.length>1?function(b,c,d){var e=a.length;while(e--)if(!a[e](b,c,d))return!1;return!0}:a[0]}function ua(a,b,c){for(var d=0,e=b.length;e>d;d++)ga(a,b[d],c);return c}function va(a,b,c,d,e){for(var f,g=[],h=0,i=a.length,j=null!=b;i>h;h++)(f=a[h])&&(!c||c(f,d,e))&&(g.push(f),j&&b.push(h));return g}function wa(a,b,c,d,e,f){return d&&!d[u]&&(d=wa(d)),e&&!e[u]&&(e=wa(e,f)),ia(function(f,g,h,i){var j,k,l,m=[],n=[],o=g.length,p=f||ua(b||"*",h.nodeType?[h]:h,[]),q=!a||!f&&b?p:va(p,m,a,h,i),r=c?e||(f?a:o||d)?[]:g:q;if(c&&c(q,r,h,i),d){j=va(r,n),d(j,[],h,i),k=j.length;while(k--)(l=j[k])&&(r[n[k]]=!(q[n[k]]=l))}if(f){if(e||a){if(e){j=[],k=r.length;while(k--)(l=r[k])&&j.push(q[k]=l);e(null,r=[],j,i)}k=r.length;while(k--)(l=r[k])&&(j=e?J(f,l):m[k])>-1&&(f[j]=!(g[j]=l))}}else r=va(r===g?r.splice(o,r.length):r),e?e(null,g,r,i):H.apply(g,r)})}function xa(a){for(var b,c,e,f=a.length,g=d.relative[a[0].type],h=g||d.relative[" "],i=g?1:0,k=sa(function(a){return a===b},h,!0),l=sa(function(a){return J(b,a)>-1},h,!0),m=[function(a,c,d){var e=!g&&(d||c!==j)||((b=c).nodeType?k(a,c,d):l(a,c,d));return b=null,e}];f>i;i++)if(c=d.relative[a[i].type])m=[sa(ta(m),c)];else{if(c=d.filter[a[i].type].apply(null,a[i].matches),c[u]){for(e=++i;f>e;e++)if(d.relative[a[e].type])break;return wa(i>1&&ta(m),i>1&&ra(a.slice(0,i-1).concat({value:" "===a[i-2].type?"*":""})).replace(R,"$1"),c,e>i&&xa(a.slice(i,e)),f>e&&xa(a=a.slice(e)),f>e&&ra(a))}m.push(c)}return ta(m)}function ya(a,b){var c=b.length>0,e=a.length>0,f=function(f,g,h,i,k){var l,m,o,p=0,q="0",r=f&&[],s=[],t=j,u=f||e&&d.find.TAG("*",k),v=w+=null==t?1:Math.random()||.1,x=u.length;for(k&&(j=g!==n&&g);q!==x&&null!=(l=u[q]);q++){if(e&&l){m=0;while(o=a[m++])if(o(l,g,h)){i.push(l);break}k&&(w=v)}c&&((l=!o&&l)&&p--,f&&r.push(l))}if(p+=q,c&&q!==p){m=0;while(o=b[m++])o(r,s,g,h);if(f){if(p>0)while(q--)r[q]||s[q]||(s[q]=F.call(i));s=va(s)}H.apply(i,s),k&&!f&&s.length>0&&p+b.length>1&&ga.uniqueSort(i)}return k&&(w=v,j=t),r};return c?ia(f):f}return h=ga.compile=function(a,b){var c,d=[],e=[],f=A[a+" "];if(!f){b||(b=g(a)),c=b.length;while(c--)f=xa(b[c]),f[u]?d.push(f):e.push(f);f=A(a,ya(e,d)),f.selector=a}return f},i=ga.select=function(a,b,e,f){var i,j,k,l,m,n="function"==typeof a&&a,o=!f&&g(a=n.selector||a);if(e=e||[],1===o.length){if(j=o[0]=o[0].slice(0),j.length>2&&"ID"===(k=j[0]).type&&c.getById&&9===b.nodeType&&p&&d.relative[j[1].type]){if(b=(d.find.ID(k.matches[0].replace(ca,da),b)||[])[0],!b)return e;n&&(b=b.parentNode),a=a.slice(j.shift().value.length)}i=X.needsContext.test(a)?0:j.length;while(i--){if(k=j[i],d.relative[l=k.type])break;if((m=d.find[l])&&(f=m(k.matches[0].replace(ca,da),aa.test(j[0].type)&&pa(b.parentNode)||b))){if(j.splice(i,1),a=f.length&&ra(j),!a)return H.apply(e,f),e;break}}}return(n||h(a,o))(f,b,!p,e,aa.test(a)&&pa(b.parentNode)||b),e},c.sortStable=u.split("").sort(B).join("")===u,c.detectDuplicates=!!l,m(),c.sortDetached=ja(function(a){return 1&a.compareDocumentPosition(n.createElement("div"))}),ja(function(a){return a.innerHTML="<a href='#'></a>","#"===a.firstChild.getAttribute("href")})||ka("type|href|height|width",function(a,b,c){return c?void 0:a.getAttribute(b,"type"===b.toLowerCase()?1:2)}),c.attributes&&ja(function(a){return a.innerHTML="<input/>",a.firstChild.setAttribute("value",""),""===a.firstChild.getAttribute("value")})||ka("value",function(a,b,c){return c||"input"!==a.nodeName.toLowerCase()?void 0:a.defaultValue}),ja(function(a){return null==a.getAttribute("disabled")})||ka(K,function(a,b,c){var d;return c?void 0:a[b]===!0?b.toLowerCase():(d=a.getAttributeNode(b))&&d.specified?d.value:null}),ga}(a);m.find=s,m.expr=s.selectors,m.expr[":"]=m.expr.pseudos,m.unique=s.uniqueSort,m.text=s.getText,m.isXMLDoc=s.isXML,m.contains=s.contains;var t=m.expr.match.needsContext,u=/^<(\w+)\s*\/?>(?:<\/\1>|)$/,v=/^.[^:#\[\.,]*$/;function w(a,b,c){if(m.isFunction(b))return m.grep(a,function(a,d){return!!b.call(a,d,a)!==c});if(b.nodeType)return m.grep(a,function(a){return a===b!==c});if("string"==typeof b){if(v.test(b))return m.filter(b,a,c);b=m.filter(b,a)}return m.grep(a,function(a){return m.inArray(a,b)>=0!==c})}m.filter=function(a,b,c){var d=b[0];return c&&(a=":not("+a+")"),1===b.length&&1===d.nodeType?m.find.matchesSelector(d,a)?[d]:[]:m.find.matches(a,m.grep(b,function(a){return 1===a.nodeType}))},m.fn.extend({find:function(a){var b,c=[],d=this,e=d.length;if("string"!=typeof a)return this.pushStack(m(a).filter(function(){for(b=0;e>b;b++)if(m.contains(d[b],this))return!0}));for(b=0;e>b;b++)m.find(a,d[b],c);return c=this.pushStack(e>1?m.unique(c):c),c.selector=this.selector?this.selector+" "+a:a,c},filter:function(a){return this.pushStack(w(this,a||[],!1))},not:function(a){return this.pushStack(w(this,a||[],!0))},is:function(a){return!!w(this,"string"==typeof a&&t.test(a)?m(a):a||[],!1).length}});var x,y=a.document,z=/^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,A=m.fn.init=function(a,b){var c,d;if(!a)return this;if("string"==typeof a){if(c="<"===a.charAt(0)&&">"===a.charAt(a.length-1)&&a.length>=3?[null,a,null]:z.exec(a),!c||!c[1]&&b)return!b||b.jquery?(b||x).find(a):this.constructor(b).find(a);if(c[1]){if(b=b instanceof m?b[0]:b,m.merge(this,m.parseHTML(c[1],b&&b.nodeType?b.ownerDocument||b:y,!0)),u.test(c[1])&&m.isPlainObject(b))for(c in b)m.isFunction(this[c])?this[c](b[c]):this.attr(c,b[c]);return this}if(d=y.getElementById(c[2]),d&&d.parentNode){if(d.id!==c[2])return x.find(a);this.length=1,this[0]=d}return this.context=y,this.selector=a,this}return a.nodeType?(this.context=this[0]=a,this.length=1,this):m.isFunction(a)?"undefined"!=typeof x.ready?x.ready(a):a(m):(void 0!==a.selector&&(this.selector=a.selector,this.context=a.context),m.makeArray(a,this))};A.prototype=m.fn,x=m(y);var B=/^(?:parents|prev(?:Until|All))/,C={children:!0,contents:!0,next:!0,prev:!0};m.extend({dir:function(a,b,c){var d=[],e=a[b];while(e&&9!==e.nodeType&&(void 0===c||1!==e.nodeType||!m(e).is(c)))1===e.nodeType&&d.push(e),e=e[b];return d},sibling:function(a,b){for(var c=[];a;a=a.nextSibling)1===a.nodeType&&a!==b&&c.push(a);return c}}),m.fn.extend({has:function(a){var b,c=m(a,this),d=c.length;return this.filter(function(){for(b=0;d>b;b++)if(m.contains(this,c[b]))return!0})},closest:function(a,b){for(var c,d=0,e=this.length,f=[],g=t.test(a)||"string"!=typeof a?m(a,b||this.context):0;e>d;d++)for(c=this[d];c&&c!==b;c=c.parentNode)if(c.nodeType<11&&(g?g.index(c)>-1:1===c.nodeType&&m.find.matchesSelector(c,a))){f.push(c);break}return this.pushStack(f.length>1?m.unique(f):f)},index:function(a){return a?"string"==typeof a?m.inArray(this[0],m(a)):m.inArray(a.jquery?a[0]:a,this):this[0]&&this[0].parentNode?this.first().prevAll().length:-1},add:function(a,b){return this.pushStack(m.unique(m.merge(this.get(),m(a,b))))},addBack:function(a){return this.add(null==a?this.prevObject:this.prevObject.filter(a))}});function D(a,b){do a=a[b];while(a&&1!==a.nodeType);return a}m.each({parent:function(a){var b=a.parentNode;return b&&11!==b.nodeType?b:null},parents:function(a){return m.dir(a,"parentNode")},parentsUntil:function(a,b,c){return m.dir(a,"parentNode",c)},next:function(a){return D(a,"nextSibling")},prev:function(a){return D(a,"previousSibling")},nextAll:function(a){return m.dir(a,"nextSibling")},prevAll:function(a){return m.dir(a,"previousSibling")},nextUntil:function(a,b,c){return m.dir(a,"nextSibling",c)},prevUntil:function(a,b,c){return m.dir(a,"previousSibling",c)},siblings:function(a){return m.sibling((a.parentNode||{}).firstChild,a)},children:function(a){return m.sibling(a.firstChild)},contents:function(a){return m.nodeName(a,"iframe")?a.contentDocument||a.contentWindow.document:m.merge([],a.childNodes)}},function(a,b){m.fn[a]=function(c,d){var e=m.map(this,b,c);return"Until"!==a.slice(-5)&&(d=c),d&&"string"==typeof d&&(e=m.filter(d,e)),this.length>1&&(C[a]||(e=m.unique(e)),B.test(a)&&(e=e.reverse())),this.pushStack(e)}});var E=/\S+/g,F={};function G(a){var b=F[a]={};return m.each(a.match(E)||[],function(a,c){b[c]=!0}),b}m.Callbacks=function(a){a="string"==typeof a?F[a]||G(a):m.extend({},a);var b,c,d,e,f,g,h=[],i=!a.once&&[],j=function(l){for(c=a.memory&&l,d=!0,f=g||0,g=0,e=h.length,b=!0;h&&e>f;f++)if(h[f].apply(l[0],l[1])===!1&&a.stopOnFalse){c=!1;break}b=!1,h&&(i?i.length&&j(i.shift()):c?h=[]:k.disable())},k={add:function(){if(h){var d=h.length;!function f(b){m.each(b,function(b,c){var d=m.type(c);"function"===d?a.unique&&k.has(c)||h.push(c):c&&c.length&&"string"!==d&&f(c)})}(arguments),b?e=h.length:c&&(g=d,j(c))}return this},remove:function(){return h&&m.each(arguments,function(a,c){var d;while((d=m.inArray(c,h,d))>-1)h.splice(d,1),b&&(e>=d&&e--,f>=d&&f--)}),this},has:function(a){return a?m.inArray(a,h)>-1:!(!h||!h.length)},empty:function(){return h=[],e=0,this},disable:function(){return h=i=c=void 0,this},disabled:function(){return!h},lock:function(){return i=void 0,c||k.disable(),this},locked:function(){return!i},fireWith:function(a,c){return!h||d&&!i||(c=c||[],c=[a,c.slice?c.slice():c],b?i.push(c):j(c)),this},fire:function(){return k.fireWith(this,arguments),this},fired:function(){return!!d}};return k},m.extend({Deferred:function(a){var b=[["resolve","done",m.Callbacks("once memory"),"resolved"],["reject","fail",m.Callbacks("once memory"),"rejected"],["notify","progress",m.Callbacks("memory")]],c="pending",d={state:function(){return c},always:function(){return e.done(arguments).fail(arguments),this},then:function(){var a=arguments;return m.Deferred(function(c){m.each(b,function(b,f){var g=m.isFunction(a[b])&&a[b];e[f[1]](function(){var a=g&&g.apply(this,arguments);a&&m.isFunction(a.promise)?a.promise().done(c.resolve).fail(c.reject).progress(c.notify):c[f[0]+"With"](this===d?c.promise():this,g?[a]:arguments)})}),a=null}).promise()},promise:function(a){return null!=a?m.extend(a,d):d}},e={};return d.pipe=d.then,m.each(b,function(a,f){var g=f[2],h=f[3];d[f[1]]=g.add,h&&g.add(function(){c=h},b[1^a][2].disable,b[2][2].lock),e[f[0]]=function(){return e[f[0]+"With"](this===e?d:this,arguments),this},e[f[0]+"With"]=g.fireWith}),d.promise(e),a&&a.call(e,e),e},when:function(a){var b=0,c=d.call(arguments),e=c.length,f=1!==e||a&&m.isFunction(a.promise)?e:0,g=1===f?a:m.Deferred(),h=function(a,b,c){return function(e){b[a]=this,c[a]=arguments.length>1?d.call(arguments):e,c===i?g.notifyWith(b,c):--f||g.resolveWith(b,c)}},i,j,k;if(e>1)for(i=new Array(e),j=new Array(e),k=new Array(e);e>b;b++)c[b]&&m.isFunction(c[b].promise)?c[b].promise().done(h(b,k,c)).fail(g.reject).progress(h(b,j,i)):--f;return f||g.resolveWith(k,c),g.promise()}});var H;m.fn.ready=function(a){return m.ready.promise().done(a),this},m.extend({isReady:!1,readyWait:1,holdReady:function(a){a?m.readyWait++:m.ready(!0)},ready:function(a){if(a===!0?!--m.readyWait:!m.isReady){if(!y.body)return setTimeout(m.ready);m.isReady=!0,a!==!0&&--m.readyWait>0||(H.resolveWith(y,[m]),m.fn.triggerHandler&&(m(y).triggerHandler("ready"),m(y).off("ready")))}}});function I(){y.addEventListener?(y.removeEventListener("DOMContentLoaded",J,!1),a.removeEventListener("load",J,!1)):(y.detachEvent("onreadystatechange",J),a.detachEvent("onload",J))}function J(){(y.addEventListener||"load"===event.type||"complete"===y.readyState)&&(I(),m.ready())}m.ready.promise=function(b){if(!H)if(H=m.Deferred(),"complete"===y.readyState)setTimeout(m.ready);else if(y.addEventListener)y.addEventListener("DOMContentLoaded",J,!1),a.addEventListener("load",J,!1);else{y.attachEvent("onreadystatechange",J),a.attachEvent("onload",J);var c=!1;try{c=null==a.frameElement&&y.documentElement}catch(d){}c&&c.doScroll&&!function e(){if(!m.isReady){try{c.doScroll("left")}catch(a){return setTimeout(e,50)}I(),m.ready()}}()}return H.promise(b)};var K="undefined",L;for(L in m(k))break;k.ownLast="0"!==L,k.inlineBlockNeedsLayout=!1,m(function(){var a,b,c,d;c=y.getElementsByTagName("body")[0],c&&c.style&&(b=y.createElement("div"),d=y.createElement("div"),d.style.cssText="position:absolute;border:0;width:0;height:0;top:0;left:-9999px",c.appendChild(d).appendChild(b),typeof b.style.zoom!==K&&(b.style.cssText="display:inline;margin:0;border:0;padding:1px;width:1px;zoom:1",k.inlineBlockNeedsLayout=a=3===b.offsetWidth,a&&(c.style.zoom=1)),c.removeChild(d))}),function(){var a=y.createElement("div");if(null==k.deleteExpando){k.deleteExpando=!0;try{delete a.test}catch(b){k.deleteExpando=!1}}a=null}(),m.acceptData=function(a){var b=m.noData[(a.nodeName+" ").toLowerCase()],c=+a.nodeType||1;return 1!==c&&9!==c?!1:!b||b!==!0&&a.getAttribute("classid")===b};var M=/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,N=/([A-Z])/g;function O(a,b,c){if(void 0===c&&1===a.nodeType){var d="data-"+b.replace(N,"-$1").toLowerCase();if(c=a.getAttribute(d),"string"==typeof c){try{c="true"===c?!0:"false"===c?!1:"null"===c?null:+c+""===c?+c:M.test(c)?m.parseJSON(c):c}catch(e){}m.data(a,b,c)}else c=void 0}return c}function P(a){var b;for(b in a)if(("data"!==b||!m.isEmptyObject(a[b]))&&"toJSON"!==b)return!1;
@@ -363,288 +363,188 @@ summary {
 
 
 
-<h1 class="title toc-ignore">Loops</h1>
+<h1 class="title toc-ignore">Finding Things</h1>
 <h4 class="author">Amy Hessl</h4>
-<h4 class="date">8/9/2019</h4>
+<h4 class="date">8/2/2019</h4>
 
 </div>
 
 
-<p><em>I don’t have any particular recipe [for developing new proofs] … It is like being lost in a jungle and trying to use all the knowledge that you can gather to come up with some new tricks, and with some luck, you might find a way out.</em><br />
-–Maryam Mirzakhani, 2014 Fields Medal Winner</p>
+<div id="problem-as-scientists-we-make-a-lot-of-files-with-a-lot-of-data.-the-problem-is-amplified-if-you-use-machines-that-can-make-data-superfast.-how-can-we-quickly-find-text-or-values-not-just-in-a-single-file-but-in-large-numbers-of-files" class="section level4">
+<h4>Problem: As scientists, we make a lot of files with a lot of data. The problem is amplified if you use machines that can make data superfast. How can we quickly find text or values, not just in a single file, but in large numbers of files?</h4>
+</div>
 <div id="questions" class="section level4">
 <h4>Questions</h4>
 <ul>
-<li>How can I perform the same actions on many different files?<br />
+<li>How can I find files?<br />
 </li>
-<li>How can I execute the same command over and over for different cases?</li>
+<li>How can I find things in files?<br />
+</li>
+<li>What is a regular expression?</li>
 </ul>
 </div>
 <div id="objectives" class="section level4">
 <h4>Objectives</h4>
 <ul>
-<li>Write a loop that applies one or more commands separately to each file in a set of files.<br />
+<li>Use <code>grep</code> to select lines from text files that match simple patterns.<br />
 </li>
-<li>Trace the values taken on by a loop variable during execution of the loop.<br />
+<li>Use <code>find</code> to find files whose names match simple patterns.<br />
 </li>
-<li>Explain the difference between a variable’s name and its value.<br />
+<li>Use the output of one command as the command-line argument(s) to another command.<br />
 </li>
-<li>Explain why spaces and some punctuation characters shouldn’t be used in file names.<br />
-</li>
-<li>Demonstrate how to see what commands have recently been executed.<br />
-</li>
-<li>Re-run recently executed commands without retyping them.</li>
+<li>Explain what is meant by ‘text’ and ‘binary’ files, and why many common tools don’t handle the latter well.</li>
 </ul>
 </div>
-<div id="key-tools" class="section level4">
-<h4>Key Tools</h4>
+<div id="toolsterms" class="section level4">
+<h4>Tools/Terms</h4>
 <ul>
-<li><code>$</code> and <code>${}</code> - define a variable, clearly define variable name<br />
+<li>Regular expressions (<code>regexp</code>)- special text string for describing a search pattern<br />
 </li>
-<li><code>&gt;</code> - either redirects to file or denotes a loop<br />
+<li><code>find</code> finds files with specific properties that match patterns.<br />
 </li>
-<li><code>for</code> - to start a for loop<br />
+<li><code>grep</code> selects lines in files that match patterns.<br />
 </li>
-<li><code>done</code> - end a for loop<br />
+<li><code>paste</code> combines output horizontally.<br />
 </li>
-<li><code>;</code> - separate multiple commands on same line, run sequentially<br />
+<li><code>--help</code> is a flag supported by many bash commands, and programs that can be run from within Bash, to display more information on how to use these commands or programs.<br />
 </li>
-<li><code>&amp;&amp;</code> - multiple commands are run but only if first is successful<br />
+<li><code>man</code> command displays the manual page for a given command.<br />
 </li>
-<li><code>echo</code> - prints something to screen<br />
+<li><code>$(command)</code> inserts a command’s output in place. Like the parentheses in an equation.<br />
 </li>
-<li><code>Control-c</code> - escapes out of a (hung) process<br />
-</li>
-<li><code>Up arrow</code> - returns previous command lines from prompt<br />
-</li>
-<li><code>Control-a</code> - moves cursor to beginning of line<br />
-</li>
-<li><code>Control-e</code> - moves cursor end beginning of line<br />
-</li>
-<li><code>history</code> - provides last 100 commands by line number<br />
-</li>
-<li><code>!123</code> - runs command number 123 from history</li>
+<li><code>sed</code> a stream editor, often used for search and replace operations.</li>
 </ul>
-<p><strong>Loops</strong> are key to productivity improvements through automation as they allow us to execute commands repetitively. Similar to wildcards and tab completion, using loops also reduces the amount of typing (and typing mistakes). Suppose we have several hundred genome data files named <em>basilisk.dat</em>, <em>unicorn.dat</em>, and so on. In this example, we’ll use the <em>creatures</em> directory which only has two example files, but the principles can be applied to many many more files at once. We would like to modify these files, but also save a version of the original files, naming the copies <em>original-basilisk.dat</em> and <em>original-unicorn.dat</em>. We can’t use:<br />
-<code>cp *.dat original-*.dat</code></p>
-<p>because that would expand to:<br />
-<code>cp basilisk.dat unicorn.dat original-*.dat</code></p>
-<p>This wouldn’t back up our files, instead we get an error:<br />
-<code>target original-*.dat is not a directory</code></p>
-<p>This problem arises when <code>cp</code> receives more than two inputs. When this happens, it expects the last input to be a directory where it can copy all the files it was passed. Since there is no directory named _original-*.dat_ in the creatures directory we get an error.</p>
-<p>Instead, we can use a <strong>for loop</strong> to do some operation once for each thing in a list. Here’s a simple example that displays the first three lines of each file in turn:</p>
-<pre class="bash"><code>cd ../data/data-shell/creatures
-for filename in basilisk.dat unicorn.dat
-  do
-      head -n 3 $filename   
-done</code></pre>
-<pre><code>## COMMON NAME: basilisk
-## CLASSIFICATION: basiliscus vulgaris
-## UPDATED: 1745-05-02
-## COMMON NAME: unicorn
-## CLASSIFICATION: equus monoceros
-## UPDATED: 1738-11-24</code></pre>
-<p>COMMON NAME: basilisk CLASSIFICATION: basiliscus vulgaris UPDATED: 1745-05-02 COMMON NAME: unicorn CLASSIFICATION: equus monoceros UPDATED: 1738-11-24</p>
 </div>
-<div id="for-loop-anatomy" class="section level4">
-<h4><strong>For</strong> loop anatomy:</h4>
-<p>When the shell sees the keyword <code>for</code>, it knows to repeat a command (or group of commands) once for each item in a list. Each time the loop runs (called an <strong>iteration</strong>), an item in the list is assigned in sequence to the variable (<code>$filename</code>), and the commands inside the loop are executed, before moving on to the next item in the list.</p>
-<p>Inside the loop, we call for the variable’s value by putting <code>$</code> in front of it. The <code>$</code> tells the shell interpreter to treat the variable as a variable name and substitute its value in its place, rather than treat it as text or an external command. In this example, the list is two filenames: <em>basilisk.dat</em> and <em>unicorn.dat</em>. Each time the loop iterates, it will assign a file name to the variable filename and run the <code>head</code> command. The first time through the loop, <code>$filename</code> is <em>basilisk.dat</em>. The interpreter runs the command head on <em>basilisk.dat</em>, and the prints the first three lines of <em>basilisk.dat</em>. For the second iteration, <code>$filename</code> becomes <code>unicorn.dat</code>. This time, the shell runs head on <em>unicorn.dat</em> and prints the first three lines of <em>unicorn.dat</em>. Since the list was only two items, the shell exits the for loop.</p>
-<p><code>${ }</code> When using variables it is also possible to put the names into curly braces to clearly delimit the variable name: <code>$filename</code> is equivalent to <code>${filename}</code>, but is different from <code>${file}name</code>. You may find this notation in other people’s programs.</p>
-</div>
-<div id="variables-in-loops" class="section level4">
-<h4>Variables in Loops</h4>
-<p>This exercise refers to the <em>data-shell/molecules</em> directory. <code>ls</code> gives the following output:</p>
-<pre class="bash"><code>ls</code></pre>
-<pre><code>## cubane.pdb
-## ethane.pdb
-## methane.pdb
-## octane.pdb
-## pentane.pdb
-## propane.pdb</code></pre>
+<div id="grep" class="section level3">
+<h3>grep</h3>
+<p>In the same way that many of us now use “Google” as a verb meaning “to find”, Unix programmers often use the word “grep”. “grep” is a contraction of “global/regular expression/print”, a common sequence of operations in early Unix text editors. It is also the name of a very useful command-line program. <code>grep</code> finds and prints lines in files that match a pattern. For our examples, we will use a file that contains three haikus taken from a 1998 competition in Salon magazine. For this set of examples, we’re going to be working in the <em>writing</em> subdirectory of <em>data-shell/</em></p>
+<pre class="bash"><code>cd ../data/data-shell/writing
+cat haiku.txt</code></pre>
+<pre><code>## The Tao that is seen
+## Is not the true Tao, until
+## You bring fresh toner.
+## 
+## With searching comes loss
+## and the presence of absence:
+## &quot;My Thesis&quot; not found.
+## 
+## Yesterday it worked
+## Today it is not working
+## Software is like that.</code></pre>
+<p>We haven’t linked to the original haikus because they don’t appear to be on Salon’s site any longer. As Jeff Rothenberg said, “Digital information lasts forever — or five years, whichever comes first.” Luckily, popular content often has backups.</p>
+<p>Let’s use <code>grep</code> find lines that contain the word “not”:</p>
+<pre class="bash"><code>grep not haiku.txt</code></pre>
+<pre><code>## Is not the true Tao, until
+## &quot;My Thesis&quot; not found.
+## Today it is not working</code></pre>
+<p>Here, <em>not</em> is the pattern we’re searching for. The <code>grep</code> command searches through the file, looking for matches to the pattern specified. To use it type: <code>grep</code>, then the pattern we’re searching for and finally the name of the file (or files) we’re searching in. The output is the three lines in the file that contain the letters “not”. Let’s try a different pattern: “The”.</p>
+<pre class="bash"><code>grep The haiku.txt</code></pre>
+<pre><code>## The Tao that is seen
+## &quot;My Thesis&quot; not found.</code></pre>
+<p>This time, two lines that include the letters “The” are outputted. However, one instance of those letters is contained within a larger word, “Thesis”. To restrict matches to lines containing the word “The” on its own, we can give grep with the <code>-w</code> flag. This will limit matches to word boundaries.</p>
+<pre class="bash"><code>grep -w The haiku.txt</code></pre>
+<pre><code>## The Tao that is seen</code></pre>
+<p>Note that a “word boundary” includes the start and end of a line, so not just letters surrounded by spaces. Sometimes we don’t want to search for a single word, but a phrase. This is also easy to do with grep by putting the phrase in quotes.</p>
+<pre class="bash"><code>grep -w &quot;is not&quot; haiku.txt</code></pre>
+<pre><code>## Today it is not working</code></pre>
+<p>We’ve now seen that you don’t have to have quotes around single words, but it is useful to use quotes when searching for multiple words. It also helps to make it easier to distinguish between the search term or phrase and the file being searched. We will use quotes in the remaining examples.</p>
+<p>Another useful option is <code>-n</code>, which numbers the lines that match:</p>
+<pre class="bash"><code>grep -n &quot;it&quot; haiku.txt</code></pre>
+<pre><code>## 5:With searching comes loss
+## 9:Yesterday it worked
+## 10:Today it is not working</code></pre>
+<p>Here, we can see that lines 5, 9, and 10 contain the letters “it”. We can combine options (i.e. flags) as we do with other Unix commands. For example, let’s find the lines that contain the word “the”. We can combine the option <code>-w</code> to find the lines that contain the word “the” and <code>-n</code> to number the lines that match:</p>
+<pre class="bash"><code>grep -n -w &quot;the&quot; haiku.txt</code></pre>
+<pre><code>## 2:Is not the true Tao, until
+## 6:and the presence of absence:</code></pre>
+<p>Now we add the option <code>-i</code> to make our search case-insensitive:</p>
+<pre class="bash"><code>grep -n -w -i &quot;the&quot; haiku.txt</code></pre>
+<pre><code>## 1:The Tao that is seen
+## 2:Is not the true Tao, until
+## 6:and the presence of absence:</code></pre>
+<p>Now, we want to use the option <code>-v</code> to invert our search, i.e., we want to output the lines that do <em>not</em> contain the word “the”.</p>
+<pre class="bash"><code>grep -n -w -v &quot;the&quot; haiku.txt </code></pre>
+<pre><code>## 1:The Tao that is seen
+## 3:You bring fresh toner.
+## 4:
+## 5:With searching comes loss
+## 7:&quot;My Thesis&quot; not found.
+## 8:
+## 9:Yesterday it worked
+## 10:Today it is not working
+## 11:Software is like that.</code></pre>
+<p>grep has lots of other options. To find out what they are, we can type:</p>
+<pre><code>man grep</code></pre>
 <blockquote>
-<p><strong>Challenge: What is the output of the following code?</strong></p>
+<p><strong>Challenge: How can we return the file without blank lines? Which line numbers contain blank lines?</strong></p>
 </blockquote>
-<pre class="bash"><code>for datafile in *.pdb  
-do  
-    ls *.pdb  
-done  </code></pre>
-<p>Now, what is the output of the following code?</p>
-<pre class="bash"><code>for datafile in *.pdb
-do
-    ls $datafile
-done</code></pre>
-<pre><code>## cubane.pdb
-## ethane.pdb
-## methane.pdb
-## octane.pdb
-## pentane.pdb
-## propane.pdb</code></pre>
-<p>Why do these two loops give different outputs?</p>
-</div>
-<div id="follow-the-prompt-or" class="section level4">
-<h4>Follow the Prompt <code>$</code> or <code>&gt;</code></h4>
-<p>The shell prompt changes from <code>$</code> to <code>&gt;</code> and back again as we were typing in our loop. The second prompt, <code>&gt;</code>, is different to remind us that we haven’t finished typing a complete command yet. A semicolon, <code>;</code>, can be used to separate two commands written on a single line. Try using the <code>up-arrow</code> to see your last command. What happened?</p>
-</div>
-<div id="same-symbols-different-meanings" class="section level4">
-<h4>Same Symbols, Different Meanings</h4>
-<p>Here we see <code>&gt;</code> being used a shell prompt, whereas <code>&gt;</code> is also used to redirect output. Similarly,<code>$</code> is used as a shell prompt, but, as we saw earlier, it is also used to ask the shell to get the value of a variable. If the shell prints <code>&gt;</code> or <code>$</code> then it expects you to type something, and the symbol is a prompt. If you type <code>&gt;</code> or <code>$</code> yourself, it is an instruction from you that the shell to redirect output or get the value of a variable.</p>
-<p>Returning to our example in the <em>data-shell/creatures</em> directory, we have called the variable in this loop filename in order to make its purpose clearer to human readers. The shell itself doesn’t care what the variable is called; if we wrote this loop as:</p>
-<pre class="bash"><code>cd ../data/data-shell/creatures
-for x in basilisk.dat unicorn.dat
-do
-    head -n 3 $x
-done</code></pre>
-<pre><code>## COMMON NAME: basilisk
-## CLASSIFICATION: basiliscus vulgaris
-## UPDATED: 1745-05-02
-## COMMON NAME: unicorn
-## CLASSIFICATION: equus monoceros
-## UPDATED: 1738-11-24</code></pre>
-<p>or:</p>
-<pre class="bash"><code>cd ../data/data-shell/creatures
-for temperature in basilisk.dat unicorn.dat
-do
-    head -n 3 $temperature
-done</code></pre>
-<pre><code>## COMMON NAME: basilisk
-## CLASSIFICATION: basiliscus vulgaris
-## UPDATED: 1745-05-02
-## COMMON NAME: unicorn
-## CLASSIFICATION: equus monoceros
-## UPDATED: 1738-11-24</code></pre>
-<p>It should work exactly the same way. Which is better? Why?</p>
-<p>Programs are only useful if people can understand them, so meaningless names (like x) or misleading names (like temperature) increase the odds that the program won’t do what its readers think it does.</p>
 <blockquote>
-<p><strong>Challenge: What would be the output of running the following loop in the data-shell/molecules directory?</strong></p>
+<p><strong>Challenge: Which command would result in the following output: and the presence of absence:</strong></p>
 </blockquote>
-<pre class="bash"><code>cd ../data/data-shell/molecules
-for filename in c*
-do
-    ls $filename 
-done</code></pre>
 <ol style="list-style-type: decimal">
-<li>No files are listed.<br />
+<li>grep “of” haiku.txt<br />
 </li>
-<li>All files are listed.<br />
+<li>grep -E “of” haiku.txt<br />
 </li>
-<li>Only cubane.pdb, octane.pdb and pentane.pdb are listed.<br />
+<li>grep -w “of” haiku.txt<br />
 </li>
-<li>Only cubane.pdb is listed.</li>
+<li>grep -i “of” haiku.txt</li>
 </ol>
-<p>It’s pretty sweet that the Shell automatically recognizes that <code>c*</code> refers to <code>ls c*</code></p>
 </div>
-<div id="limiting-sets-of-files" class="section level4">
-<h4>Limiting Sets of Files</h4>
-<p>How would the output differ from using this command instead?</p>
-<pre class="bash"><code>for filename in *c*
-do
-    ls $filename 
-done</code></pre>
-<ol style="list-style-type: decimal">
-<li>The same files would be listed.<br />
-</li>
-<li>All the files are listed this time.<br />
-</li>
-<li>No files are listed this time.<br />
-</li>
-<li>The files cubane.pdb and octane.pdb will be listed.<br />
-</li>
-<li>Only the file octane.pdb will be listed.<br />
-Let’s continue with our example in the <em>data-shell/creatures</em> directory. Here’s a slightly more complicated loop:</li>
+<div id="wildcards" class="section level3">
+<h3>Wildcards</h3>
+<p>grep’s real power doesn’t come from its options, though; it comes from the fact that patterns can include wildcards. (The technical name for these is <em>regular expressions</em>, which is what the “re” in “grep” stands for.) Regular expressions are both complex and powerful. REGEX is a real artform. As a taster, we can find lines that have an ‘o’ in the second position like this:</p>
+<pre class="bash"><code>grep -E '^.o' haiku.txt</code></pre>
+<pre><code>## You bring fresh toner.
+## Today it is not working
+## Software is like that.</code></pre>
+<p>We use the <code>-E</code> flag and put the pattern in quotes to prevent the shell from trying to interpret it. (If the pattern contained a *, for example, the shell would try to expand it before running grep.) The <code>^</code> in the pattern anchors the match to the start of the line. The <code>.</code> matches a single character (just like <code>?</code> in the shell), while the <code>o</code> matches an actual ‘o’.</p>
+<div id="tracking-a-species" class="section level4">
+<h4>Tracking a Species</h4>
+<blockquote>
+<p><strong>Challenge: Leah has several hundred data files saved in one directory, each of which is formatted like this: 2013-11-05,deer,5<br />
+2013-11-05,rabbit,22<br />
+2013-11-05,raccoon,7<br />
+2013-11-06,rabbit,19<br />
+2013-11-06,deer,2<br />
+She wants to write a shell script that takes a species as the first command-line argument and a directory as the second argument. The script should return one file called <code>speciesname.txt</code> containing a list of dates and the number of that species seen on each date. For example using the data shown above, <code>rabbit.txt</code> would contain: 2013-11-05,22<br />
+2013-11-06,19<br />
+An example of such a file is provided in <code>data-shell/data/animal-counts/animals.txt</code></strong></p>
+</blockquote>
+<p><em>Solution Hints</em> * Use man grep to look for how to grep text recursively in a directory and man cut to select more than one field in a line. * Start by selecting all the lines of animals.txt with “rabbit” as an example. * Examine this output. * Then cut those lines to cut out junk, then cut again to preserve just the date and frequency * Send the final output to a file called “rabbit.txt”</p>
+<p>grep -w rabbit -r animals.txt | cut -d : -f 2 | cut -d , -f 1,3 &gt; rabbit.txt</p>
+<p>Now replace “rabbit” and “animals.txt” with variables ($1, $2)</p>
+<p>Put these commands and pipes in the right order to achieve this: cut -d : -f 2<br />
+&gt;<br />
+|<br />
+grep -w $1 -r $2<br />
+|<br />
+$1.txt<br />
+cut -d , -f 1,3</p>
+<p>Solution: grep -w $1 -r $2 | cut -d : -f 2 | cut -d , -f 1,3 &gt; $1.txt called by: $ bash count-species.sh bear .</p>
+<p>Little Women You and your friend, having just finished reading Little Women by Louisa May Alcott, are in an argument. Of the four sisters in the book, Jo, Meg, Beth, and Amy, your friend thinks that Jo was the most mentioned. You, however, are certain it was Amy. Luckily, you have a file LittleWomen.txt containing the full text of the novel (data-shell/writing/data/LittleWomen.txt). Using a for loop, how would you tabulate the number of times each of the four sisters is mentioned? Hint: one solution might employ the commands grep and wc and a |, while another might utilize grep options. There is often more than one way to solve a programming task, so a particular solution is usually chosen based on a combination of yielding the correct result, elegance, readability, and speed.</p>
+<p>Compare Your Numbers! One solution has Amy at 645. Another 643. Why? Multiple mentions per line? Does that include “Amy’s”? Solution(s) for sis in Jo Meg Beth Amy do echo $sis: grep -ow $sis LittleWomen.txt | wc -l done Why is this solution slightly inferior? for sis in Jo Meg Beth Amy do echo $sis: grep -ocw $sis LittleWomen.txt done This solution is inferior because grep -c only reports the number of lines matched. The total number of matches reported by this method will be lower if there is more than one match per line.</p>
+<p>What other applications can you imagine for this type of loop? egrep - For more detailed regular expressions If you need to use more detailed expressions to match strings, try using egrep which has more options than grep. Some more building blocks for regular expressions using egrep: * . (dot) - a single character. * ? - the preceding character matches 0 or 1 times only. * * - the preceding character matches 0 or more times. * + - the preceding character matches 1 or more times. * {n} - the preceding character matches exactly n times. * [agd] - the character is one of those included within the square brackets. * [^agd] - the character is not one of those included within the square brackets. * [c-f] - the dash within the square brackets operates as a range. In this case it means either the letters c, d, e or f. * | (pipe symbol) - the logical OR operation * () - allows us to group several characters to behave as one. * ^ - matches the beginning of the line. * $ - matches the end of the line. Example: fruit.txt 1. Fred apples 20 2. Susy oranges 5 3. Mark watermellons 12 4. Robert pears 4 5. Terry oranges 9</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Lisa peaches 7</li>
+<li>Susy oranges 12</li>
+<li>Mark grapes 39</li>
+<li>Anne mangoes 7</li>
+<li>Greg pineapples 3</li>
+<li>Oliver ^rockmellons 2</li>
+<li>Betty limes 14 What do these do? What would they return? egrep ‘p{2}’ fruit.txt egrep ‘2<span class="math inline">\(' fruit.txt egrep '[w-z]' fruit.txt egrep '[^w-z]' fruit.txt egrep '^1' fruit.txt egrep 'or|is|go' fruit.txt egrep '^\)</span>’ fruit.txt egrep ‘^’ fruit.txt</li>
 </ol>
-<pre class="bash"><code>for filename in *.dat
-do
-    echo $filename
-    head -n 100 $filename | tail -n 20
-done</code></pre>
-<pre><code>## basilisk.dat
-## CGGTACCGAA
-## AAGGGTCGCG
-## CAAGTGTTCC
-## CGGGACAATA
-## GTTCTGCTAA
-## GATAAGTATG
-## TGCCGACTTA
-## CCCGACCGTC
-## TAGGTTATAA
-## GGCACAACCG
-## CTTCACTGTA
-## GAGGTGTACA
-## AGGATCCGTT
-## GCGCGGGCGG
-## CAGTCTATGT
-## TTTTCGACAC
-## TGGACTGCTT
-## CCCTTTGAGG
-## GTGGATTTTT
-## CGTAACGGGT
-## unicorn.dat
-## CGGTACCGAA
-## AAGGGTCGCG
-## CAAGTGTTCC
-## CGGGACAATA
-## GTTCTGCTAA
-## GATAAGTATG
-## TGCCGACTTA
-## CCCGACCGTC
-## TAGGTTATAA
-## GGCACAACCG
-## CTTCACTGTA
-## GAGGTGTACA
-## AGGATCCGTT
-## GCGCGGGCGG
-## CAGTCTATGT
-## TTTTCGACAC
-## TGGACTGCTT
-## CCCTTTGAGG
-## GTGGATTTTT
-## CGTAACGGGT</code></pre>
-<p>The shell starts by expanding _*.dat_ to create the list of files it will process. The loop body then executes two commands for each of those files. The first, <code>echo</code>, just prints its command-line arguments to standard output. For example:</p>
-<pre class="bash"><code>echo hello world</code></pre>
-<pre><code>## hello world</code></pre>
-<p>In this case, since the shell expands <code>$filename</code> to be the name of a file, <code>echo $filename</code> just prints the name of the file. Note that we <em>can’t</em> write this as:</p>
-<pre class="bash"><code>for filename in *.dat
-do
-    $filename
-    head -n 100 $filename | tail -n 20
-done</code></pre>
-<p>because then the first time through the loop, when <code>$filename</code> expanded to <em>basilisk.dat</em>, the shell would try to run <em>basilisk.dat</em> as a program. Finally, the head and tail combination selects lines 81-100 from whatever file is being processed (assuming the file has at least 100 lines).</p>
 </div>
-<div id="spaces-in-names" class="section level4">
-<h4>Spaces in Names</h4>
-<p>Whitespace is used to separate the elements on the list that we are going to loop over. If on the list we have elements with whitespace we need to quote those elements and our variable when using it. Suppose our data files are named: <em>red dragon.dat</em><br />
-<em>purple unicorn.dat</em></p>
-<p>We would need to use:</p>
-<pre class="bash"><code>for filename in &quot;red dragon.dat&quot; &quot;purple unicorn.dat&quot;
-do
-    head -n 100 &quot;$filename&quot; | tail -n 3
-done</code></pre>
-<pre><code>## head: red dragon.dat: No such file or directory
-## head: purple unicorn.dat: No such file or directory</code></pre>
-<p>It is simpler just to avoid using whitespaces (or other special characters) in filenames. The files above don’t exist, so if we run the above code, the head command will be unable to find them, however the error message returned will show the name of the files it is expecting.</p>
-<p>Try removing the quotes around <code>$filename</code> in the loop above to see the effect of the quote marks on whitespace. Note that we get a result from the loop command for <em>unicorn.dat</em> when we run this code in the creatures directory:</p>
-<pre class="bash"><code>for filename in red dragon.dat purple unicorn.dat
-do
-    head -n 100 $filename | tail -n 3
-done</code></pre>
-<pre><code>## head: red: No such file or directory
-## head: dragon.dat: No such file or directory
-## head: purple: No such file or directory
-## CCCTTTGAGG
-## GTGGATTTTT
-## CGTAACGGGT</code></pre>
-<p>Going back to our original file copying problem, we can solve it using this loop:</p>
-<pre class="bash"><code>for filename in *.dat
-do
-    cp $filename original-$filename
-done</code></pre>
-<p>This loop runs the cp command once for each filename. The first time, when <code>$filename</code> expands to basilisk.dat, the shell executes: cp basilisk.dat original-basilisk.dat The second time, the command is: cp unicorn.dat original-unicorn.dat Since the cp command does not normally produce any output, it’s hard to check that the loop is doing the correct thing. By prefixing the command with echo it is possible to see each command as it would be executed. The following diagram shows what happens when the modified script is executed, and demonstrates how the judicious use of echo is a good debugging technique.</p>
-<p>Nelle’s Pipeline: Processing Files Nelle is now ready to process her data files using goostats — a shell script written by her supervisor. This calculates some statistics from a protein sample file, and takes two arguments: 1. an input file (containing the raw data) 2. an output file (to store the calculated statistics) Since she’s still learning how to use the shell, she decides to build up the required commands in stages. Her first step is to make sure that she can select the right input files — remember, these are ones whose names end in ‘A’ or ‘B’, rather than ‘Z’. Starting from her home directory, Nelle types: $ cd north-pacific-gyre/2012-07-03 $ for datafile in NENE<em>[AB].txt &gt; do &gt; echo $datafile &gt; done NENE01729A.txt NENE01729B.txt NENE01736A.txt … NENE02043A.txt NENE02043B.txt Her next step is to decide what to call the files that the goostats analysis program will create. Prefixing each input file’s name with “stats” seems simple, so she modifies her loop to do that: $ for datafile in NENE</em>[AB].txt &gt; do &gt; echo <span class="math inline">\(datafile stats-\)</span>datafile &gt; done NENE01729A.txt stats-NENE01729A.txt NENE01729B.txt stats-NENE01729B.txt NENE01736A.txt stats-NENE01736A.txt … NENE02043A.txt stats-NENE02043A.txt NENE02043B.txt stats-NENE02043B.txt She hasn’t actually run goostats yet, but now she’s sure she can select the right files and generate the right output filenames. Typing in commands over and over again is becoming tedious, though, and Nelle is worried about making mistakes, so instead of re-entering her loop, she presses the up arrow. In response, the shell redisplays the whole loop on one line (using semi-colons to separate the pieces): $ for datafile in NENE<em>[AB].txt; do echo <span class="math inline">\(datafile stats-\)</span>datafile; done Using the left arrow key, Nelle backs up and changes the command echo to bash goostats: $ for datafile in NENE</em>[AB].txt; do bash goostats <span class="math inline">\(datafile stats-\)</span>datafile; done When she presses Enter, the shell runs the modified command. However, nothing appears to happen — there is no output. After a moment, Nelle realizes that since her script doesn’t print anything to the screen any longer, she has no idea whether it is running, much less how quickly. She kills the running command by typing Ctrl-C, uses up-arrow to repeat the command, and edits it to read: $ for datafile in NENE<em>[AB].txt; do echo $datafile; bash goostats <span class="math inline">\(datafile stats-\)</span>datafile; done Beginning and End We can move to the beginning of a line in the shell by typing Ctrl-a and to the end using Ctrl-e. When she runs her program now, it produces one line of output every five seconds or so: NENE01729A.txt NENE01729B.txt NENE01736A.txt … 1518 times 5 seconds, divided by 60, tells her that her script will take about two hours to run. As a final check, she opens another terminal window, goes into north-pacific-gyre/2012-07-03, and uses cat stats-NENE01729B.txt to examine one of the output files. It looks good, so she decides to get some coffee and catch up on her reading. Those Who Know History Can Choose to Repeat It Another way to repeat previous work is to use the history command to get a list of the last few hundred commands that have been executed, and then to use !123 (where “123” is replaced by the command number) to repeat one of those commands. For example, if Nelle types this: $ history | tail -n 5 456 ls -l NENE0</em>.txt 457 rm stats-NENE01729B.txt.txt 458 bash goostats NENE01729B.txt stats-NENE01729B.txt 459 ls -l NENE0<em>.txt 460 history then she can re-run goostats on NENE01729B.txt simply by typing !458. Other History Commands There are a number of other shortcut commands for getting at the history. </em> Ctrl-R enters a history search mode “reverse-i-search” and finds the most recent command in your history that matches the text you enter next. Press Ctrl-R one or more additional times to search for earlier matches. * !! retrieves the immediately preceding command (you may or may not find this more convenient than using the up-arrow) * !$ retrieves the last word of the last command. That’s useful more often than you might expect: after bash goostats NENE01729B.txt stats-NENE01729B.txt, you can type less !$ to look at the file stats-NENE01729B.txt, which is quicker than doing up-arrow and editing the command-line. Saving to a File in a Loop - Part One In the data-shell/molecules directory, what is the effect of this loop? for mols in *.pdb do echo $mols cat $mols &gt; mols.pdb done 1. Prints cubane.pdb, ethane.pdb, methane.pdb, octane.pdb, pentane.pdb and propane.pdb, and the text from propane.pdb will be saved to a file called alkanes.pdb. 2. Prints cubane.pdb, ethane.pdb, and methane.pdb, and the text from all three files would be concatenated and saved to a file called alkanes.pdb. 3. Prints cubane.pdb, ethane.pdb, methane.pdb, octane.pdb, and pentane.pdb, and the text from propane.pdb will be saved to a file called alkanes.pdb. 4. None of the above. What’s the problem? How can we fix it?</p>
-<p>Saving to a File in a Loop - Part Two Also in the data-shell/molecules directory, what would be the output of the following loop? for datafile in <em>.pdb do cat $datafile &gt;&gt; all.pdb done 1. All of the text from cubane.pdb, ethane.pdb, methane.pdb, octane.pdb, and pentane.pdb would be concatenated and saved to a file called all.pdb. 2. The text from ethane.pdb will be saved to a file called all.pdb. 3. All of the text from cubane.pdb, ethane.pdb, methane.pdb, octane.pdb, pentane.pdb and propane.pdb would be concatenated and saved to a file called all.pdb. 4. All of the text from cubane.pdb, ethane.pdb, methane.pdb, octane.pdb, pentane.pdb and propane.pdb would be printed to the screen and saved to a file called all.pdb. Doing a Dry Run A loop is a way to do many things at once — or to make many mistakes at once if it does the wrong thing. One way to check what a loop would do is to echo the commands it would run instead of actually running them. Suppose we want to preview the commands the following loop will execute without actually running those commands: for file in </em>.pdb do analyze <span class="math inline">\(file &gt; analyzed-\)</span>file done What is the difference between the two loops below, and which one would we want to run? # Version 1 for file in <em>.pdb do echo analyze <span class="math inline">\(file &gt; analyzed-\)</span>file done # Version 2 for file in </em>.pdb do echo “analyze <span class="math inline">\(file &gt; analyzed-\)</span>file” done</p>
-<p>Try both versions and open the output files.</p>
-<p>Nested Loops Suppose we want to set up a directory structure to organize some experiments measuring reaction rate constants with different compounds and different temperatures. What would be the result of the following code: for species in cubane ethane methane do for temperature in 25 30 37 40 do mkdir <span class="math inline">\(species-\)</span>temperature done done Check out the results!</p>
-<p>Key Points * A for loop repeats commands once for every thing in a list. * Every for loop needs a variable to refer to the thing it is currently operating on. * Use $name to expand a variable (i.e., get its value). ${name} can also be used. * Do not use spaces, quotes, or wildcard characters such as ‘<em>’ or ‘?’ in filenames, as it complicates variable expansion. </em> Give files consistent names that are easy to match with wildcard patterns to make it easy to select them for looping. * Use the up-arrow key to scroll up through previous commands to edit and repeat them. * Use Ctrl-R to search through the previously entered commands. * Use history to display recent commands, and !number to repeat a command by number.</p>
+<div id="find-files" class="section level4">
+<h4>Find Files</h4>
+<p>While grep finds lines in files, the find command finds files themselves. Again, it has a lot of options. Nelle’s writing directory contains one file called haiku.txt and three subdirectories: thesis (which contains a sadly empty file, empty-draft.md); data (which contains three files LittleWomen.txt, one.txt and two.txt); and a tools directory that contains the programs format and stats, and a subdirectory called old, with a file oldtool. For our first command, let’s run find . from within Nelle’s writing/. $ find . . ./data ./data/one.txt ./data/LittleWomen.txt ./data/two.txt ./tools ./tools/format ./tools/old ./tools/old/oldtool ./tools/stats ./haiku.txt ./thesis ./thesis/empty-draft.md As always, the . on its own means the current working directory, which is where we want our search to start. find’s output is the names of every file and directory under the current working directory. This can seem useless at first but find has many options to filter the output and in this lesson we will discover some of them. The first option in our list is -type d that means “things that are directories”. Sure enough, find’s output is the names of the five directories in our little tree (including .): $ find . -type d ./ ./data ./thesis ./tools ./tools/old Notice that the objects find finds are not listed in any particular order. If we change -type d to -type f, we get a listing of all the files instead: $ find . -type f ./haiku.txt ./tools/stats ./tools/old/oldtool ./tools/format ./thesis/empty-draft.md ./data/one.txt ./data/LittleWomen.txt ./data/two.txt Now let’s try matching by name: $ find . -name <em>.txt ./haiku.txt We expected it to find all the text files, but it only prints out ./haiku.txt. The problem is that the shell expands wildcard characters like </em> before commands run. Since <em>.txt in the current directory expands to haiku.txt, the command we actually ran was: $ find . -name haiku.txt find did what we asked; we just asked for the wrong thing. To get what we want, let’s do what we did with grep: put </em>.txt in single quotes to prevent the shell from expanding the * wildcard. This way, find actually gets the pattern <em>.txt, not the expanded filename haiku.txt: $ find . -name ’</em>.txt’ ./data/one.txt ./data/LittleWomen.txt ./data/two.txt ./haiku.txt Listing vs. Finding ls and find can be made to do similar things given the right options, but under normal circumstances, ls lists everything it can, while find searches for things with certain properties and shows them.</p>
+<p>As we said earlier, the command line’s power lies in combining tools. We’ve seen how to do that with pipes; let’s look at another technique. As we just saw, find . -name ‘<em>.txt’gives us a list of all text files in or below the current directory. How can we combine that with wc -l to count the lines in all those files? The simplest way is to put the find command inside $(): $ wc -l $(find . -name ’</em>.txt’) 11 ./haiku.txt 300 ./data/two.txt 21022 ./data/LittleWomen.txt 70 ./data/one.txt 21403 total When the shell executes this command, the first thing it does is run whatever is inside the $(). It then replaces the $() expression with that command’s output. Since the output of find is the four filenames ./data/one.txt, ./data/LittleWomen.txt, ./data/two.txt, and ./haiku.txt, the shell constructs the command: $ wc -l ./data/one.txt ./data/LittleWomen.txt ./data/two.txt ./haiku.txt which is what we wanted. This expansion is exactly what the shell does when it expands wildcards like * and ?, but lets us use any command we want as our own “wildcard”. It’s very common to use find and grep together. The first finds files that match a pattern; the second looks for lines inside those files that match another pattern. Here, for example, we can find PDB files that contain iron atoms by looking for the string “FE” in all the .pdb files above the current directory: $ grep “FE” $(find . -name ‘<em>.pdb’) ../data/pdb/heme.pdb:ATOM 25 FE 1 -0.924 0.535 -0.518 Matching and Subtracting The -v flag to grep inverts pattern matching, so that only lines which do not match the pattern are printed. Given that, which of the following commands will find all files in /data whose names end in s.txt (e.g., animals.txt or planets.txt), but do not contain the word net? Once you have thought about your answer, you can test the commands in the data-shell directory. 1. find data -name ’</em>s.txt’ | grep -v net 2. find data -name *s.txt | grep -v net 3. grep -v “temp” $(find data -name ‘<em>s.txt’) 4. None of the above. Pipeline Reading Comprehension Write a short explanatory comment for the following shell script: wc -l $(find . -name ’</em>.dat’) | sort -n</p>
+<p>Finding Files with Different Properties The find command can be given several other criteria known as “tests” to locate files with specific attributes, such as creation time, size, permissions, or ownership. Use man find to explore these, and then write a single command to find all files in or below the current directory that were modified by the user ahmed in the last 24 hours. Hint 1: you will need to use three tests: -type, -mtime, and -user. Hint 2: The value for -mtime will need to be negative—why? Key Points * find finds files with specific properties that match patterns. * grep and egrep selects lines in files that match patterns. * –help is a flag supported by many bash commands, and programs that can be run from within Bash, to display more information on how to use these commands or programs. * man command displays the manual page for a given command. * $(command) inserts a command’s output in place.</p>
+</div>
+<div id="acknowledgments" class="section level4">
+<h4><strong>Acknowledgments</strong></h4>
+<p><em>This page was derived in part from: <a href="software-carpentry.org">Software Carpentry</a>, licensed under the CC BY-NC 3.0 Creative Commons</em></p>
+</div>
 </div>
 
 

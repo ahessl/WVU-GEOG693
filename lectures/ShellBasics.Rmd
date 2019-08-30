@@ -31,9 +31,19 @@ Sara is new to R.  She borrowed a script from a colleague that reads in climate 
 * __root directory__ - top of the file system; may be same as home  
 * __home directory__ - the “user’s” directory, i.e. the directory a user is in upon login  
 * __working directory__ - the current directory (i.e., “folder”) that you are in. By default, this is your home directory. 
-*	__path__ - the unique file or folder location within a directory. Here the path is also the working directory: /Users/amyhessl
+*	__path__ - the unique file or folder location within a directory. Here the path is also the working directory: _/Users/amyhessl_
 
-#### BIG HINT: watch your progress in the lower right window of RStudio under the 'Files' tab.
+### Tips on Reading the Lessons
+
+Code blocks are grey blocks that look like this:
+```{bash, echo=-1, eval=T}
+cd ../data/data-shell
+pwd
+ls molecules
+```
+Code blocks are often followed by white blocks of bash output.  When you are entering commands at the $ prompt, you will want to enter the code from the code chunks and expect to see the same output in your terminal window, preceded by ##.
+
+#### BIG HINT: As you make new files or directories watch your progress in the lower right window of RStudio under the 'Files' tab.
 
 You can print your working directory (pwd):
 
@@ -42,8 +52,7 @@ pwd
 ```
 My working directory will not match yours.  What things are different? What aspects are the same?
 
-### On Slashes
-
+### On Slashes  
 Unix based operating systems use a forward slash (`/`), Windows uses a backward slash (`\`).  Some applications like R were written for Unix, therefore use a `/`.
 
 ### Why Directories?
@@ -176,10 +185,11 @@ _What does the -p flag do?_
 Hint: what does the -r flag do?  BE VERY CAREFUL! Why?		
 
 ### Absolute and Relative Paths
-So far, when specifying directory names, or even a directory path (as above), we have been using relative paths. When you use a relative path with a command like ls or cd, it tries to find that location from where we are, rather than from the root of the file system.  There are two ways to make an absolute path - a path that will take anyone to the same place regardless of their directory structure.
+So far, when specifying directory names, or even a directory path (as above), we have been using relative paths. When you use a relative path with a command like `ls` or `cd`, it tries to find that location from where we are, rather than from the root of the file system.  There are two ways to make an relative path - a path that will take anyone to the same place regardless of their directory structure.
 
 * cd ~ directs to the users home directory.
 * cd / directs to the root directory
+* cd . directs to the current working directory
 
 The leading / tells the computer to follow the path from the root of the file system, so it always refers to exactly one directory, no matter where we are when we run the command.
 
@@ -207,7 +217,7 @@ cd	~/Desktop/GEOG693/shell
 *	__pwd__ prints the user’s current working directory.  
 *	__/__ on its own is the root directory of the whole file system - this may or may not be your home directory.  
 *	A __relative path__ specifies a location starting from the current location.  
-*	An __absolute path__ specifies a location from the root of the file system.  
+*	An __absolute path__ specifies a location from the root of the file system along a specific path.  
 *	Directory names in a path are separated with forward slash on Unix, but backward slash on Windows.  
 *	__..__ means ‘the directory above the current one’; . on its own means ‘the current directory’.  
 *	Most files’ names are something.extension. The __extension__ isn’t required, and doesn’t guarantee anything, but is normally used to indicate the type of data in the file.  

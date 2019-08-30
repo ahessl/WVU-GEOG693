@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Problem: As scientists, we make a lot of files with a lot of data.  The problem is amplified if you use machines that can make superfast. How can we quickly find text or values, not just in a single file, but in large numbers of files?
+#### Problem: As scientists, we make a lot of files with a lot of data.  The problem is amplified if you use machines that can make data superfast. How can we quickly find text or values, not just in a single file, but in large numbers of files?
 
 #### Questions
 *	How can I find files?  
@@ -34,7 +34,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### grep
 In the same way that many of us now use “Google” as a verb meaning “to find”, Unix programmers often use the word “grep”. “grep” is a contraction of “global/regular expression/print”, a common sequence of operations in early Unix text editors. It is also the name of a very useful command-line program.
-`grep` finds and prints lines in files that match a pattern. For our examples, we will use a file that contains three haikus taken from a 1998 competition in Salon magazine. For this set of examples, we’re going to be working in the `writing/` subdirectory of `data-shell/`
+`grep` finds and prints lines in files that match a pattern. For our examples, we will use a file that contains three haikus taken from a 1998 competition in Salon magazine. For this set of examples, we’re going to be working in the _writing_ subdirectory of _data-shell/_
 
 ```{bash, echo=TRUE, eval=T}
 cd ../data/data-shell/writing
@@ -103,24 +103,7 @@ cd ../data/data-shell/writing
 grep -n -w -v "the" haiku.txt 
 ```
 grep has lots of other options. To find out what they are, we can type:
-```{bash, echo=TRUE, eval=T}
-grep --help
 ```
-
-Regexp selection and interpretation:
-  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)
-  -F, --fixed-strings       PATTERN is a set of newline-separated fixed strings
-  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)
-  -P, --perl-regexp         PATTERN is a Perl regular expression
-  -e, --regexp=PATTERN      use PATTERN for matching
-  -f, --file=FILE           obtain PATTERN from FILE
-  -i, --ignore-case         ignore case distinctions
-  -w, --word-regexp         force PATTERN to match only whole words
-  -x, --line-regexp         force PATTERN to match only whole lines
-  -z, --null-data           a data line ends in 0 byte, not newline
-
-Or for more info, try the manual
-```{bash, echo=-1, eval=T}
 man grep
 ```
 
@@ -146,17 +129,21 @@ grep -E '^.o' haiku.txt
 We use the `-E` flag and put the pattern in quotes to prevent the shell from trying to interpret it. (If the pattern contained a *, for example, the shell would try to expand it before running grep.) The `^` in the pattern anchors the match to the start of the line. The `.` matches a single character (just like `?` in the shell), while the `o` matches an actual ‘o’.
 
 #### Tracking a Species
->__Challenge: Leah has several hundred data files saved in one directory, each of which is formatted like this:
+>__Challenge: Leah has several hundred data files saved in one directory, each of which is formatted like this:__  
+
+```
 2013-11-05,deer,5  
 2013-11-05,rabbit,22  
 2013-11-05,raccoon,7  
 2013-11-06,rabbit,19  
-2013-11-06,deer,2  
-She wants to write a shell script that takes a species as the first command-line argument and a directory as the second argument. The script should return one file called `speciesname.txt` containing a list of dates and the number of that species seen on each date. For example using the data shown above, `rabbit.txt` would contain:
+2013-11-06,deer,2 
+```
+She wants to write a shell script that takes a species as the first command-line argument and a directory as the second argument. The script should return one file called _speciesname.txt_ containing a list of dates and the number of that species seen on each date. For example using the data shown above, _rabbit.txt_ would contain:
+```
 2013-11-05,22  
 2013-11-06,19  
-An example of such a file is provided in `data-shell/data/animal-counts/animals.txt`__
-
+```
+An example of such a file is provided in: _data-shell/data/animal-counts/animals.txt_
 
 _Solution Hints_
 *	Use man grep to look for how to grep text recursively in a directory and man cut to select more than one field in a line.
@@ -335,3 +322,5 @@ Key Points
 *	man command displays the manual page for a given command.
 *	$(command) inserts a command’s output in place.
 
+#### __Acknowledgments__
+_This page was derived in part from: [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_

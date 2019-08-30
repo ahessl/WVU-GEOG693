@@ -414,9 +414,7 @@ summary {
 <p>We now know how to explore files and directories, let’s review how to make a directory. Be sure you are in the directory for the folder we just unzipped and use <code>ls -F</code> to see what it contains:</p>
 <pre class="bash"><code>cd ../data/data-shell
 ls -F</code></pre>
-<pre><code>## creatures/
-## data/
-## junk/
+<pre><code>## data/
 ## molecules/
 ## north-pacific-gyre/
 ## notes.txt
@@ -427,9 +425,7 @@ ls -F</code></pre>
 <pre class="bash"><code>mkdir thesis</code></pre>
 <p>Since thesis is a relative path (i.e., doesn’t have specific path), the new directory is created in the current working directory:</p>
 <pre class="bash"><code>ls -F</code></pre>
-<pre><code>## creatures/
-## data/
-## junk/
+<pre><code>## data/
 ## molecules/
 ## north-pacific-gyre/
 ## notes.txt
@@ -487,7 +483,7 @@ touch draft.txt</code></pre>
 <p>Now an <code>ls</code> in the thesis folder will show the file:</p>
 <pre class="bash"><code>ls -l</code></pre>
 <pre><code>## total 0
-## -rw-r--r--  1 amyhessl  staff  0 Aug 27 19:55 draft.txt</code></pre>
+## -rw-r--r--  1 amyhessl  staff  0 Aug 28 16:53 draft.txt</code></pre>
 <p>Returning to the <em>data-shell</em> directory, let’s tidy up the <em>thesis</em> directory by removing the draft we created:</p>
 <pre class="bash"><code>rm draft.txt</code></pre>
 <p>This command removes files (<code>rm</code> is short for “remove”). If we run <code>ls</code> again, its output is empty once more, which tells us that our file is gone.</p>
@@ -496,20 +492,20 @@ touch draft.txt</code></pre>
 <div id="deleting-is-forever" class="section level3">
 <h3>Deleting Is Forever</h3>
 <p>The bash shell doesn’t have a trash bin that we can recover deleted files from (though most graphical interfaces to bash do). Instead, when we delete files, they are unhooked from the file system so that their storage space on disk can be recycled. Tools for finding and recovering deleted files do exist, but there’s no guarantee they’ll work in any particular situation, since the computer may recycle the file’s disk space right away.</p>
-<p>Let’s re-create that file and then move up one directory to <em>~/OpenDataSci/data/data-shell</em> using <code>cd ..</code>:</p>
-<pre class="bash"><code>pwd</code></pre>
-<pre><code>## /Users/amyhessl/Dropbox/Hessl/Teaching/Courses/EarthSciDigAge/OpenDataSci/data/data-shell</code></pre>
+<p>Let’s re-create <em>draft.txt</em>, then move up a directory to <em>/data-shell</em> using <code>cd ..</code></p>
 <pre class="bash"><code>cd thesis
 touch draft.txt
 cd ..</code></pre>
 <p>What happens if we try to remove the entire thesis directory using <code>rm thesis</code>?</p>
-<p>This happens because <code>rm</code> by default only works on files, not directories.</p>
-<p>Instead try: <code>rmdir thesis</code></p>
+<p>We get an error happens because <code>rm</code> by default only works on files, not directories.</p>
+<p>Instead try:</p>
+<pre class="bash"><code>rmdir thesis</code></pre>
 <blockquote>
 <p><strong>Challenge: What went wrong in this case?</strong></p>
 </blockquote>
-<p>To really get rid of thesis we must also delete the file <em>draft.txt</em>. We can do this with the recursive option for <code>rm</code>:</p>
-<pre class="bash"><code>rm -r -i thesis</code></pre>
+<p>To really get rid of <em>thesis</em> we must be in a directory above <em>thesis</em> <strong>and</strong> <em>thesis</em> must be empty. We can do this with the recursive option for <code>rm</code>:</p>
+<pre class="bash"><code>cd ..
+rm -r -i thesis</code></pre>
 <div id="using-rm-safely" class="section level4">
 <h4>Using rm Safely</h4>
 <p>Add the thesis directory back in and make a <em>draft.txt</em> and a <em>quotations.txt</em> file in that directory. You can do it in one command!</p>
@@ -518,10 +514,10 @@ touch thesis/draft.txt thesis/quotations.txt</code></pre>
 <p>What happens when we type:</p>
 <pre class="bash"><code>rm -i thesis/quotations.txt</code></pre>
 <p>Why would we want this protection when using <code>rm</code>?</p>
-<p><em>With Great Power Comes Great Responsibility</em> Removing the files in a directory recursively can be a very dangerous operation. If we’re concerned about what we might be deleting we can add the “interactive” flag <code>-i</code> to rm which will ask us for confirmation before each step.</p>
+<p><em>With Great Power Comes Great Responsibility</em> Removing the files in a directory recursively can be a very dangerous operation. If we’re concerned about what we might be deleting we can add the “interactive” flag <code>-i</code> to <code>rm</code> which will ask us for confirmation before each step.</p>
 <pre class="bash"><code>rm -r -i thesis </code></pre>
 <p>This removes everything in the directory, then the directory itself, asking at each step for you to confirm the deletion.</p>
-<p>Let’s create that directory and file one more time. (Note that this time we’re running touch with the path <code>thesis/draft.txt</code>, rather than going into the thesis directory and running nano or notepadd++ on <em>draft.txt</em> there.)</p>
+<p>Let’s create that directory and file one more time. (Note that this time we’re running <code>touch</code> with the path <em>thesis/draft.txt</em>, rather than going into the thesis directory and running nano or notepadd++ on <em>draft.txt</em> there.)</p>
 <blockquote>
 <p><strong>Challenge: Try making the draft and directory at the same time. Which is it?</strong></p>
 </blockquote>
@@ -548,18 +544,19 @@ mv thesis/draft.txt thesis/quotes.txt</code></pre>
 <pre class="bash"><code>ls quotes.txt</code></pre>
 <pre><code>## quotes.txt</code></pre>
 <blockquote>
-<p><strong>Challenge: After running the following commands, Jamie realizes that she put the files sucrose.dat and maltose.dat into the wrong folder:</strong></p>
+<p><strong>Challenge: After running the following commands, Jamie realizes that she put the file sucrose.dat in the wrong folder:</strong></p>
 </blockquote>
+<p>Check out her commands below, then see if you can fill in the blank to move <em>sucrose.dat</em> to the <em>raw</em> directory.</p>
 <pre class="bash"><code>ls -F
     analyzed/ raw/
 ls -F analyzed
   Fructose.dat glucose.dat maltose.dat sucrose.dat
 cd raw/</code></pre>
-<blockquote>
-<p><strong>Challenge: Fill in the blanks to move these files to the current folder (i.e., the one she is currently in):</strong></p>
-</blockquote>
-<p><code>mv __/sucrose.dat __maltose.dat __</code></p>
+<p><code>mv __/__/sucrose.dat __</code></p>
 <p><em>Hint:</em> Recall that <code>..</code> refers to the parent directory (i.e. one above the current directory) and that <code>.</code> refers to the current directory.</p>
+<blockquote>
+<p>__Extra Challenge: What if Jamie needed to move two files (sucrose.dat and maltose.dat) to raw/. Can she do it in one line?</p>
+</blockquote>
 </div>
 <div id="copy" class="section level4">
 <h4>Copy</h4>
@@ -567,9 +564,7 @@ cd raw/</code></pre>
 <pre class="bash"><code>cp quotes.txt thesis/quotations.txt
 ls . thesis</code></pre>
 <pre><code>## .:
-## creatures
 ## data
-## junk
 ## molecules
 ## north-pacific-gyre
 ## notes.txt

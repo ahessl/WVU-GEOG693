@@ -121,13 +121,8 @@ This command removes files (`rm` is short for “remove”). If we run `ls` agai
 ### Deleting Is Forever
 The bash shell doesn’t have a trash bin that we can recover deleted files from (though most graphical interfaces to bash do). Instead, when we delete files, they are unhooked from the file system so that their storage space on disk can be recycled. Tools for finding and recovering deleted files do exist, but there’s no guarantee they’ll work in any particular situation, since the computer may recycle the file’s disk space right away.
 
-Let’s re-create that file and then move up one directory to _~/OpenDataSci/data/data-shell_ using `cd ..`:
+Let’s re-create _draft.txt_, then move up a directory to _/data-shell_ using `cd ..`
 
-
-```{bash, echo=-1, eval=T}
-cd ../data/data-shell
-pwd
-```
 ```{bash, echo=-1, eval=T}
 cd ../data/data-shell
 cd thesis
@@ -137,16 +132,21 @@ cd ..
 
 What happens if we try to remove the entire thesis directory using `rm thesis`?
 
-This happens because `rm` by default only works on files, not directories.
+We get an error happens because `rm` by default only works on files, not directories.
 
-Instead try: `rmdir thesis`
+Instead try: 
+```{bash, echo=-1, eval=F, engine='sh'}
+cd ../data/data-shell/thesis
+rmdir thesis
+```
 
 > __Challenge: What went wrong in this case?__
 
-To really get rid of thesis we must also delete the file _draft.txt_. We can do this with the recursive option for `rm`:
+To really get rid of _thesis_ we must be in a directory above _thesis_ __and__ _thesis_ must be empty.  We can do this with the recursive option for `rm`:
 
-```{bash, echo=-1, eval=F, engine='bash'}
-cd ../data/data-shell
+```{bash, echo=-1, eval=F, engine='sh'}
+cd ../data/data-shell/thesis
+cd ..
 rm -r -i thesis
 ```
 
@@ -157,14 +157,14 @@ rm -r thesis
 #### Using rm Safely
 
 Add the thesis directory back in and make a _draft.txt_ and a _quotations.txt_ file in that directory. You can do it in one command!
-```{bash, echo=-1, eval=T, engine='bash'}
+```{bash, echo=-1, eval=T, engine='sh'}
 cd ../data/data-shell
 mkdir thesis
 touch thesis/draft.txt thesis/quotations.txt
 ```
 
 What happens when we type:
-```{bash, echo=-1, eval=F, engine='bash'}
+```{bash, echo=-1, eval=F, engine='sh'}
 cd ../data/data-shell
 rm -i thesis/quotations.txt
 ```
@@ -172,9 +172,9 @@ rm -i thesis/quotations.txt
 Why would we want this protection when using `rm`?
 
 _With Great Power Comes Great Responsibility_
-Removing the files in a directory recursively can be a very dangerous operation. If we’re concerned about what we might be deleting we can add the “interactive” flag `-i` to rm which will ask us for confirmation before each step.
+Removing the files in a directory recursively can be a very dangerous operation. If we’re concerned about what we might be deleting we can add the “interactive” flag `-i` to `rm` which will ask us for confirmation before each step.
 
-```{bash, echo=-1, eval=F, engine='bash'}
+```{bash, echo=-1, eval=F, engine='sh'}
 cd ../data/data-shell
 rm -r -i thesis 
 ```
@@ -186,7 +186,7 @@ rm -r thesis
 
 This removes everything in the directory, then the directory itself, asking at each step for you to confirm the deletion.
 
-Let’s create that directory and file one more time. (Note that this time we’re running touch with the path `thesis/draft.txt`, rather than going into the thesis directory and running nano or notepadd++ on _draft.txt_ there.)
+Let’s create that directory and file one more time. (Note that this time we’re running `touch` with the path _thesis/draft.txt_, rather than going into the thesis directory and running nano or notepadd++ on _draft.txt_ there.)
 
 >__Challenge: Try making the draft and directory at the same time. Which is it?__  
 
@@ -235,9 +235,10 @@ ls quotes.txt
 ```
 
 >__Challenge:
-After running the following commands, Jamie realizes that she put the files sucrose.dat and maltose.dat into the wrong folder:__  
+After running the following commands, Jamie realizes that she put the file sucrose.dat in the wrong folder:__    
 
-```{bash eval=FALSE, include=TRUE, engine='bash'}
+Check out her commands below, then see if you can fill in the blank to move _sucrose.dat_ to the _raw_ directory.
+```{bash eval=FALSE, include=TRUE, engine='sh'}
 ls -F
 	analyzed/ raw/
 ls -F analyzed
@@ -245,11 +246,11 @@ ls -F analyzed
 cd raw/
 ```
 
->__Challenge: Fill in the blanks to move these files to the current folder (i.e., the one she is currently in):__  
-
-`mv __/sucrose.dat __maltose.dat __`
+`mv __/__/sucrose.dat __`
 
 _Hint:_ Recall that `..` refers to the parent directory (i.e. one above the current directory) and that `.` refers to the current directory. 
+
+>__Extra Challenge: What if Jamie needed to move two files (sucrose.dat and maltose.dat) to raw/.  Can she do it in one line?
 
 #### Copy
 The `cp` command works very much like `mv`, except it copies a file instead of moving it. We can check that it did the right thing using `ls` with two paths as arguments — like most Unix/bash commands, `ls` can be given multiple paths at once:
@@ -262,14 +263,10 @@ ls . thesis
 
 To prove that we made a copy, let’s delete the _quotes.txt_ file in the current directory and then run that same `ls` again.
 
-```{bash eval=FALSE, engine='bash' }
+```{bash, eval=FALSE, engine='sh' }
 cd ../data/data-shell
 rm quotes.txt
 ls quotes.txt thesis/quotations.txt
-```
-```{bash eval=T, echo=F, engine='bash'}
-cd ../data/data-shell
-rm quotes.txt
 ```
 
 This time it tells us that it can’t find _quotes.txt_ in the current directory, but it does find the copy in thesis that we didn’t delete.
@@ -304,7 +301,7 @@ For this exercise, you can test the commands in the _data-shell/data_ directory.
 
 In the example below, what does `cp` do when given several filenames and a directory name?
 
-```{bash eval=FALSE, include=TRUE, engine='bash'}
+```{bash, eval=FALSE, include=TRUE, engine='sh'}
 cd ../data/data-shell
 mkdir backup
 cp amino-acids.txt animals.txt backup/
@@ -319,21 +316,21 @@ Assume that the file structure is in a folder called _2016-05-18-data_, which co
 >__Challenge: Which of the following set of commands would achieve this objective? What would the other commands do?__  
 
 Option A
-```{bash eval=FALSE, include=TRUE, engine='bash'}
+```{bash, eval=FALSE, include=TRUE, engine='sh'}
 cp -r 2016-05-18-data/ 2016-05-20-data/
 rm 2016-05-20-data/raw/*
 rm 2016-05-20-data/processed/*
 ```
 
 Option B
-```{bash eval=FALSE, include=TRUE, engine='bash'}
+```{bash, eval=FALSE, include=TRUE, engine='sh'}
 rm 2016-05-20-data/raw/*
 rm 2016-05-20-data/processed/*
 cp -r 2016-05-18-data/ 2016-5-20-data/
 ```
 
 Option C
-```{bash eval=FALSE, include=TRUE, engine='bash'}
+```{bash, eval=FALSE, include=TRUE, engine='sh'}
 cp -r 2016-05-18-data/ 2016-05-20-data/
 rm -r -i 2016-05-20-data/
 ```

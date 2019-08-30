@@ -128,27 +128,34 @@ Now let’s use the `sort` command to sort its contents.
 
 _What Does `sort -n` Do?_
 
-If we run sort on a file containing the following lines:
+If we run sort on a file containing the following lines:  
+
+```
 10  
 2  
 19  
 22  
-6  
+6
+```
 
-the output is:
+the output is:  
+
+```
 10  
 19  
 2  
 22  
-6  
+6
+```
 
-If we run `sort -n` on the same input, we get this instead:
+If we run `sort -n` on the same input, we get this instead:  
+```
 2  
 6  
 10  
 19  
 22  
-
+```
 > __Challenge: Explain why -n has this effect.__
 
 #### Other Kinds of Sorting...
@@ -237,11 +244,11 @@ The shell is actually just another program. Under normal circumstances, whatever
 
 Here’s what happens when we run `wc -l *.pdb > lengths.txt`. The shell starts by telling the computer to create a new process to run the `wc` program. Since we’ve provided some filenames as arguments, `wc` reads from them instead of from standard input. And since we’ve used `>` to redirect output to a file, the shell connects the process’s standard output to that file.  
 
-If we run `wc -l *.pdb | sort -n` instead, the shell creates two processes (one for each process in the pipe) so that `wc` and sort run simultaneously. The standard output of `wc` is fed directly to the standard input of `sort`; since there’s no redirection with `>`, sort’s output goes to the screen. And if we run `wc -l *.pdb | sort -n | head -n 1`, we get three processes with data flowing from the files, through `wc` to `sort`, and from `sort` through `head` to the screen.
+If we run `wc -l *.pdb | sort -n` instead, the shell creates two processes (one for each process in the pipe) so that `wc` and `sort` run simultaneously. The standard output of `wc` is fed directly to the standard input of `sort`; since there’s no redirection with `>`, sort’s output goes to the screen. And if we run `wc -l *.pdb | sort -n | head -n 1`, we get three processes with data flowing from the files, through `wc` to `sort`, and from `sort` through `head` to the screen.
  
 This simple idea is why Unix (and bash by extension) has been so successful. Instead of creating enormous programs that try to do many different things, Unix programmers focus on creating _lots of simple tools that each do one job well_, and that work well with each other. This programming model is called _“pipes and filters”_. We’ve already seen pipes; a filter is a program like `wc` or `sort` that transforms a stream of input into a stream of output. Almost all of the standard Unix tools can work this way: unless told to do otherwise, they read from standard input, do something with what they’ve read, and write to standard output.  
 
-The key is that any program that reads lines of text from standard input and writes lines of text to standard output can be combined with every other program that behaves this way as well. Movig forward, you can and should write your programs this way so that you and other people can put those programs into pipes to multiply their power.
+The key is that any program that reads lines of text from standard input and writes lines of text to standard output can be combined with every other program that behaves this way as well. Moving forward, you can and should write your programs this way so that you and other people can put those programs into pipes to multiply their power.
 
 ### Redirecting Input `>`
 As well as using `>` to redirect a program’s output, we can use `<` to redirect its input, i.e., to read from a file instead of from standard input. For example, instead of writing `wc ammonia.pdb`, we could write `wc < ammonia.pdb`. In the first case, `wc` gets a command line argument telling it what file to open. In the second, `wc` doesn’t have any command line arguments, so it reads from standard input, but we have told the shell to send the contents of _ammonia.pdb_ to wc’s standard input.
@@ -256,39 +263,39 @@ and:
 
 In the first case, the input is _notes.txt_ but in the second example, it is the contents of _notes.txt_ that is the input.  
 
-Compare with:
-`wc -l`
-`this`
-`is` 
-`a`
-`test`
-`Control-D` #to tell bash shell you are done entering stuff for `wc`
+Compare with:  
+```{bash, eval=F, engine='sh'}
+wc -l
+this
+is 
+a
+test
+#Control-D to tell bash shell you are done entering stuff for `wc`
+```
 
 #### Removing Duplicates Using `uniq`
 The command `uniq` removes adjacent duplicated lines from its input. For example, the file _data-shell/data/salmon.txt_ contains:
-`coho`  
-`coho`  
-`steelhead`  
-`coho`  
-`steelhead`  
-`steelhead` 
+```{bash, echo=-1}
+cd ../data/data-shell/data
+cat salmon.txt
+```
 
 Running the command `uniq salmon.txt` from the _data-shell/data_ directory produces:
-`coho`  
-`steelhead`  
-`coho`  
-`steelhead`  
+```{bash, echo=-1}
+cd ../data/data-shell/data
+uniq salmon.txt
+```
 
 Why do you think `uniq` only removes adjacent duplicated lines? (Hint: think about very large data sets.) 
 
 > __Challenge: What other command could you combine with it in a pipe to remove all duplicated lines? Do you use > , >>, or | ? __
 
 #### Nelle’s Pipeline: Checking Files
-Nelle has run her samples through the assay machines and created 17 files in the _north-pacific-gyre/2012-07-03_ directory contained within _data-shell_. As a quick sanity check, starting from her home directory, Nelle lists here files:
+Nelle has run her samples through the assay machines and created 17 files in the _data-shell/north-pacific-gyre/2012-07-03_ directory. As a quick sanity check, starting from her home directory, Nelle lists here files:
 
-```{bash, echo=TRUE, eval=T}
+```{bash, echo=-1, eval=T}
 cd ../data/data-shell/north-pacific-gyre/2012-07-03
-wc -l *.txt
+wc -l *.txt | head
 ```
 
 Now she types this:
@@ -319,12 +326,13 @@ Nelle is wise to the NDD principle, so she’ll just be careful later on to sele
 
 #### Wildcard Expressions
 Wildcard expressions can be very complex, but you can sometimes write them in ways that only use simple syntax, at the expense of being a bit more verbose.
-Consider the directory `data-shell/north-pacific-gyre/2012-07-03` : the wildcard expression `*[AB].txt` matches all files ending in `A.txt` or `B.txt`. Imagine you forgot about this.  
+
+> __Challenge: Consider the directory `data-shell/north-pacific-gyre/2012-07-03` : the wildcard expression `*[AB].txt` matches all files ending in `A.txt` or `B.txt`. Imagine you forgot about this.__  
+
 1. Can you match the same set of files with basic wildcard expressions that do not use the [] syntax? Hint: You may need more than one expression.  
 2. Under what circumstances would your new expression produce an error message where the original one would not?  
 
 Hint: Experiment with the files in _data/elements_  
-
  
 #### Key Points
 * `cat` displays the contents of its inputs.    
@@ -338,5 +346,9 @@ Hint: Experiment with the files in _data/elements_
 * first `|` second is a pipeline: the output of the first command is used as the input to the second.  
 * The best way to use the shell is to use pipes to combine simple single-purpose programs (filters).  
 
+#### __Acknowledgments__
+_This page was derived in part from: [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_
 
-
+```{bash, echo=F}
+rm ../data/data-shell/molecules/*lengths*.txt
+```
