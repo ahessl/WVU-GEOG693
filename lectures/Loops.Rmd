@@ -401,7 +401,7 @@ Key Points
 *	Use history to display recent commands, and !number to repeat a command by number.
 
 ```{bash, echo = FALSE}
-#rm ../data/data-shell/molecules/*lengths*
+#rm ../data/data-shell/molecules/*lengths* ##wildcards?
 #rm ../data/data-shell/creatures/*original-*
 #rm ../data/data-shell/molecules/mols.pdb
 #rm ../data/data-shell/molecules/all.pdb
