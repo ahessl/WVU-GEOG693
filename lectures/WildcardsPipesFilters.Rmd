@@ -28,7 +28,8 @@ I have been using single commands in sequence but I want to do some more complic
 *	`sort` - sorts output but need flag `-n` for numerical order  
 *	`head` - print first `-n` lines of a file  
 *	`tail` - print last `-`n lines of a file  
-*	`|` pipe -sends output to next command  
+*	`|` pipe -sends output to next command 
+*       `cut` - divides a file into several parts or columns  
 *	Filter - Unix program that filters or converts input to output    
 
 ### Get the Data
@@ -290,6 +291,29 @@ Why do you think `uniq` only removes adjacent duplicated lines? (Hint: think abo
 
 > __Challenge: What other command could you combine with it in a pipe to remove all duplicated lines? Do you use > , >>, or | ? __
 
+#### Cut: Slicing Up Files
+Though most work with the contents of a file would be conducted using analytical languages like `R`, sometimes it's convenient to be able to slice up a file into different fields or columns and then do an operation (e.g. `sort` or `wc`) on just those fields.  Let's slice up some _planets.txt_ located in _data-shell/data_. `Cut` has a variety of flags.  `-c` cuts by the character number.  What's the difference between `-c 1,7` and `-c 1-7`?
+
+```{bash, echo=-1}
+cd ../data/data-shell/data
+cut -c 1-7 planets.txt | head
+```
+This presents a common problem, most files are not arranged such that the contents of a field have the same number of characters - though sometimes this is the case!
+
+Most text files are set up with some kind of 'delimiter' to help differentiate between fields, independent of character number. Tabs, commas, spaces can all be delimeters and `cut -d` allows us to cut using those delimeters, returning only the column(s) that we select using the `-f` flag.
+
+```{bash, echo=-1}
+cd ../data/data-shell/data
+cut -d , -f 1 planets.txt | head
+```
+
+> _Challenge: what is largest planetary radius._
+
+```{bash, echo=F}
+cd ../data/data-shell/data
+cut -d , -f 3 planets.txt | sort | tail -n 2 | sort -r
+```
+
 #### Nelle’s Pipeline: Checking Files
 Nelle has run her samples through the assay machines and created 17 files in the _data-shell/north-pacific-gyre/2012-07-03_ directory. As a quick sanity check, starting from her home directory, Nelle lists here files:
 
@@ -333,6 +357,8 @@ Wildcard expressions can be very complex, but you can sometimes write them in wa
 2. Under what circumstances would your new expression produce an error message where the original one would not?  
 
 Hint: Experiment with the files in _data/elements_  
+
+
  
 #### Key Points
 * `cat` displays the contents of its inputs.    
@@ -344,6 +370,7 @@ Hint: Experiment with the files in _data/elements_
 * `?` matches any single character in a filename, so `?.txt` matches `a.txt` but not `any.txt`.  
 * command `>` file redirects a command’s output to a file.  
 * first `|` second is a pipeline: the output of the first command is used as the input to the second.  
+* `cut` - divides a file into several parts or columns  
 * The best way to use the shell is to use pipes to combine simple single-purpose programs (filters).  
 
 #### __Acknowledgments__

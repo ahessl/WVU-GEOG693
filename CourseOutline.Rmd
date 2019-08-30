@@ -29,6 +29,7 @@ Please complete this before the first day of class.
 
 5) [Wildcards, Pipes, and Filters](./lectures/WildcardsPipesFilters.html) _08/30/19_  
 
+
 6) [Accessing Data with `wget`](./lectures/wget.html) _09/04/09_
 
 7) Loops  

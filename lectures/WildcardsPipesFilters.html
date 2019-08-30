@@ -403,8 +403,8 @@ summary {
 </li>
 <li><code>tail</code> - print last <code>-</code>n lines of a file<br />
 </li>
-<li><code>|</code> pipe -sends output to next command<br />
-</li>
+<li><code>|</code> pipe -sends output to next command</li>
+<li><pre><code>  `cut` - divides a file into several parts or columns  </code></pre></li>
 <li>Filter - Unix program that filters or converts input to output</li>
 </ul>
 </div>
@@ -417,6 +417,7 @@ summary {
 <pre class="bash"><code>ls molecules</code></pre>
 <pre><code>## cubane.pdb
 ## ethane.pdb
+## lengths.txt
 ## methane.pdb
 ## octane.pdb
 ## pentane.pdb
@@ -659,6 +660,39 @@ test
 <p><strong>Challenge: What other command could you combine with it in a pipe to remove all duplicated lines? Do you use &gt; , &gt;&gt;, or | ? </strong></p>
 </blockquote>
 </div>
+<div id="cut-slicing-up-files" class="section level4">
+<h4>Cut: Slicing Up Files</h4>
+<p>Though most work with the contents of a file would be conducted using analytical languages like <code>R</code>, sometimes it’s convenient to be able to slice up a file into different fields or columns and then do an operation (e.g. <code>sort</code> or <code>wc</code>) on just those fields. Let’s slice up some <em>planets.txt</em> located in <em>data-shell/data</em>. <code>Cut</code> has a variety of flags. <code>-c</code> cuts by the character number. What’s the difference between <code>-c 1,7</code> and <code>-c 1-7</code>?</p>
+<pre class="bash"><code>cut -c 1-7 planets.txt | head</code></pre>
+<pre><code>## &quot;Planet
+## &quot;55 Cnc
+## &quot;CoRoT-
+## &quot;CoRoT-
+## &quot;CoRoT-
+## &quot;CoRoT-
+## &quot;CoRoT-
+## &quot;CoRoT-
+## &quot;CoRoT-
+## &quot;CoRoT-</code></pre>
+<p>This presents a common problem, most files are not arranged such that the contents of a field have the same number of characters - though sometimes this is the case!</p>
+<p>Most text files are set up with some kind of ‘delimiter’ to help differentiate between fields, independent of character number. Tabs, commas, spaces can all be delimeters and <code>cut -d</code> allows us to cut using those delimeters, returning only the column(s) that we select using the <code>-f</code> flag.</p>
+<pre class="bash"><code>cut -d , -f 1 planets.txt | head</code></pre>
+<pre><code>## &quot;Planet Name&quot;
+## &quot;55 Cnc e&quot;
+## &quot;CoRoT-1 b&quot;
+## &quot;CoRoT-10 b&quot;
+## &quot;CoRoT-11 b&quot;
+## &quot;CoRoT-12 b&quot;
+## &quot;CoRoT-13 b&quot;
+## &quot;CoRoT-14 b&quot;
+## &quot;CoRoT-16 b&quot;
+## &quot;CoRoT-17 b&quot;</code></pre>
+<blockquote>
+<p><em>Challenge: what is largest planetary radius.</em></p>
+</blockquote>
+<pre><code>## &quot;Pl. Radius&quot;
+## &quot;2.037&quot;</code></pre>
+</div>
 <div id="nelles-pipeline-checking-files" class="section level4">
 <h4>Nelle’s Pipeline: Checking Files</h4>
 <p>Nelle has run her samples through the assay machines and created 17 files in the <em>data-shell/north-pacific-gyre/2012-07-03</em> directory. As a quick sanity check, starting from her home directory, Nelle lists here files:</p>
@@ -729,6 +763,8 @@ ls *Z.txt</code></pre>
 <li>command <code>&gt;</code> file redirects a command’s output to a file.<br />
 </li>
 <li>first <code>|</code> second is a pipeline: the output of the first command is used as the input to the second.<br />
+</li>
+<li><code>cut</code> - divides a file into several parts or columns<br />
 </li>
 <li>The best way to use the shell is to use pipes to combine simple single-purpose programs (filters).</li>
 </ul>
