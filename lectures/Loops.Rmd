@@ -112,9 +112,9 @@ Here we see `>` being used a shell prompt, whereas `>` is also used to redirect 
 If the shell prints `>` or `$` then it expects you to type something, and the symbol is a prompt.
 If you type `>` or `$` yourself, it is an instruction from you that the shell to redirect output or get the value of a variable.
 
-Returning to our example in the _data-shell/creatures_ directory, we have called the variable in this loop filename in order to make its purpose clearer to human readers. The shell itself doesn’t care what the variable is called; if we wrote this loop as:
+Returning to our example in the _data-shell/creatures_ directory, we have called the variable in this loop `filename` in order to make its purpose clearer to human readers. The shell itself doesn’t care what the variable is called; if we wrote this loop as:
 
-```{bash, eval=TRUE, echo=TRUE, engine="sh"}
+```{bash, eval=TRUE, echo=-1, engine="sh"}
 cd ../data/data-shell/creatures
 for x in basilisk.dat unicorn.dat
 do
@@ -122,7 +122,7 @@ do
 done
 ```
 or:
-```{bash, eval=T, echo=TRUE, engine="sh"}
+```{bash, eval=T, echo=-1, engine="sh"}
 cd ../data/data-shell/creatures
 for temperature in basilisk.dat unicorn.dat
 do
@@ -362,10 +362,6 @@ do
 done
 ```
 
-```{bash, echo=F}
-cd ../data/data-shell/molecules
-rm analyzed*.pdb
-```
 
 ##### Version 2
 ```{bash mols loop, echo=-1, eval=F, engine='sh'}
@@ -375,20 +371,31 @@ do
   echo "analyze $file > analyzed-$file"
 done
 ```
+```{bash, echo=F}
+cd ../data/data-shell/molecules
+rm analyzed*.pdb
+```
 
 Try both versions and open the output files.
 
 #### Nested Loops
 Suppose we want to set up a directory structure to organize some experiments measuring reaction rate constants with different compounds and different temperatures. What would be the result of the following code:
 
-for species in cubane ethane methane
+```{bash, echo=-1, engine='sh'}
+cd ./data/data-shell/molecules
+for species in cubane.pdb ethane.pdb methane.pdb
 do
     for temperature in 25 30 37 40
     do
         mkdir $species-$temperature
     done
 done
+```
 Check out the results!
+
+```{bash, echo=F}
+rm -r ../data/data-shell/molecules/*.pdb-*
+```
 
 Key Points
 *	A for loop repeats commands once for every thing in a list.

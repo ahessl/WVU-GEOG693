@@ -27,12 +27,11 @@ Please complete this before the first day of class.
 
 4) [Files and Directories](./lectures/FilesDirectories.html) _08/28/19_  
 
-5) [Wildcards, Pipes, and Filters](./lectures/WildcardsPipesFilters.html) _08/30/19_  
+5) [Wildcards, Pipes, and Filters](./lectures/WildcardsPipesFilters.html) _08/30/19_   
 
+6) [Loops](./lectures/Loops.html) _09/04/09_  
 
-6) [Accessing Data with `wget`](./lectures/wget.html) _09/04/09_
-
-7) Loops  
+7) [Accessing Data with `wget`](./lectures/wget.html)  _09/11/09_  
 
 8) Finding Things 
     + `grep`
