@@ -3,12 +3,12 @@ title: "wget"
 author: "Amy Hessl"
 date: "8/7/2019"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, engine='sh')
 ```
 
 #### Getting Data
@@ -39,7 +39,7 @@ Option 2: First download _HomeBrew_, a package installer that allows you to inst
 
 On a mac, use these commands.  You may need to enter your password.
 
-```{bash, eval=F}	
+```{bash homebrew, eval=F, engine='sh'}	
 xcode-select --install
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`  
 
@@ -47,8 +47,8 @@ brew doctor #checks that you have it installed properly
 ```
 Once brewer is installed you can access tons of free utilities such as `wget`.  From your home directory, try:
 
-```{bash, eval=F}
-brew install wget`
+```{bash wget install, eval=F, engine='sh'}
+brew install wget
 ```
 
 ##### Git for Windows Instructions (and for other utilities too)
@@ -69,42 +69,49 @@ and help information:
 	`wget -h`
 OR 
 	`man wget`
+	
+OR go to the [online manual](https://www.gnu.org/software/wget/manual/wget.html#URL-Format)
 
 #### Retrieve One File From a url
 Say you want to download a single climate station file from NOAA (with an eye towards writing code to download a whole bunch of files). To download a single dataset from a url and save in your working directory:
 
-```{bash one file, echo=TRUE, eval=FALSE}
+```{bash mkdir wget, echo=TRUE, eval=TRUE, engine='sh'}
 mkdir ../data/data-shell/wget
+cd ../data/data-shell/wget
+```
+Download and store in wget:
+```{bash one file, echo=TRUE, eval=FALSE, engine='sh'}
 cd ../data/data-shell/wget
 wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all/USW00013736.dly
 ```
-Check in your working directory to see that you now have a file named `USW0013736.dly`. You can look at this file using `cat`, `nano` or any text editor, even though it has a _.dly_ extension (NOAA specific extension for 'daily' climate data).  Let's take a look at the url, and consider how NOAA is storing all these individual station records.
+Check in your _wget_ directory to see that you now have a file named `USW0013736.dly`. You can look at this file using `cat`, `nano` or any text editor, even though it has a _.dly_ extension (NOAA specific extension for 'daily' climate data).  Let's take a look at the url, and consider how NOAA is storing all these individual station records.
 
 Paste just this part of the url into a browser:
 ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/
 
-If you add all/ or click on that folder, it will take a long time to load, because that is a list of all the climate stations in the Global Historical Climatology Network maintained by NOAA, as well as their daily data.  So, if you know the station number (can be retrieved using the inventory), then you can download just that station.  Open the readme file to learn about the formatting of the data and how to download it.
+If you add all/ or click on that folder, it will take a long time to load, because that is a list of all the climate stations in the Global Historical Climatology Network maintained by NOAA, as well as their daily data.  So, if you know the station number (can be retrieved using the inventory), then you can download just that station.  Open the _readme_ file to learn about the formatting of the data and how to download it.
 
 ##### Naming the Files
 Better than simply downloading a file, you can manually specify the file name and destination in the original command using the `-O` flag:
 
-```{bash}
+```{bash name file, echo=TRUE, eval=FALSE, engine='sh'}
 cd ../data/data-shell/wget
 wget -O morgdata.txt ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all/USW00013736.dly 
 ```
 Here, the `-O` option is used to indicate that the contents of the url will be sent to a file in your working directory called `morgdata.txt`
 
 Try it again with another dataset: 
-```{bash, echo=-1, engine='sh'}
+```{bash NASAGISS, echo=-1, engine='sh'}
+#mkdir ../data/data-shell/wget
 cd ../data/data-shell/wget
-wget -O SeasonalTempIndex.csv https://data.giss.nasa.gov/gistemp/graphs_v4/graph_data/GISTEMP_Seasonal_Cycle_since_1880/graph.csv
+wget -O NASAGISSTv4.csv -q https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.txt
 ```
-What are these data?  Where are they from?  What might you use them for?  Why might you want automatically download data, rather than storing a copy for your use?
+What are these data?  Where are they from?  What might you use them for?  Why might you want to automatically download data, rather than storing a copy for future use?
 
 #### Retrieve multiple files from url
 Downloading a single file, for example as your data source in a script is valuable but being able to pull many files at once is extremely powerful.		
 	
-##### Example 1. Pulling publicly archived scientific datasets to increase research efficiency.__
+##### Example 1. Pulling publicly archived scientific datasets to increase research efficiency.
 
 In earth science, lots of data are archived in publicly available online storage. Much of today’s cutting-edge research depends on utilizing these large datasets. Downloading individual data files is usually impractical - with a basic understanding of the terminal, you can pull large quantities of data simultaneously, immediately improving the efficiency of your research. 
 
@@ -118,7 +125,8 @@ The Pages 2k data are stored publicly online in a NOAA Paleo archive. Before we 
 
 Using a command like the one below, you can immediately download all files from the Pages2k dataset and put them in your working directory. DON’T DO IT YET!  Let's examine the flags first. Run `man wget` or use help to explore the flags in this command:
 
-```{bash, engine='sh'}
+```
+cd ../data/data-shell/wget
 wget -r -e robots=off -A.txt -np https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/
 ```
 
@@ -136,7 +144,7 @@ You can see the file directory structure of the website when you go into your Fi
 
 What if you only wanted those files from Africa? In this case, the files are named conveniently so a wildcard will work.  Add to this `-nd` which copies only the files, without the directory structure. Note: I also used `-q` (quiet) to reduce output to my lesson!
 
-```{bash, echo=-1, engine='sh'}
+```{bash PAGES_Africa, echo=-1, engine='sh'}
 cd ../data/data-shell/wget
 wget -r -e robots=off -A 'Afr*.txt' -np -nd -q https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/
 ```
@@ -149,7 +157,7 @@ https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/da
 
 You will need the full URL for each file (_PAGES2k_toget.txt_) and remove the `-r`, `-e` and `-np` flags. This is neater as you won't get all the extra directories in your download - just the files. Again I added `-q` but you might want to keep the verbose output in case there are errors.
 
-```{bash, echo=-1, engine='sh'}
+```{bash from file, echo=-1, engine='sh'}
 cd ../data/data-shell/wget
 wget  -i PAGES2k_toget.txt -q https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/
 ```
@@ -157,7 +165,7 @@ You also get a _index.html.tmp_ file with this approach - let me know if you fig
 
 If you plan to download a lot of files, you might add a pause between downloads to prevent overloading the server using the `-w` flag:  
 
-```{bash, echo=-1, engine='sh'}
+```{bash pause, echo=-1, engine='sh'}
 cd ../data/data-shell/wget
 wget -w 3 -i PAGES2k_toget.txt -q https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/
 ```
@@ -167,9 +175,9 @@ You don’t have to use `wget` just for research! Play around with it a bit in s
 
 Here is a “fun” example, where `wget` is used to download a copy of Mark Twain’s Adventures of Huckleberry Finn to your personal computer.  Many copies of works of world literature that have entered into the public domain phase are available for free on a site called [Project Gutenberg](gutenberg.org). You can use `wget` to download entire copies of these works:
 
-```{bash, echo=-1, engine='sh'}
+```{bash gutenberg, echo=-1, engine='sh'}
 cd ../data/data-shell/wget
-wget -r -A.txt -np -e robots=off -l1 https://www.gutenberg.org/files/76/ 
+wget -q -r -A.txt -np -e robots=off -l1 https://www.gutenberg.org/files/76/ 
 ```
 
 This downloads only the _.txt_ version of the book and saves it to your working directory, but it contains the directory structure.
@@ -182,7 +190,7 @@ wget -r -A.txt -nH --cut-dirs 5 -np -e robots=off -l1 -q https://www.gutenberg.o
 ```
 OR, if you know the exact file:
 
-```{bash, echo=-1, engine='sh'}
+```{bash exactfile, echo=-1, engine='sh'}
 cd ../data/data-shell/wget
 wget -q https://www.gutenberg.org/files/76/76-0.txt
 ```
@@ -195,13 +203,14 @@ mv 76-0.txt huck.txt
 grep -ow 'Tom' huck.txt | wc -l && grep -ow 'Jim' huck.txt | wc -l
 ```
 
-#### Amazing Loops Possible
+##### Downloading and Processing Files with a For Loop
+_Now I give you the keys to the castle!_
 
-```{bash, engine='sh'}
+```{bash wget loop, engine='sh'}
 cd ../data/data-shell/wget
 for gauge in "03062500" "03070260"
 do
-	wget -O "$gauge".txt -q "https://waterdata.usgs.gov/nwis/dv?cb_00060=on&format=rdb&site_no=03062500&referred_module=sw&period=&begin_date=1946-03-03&end_date=2018-12-06"
+	wget -q -O "$gauge".txt "https://waterdata.usgs.gov/nwis/dv?cb_00060=on&format=rdb&site_no=03062500&referred_module=sw&period=&begin_date=1946-03-03&end_date=2018-12-06"
 done
 ```
 

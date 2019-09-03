@@ -375,7 +375,7 @@ summary {
 </div>
 <div id="problem" class="section level3">
 <h3>Problem</h3>
-<p>Jon wants to develop his own multi-proxy reconstruction of past temperature from existing paleoclimate data for the last 2000 years. Luckily, he found the PAGES2k website which includes ample paleoclimate proxy data. PAGES2k data files are stored at NOAA National Centers for Environmental Information where there are thousands of files hosted. Some of those files are data files (<code>.txt</code>) but others are metadata files (<code>.lpd</code>). How will Jon efficiently download only those that he wants? Say just those for North America? What if Jon decides he really wants all of files?</p>
+<p>Jon wants to develop his own multi-proxy reconstruction of past temperature from existing paleoclimate data for the last 2000 years. Luckily, he found the PAGES2k website which includes ample paleoclimate proxy data. PAGES2k data files are stored at NOAA National Centers for Environmental Information where there are thousands of files hosted. Some of those files are data files (<em>.txt</em>) but others are metadata files (<em>.lpd</em>). How will Jon efficiently download only those that he wants? Say just those for North America? What if Jon decides he really wants all of files?</p>
 <div id="objectives" class="section level4">
 <h4>Objectives</h4>
 <ul>
@@ -384,7 +384,7 @@ summary {
 <li>Use <code>wget</code> to download single files from a <code>url</code><br />
 </li>
 <li>Use <code>wget</code> to download multiple files from a nested <code>url</code> directory structure</li>
-<li>Use <code>wget</code> to download only those files from a list stored in a <code>txt</code> file</li>
+<li>Use <code>wget</code> to download only those files from a list stored in a <em>.txt</em> file</li>
 </ul>
 </div>
 <div id="what-is-wget" class="section level4">
@@ -399,11 +399,14 @@ summary {
 <h5>MAC OSX</h5>
 <p>Unless you have previously used it, <code>wget</code> is probably not installed on your computer.</p>
 <p>Option 1: Straight from the Free Software Foundation: <a href="https://www.gnu.org/software/wget/" class="uri">https://www.gnu.org/software/wget/</a><br />
-Option 2: First download <code>HomeBrew</code>, a package installer that allows you to install popular free packages like <code>wget</code> and <code>git</code> straight from your shell. A step-by-step guide on preparing HomeBrew: <a href="https://" class="uri">https://</a> www.howtogeek.com/211541/homebrew-for-os-x-easily-installs- desktop-apps-and-terminal-utilities/</p>
+Option 2: First download <em>HomeBrew</em>, a package installer that allows you to install popular free packages like <code>wget</code> and <code>git</code> straight from your shell. A step-by-step guide on preparing <a href="https://%20www.howtogeek.com/211541/homebrew-for-os-x-easily-installs-%20desktop-apps-and-terminal-utilities/">HomeBrew</a></p>
 <p>On a mac, use these commands. You may need to enter your password.</p>
-<p><code>xcode-select --install</code> <code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code> <code>brew doctor</code> #checks that you have it installed properly</p>
-<p>Once brewer is installed you can access tons of free utilities such as wget:</p>
-<p><code>brew install wget</code></p>
+<pre class="bash"><code>xcode-select --install
+ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;`  
+
+brew doctor #checks that you have it installed properly</code></pre>
+<p>Once brewer is installed you can access tons of free utilities such as <code>wget</code>. From your home directory, try:</p>
+<pre class="bash"><code>brew install wget</code></pre>
 </div>
 <div id="git-for-windows-instructions-and-for-other-utilities-too" class="section level5">
 <h5>Git for Windows Instructions (and for other utilities too)</h5>
@@ -412,8 +415,8 @@ Option 2: First download <code>HomeBrew</code>, a package installer that allows 
 <p><strong>Wget</strong> * Download the lastest wget binary for windows from <a href="https://eternallybored.org/misc/wget/">eternallybored</a> (they are available as a zip with documentation, or just an exe)<br />
 * If you downloaded the zip, extract all (if windows built in zip utility gives an error, use 7-zip).<br />
 * Rename the file wget64.exe to wget.exe if necessary.<br />
-* Move <code>wget.exe</code> to your Git64 <br />
-Once wget is on your machine you can access the version details:<br />
+* Move <code>wget.exe</code> to your Git64 </p>
+<p>Once wget is on your machine you can access the version details:<br />
 <code>wget --version</code> and help information:<br />
 <code>wget -h</code> OR <code>man wget</code></p>
 </div>
@@ -422,417 +425,97 @@ Once wget is on your machine you can access the version details:<br />
 <h4>Retrieve One File From a url</h4>
 <p>Say you want to download a single climate station file from NOAA (with an eye towards writing code to download a whole bunch of files). To download a single dataset from a url and save in your working directory:</p>
 <pre class="bash"><code>mkdir ../data/data-shell/wget
-cd ../data/data-shell/wget
+cd ../data/data-shell/wget</code></pre>
+<p>Download and store in wget:</p>
+<pre class="bash"><code>cd ../data/data-shell/wget
 wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all/USW00013736.dly</code></pre>
-<p>Check in your working directory to see that you now have a file named <code>USW0013736.dly</code>. You can look at this file using cat, nano or any text editor, even though it has a <code>.dly</code> extension (NOAA specific extension for ‘daily’ climate data). Let’s take a look at the url, and consider how NOAA is storing all these individual station records.</p>
+<p>Check in your <em>wget</em> directory to see that you now have a file named <code>USW0013736.dly</code>. You can look at this file using <code>cat</code>, <code>nano</code> or any text editor, even though it has a <em>.dly</em> extension (NOAA specific extension for ‘daily’ climate data). Let’s take a look at the url, and consider how NOAA is storing all these individual station records.</p>
 <p>Paste just this part of the url into a browser: <a href="ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/" class="uri">ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/</a></p>
-<p>If you add all/ or click on that folder, it will take a long time to load, because that is a list of all the climate stations in the Global Historical Climatology Network maintained by NOAA, as well as their daily data. So, if you know the station number (can be retrieved using the inventory), then you can download just that station. Open the readme file to learn about the formatting of the data and how to download it.</p>
+<p>If you add all/ or click on that folder, it will take a long time to load, because that is a list of all the climate stations in the Global Historical Climatology Network maintained by NOAA, as well as their daily data. So, if you know the station number (can be retrieved using the inventory), then you can download just that station. Open the <em>readme</em> file to learn about the formatting of the data and how to download it.</p>
 <div id="naming-the-files" class="section level5">
 <h5>Naming the Files</h5>
 <p>Better than simply downloading a file, you can manually specify the file name and destination in the original command using the <code>-O</code> flag:</p>
-<pre class="bash"><code>wget -O morgdata.txt ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all/USW00013736.dly </code></pre>
-<pre><code>## --2019-08-09 13:05:15--  ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all/USW00013736.dly
-##            =&gt; ‘morgdata.txt’
-## Resolving ftp.ncdc.noaa.gov (ftp.ncdc.noaa.gov)... 205.167.25.101
-## Connecting to ftp.ncdc.noaa.gov (ftp.ncdc.noaa.gov)|205.167.25.101|:21... connected.
-## Logging in as anonymous ... Logged in!
-## ==&gt; SYST ... done.    ==&gt; PWD ... done.
-## ==&gt; TYPE I ... done.  ==&gt; CWD (1) /pub/data/ghcn/daily/all ... done.
-## ==&gt; SIZE USW00013736.dly ... 2833650
-## ==&gt; PASV ... done.    ==&gt; RETR USW00013736.dly ... done.
-## Length: 2833650 (2.7M) (unauthoritative)
-## 
-##      0K .......... .......... .......... .......... ..........  1%  574K 5s
-##     50K .......... .......... .......... .......... ..........  3% 1012K 4s
-##    100K .......... .......... .......... .......... ..........  5%  972K 3s
-##    150K .......... .......... .......... .......... ..........  7% 40.0M 2s
-##    200K .......... .......... .......... .......... ..........  9% 10.4M 2s
-##    250K .......... .......... .......... .......... .......... 10% 1.10M 2s
-##    300K .......... .......... .......... .......... .......... 12% 2.43M 2s
-##    350K .......... .......... .......... .......... .......... 14% 1.75M 2s
-##    400K .......... .......... .......... .......... .......... 16% 10.3M 1s
-##    450K .......... .......... .......... .......... .......... 18% 1.06M 2s
-##    500K .......... .......... .......... .......... .......... 19% 31.0M 1s
-##    550K .......... .......... .......... .......... .......... 21% 1.04M 1s
-##    600K .......... .......... .......... .......... .......... 23% 13.5M 1s
-##    650K .......... .......... .......... .......... .......... 25% 1.04M 1s
-##    700K .......... .......... .......... .......... .......... 27% 64.1M 1s
-##    750K .......... .......... .......... .......... .......... 28% 2.53M 1s
-##    800K .......... .......... .......... .......... .......... 30% 1.38M 1s
-##    850K .......... .......... .......... .......... .......... 32% 1.09M 1s
-##    900K .......... .......... .......... .......... .......... 34% 58.1M 1s
-##    950K .......... .......... .......... .......... .......... 36% 1.01M 1s
-##   1000K .......... .......... .......... .......... .......... 37% 5.49M 1s
-##   1050K .......... .......... .......... .......... .......... 39%  142M 1s
-##   1100K .......... .......... .......... .......... .......... 41% 1.19M 1s
-##   1150K .......... .......... .......... .......... .......... 43%  993K 1s
-##   1200K .......... .......... .......... .......... .......... 45% 4.64M 1s
-##   1250K .......... .......... .......... .......... .......... 46%  133M 1s
-##   1300K .......... .......... .......... .......... .......... 48% 1.26M 1s
-##   1350K .......... .......... .......... .......... .......... 50%  911K 1s
-##   1400K .......... .......... .......... .......... .......... 52%  210M 1s
-##   1450K .......... .......... .......... .......... .......... 54% 4.28M 1s
-##   1500K .......... .......... .......... .......... .......... 56% 1.44M 1s
-##   1550K .......... .......... .......... .......... .......... 57% 1010K 1s
-##   1600K .......... .......... .......... .......... .......... 59%  213M 1s
-##   1650K .......... .......... .......... .......... .......... 61% 2.33M 1s
-##   1700K .......... .......... .......... .......... .......... 63% 1.30M 1s
-##   1750K .......... .......... .......... .......... .......... 65% 1.06M 1s
-##   1800K .......... .......... .......... .......... .......... 66%  172M 0s
-##   1850K .......... .......... .......... .......... .......... 68% 3.03M 0s
-##   1900K .......... .......... .......... .......... .......... 70% 1.58M 0s
-##   1950K .......... .......... .......... .......... .......... 72%  146M 0s
-##   2000K .......... .......... .......... .......... .......... 74% 1.02M 0s
-##   2050K .......... .......... .......... .......... .......... 75% 2.72M 0s
-##   2100K .......... .......... .......... .......... .......... 77% 1.45M 0s
-##   2150K .......... .......... .......... .......... .......... 79%  109M 0s
-##   2200K .......... .......... .......... .......... .......... 81% 1.02M 0s
-##   2250K .......... .......... .......... .......... .......... 83% 2.59M 0s
-##   2300K .......... .......... .......... .......... .......... 84%  168M 0s
-##   2350K .......... .......... .......... .......... .......... 86% 1.49M 0s
-##   2400K .......... .......... .......... .......... .......... 88% 1.00M 0s
-##   2450K .......... .......... .......... .......... .......... 90%  124M 0s
-##   2500K .......... .......... .......... .......... .......... 92% 2.95M 0s
-##   2550K .......... .......... .......... .......... .......... 93% 1.49M 0s
-##   2600K .......... .......... .......... .......... .......... 95% 6.59M 0s
-##   2650K .......... .......... .......... .......... .......... 97% 1.14M 0s
-##   2700K .......... .......... .......... .......... .......... 99% 3.43M 0s
-##   2750K .......... .......                                    100% 68.4M=1.4s
-## 
-## 2019-08-09 13:05:17 (1.93 MB/s) - ‘morgdata.txt’ saved [2833650]</code></pre>
+<pre class="bash"><code>cd ../data/data-shell/wget
+wget -O morgdata.txt ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all/USW00013736.dly </code></pre>
 <p>Here, the <code>-O</code> option is used to indicate that the contents of the url will be sent to a file in your working directory called <code>morgdata.txt</code></p>
 <p>Try it again with another dataset:</p>
-<pre class="bash"><code>wget -O SeasonalTempIndex.txt https://data.giss.nasa.gov/gistemp/graphs/graph_data/Temperature_Anomaly_Seasonal_Resolution/graph.txt</code></pre>
-<pre><code>## --2019-08-09 13:05:17--  https://data.giss.nasa.gov/gistemp/graphs/graph_data/Temperature_Anomaly_Seasonal_Resolution/graph.txt
-## Resolving data.giss.nasa.gov (data.giss.nasa.gov)... 129.164.128.233
-## Connecting to data.giss.nasa.gov (data.giss.nasa.gov)|129.164.128.233|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: 16876 (16K) [text/plain]
-## Saving to: ‘SeasonalTempIndex.txt’
-## 
-##      0K .......... ......                                     100%  336K=0.05s
-## 
-## 2019-08-09 13:05:17 (336 KB/s) - ‘SeasonalTempIndex.txt’ saved [16876/16876]</code></pre>
-<p>What are these data? Where are they from? What might you use them for? Why might you want automatically download data, rather than storing a copy for your use?</p>
+<pre class="bash"><code>cd ../data/data-shell/wget
+wget -O NASAGISSTv4.csv -q https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.txt</code></pre>
+<p>What are these data? Where are they from? What might you use them for? Why might you want to automatically download data, rather than storing a copy for future use?</p>
 </div>
 </div>
 <div id="retrieve-multiple-files-from-url" class="section level4">
 <h4>Retrieve multiple files from url</h4>
 <p>Downloading a single file, for example as your data source in a script is valuable but being able to pull many files at once is extremely powerful.</p>
-<p><strong>Example 1. Pulling publicly archived scientific datasets to increase research efficiency.</strong></p>
+<div id="example-1.-pulling-publicly-archived-scientific-datasets-to-increase-research-efficiency." class="section level5">
+<h5>Example 1. Pulling publicly archived scientific datasets to increase research efficiency.</h5>
 <p>In earth science, lots of data are archived in publicly available online storage. Much of today’s cutting-edge research depends on utilizing these large datasets. Downloading individual data files is usually impractical - with a basic understanding of the terminal, you can pull large quantities of data simultaneously, immediately improving the efficiency of your research.</p>
 </div>
-<div id="jons-problem" class="section level4">
-<h4>Jon’s Problem</h4>
+<div id="jons-problem" class="section level5">
+<h5>Jon’s Problem</h5>
 <p>Jon can read about PAGES2k here: <a href="http://www.pages-igbp.org/ini/wg/2k-network/intro" class="uri">http://www.pages-igbp.org/ini/wg/2k-network/intro</a> Click on “Data” and “Phase 2 data”.</p>
 <p>Where are the actual data stored?</p>
 <p>The Pages 2k data are stored publicly online in a NOAA Paleo archive. Before we download a ton of data we don’t know much about, let us examine carefully how the data are stored and help Jon design a plan to download it.</p>
 <p>Using a command like the one below, you can immediately download all files from the Pages2k dataset and put them in your working directory. DON’T DO IT YET! Let’s examine the flags first. Run <code>man wget</code> or use help to explore the flags in this command:</p>
-<p><code>wget -r -e robots=off -A.txt -np https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/</code></p>
+<pre><code>cd ../data/data-shell/wget
+wget -r -e robots=off -A.txt -np https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/</code></pre>
 <p>The <code>-r</code> option tells wget to recursively download. This means that it not only pulls the website at face value, but also all files included under that website. Try it without <code>-r</code> and see what happens.</p>
 <p>Enabling the <code>-A</code> option allows you to only pull files of a certain type. For example, <code>-A.txt</code> pulls all <code>.txt</code> files, which in this case, is what you want. Alternatively, you could specify <code>-A.pdf</code>, <code>-A.csv</code>, <code>-A.doc</code>, etc.</p>
-<p>The robots option [<code>-e</code>] is set to <code>robots=off</code> in the above wget command. This is called robot exclusion (<a href="https://www.gnu.org/software/wget/manual/html_node/Robot-Exclusion.html" class="uri">https://www.gnu.org/software/wget/manual/html_node/Robot-Exclusion.html</a>), and sometimes can help wget more directly access your desired files if <code>robots.txt</code> discourages a complete search of the website. Remove this option, and notice that wget will only download a <code>robots.txt</code> file, which is useless for your current situation.</p>
-<p>The <code>-np</code> option stands for “no parent. wget will follow the directory index on the website. In the case of the Pages 2k directory, wget will continue up one directory to the parent directory, and then continue to download all files in that directory as well. If you want to disallow this feature, set the <code>-np</code> option. In the current example, IF we were to re-run your command without the -np option specified - you will see that not only are the files in the data-current-version folder downloaded, but also the files in the data-version-2.0.0 folder (and ALL of the files in successive directories above that!!) This is a ton of files, and you probably don’t need them all!</p>
+<p>The robots option [<code>-e</code>] is set to <code>robots=off</code> in the above wget command. This is called robot exclusion (<a href="https://www.gnu.org/software/wget/manual/html_node/Robot-Exclusion.html" class="uri">https://www.gnu.org/software/wget/manual/html_node/Robot-Exclusion.html</a>), and sometimes can help wget more directly access your desired files if <em>robots.txt</em> discourages a complete search of the website. Remove this option, and notice that wget will only download a <em>robots.txt</em> file, which is useless for your current situation.</p>
+<p>The <code>-np</code> option stands for “no parent”. wget will follow the directory index on the website. In the case of the Pages 2k directory, wget will continue up one directory to the parent directory, and then continue to download all files in that directory as well. If you want to disallow this feature, set the <code>-np</code> option. In the current example, IF we were to re-run your command without the <code>-np</code> option specified - you will see that not only are the files in the data-current-version folder downloaded, but also the files in the data-version-2.0.0 folder (and ALL of the files in successive directories above that!!) This is a ton of files, and you probably don’t need them all!</p>
 <p>In this case, you can achieve the same effect as <code>-np</code> by specifying the option <code>-l1</code>. By default, wget will search and download files from up to 5 directories (<code>-l5</code>) in the current webpage file structure. This means it will follow all links on the first page (<code>-l1</code>), the second page (<code>-l2</code>), etc up to the fifth page (<code>-l5</code>). <code>-l0</code> is “infinity” - this could download the entire Internet, because wget keeps following every link it finds. For goodness sakes, don’t ever do this unless it’s the end of the world and you are trying to save Wikipedia.</p>
 <p>You can see the file directory structure of the website when you go into your Finder to observe your downloaded files. Note that you will have a structure of empty folders. This is useful if you are trying to mirror an entire website, but not so great for this problem specifically.</p>
-<p>What if you only wanted those files from Africa? In this case, the files are named conveniently so a wildcard will work. Add to this <code>-nd</code> which copies only the files, without the directory structure.</p>
-<pre class="bash"><code>wget -r -e robots=off -A 'Afr*.txt' -np -nd https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/</code></pre>
-<pre><code>## --2019-08-09 13:05:17--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/
-## Resolving www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)... 205.167.25.172, 205.167.25.171, 205.167.25.178, ...
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: unspecified [text/html]
-## Saving to: ‘index.html.2.tmp’
-## 
-##      0K .......... .......... .......... .......... ..........  885K
-##     50K .......... .......... .......... .......... .......... 1.12M
-##    100K .......... .......... .......... .......... .......... 41.5M
-##    150K .......... .......... .......... .......... .......... 7.29M
-##    200K .......... .......... .......... .......... .......... 1.15M
-##    250K .......... .......... .......... .......... .......... 49.2M
-##    300K .......... .......... .......... .......               54.6M=0.2s
-## 
-## 2019-08-09 13:05:18 (2.17 MB/s) - ‘index.html.2.tmp’ saved [345457]
-## 
-## Removing index.html.2.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:18--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/?C=N;O=D
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: unspecified [text/html]
-## Saving to: ‘index.html?C=N;O=D.tmp’
-## 
-##      0K .......... .......... .......... .......... ..........  911K
-##     50K .......... .......... .......... .......... .......... 3.20M
-##    100K .......... .......... .......... .......... .......... 35.3M
-##    150K .......... .......... .......... .......... .......... 1.68M
-##    200K .......... .......... .......... .......... .......... 40.9M
-##    250K .......... .......... .......... .......... .......... 1.02M
-##    300K .......... .......... .......... .......               24.1M=0.2s
-## 
-## 2019-08-09 13:05:18 (2.18 MB/s) - ‘index.html?C=N;O=D.tmp’ saved [345457]
-## 
-## Removing index.html?C=N;O=D.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:18--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/?C=M;O=A
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: unspecified [text/html]
-## Saving to: ‘index.html?C=M;O=A.tmp’
-## 
-##      0K .......... .......... .......... .......... .......... 1022K
-##     50K .......... .......... .......... .......... .......... 4.59M
-##    100K .......... .......... .......... .......... .......... 27.3M
-##    150K .......... .......... .......... .......... .......... 1.28M
-##    200K .......... .......... .......... .......... .......... 44.9M
-##    250K .......... .......... .......... .......... .......... 3.32M
-##    300K .......... .......... .......... .......               42.7M=0.1s
-## 
-## 2019-08-09 13:05:19 (2.84 MB/s) - ‘index.html?C=M;O=A.tmp’ saved [345457]
-## 
-## Removing index.html?C=M;O=A.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:19--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/?C=S;O=A
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: unspecified [text/html]
-## Saving to: ‘index.html?C=S;O=A.tmp’
-## 
-##      0K .......... .......... .......... .......... .......... 1.07M
-##     50K .......... .......... .......... .......... .......... 3.77M
-##    100K .......... .......... .......... .......... .......... 19.3M
-##    150K .......... .......... .......... .......... .......... 1.36M
-##    200K .......... .......... .......... .......... .......... 46.9M
-##    250K .......... .......... .......... .......... .......... 2.82M
-##    300K .......... .......... .......... .......               48.5M=0.1s
-## 
-## 2019-08-09 13:05:19 (2.84 MB/s) - ‘index.html?C=S;O=A.tmp’ saved [345457]
-## 
-## Removing index.html?C=S;O=A.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:19--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/?C=D;O=A
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: unspecified [text/html]
-## Saving to: ‘index.html?C=D;O=A.tmp’
-## 
-##      0K .......... .......... .......... .......... ..........  898K
-##     50K .......... .......... .......... .......... .......... 1.09M
-##    100K .......... .......... .......... .......... .......... 36.3M
-##    150K .......... .......... .......... .......... ..........  994K
-##    200K .......... .......... .......... .......... .......... 42.5M
-##    250K .......... .......... .......... .......... .......... 48.1M
-##    300K .......... .......... .......... .......               40.7M=0.2s
-## 
-## 2019-08-09 13:05:20 (2.12 MB/s) - ‘index.html?C=D;O=A.tmp’ saved [345457]
-## 
-## Removing index.html?C=D;O=A.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:20--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/Afr-ColdAirCave.Sundqvist.2013.txt
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: 14170 (14K) [text/plain]
-## Saving to: ‘Afr-ColdAirCave.Sundqvist.2013.txt.1.tmp’
-## 
-##      0K .......... ...                                        100% 66.2M=0s
-## 
-## 2019-08-09 13:05:20 (66.2 MB/s) - ‘Afr-ColdAirCave.Sundqvist.2013.txt.1.tmp’ saved [14170/14170]
-## 
-## Removing Afr-ColdAirCave.Sundqvist.2013.txt.1.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:20--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/Afr-LakeMalawi.Powers.2011.txt
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: 5787 (5.7K) [text/plain]
-## Saving to: ‘Afr-LakeMalawi.Powers.2011.txt.1.tmp’
-## 
-##      0K .....                                                 100% 45.2M=0s
-## 
-## 2019-08-09 13:05:20 (45.2 MB/s) - ‘Afr-LakeMalawi.Powers.2011.txt.1.tmp’ saved [5787/5787]
-## 
-## Removing Afr-LakeMalawi.Powers.2011.txt.1.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:20--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/Afr-LakeTanganyika.Tierney.2010.txt
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: 10473 (10K) [text/plain]
-## Saving to: ‘Afr-LakeTanganyika.Tierney.2010.txt.1.tmp’
-## 
-##      0K ..........                                            100% 46.5M=0s
-## 
-## 2019-08-09 13:05:20 (46.5 MB/s) - ‘Afr-LakeTanganyika.Tierney.2010.txt.1.tmp’ saved [10473/10473]
-## 
-## Removing Afr-LakeTanganyika.Tierney.2010.txt.1.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:20--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/Afr-P178-15P.Tierney.2015-1.txt
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: 4824 (4.7K) [text/plain]
-## Saving to: ‘Afr-P178-15P.Tierney.2015-1.txt.1.tmp’
-## 
-##      0K ....                                                  100%  131M=0s
-## 
-## 2019-08-09 13:05:20 (131 MB/s) - ‘Afr-P178-15P.Tierney.2015-1.txt.1.tmp’ saved [4824/4824]
-## 
-## Removing Afr-P178-15P.Tierney.2015-1.txt.1.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:20--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/Afr-P178-15P.Tierney.2015-2.txt
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: 5775 (5.6K) [text/plain]
-## Saving to: ‘Afr-P178-15P.Tierney.2015-2.txt.1.tmp’
-## 
-##      0K .....                                                 100%  153M=0s
-## 
-## 2019-08-09 13:05:21 (153 MB/s) - ‘Afr-P178-15P.Tierney.2015-2.txt.1.tmp’ saved [5775/5775]
-## 
-## Removing Afr-P178-15P.Tierney.2015-2.txt.1.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:21--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/?C=N;O=A
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: unspecified [text/html]
-## Saving to: ‘index.html?C=N;O=A.tmp’
-## 
-##      0K .......... .......... .......... .......... .......... 1003K
-##     50K .......... .......... .......... .......... ..........  974K
-##    100K .......... .......... .......... .......... .......... 29.9M
-##    150K .......... .......... .......... .......... .......... 42.6M
-##    200K .......... .......... .......... .......... .......... 1.04M
-##    250K .......... .......... .......... .......... .......... 41.6M
-##    300K .......... .......... .......... .......               51.1M=0.2s
-## 
-## 2019-08-09 13:05:21 (2.16 MB/s) - ‘index.html?C=N;O=A.tmp’ saved [345457]
-## 
-## Removing index.html?C=N;O=A.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:21--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/?C=M;O=D
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: unspecified [text/html]
-## Saving to: ‘index.html?C=M;O=D.tmp’
-## 
-##      0K .......... .......... .......... .......... .......... 1013K
-##     50K .......... .......... .......... .......... .......... 1008K
-##    100K .......... .......... .......... .......... .......... 20.5M
-##    150K .......... .......... .......... .......... .......... 22.8M
-##    200K .......... .......... .......... .......... .......... 1.05M
-##    250K .......... .......... .......... .......... .......... 23.6M
-##    300K .......... .......... .......... .......               23.5M=0.2s
-## 
-## 2019-08-09 13:05:22 (2.15 MB/s) - ‘index.html?C=M;O=D.tmp’ saved [345457]
-## 
-## Removing index.html?C=M;O=D.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:23--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/?C=S;O=D
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: unspecified [text/html]
-## Saving to: ‘index.html?C=S;O=D.tmp’
-## 
-##      0K .......... .......... .......... .......... ..........  994K
-##     50K .......... .......... .......... .......... .......... 4.16M
-##    100K .......... .......... .......... .......... .......... 38.2M
-##    150K .......... .......... .......... .......... .......... 1.28M
-##    200K .......... .......... .......... .......... .......... 25.1M
-##    250K .......... .......... .......... .......... .......... 3.31M
-##    300K .......... .......... .......... .......               41.5M=0.1s
-## 
-## 2019-08-09 13:05:23 (2.77 MB/s) - ‘index.html?C=S;O=D.tmp’ saved [345457]
-## 
-## Removing index.html?C=S;O=D.tmp since it should be rejected.
-## 
-## --2019-08-09 13:05:24--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/?C=D;O=D
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: unspecified [text/html]
-## Saving to: ‘index.html?C=D;O=D.tmp’
-## 
-##      0K .......... .......... .......... .......... .......... 1005K
-##     50K .......... .......... .......... .......... .......... 2.90M
-##    100K .......... .......... .......... .......... .......... 70.6M
-##    150K .......... .......... .......... .......... .......... 1.43M
-##    200K .......... .......... .......... .......... .......... 25.0M
-##    250K .......... .......... .......... .......... .......... 1.02M
-##    300K .......... .......... .......... .......               31.6M=0.2s
-## 
-## 2019-08-09 13:05:25 (2.16 MB/s) - ‘index.html?C=D;O=D.tmp’ saved [345457]
-## 
-## Removing index.html?C=D;O=D.tmp since it should be rejected.
-## 
-## FINISHED --2019-08-09 13:05:26--
-## Total wall clock time: 8.7s
-## Downloaded: 14 files, 3.0M in 1.3s (2.37 MB/s)</code></pre>
-<p>What if you had a specific list of files you wanted? For example, create a .txt file named <code>PAGES2k_toget.txt</code> that contains the following URLs:</p>
-<p><a href="https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/Arc-Yukon.DArrigo.2006.txt" class="uri">https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/Arc-Yukon.DArrigo.2006.txt</a> <a href="https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/NAm-Pintlers.Littell.2011-1.txt" class="uri">https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/NAm-Pintlers.Littell.2011-1.txt</a> <a href="https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/SAm-CentralAndes6.Villalba.2014.txt" class="uri">https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/SAm-CentralAndes6.Villalba.2014.txt</a></p>
-<p>You will need the full URL for each file (PAGES2k_toget.txt) and remove the -r, -e and -np flags. This is neater as you won’t get all the extra directories in your download - just the files.</p>
-<pre class="bash"><code>wget  -i PAGES2k_toget.txt https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/</code></pre>
-<pre><code>## --2019-08-09 13:05:26--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/
-## Resolving www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)... 205.167.25.172, 205.167.25.171, 205.167.25.178, ...
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: unspecified [text/html]
-## Saving to: ‘index.html.2’
-## 
-##      0K .......... .......... .......... .......... ..........  927K
-##     50K .......... .......... .......... .......... .......... 1.04M
-##    100K .......... .......... .......... .......... .......... 21.7M
-##    150K .......... .......... .......... .......... .......... 23.0M
-##    200K .......... .......... .......... .......... .......... 1.08M
-##    250K .......... .......... .......... .......... .......... 40.3M
-##    300K .......... .......... .......... .......               48.8M=0.2s
-## 
-## 2019-08-09 13:05:26 (2.16 MB/s) - ‘index.html.2’ saved [345457]
-## 
-## --2019-08-09 13:05:26--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/Arc-Yukon.DArrigo.2006.txt
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: 14368 (14K) [text/plain]
-## Saving to: ‘Arc-Yukon.DArrigo.2006.txt.2’
-## 
-##      0K .......... ....                                       100% 17.6M=0.001s
-## 
-## 2019-08-09 13:05:27 (17.6 MB/s) - ‘Arc-Yukon.DArrigo.2006.txt.2’ saved [14368/14368]
-## 
-## --2019-08-09 13:05:27--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/NAm-Pintlers.Littell.2011-1.txt
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: 74982 (73K) [text/plain]
-## Saving to: ‘NAm-Pintlers.Littell.2011-1.txt.2’
-## 
-##      0K .......... .......... .......... .......... .......... 68%  996K 0s
-##     50K .......... .......... ...                             100% 1.28M=0.07s
-## 
-## 2019-08-09 13:05:27 (1.05 MB/s) - ‘NAm-Pintlers.Littell.2011-1.txt.2’ saved [74982/74982]
-## 
-## --2019-08-09 13:05:27--  https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/SAm-CentralAndes6.Villalba.2014.txt
-## Connecting to www1.ncdc.noaa.gov (www1.ncdc.noaa.gov)|205.167.25.172|:443... connected.
-## HTTP request sent, awaiting response... 200 OK
-## Length: 28597 (28K) [text/plain]
-## Saving to: ‘SAm-CentralAndes6.Villalba.2014.txt.2’
-## 
-##      0K .......... .......... .......                         100% 1.89M=0.01s
-## 
-## 2019-08-09 13:05:27 (1.89 MB/s) - ‘SAm-CentralAndes6.Villalba.2014.txt.2’ saved [28597/28597]
-## 
-## FINISHED --2019-08-09 13:05:27--
-## Total wall clock time: 1.2s
-## Downloaded: 4 files, 453K in 0.2s (1.87 MB/s)</code></pre>
+<p>What if you only wanted those files from Africa? In this case, the files are named conveniently so a wildcard will work. Add to this <code>-nd</code> which copies only the files, without the directory structure. Note: I also used <code>-q</code> (quiet) to reduce output to my lesson!</p>
+<pre class="bash"><code>wget -r -e robots=off -A 'Afr*.txt' -np -nd -q https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/</code></pre>
+<p>What if you had a specific list of files you wanted? For example, create a <em>.txt</em> file named <em>PAGES2k_toget.txt</em> that contains the following URLs:</p>
+<p><a href="https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/Arc-Yukon.DArrigo.2006.txt" class="uri">https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/Arc-Yukon.DArrigo.2006.txt</a><br />
+<a href="https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/NAm-Pintlers.Littell.2011-1.txt" class="uri">https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/NAm-Pintlers.Littell.2011-1.txt</a><br />
+<a href="https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/SAm-CentralAndes6.Villalba.2014.txt" class="uri">https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/SAm-CentralAndes6.Villalba.2014.txt</a></p>
+<p>You will need the full URL for each file (<em>PAGES2k_toget.txt</em>) and remove the <code>-r</code>, <code>-e</code> and <code>-np</code> flags. This is neater as you won’t get all the extra directories in your download - just the files. Again I added <code>-q</code> but you might want to keep the verbose output in case there are errors.</p>
+<pre class="bash"><code>wget  -i PAGES2k_toget.txt -q https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/</code></pre>
+<p>You also get a <em>index.html.tmp</em> file with this approach - let me know if you figure out how to avoid getting that file.</p>
 <p>If you plan to download a lot of files, you might add a pause between downloads to prevent overloading the server using the <code>-w</code> flag:</p>
-<pre class="console"><code>wget -w 3 -i PAGES2k_toget.txt https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/</code></pre>
-<p>Example 2. Pulling public domain literature for your own use offline You don’t have to use wget just for research! Play around with it a bit in situations of personal and professional interest - the best way to learn something is to start trying things.</p>
-<p>Here is a “fun” example, where wget is used to download a copy of Mark Twain’s Life On The Mississippi to your personal computer. Many copies of works of world literature that have entered into the public domain phase are available for free on a site called Project Gutenberg, gutenberg.org. You can use wget to download entire copies of these works:</p>
-<pre><code>wget -r -A.txt -np -e robots=off -l1 https://www.gutenberg.org/files/245/ </code></pre>
-<p>This downloads only the .txt version of the book and saves it to your working directory, but it also saves the folders that contained it because of the -r flag. Note that like in the previous example, you will have to navigate through the website’s file structure to access your copy of the book. Convert the .txt to pdf, send to your Kindle, or read offline on your PC! Play around with the option settings in this example to retrieve other versions, books, filetypes, jpg book illustrations, etc.</p>
-<p>Key Points * Wget allows you to directly download files from urls * Use flags and wildcards to allow for multiple downloads in a single line * Be careful with the amount of data you download at any given time.</p>
-<ol start="5" style="list-style-type: decimal">
-<li>Further Reading</li>
-</ol>
+<pre class="bash"><code>wget -w 3 -i PAGES2k_toget.txt -q https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/</code></pre>
+</div>
+<div id="example-2.-pulling-public-domain-literature-for-your-own-use-offline" class="section level5">
+<h5>Example 2. Pulling public domain literature for your own use offline</h5>
+<p>You don’t have to use <code>wget</code> just for research! Play around with it a bit in situations of personal and professional interest - the best way to learn something is to start trying things.</p>
+<p>Here is a “fun” example, where <code>wget</code> is used to download a copy of Mark Twain’s Adventures of Huckleberry Finn to your personal computer. Many copies of works of world literature that have entered into the public domain phase are available for free on a site called <a href="gutenberg.org">Project Gutenberg</a>. You can use <code>wget</code> to download entire copies of these works:</p>
+<pre class="bash"><code>wget -q -r -A.txt -np -e robots=off -l1 https://www.gutenberg.org/files/76/ </code></pre>
+<p>This downloads only the <em>.txt</em> version of the book and saves it to your working directory, but it contains the directory structure.</p>
+<p>To cut to the chase and just get the material from files/ which is 4 levels down:</p>
+<pre class="bash"><code>wget -r -A.txt -nH --cut-dirs 5 -np -e robots=off -l1 -q https://www.gutenberg.org/files/76/ </code></pre>
+<p>OR, if you know the exact file:</p>
+<pre class="bash"><code>wget -q https://www.gutenberg.org/files/76/76-0.txt</code></pre>
+<p>Let’s find out how many times Tom and Jim are mentioned:</p>
+<pre class="bash"><code>mv 76-0.txt huck.txt
+grep -ow 'Tom' huck.txt | wc -l &amp;&amp; grep -ow 'Jim' huck.txt | wc -l</code></pre>
+<pre><code>##      240
+##      384</code></pre>
+</div>
+<div id="downloading-and-processing-files-with-a-for-loop" class="section level5">
+<h5>Downloading and Processing Files with a For Loop</h5>
+<p><strong>Now I give you the keys to the castle!</strong></p>
+<pre class="bash"><code>cd ../data/data-shell/wget
+for gauge in &quot;03062500&quot; &quot;03070260&quot;
+do
+    wget -q -O &quot;$gauge&quot;.txt &quot;https://waterdata.usgs.gov/nwis/dv?cb_00060=on&amp;format=rdb&amp;site_no=03062500&amp;referred_module=sw&amp;period=&amp;begin_date=1946-03-03&amp;end_date=2018-12-06&quot;
+done</code></pre>
+<p>What did this loop do?</p>
+</div>
+<div id="key-points" class="section level5">
+<h5>Key Points</h5>
 <ul>
-<li>“Extra Unix Shell Material” Software Carpentry: <a href="http://swcarpentry.github.io/shell-extras/" class="uri">http://swcarpentry.github.io/shell-extras/</a></li>
-<li>GNU wget manual: <a href="https://www.gnu.org/software/wget/manual/wget.html" class="uri">https://www.gnu.org/software/wget/manual/wget.html</a></li>
-<li>Install packages with Homebrew: <a href="https://www.howtogeek.com/211541/homebrew-for-os-x-easily-installs-desktop-apps-and-terminal-utilities/" class="uri">https://www.howtogeek.com/211541/homebrew-for-os-x-easily-installs-desktop-apps-and-terminal-utilities/</a></li>
+<li><code>wget</code> is a utility that you can download to expand the value of the shell<br />
+</li>
+<li><code>wget</code> allows you to directly download files from urls<br />
+</li>
+<li>Use flags and wildcards to allow for multiple downloads in a single line<br />
+</li>
+<li>Create a file of urls to download lots of data</li>
+<li>Be careful with the amount of data you download at any given time</li>
 </ul>
+</div>
 </div>
 </div>
 

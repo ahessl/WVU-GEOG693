@@ -210,7 +210,7 @@ done
 ```
 
 Going back to our original file copying problem, we can solve it using this loop:
-```{bash, eval=F, echo=-1, engine="sh"}
+```{bash, eval=T, echo=-1, engine="sh"}
 cd ../data/data-shell/creatures
 for filename in *.dat
 do
@@ -236,7 +236,7 @@ Nelle is now ready to process her data files using goostats — a shell script w
 2.	an output file (to store the calculated statistics)  
 Since she’s still learning how to use the shell, she decides to build up the required commands in stages. Her first step is to make sure that she can select the right input files — remember, these are ones whose names end in ‘A’ or ‘B’, rather than ‘Z’. Starting from the _north-pacific-gyre/2012-07-03_ folder, Nelle types:
 
-```{bash gooloop, echo=-1}
+```{bash gooloop a, echo=-1}
 cd ../data/data-shell/north-pacific-gyre/2012-07-03
 for datafile in NENE*[AB].txt
  do
@@ -246,7 +246,7 @@ for datafile in NENE*[AB].txt
 
 Her next step is to decide what to call the files that the goostats analysis program will create. Prefixing each input file’s name with “stats” seems simple, so she modifies her loop to do that:
 
-```{bash gooloop, echo=-1}
+```{bash gooloop b, echo=-1}
 cd ../data/data-shell/north-pacific-gyre/2012-07-03
 for datafile in NENE*[AB].txt
  do
@@ -261,7 +261,7 @@ Typing in commands over and over again is becoming tedious, though, and Nelle is
 
 Using the left arrow key, Nelle backs up and changes the command `echo` to `bash goostats`:
 
-```{bash gooloop, echo=-1}
+```{bash gooloop c, echo=-1}
 cd ../data/data-shell/north-pacific-gyre/2012-07-03
 for datafile in NENE*[AB].txt
  do
@@ -271,7 +271,7 @@ for datafile in NENE*[AB].txt
 
 When she presses Enter, the shell runs the modified command. However, nothing appears to happen — there is no output. After a moment, Nelle realizes that since her script doesn’t print anything to the screen any longer, she has no idea whether it is running, much less how quickly. She kills the running command by typing Ctrl-C, uses up-arrow to repeat the command, and edits it to read:
 
-```{bash gooloop, echo=-1}
+```{bash gooloop d, echo=-1}
 cd ../data/data-shell/north-pacific-gyre/2012-07-03
 for datafile in NENE*[AB].txt; do echo $datafile; bash goostats $datafile stats-$datafile; done
 ```
@@ -309,7 +309,7 @@ There are a number of other shortcut commands for getting at the history.
 #### Saving to a File in a Loop - Part One
 In the _data-shell/molecules_ directory, what is the effect of this loop?
 
-```{bash mols loop, echo=-1, eval=F, engine='sh'}
+```{bash molsloop a, echo=-1, eval=F, engine='sh'}
 cd ../data/data-shell/molecules
 for mols in *.pdb
 do
@@ -329,7 +329,7 @@ What's the problem? How can we fix it?
 #### Saving to a File in a Loop - Part Two
 Also in the _data-shell/molecules_ directory, what would be the output of the following loop?
 
-```{bash mols loop, echo=-1, eval=F, engine='sh'}
+```{bash molsloop b, echo=-1, eval=F, engine='sh'}
 cd ../data/data-shell/molecules
 for datafile in *.pdb
 do
@@ -352,9 +352,9 @@ do
   analyze $file > analyzed-$file
 done
 ```
-What is the difference between the two loops below, and which one would we want to run?
-##### Version 1
-```{bash mols loop, echo=-1, eval=F, engine='sh'}
+What is the difference between the two loops below, and which one would we want to run?  
+##### Version 1  
+```
 cd ../data/data-shell/molecules
 for file in *.pdb
 do
@@ -363,17 +363,13 @@ done
 ```
 
 
-##### Version 2
-```{bash mols loop, echo=-1, eval=F, engine='sh'}
+##### Version 2  
+```
 cd ../data/data-shell/molecules
 for file in *.pdb
 do
   echo "analyze $file > analyzed-$file"
 done
-```
-```{bash, echo=F}
-cd ../data/data-shell/molecules
-rm analyzed*.pdb
 ```
 
 Try both versions and open the output files.
@@ -382,8 +378,8 @@ Try both versions and open the output files.
 Suppose we want to set up a directory structure to organize some experiments measuring reaction rate constants with different compounds and different temperatures. What would be the result of the following code:
 
 ```{bash, echo=-1, engine='sh'}
-cd ./data/data-shell/molecules
-for species in cubane.pdb ethane.pdb methane.pdb
+cd ../data/data-shell/molecules
+for species in cubane.t ethane.t methane.t
 do
     for temperature in 25 30 37 40
     do
@@ -394,23 +390,24 @@ done
 Check out the results!
 
 ```{bash, echo=F}
-rm -r ../data/data-shell/molecules/*.pdb-*
+rm -r ../data/data-shell/molecules/*ane.t*
 ```
 
-Key Points
-*	A for loop repeats commands once for every thing in a list.
-*	Every for loop needs a variable to refer to the thing it is currently operating on.
-*	Use $name to expand a variable (i.e., get its value). ${name} can also be used.
-*	Do not use spaces, quotes, or wildcard characters such as ‘*’ or ‘?’ in filenames, as it complicates variable expansion.
-*	Give files consistent names that are easy to match with wildcard patterns to make it easy to select them for looping.
-*	Use the up-arrow key to scroll up through previous commands to edit and repeat them.
-*	Use Ctrl-R to search through the previously entered commands.
-*	Use history to display recent commands, and !number to repeat a command by number.
+#### Key Points  
+*	A for loop repeats commands once for every thing in a list.  
+*	Every for loop needs a variable to refer to the thing it is currently operating on.  
+*	Use `$name` to expand a variable (i.e., get its value). `${name}` can also be used.  
+*	Do not use spaces, quotes, or wildcard characters such as ‘*’ or ‘?’ in filenames, as it complicates variable expansion.  
+*	Give files consistent names that are easy to match with wildcard patterns to make it easy to select them for looping.  
+*	Use the up-arrow key to scroll up through previous commands to edit and repeat them.  
+*	Use Ctrl-R to search through the previously entered commands.  
+*	Use history to display recent commands, and !number to repeat a command by number.  
 
-```{bash, echo = FALSE}
-#rm ../data/data-shell/molecules/*lengths* ##wildcards?
+Don't forget to clean up!
+```{bash, echo = TRUE}
 #rm ../data/data-shell/creatures/*original-*
 #rm ../data/data-shell/molecules/mols.pdb
 #rm ../data/data-shell/molecules/all.pdb
+#rm -r -i ../data/data-shell/molecules/*ane.t*
 
 ```
