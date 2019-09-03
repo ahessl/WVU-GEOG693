@@ -2,7 +2,7 @@
 title: "Schedule"
 subtitle: GEOG693 Open Data Science
 author: "A Hessl"
-date: "Last Updated: 6/1/2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Loops"
 author: "Amy Hessl"
-date: "8/9/2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "wget"
 author: "Amy Hessl"
-date: "8/7/2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document: default
   pdf_document: default
