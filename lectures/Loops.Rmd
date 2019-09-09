@@ -60,12 +60,6 @@ for filename in basilisk.dat unicorn.dat
       head -n 3 $filename	
 done
 ```
-COMMON NAME: basilisk
-CLASSIFICATION: basiliscus vulgaris
-UPDATED: 1745-05-02
-COMMON NAME: unicorn
-CLASSIFICATION: equus monoceros
-UPDATED: 1738-11-24
 
 #### __For__ loop anatomy:
 When the shell sees the keyword `for`, it knows to repeat a command (or group of commands) once for each item in a list. Each time the loop runs (called an __iteration__), an item in the list is assigned in sequence to the variable (`$filename`), and the commands inside the loop are executed, before moving on to the next item in the list. 
@@ -124,9 +118,9 @@ done
 or:
 ```{bash, eval=T, echo=-1, engine="sh"}
 cd ../data/data-shell/creatures
-for temperature in basilisk.dat unicorn.dat
+for genetics in basilisk.dat unicorn.dat
 do
-    head -n 3 $temperature
+    head -n 3 $genetics
 done
 ```
 
@@ -217,6 +211,8 @@ do
     cp $filename original-$filename
 done
 ```
+![Loop Diagram](./images/Loop.png) 
+
 This loop runs the `cp` command once for each filename. The first time, when `$filename` expands to basilisk.dat, the shell executes:
 cp basilisk.dat original-basilisk.dat
 
@@ -228,7 +224,7 @@ Since the `cp` command does not normally produce any output, it’s hard to chec
 ```{bash, eval=T, echo=F, engine="sh"}
 rm ../data/data-shell/creatures/original*.dat
 ```
-![Loop Diagram](./images/Loop.png) 
+
 
 #### Nelle’s Pipeline: Processing Files
 Nelle is now ready to process her data files using goostats — a shell script written by her supervisor. This calculates some statistics from a protein sample file, and takes two arguments:
@@ -353,6 +349,7 @@ do
 done
 ```
 What is the difference between the two loops below, and which one would we want to run?  
+
 ##### Version 1  
 ```
 cd ../data/data-shell/molecules
@@ -361,7 +358,6 @@ do
   echo analyze $file > analyzed-$file
 done
 ```
-
 
 ##### Version 2  
 ```
@@ -406,8 +402,9 @@ rm -r ../data/data-shell/molecules/*ane.t*
 Don't forget to clean up!
 ```{bash, echo = TRUE}
 #rm ../data/data-shell/creatures/*original-*
-#rm ../data/data-shell/molecules/mols.pdb
 #rm ../data/data-shell/molecules/all.pdb
 #rm -r -i ../data/data-shell/molecules/*ane.t*
 
 ```
+#### __Acknowledgments__
+_This page was derived in part from: [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_

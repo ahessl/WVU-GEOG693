@@ -1,7 +1,7 @@
 ---
 title: "Finding Things"
 author: "Amy Hessl"
-date: "8/2/2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 
