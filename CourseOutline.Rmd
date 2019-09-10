@@ -29,15 +29,15 @@ Please complete this before the first day of class.
 
 5) [Wildcards, Pipes, and Filters](./lectures/WildcardsPipesFilters.html) _08/30/19_   
 
-6) [Loops](./lectures/Loops.html) _09/04/09_  
+6) [Loops](./lectures/Loops.html) _09/04/19_  
 
-7) [Accessing Data with `wget`](./lectures/wget.html)  _09/11/09_  
+7) [Accessing Data with `wget`](./lectures/wget.html)  _09/11/19_  
 
-8) Finding Things 
-    + `grep`
-    + `find`
+8) [Shell Scripts](./lectures/ShellScripts.html) _09/13/19_  
 
-9) Shell Scripts
+9) Finding Things  _09/18/19_
+    + `grep`  
+    + `find`  
 
 
 
@@ -45,38 +45,38 @@ Please complete this before the first day of class.
 
 ### __Project Management and Collaboration__
 
-1) Project Management in R Studio
+1) [Version Control Using Git](./lectures/Git.html) _09/20/19_
 
-2) [Version Control Using Git](./lectures/Git.html) _00/00/00_
+2) [Collaboration and Sharing Using GitHub](./lectures/GitHib.html) _09/20/19_
 
-3) [Collaboration and Sharing Using GitHub](./lectures/GitHib.html) _00/00/00_
+3) Project Management in R Studio _09/25/19_
 
 <br/>
 
 ### __Working with Data in R__  
 
-1) Data Structures  
+1) Data Structures  _10/02/19_
 
-2) Data Frames  
+2) Data Frames  _10/04/19_
 
-3) Subsetting/Indexing Data  
+3) Subsetting/Indexing Data  _10/09/19_
 
-4) Control Flow: Functions in R  
+4) Control Flow: Functions in R  _10/11/19_
 
-5) Control Flow: Apply  
+5) Control Flow: Apply  _10/16/19_
 
-6) Control Flow: Loops  
+6) Control Flow: Loops  _10/18/19_
 
-7) Split, Apply, Combine   
+7) Split, Apply, Combine  _10/23/19_
 
-8) Plotting Using Base R  
+8) Plotting Using Base R  _10/25/19_
 
-9) Plotting Using ggplot  
+9) Plotting Using ggplot  _10/30/19_
 
-10) APIs to Download Data  
+10) APIs to Download Data  _11/01/19_
 
-11) Editing a Package  
+11) Editing a Package  _11/06/19_
 
 #### __Acknowledgments__
-_This page was derived in part from:Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University, and from [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_
+_These pages were derived in part from:Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University, and from [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_
 

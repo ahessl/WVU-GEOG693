@@ -111,11 +111,11 @@ What are these data?  Where are they from?  What might you use them for?  Why mi
 #### Retrieve multiple files from url
 Downloading a single file, for example as your data source in a script is valuable but being able to pull many files at once is extremely powerful.		
 	
-##### Example 1. Pulling publicly archived scientific datasets to increase research efficiency.
+##### __Example 1.__ Pulling publicly archived scientific datasets to increase research efficiency.
 
 In earth science, lots of data are archived in publicly available online storage. Much of today’s cutting-edge research depends on utilizing these large datasets. Downloading individual data files is usually impractical - with a basic understanding of the terminal, you can pull large quantities of data simultaneously, immediately improving the efficiency of your research. 
 
-##### Jon's Problem
+_Jon's Problem_
 Jon can read about PAGES2k here: http://www.pages-igbp.org/ini/wg/2k-network/intro
 Click on "Data" and "Phase 2 data".
 
@@ -170,7 +170,7 @@ cd ../data/data-shell/wget
 wget -w 3 -i PAGES2k_toget.txt -q https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/
 ```
 
-##### Example 2. Pulling public domain literature for your own use offline
+##### __Example 2.__ Pulling public domain literature for your own use offline
 You don’t have to use `wget` just for research! Play around with it a bit in situations of personal and professional interest - the best way to learn something is to start trying things. 
 
 Here is a “fun” example, where `wget` is used to download a copy of Mark Twain’s Adventures of Huckleberry Finn to your personal computer.  Many copies of works of world literature that have entered into the public domain phase are available for free on a site called [Project Gutenberg](gutenberg.org). You can use `wget` to download entire copies of these works:

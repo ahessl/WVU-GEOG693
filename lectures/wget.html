@@ -365,7 +365,7 @@ summary {
 
 <h1 class="title toc-ignore">wget</h1>
 <h4 class="author">Amy Hessl</h4>
-<h4 class="date">8/7/2019</h4>
+<h4 class="date">10 September, 2019</h4>
 
 </div>
 
@@ -419,6 +419,7 @@ brew doctor #checks that you have it installed properly</code></pre>
 <p>Once wget is on your machine you can access the version details:<br />
 <code>wget --version</code> and help information:<br />
 <code>wget -h</code> OR <code>man wget</code></p>
+<p>OR go to the <a href="https://www.gnu.org/software/wget/manual/wget.html#URL-Format">online manual</a></p>
 </div>
 </div>
 <div id="retrieve-one-file-from-a-url" class="section level4">
@@ -426,6 +427,7 @@ brew doctor #checks that you have it installed properly</code></pre>
 <p>Say you want to download a single climate station file from NOAA (with an eye towards writing code to download a whole bunch of files). To download a single dataset from a url and save in your working directory:</p>
 <pre class="bash"><code>mkdir ../data/data-shell/wget
 cd ../data/data-shell/wget</code></pre>
+<pre><code>## mkdir: ../data/data-shell/wget: File exists</code></pre>
 <p>Download and store in wget:</p>
 <pre class="bash"><code>cd ../data/data-shell/wget
 wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all/USW00013736.dly</code></pre>
@@ -448,12 +450,9 @@ wget -O NASAGISSTv4.csv -q https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.T
 <h4>Retrieve multiple files from url</h4>
 <p>Downloading a single file, for example as your data source in a script is valuable but being able to pull many files at once is extremely powerful.</p>
 <div id="example-1.-pulling-publicly-archived-scientific-datasets-to-increase-research-efficiency." class="section level5">
-<h5>Example 1. Pulling publicly archived scientific datasets to increase research efficiency.</h5>
+<h5><strong>Example 1.</strong> Pulling publicly archived scientific datasets to increase research efficiency.</h5>
 <p>In earth science, lots of data are archived in publicly available online storage. Much of today’s cutting-edge research depends on utilizing these large datasets. Downloading individual data files is usually impractical - with a basic understanding of the terminal, you can pull large quantities of data simultaneously, immediately improving the efficiency of your research.</p>
-</div>
-<div id="jons-problem" class="section level5">
-<h5>Jon’s Problem</h5>
-<p>Jon can read about PAGES2k here: <a href="http://www.pages-igbp.org/ini/wg/2k-network/intro" class="uri">http://www.pages-igbp.org/ini/wg/2k-network/intro</a> Click on “Data” and “Phase 2 data”.</p>
+<p><em>Jon’s Problem</em> Jon can read about PAGES2k here: <a href="http://www.pages-igbp.org/ini/wg/2k-network/intro" class="uri">http://www.pages-igbp.org/ini/wg/2k-network/intro</a> Click on “Data” and “Phase 2 data”.</p>
 <p>Where are the actual data stored?</p>
 <p>The Pages 2k data are stored publicly online in a NOAA Paleo archive. Before we download a ton of data we don’t know much about, let us examine carefully how the data are stored and help Jon design a plan to download it.</p>
 <p>Using a command like the one below, you can immediately download all files from the Pages2k dataset and put them in your working directory. DON’T DO IT YET! Let’s examine the flags first. Run <code>man wget</code> or use help to explore the flags in this command:</p>
@@ -478,7 +477,7 @@ wget -r -e robots=off -A.txt -np https://www1.ncdc.noaa.gov/pub/data/paleo/pages
 <pre class="bash"><code>wget -w 3 -i PAGES2k_toget.txt -q https://www1.ncdc.noaa.gov/pub/data/paleo/pages2k/pages2k-temperature-v2-2017/data-current-version/</code></pre>
 </div>
 <div id="example-2.-pulling-public-domain-literature-for-your-own-use-offline" class="section level5">
-<h5>Example 2. Pulling public domain literature for your own use offline</h5>
+<h5><strong>Example 2.</strong> Pulling public domain literature for your own use offline</h5>
 <p>You don’t have to use <code>wget</code> just for research! Play around with it a bit in situations of personal and professional interest - the best way to learn something is to start trying things.</p>
 <p>Here is a “fun” example, where <code>wget</code> is used to download a copy of Mark Twain’s Adventures of Huckleberry Finn to your personal computer. Many copies of works of world literature that have entered into the public domain phase are available for free on a site called <a href="gutenberg.org">Project Gutenberg</a>. You can use <code>wget</code> to download entire copies of these works:</p>
 <pre class="bash"><code>wget -q -r -A.txt -np -e robots=off -l1 https://www.gutenberg.org/files/76/ </code></pre>
@@ -495,7 +494,7 @@ grep -ow 'Tom' huck.txt | wc -l &amp;&amp; grep -ow 'Jim' huck.txt | wc -l</code
 </div>
 <div id="downloading-and-processing-files-with-a-for-loop" class="section level5">
 <h5>Downloading and Processing Files with a For Loop</h5>
-<p><strong>Now I give you the keys to the castle!</strong></p>
+<p><em>Now I give you the keys to the castle!</em></p>
 <pre class="bash"><code>cd ../data/data-shell/wget
 for gauge in &quot;03062500&quot; &quot;03070260&quot;
 do
