@@ -365,7 +365,7 @@ summary {
 
 <h1 class="title toc-ignore">wget</h1>
 <h4 class="author">Amy Hessl</h4>
-<h4 class="date">10 September, 2019</h4>
+<h4 class="date">11 September, 2019</h4>
 
 </div>
 
@@ -399,7 +399,7 @@ summary {
 <h5>MAC OSX</h5>
 <p>Unless you have previously used it, <code>wget</code> is probably not installed on your computer.</p>
 <p>Option 1: Straight from the Free Software Foundation: <a href="https://www.gnu.org/software/wget/" class="uri">https://www.gnu.org/software/wget/</a><br />
-Option 2: First download <em>HomeBrew</em>, a package installer that allows you to install popular free packages like <code>wget</code> and <code>git</code> straight from your shell. A step-by-step guide on preparing <a href="https://%20www.howtogeek.com/211541/homebrew-for-os-x-easily-installs-%20desktop-apps-and-terminal-utilities/">HomeBrew</a></p>
+Option 2: First download <em>HomeBrew</em>, a package installer that allows you to install popular free packages like <code>wget</code> and <code>git</code> straight from your shell. A step-by-step guide on preparing: <a href="https://www.howtogeek.com/211541/homebrew-for-os-x-easily-installs-desktop-apps-and-terminal-utilities/">HomeBrew</a></p>
 <p>On a mac, use these commands. You may need to enter your password.</p>
 <pre class="bash"><code>xcode-select --install
 ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;`  
@@ -427,7 +427,6 @@ brew doctor #checks that you have it installed properly</code></pre>
 <p>Say you want to download a single climate station file from NOAA (with an eye towards writing code to download a whole bunch of files). To download a single dataset from a url and save in your working directory:</p>
 <pre class="bash"><code>mkdir ../data/data-shell/wget
 cd ../data/data-shell/wget</code></pre>
-<pre><code>## mkdir: ../data/data-shell/wget: File exists</code></pre>
 <p>Download and store in wget:</p>
 <pre class="bash"><code>cd ../data/data-shell/wget
 wget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all/USW00013736.dly</code></pre>
