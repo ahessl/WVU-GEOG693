@@ -35,13 +35,12 @@ Please complete this before the first day of class.
 
 8) [Shell Scripts](./lectures/ShellScripts.html) _09/13/19_  
 
-9) Finding Things  _09/18/19_
+9) [Finding Things](./lectures/Find_grep.html)  _09/18/19_
     + `grep`  
     + `find`  
 
 
-
-<br/> 
+***  
 
 ### __Project Management and Collaboration__
 

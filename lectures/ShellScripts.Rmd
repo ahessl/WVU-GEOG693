@@ -1,0 +1,309 @@
+---
+title: "Shell Scripts"
+author: "Amy Hessl"
+date: "9/9/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We have been working using a line-by-line style: we write a line of code and run it.  We might save it for later, but we have yet to develop a script that can be executed from a single command.  To imitate the many small parts working together paradigm, we will want to begin creating little programs that can perform automated tasks that we require regularly. Ideally, those scripts will be flexible enough that we can use them over and over with little modification(!)
+
+#### Questions  
+*	How can I save and re-use commands? 
+*   How can I create programs to automate repeatitive tasks and save time?
+
+#### Objectives  
+*	Write a shell script that runs a command or series of commands for a fixed set of files.  
+*	Run a shell script from the command line.  
+*	Write a shell script that operates on a set of files defined by the user on the command line.  
+*	Create pipelines that include shell scripts you, and others, have written.  
+
+#### Tools/Commands  
+*	`bash` - to run a script from command line  
+*	`$1` - Variable names  
+*	`#` - Comments  
+*	`$@` - All of the command-line arguments to the shell script (good when you don't know how many arguments will need to be passed)  
+
+We are finally ready to see what makes the shell such a powerful programming environment. We are going to take the commands we repeat frequently and save them in files so that we can re-run all those operations again later by typing a single command. For historical reasons, a bunch of commands saved in a file is usually called a shell script, but make no mistake: these are actually small programs.
+Let’s start by going back to _data-shell/molecules/_ and creating a new text file, _middle.sh_ which will become our shell script.  You can either make a new text file in RStudio or open one in atom or another text editor.  Be sure to save it in _molecules_.
+
+The command `nano middle.sh` opens the file _middle.sh_ within the text editor “nano” (which runs within the shell). If the file does not exist, it will be created. 
+We can use the text editor to directly edit the file – we’ll simply insert the following line:
+
+`head -n 15 octane.pdb | tail -n 5`
+
+This is a variation on the pipe we constructed earlier: it selects lines 11-15 of the file _octane.pdb_. Remember, we are not running it as a command just yet: we are putting the commands in a file.
+Then we save the file and exit the text editor. Check that the directory molecules now contains a file called _middle.sh_.  
+
+Once we have saved the file, we can ask the shell to execute the commands it contains. Our shell is called bash, so we run the following command:
+```{bash, engine='sh'}
+cd ../data/data-shell/molecules
+bash middle.sh
+```
+
+Sure enough, our script’s output is exactly what we would get if we ran that pipeline directly.
+
+#### Text vs. Whatever  
+We usually call programs like Microsoft Word or LibreOffice Writer “text editors”, but we need to be a bit more careful when it comes to programming. By default, Microsoft Word uses _.docx_ files to store not only text, but also formatting information about fonts, headings, and so on. This extra information isn’t stored as characters, and doesn’t mean anything to tools like head: they expect input files to contain nothing but the letters, digits, and punctuation on a standard computer keyboard. When editing programs, therefore, you must either use a plain text editor, or be careful to save files as plain text.
+
+What if we want to select lines from an arbitrary file? We could edit _middle.sh_ each time to change the filename, but that would probably take longer than just retyping the command. Instead, let’s edit _middle.sh_ and make it more versatile:
+
+
+Replace the text _octane.pdb_ with the special variable called `$1`:
+
+`head -n 15 "$1" | tail -n 5`
+
+Inside a shell script, `$1` means “the first filename (or other argument) on the command line”. We can now run our script like this:
+
+```{bash, eval=F, engine='sh'}
+cd ../data/data-shell/molecules
+bash middle.sh octane.pdb
+```
+OR
+```{bash, eval=F, engine='sh'}
+cd ../data/data-shell/molecules
+bash middle.sh pentane.pdb
+```
+
+#### Double-Quotes Around Arguments  
+For the same reason that we put the loop variable inside double-quotes, in case the filename happens to contain any spaces, we surround `$1` with double-quotes.
+We still need to edit _middle.sh_ each time we want to adjust the range of lines, though. Let’s fix that by using the special variables `$2` and `$3` for the number of lines to be passed to head and tail respectively:
+
+In a text editor:
+`head -n "$2" "$1" | tail -n "$3"`
+We can now run:
+
+```{bash, eval=F, engine='sh'}
+cd ../data/data-shell/molecules
+bash middle.sh pentane.pdb 15 5
+```
+
+By changing the arguments to our command we can change our script’s behaviour:
+
+```{bash, eval=F, engine='sh'}
+cd ../data/data-shell/molecules
+bash middle.sh pentane.pdb 20 5
+```
+This works, but it may take the next person who reads _middle.sh_ a moment to figure out what it does. We can improve our script by adding some comments at the top:
+
+```
+# Select lines from the middle of a file.
+# Usage: bash middle.sh filename end_line num_lines
+head -n "$2" "$1" | tail -n "$3"
+```
+
+A comment starts with a `#` character and runs to the end of the line. The computer ignores comments, but they’re invaluable for helping people (including your future self) understand and use scripts. The only caveat is that each time you modify the script, you should check that the comment is still accurate: an explanation that sends the reader in the wrong direction is worse than none at all.
+What if we want to process many files in a single pipeline? For example, if we want to sort our _.pdb_ files by length, we would type:
+
+`wc -l *.pdb | sort -n`
+
+because `wc -l` lists the number of lines in the files (recall that wc stands for ‘word count’, adding the -l flag means ‘count lines’ instead) and `sort -n` sorts things numerically. We could put this in a file, but then it would only ever sort a list of _.pdb_ files in the current directory. 
+
+#### `"$@"`
+If we want to be able to get a sorted list of other kinds of files, we need a way to get all those names into the script. We can’t use `$1`, `$2`, and so on because we don’t know how many files there are. Instead, we use the special variable `$@`, which means, “All of the command-line arguments to the shell script.” We also should put `$@` inside double-quotes to handle the case of arguments containing spaces (`"$@"` is equivalent to `"$1""$2" …`) Here’s an example:
+
+```
+# sorted.sh
+# Sort filenames by their length.
+# Usage: bash sorted.sh one_or_more_filenames
+wc -l "$@" | sort -n
+```
+```{bash, engine='sh'}
+cd ../data/data-shell/molecules
+bash sorted.sh *.pdb ../creatures/*.dat
+```
+
+
+#### List Unique Species
+Leah has several hundred data files, each of which is formatted like this:
+```
+2013-11-05,deer,5
+2013-11-05,rabbit,22
+2013-11-05,raccoon,7
+2013-11-06,rabbit,19
+2013-11-06,deer,2
+2013-11-06,fox,1
+2013-11-07,rabbit,18
+2013-11-07,bear,1
+```  
+An example of this type of file is given in _data-shell/data/animal-counts/animals.txt_.
+
+> _Challenge:_ Write a shell script called _species.sh_ that takes any number of filenames as command-line arguments, and uses cut, sort, and uniq to print a list of the unique species appearing in each of those files separately.  
+
+Steps:  
+1)	Write the cut, sort, uniq commands for a single file  
+2)	Construct a loop that works over a list of files for ex with wildcard  
+3)	Adjust that loop to work with "$@" instead  
+4)	Comment as you go.  Consider using echo in your output.  
+
+```{bash, engine='sh'}
+cd ../data/data-shell/data/animal-counts
+bash species.sh *.txt
+```
+
+#### Why Isn’t It Doing Anything?
+What happens if a script is supposed to process a bunch of files, but we don’t give it any filenames? For example, what if we type:
+```{bash, eval=F}
+bash species.sh
+```
+
+but don’t say _*.dat_ (or anything else)? In this case, `$@` expands to nothing at all, so the pipeline inside the script is effectively:
+
+`cat "$@" | cut -d ',' -f 2 | sort | uniq`
+
+Since it doesn’t have any filenames, wc assumes it is supposed to process standard input, so it just sits there and waits for us to give it some data interactively. From the outside, though, all we see is it sitting there: the script doesn’t appear to do anything.
+
+#### Writing History to a File  
+Suppose we have just run a series of commands that did something useful — for example, that created a graph we’d like to use in a paper. We’d like to be able to re-create the graph later if we need to, so we want to save the commands in a file. Instead of typing them in again (and potentially getting them wrong) we can do this:
+
+```{bash, eval=F, engine='sh'}
+history | tail -n 5 > redo-figure-3.sh
+```
+
+The file _redo-figure-3.sh_ now contains:
+```
+297 bash goostats NENE01729B.txt stats-NENE01729B.txt  
+298 bash goodiff stats-NENE01729B.txt /data/validated/01729.txt > 01729-differences.txt  
+299 cut -d ',' -f 2-3 01729-differences.txt > 01729-time-series.txt  
+300 ygraph --format scatter --color bw --borders none 01729-time-series.txt figure-3.png  
+301 history | tail -n 5 > redo-figure-3.sh  
+```
+After a moment’s work in an editor to remove the serial numbers on the commands, and to remove the final line where we called the history command, we have a completely accurate record of how we created that figure.
+
+_Why is this so important?_
+
+#### Why Record Commands in the History Before Running Them?
+If you run the command:
+```{bash, eval=T, engine='sh'}
+history | tail -n 5 > ../data/data-shell/recent.sh
+```
+the last command in the file is the history command itself, i.e., the shell has added history to the command log before actually running it. In fact, the shell always adds commands to the log before running them. Why do you think it does this?
+
+In practice, most people develop shell scripts by running commands at the shell prompt a few times to make sure they’re doing the right thing, then saving them in a file for re-use. This style of work allows people to recycle what they discover about their data and their workflow with one call to history and a bit of editing to clean up the output and save it as a shell script.
+
+```{bash, eval=T, echo=F}
+rm ../data/data-shell/recent.sh
+```
+
+#### Nelle’s Pipeline: Creating a Script  
+Nelle’s supervisor insisted that all her analytics must be reproducible. The easiest way to capture all the steps is in a script. She runs the text editor and writes the following:
+```
+# Calculate stats for data files.
+for datafile in "$@"
+do
+    echo $datafile
+    bash goostats $datafile stats-$datafile
+done
+```
+
+She saves this in a file called _do-stats.sh_ so that she can now re-do the first stage of her analysis by typing:
+
+```
+bash do-stats.sh NENE*[AB].txt
+```
+
+She can also do this:
+```
+bash do-stats.sh NENE*[AB].txt | wc -l
+```
+
+so that the output is just the number of files processed rather than the names of the files that were processed.  But that won't print till the entire process is complete!
+One thing to note about Nelle’s script is that it lets the person running it decide what files to process. She could have written it as:
+
+```
+# Calculate stats for Site A and Site B data files.
+for datafile in NENE*[AB].txt
+do
+    echo $datafile
+    bash goostats $datafile stats-$datafile
+done
+```
+
+The advantage is that this always selects the right files: she doesn’t have to remember to exclude the ‘Z’ files. The disadvantage is that it always selects just those files — she can’t run it on all files (including the ‘Z’ files), or on the ‘G’ or ‘H’ files her colleagues in Antarctica are producing, without editing the script. If she wanted to be more adventurous, she could modify her script to check for command-line arguments, and use _NENE*[AB].txt_ if none were provided. Of course, this introduces another tradeoff between flexibility and complexity.
+
+#### Variables in Shell Scripts
+> _Challenge:_ In the molecules directory, imagine you have a shell script called _script.sh_ containing the following commands:  
+
+```
+head -n $2 $1
+tail -n $3 $1
+```
+
+While you are in the molecules directory, you type the following command:
+
+`bash script.sh '*.pdb' 1 1`
+
+Which of the following outputs would you expect to see?  
+1.	All of the lines between the first and the last lines of each file ending in _.pdb_ in the molecules directory  
+2.	The first and the last line of each file ending in _.pdb_ in the molecules directory  
+3.	The first and the last line of each file in the molecules directory  
+4.	An error because of the quotes around _*.pdb_  
+
+#### Find the Longest File With a Given Extension
+> _Challenge:_ Write a shell script called _longest.sh_ that takes the name of a directory and a filename extension as its arguments, and prints out the name of the file with the most lines in that directory with that extension. For example:
+
+`bash longest.sh /tmp/data pdb`
+
+would print the name of the _.pdb_ file in _/tmp/data_ that has the most lines.
+
+First try performing this task at the command line, building up each part, then add in the variables in a script.
+
+#### Script Reading Comprehension
+For this question, consider the _data-shell/molecules_ directory once again. This contains a number of _.pdb_ files in addition to any other files you may have created. Explain what each script below called _example.sh_ would do when run as `bash example.sh *.pdb` if it contained the following lines:
+
+```
+# Script 1
+echo *.*
+```
+
+```
+# Script 2
+for filename in $1 $2 $3
+do
+    cat $filename
+done
+```
+```
+# Script 3
+echo $@.pdb
+```
+
+#### Debugging Scripts
+Suppose you have saved the following script in a file called _do-errors.sh_ in Nelle’s _north-pacific-gyre/2012-07-03_ directory:
+
+```
+#Calculate stats for data files.
+for datafile in "$@"
+do
+    echo $datfile
+    bash goostats $datafile stats-$datafile
+done
+```
+
+When you run it:
+
+`bash do-errors.sh NENE*[AB].txt`
+
+the output is blank. To figure out why, re-run the script using the `-x` option:
+
+`bash -x do-errors.sh NENE*[AB].txt`
+
+What is the output showing you? Which line is responsible for the error?
+
+
+#### Key Points  
+*	Save commands in files (usually called shell scripts) for re-use.  
+*	`bash filename` runs the commands saved in a file.  
+*	`$@` refers to all of a shell script’s command-line arguments.  
+*	`$1`, `$2`, etc., refer to the first command-line argument, the second command-line argument, etc.  
+*	Place variables in quotes if the values might have spaces in them.  
+*	Letting users decide what files to process is more flexible and more consistent with built-in Unix commands.  
+
+
+#### __Acknowledgments__
+_This page was derived in part from: [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_
+
+
