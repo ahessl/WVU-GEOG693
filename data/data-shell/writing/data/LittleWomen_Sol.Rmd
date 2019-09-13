@@ -1,0 +1,38 @@
+---
+title: "LittleWomenLoop"
+author: "Amy Hessl"
+date: "9/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### Little Women Solutions
+
+__Option 1__
+```{bash, engine='sh'}
+cd ../data/data-shell/writing/data
+for sis in Jo Meg Beth Amy
+do
+	echo $sis:
+	grep -ocw $sis LittleWomen.txt
+done
+```
+__Option 2__
+```{bash, engine='sh'}
+cd ../data/data-shell/writing/data
+for sis in Jo Meg Beth Amy
+do
+	echo $sis:
+	grep -ow $sis LittleWomen.txt | wc -l
+done
+```
+
+
+Solution #1 is inferior because `grep -c` only reports the number of lines matched. The total number of matches reported by this method will be lower if there is more than one match per line.
+
+Do either include "Amy's"?
+
+What other applications can you imagine for this type of loop?
