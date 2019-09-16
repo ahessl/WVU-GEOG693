@@ -36,83 +36,81 @@ Imagine Jess and a colleague, Jenny, are working on a new project that includes 
 
 ### Basic Usage of Git  
 #### Setting up a repository
-Let's get started by making a repo in our home directory called ```~/Rivers```.
+Let's get started by making a repo in our working directory called _./Rivers_.
 
-```{bash, eval=FALSE}
-cd ~/
+```{bash, echo=-1, eval=TRUE}
+cd ../data
 mkdir Rivers
-
-cd ~/Rivers
+cd Rivers
 git init	
 ```
 
 ```git init``` initializes the folder ```~/Rivers``` as a repo. Any files or folders that undergo changes in this repository can now be tracked with version control. 
 
 Use the list hidden files command (```ls -a```) in terminal to see that git has created a hidden directory within your new repo called ```.git```: 
-```{bash, echo=-1, eval=T}
-cd ~/Rivers
+```{bash, echo=-1, eval=TRUE}
+cd ../data/Rivers
 ls -a
 ```
 Here, you are using the ```-a``` option for “all files.” Try it without the ````-a``` option, and you will see that the shell does not list the ```.git``` directory. This is because it is hidden. ```-a``` shows these hidden files. 
 	
 Check that your repository is set up correctly by checking the status: 
 
-```{bash git status rivers, echo=-1, eval=T}
-cd ~/Rivers
+```{bash, echo=-1, eval=TRUE}
+cd ../data/Rivers
 git status
 ```
 
 
 #### Tracking Changes: 
-First, create a text file that you can work with. In your terminal, create a file called “WVRivers.txt” and populate the file with some names of rivers in West Virginia. Later, we will make and track changes to this text file. You can create a new file in the terminal using the cat command: 
-```{bash}
-touch ~/Rivers/WVRivers.txt
-```
+First, create a text file that you can work with. In your terminal, create a file called “WVRivers.txt” and populate the file with some names of rivers in West Virginia. Later, we will make and track changes to this text file. 
 
 Now you can edit the file.  Find it in the Files tab of lower right RStudio IDE. Click on it and it will open in your RStudio text editor (upper left). Let's add some rivers to the file:
 
-```{text}
-Cheat
+```{bash, echo=-1, eval=TRUE}
+cd ../data/Rivers
+touch WVRivers.txt
+echo "Cheat 
 Monongahela
 Dents Run
 Deckers Creek
-Blackwater River
+Blackwater River 
 Tygart River
 Wheeling Creek
 Kanawha River
 New River
 Big Sandy Creek
-Elk
+Elk" > WVRivers.txt
 ```
 
 
 To check the status of ```WVRivers.txt``` in your git repository, use:
-```{bash}
-cd ~/Rivers
+```{bash, echo=-1, eval=TRUE}
+cd ../data/Rivers
 git status
 ```
 
 #### Make an Initial commit
 This tells you that WVRivers.txt is an “untracked file.” This means that git isn’t keeping track of the file via version control. We have to tell git which files we want to track. To do this, use git add: 
 
-```{bash, echo=-1, eval=T}
-cd ~/Rivers
+```{bash, echo=-1, eval=TRUE}
+cd ../data/Rivers
 git add WVRivers.txt
 git status
 ```
 
 Note that the changes to WVRivers.txt still need to be committed with a message:
 
-```{bash commit, echo=-1, eval=FALSE}
-cd ~/Rivers
+```{bash, echo=-1, eval=TRUE}
+cd ../data/Rivers
 git commit -m "Started list of West Virginia rivers"
 ```
 
 Using the ```-m``` option with ```git commit``` gives you the opportunity (required!) to add a notes message to your commit. This is an essential, brief comment that allows you and collaborators to remember what changes you made and why. 
 
 Run git status again: 
-```{bash WVRivers status, echo=-1, eval=T}
-cd ~/Rivers
+```{bash, echo=-1, eval=TRUE}
+cd ../data/Rivers
 git status
 ```
 
@@ -120,40 +118,43 @@ This indicates that everything is up to date and committed correctly.
 
 Let’s say that you now wanted to go back into your ```WVRivers.txt``` and make changes. Open ```WVRivers.txt``` and add “River” after Cheat, Monongahela, and Elk. 
 
-```{text}
-Cheat River
+```{bash, echo=-1, eval=TRUE}
+cd ../data/Rivers
+touch WVRivers.txt
+echo "Cheat River
 Monongahela River
 Dents Run
 Deckers Creek
-Blackwater River
+Blackwater River 
 Tygart River
 Wheeling Creek
 Kanawha River
 New River
 Big Sandy Creek
-Elk River
+Elk River" > WVRivers.txt
 ```
-When you check git status, you will see that changes were made:
+When you check git status, you will see that changes were made.
 
-```{bash git status, echo=-1, eval=T}
-cd ~/Rivers
+```{bash, echo=-1, eval=TRUE}
+cd ../data/Rivers
 git status
 ```
 
 #### Viewing Changes with ```git diff```  
 You can see which changes were made before adding and committing the changed file. 
 
-```{bash, echo=-1, eval=T}
-cd ~/Rivers
+```{bash, echo=-1, eval=TRUE}
+cd ../data/Rivers
 git diff
 ```
+
 
 > Challenge: What do all the colors and symbols mean?
 
 Assuming you want to keep the change, you need to use ```git add``` and ```git commit``` to fully save the changes:
 
-```{bash, echo=-1, eval=F}
-cd ~/Rivers
+```{bash, echo=-1, eval=TRUE}
+cd ../data/Rivers
 git add WVRivers.txt
 git commit WVRivers.txt -m 'Added River to Monongahela, Cheat, and Elk'
 ```
@@ -166,13 +167,30 @@ Greenbrier River
 South Branch Potomac River
 Scotts Run
 ```
-
+```{bash, echo=F, eval=TRUE}
+cd ../data/Rivers
+echo "Cheat River
+Monongahela River
+Dents Run
+Deckers Creek
+Blackwater River 
+Tygart River
+Wheeling Creek
+Kanawha River
+New River
+Big Sandy Creek
+Elk River
+Ohio River
+Greenbrier River
+South Branch Potomac River
+Scotts Run" > WVRivers.txt
+```
 > Challenge: How can you check that the changes were made and recognized as changes?
 
 Finally, finalize your changes using: 
 
-```{bash, echo=-1, eval=F}
-cd ~/Rivers
+```{bash, echo=-1, eval=T}
+cd ../data/Rivers
 git add WVRivers.txt
 git commit -m 'added four more rivers to the list'
 ```
@@ -184,7 +202,7 @@ It is a good idea to check git status again, and as much as possible, to confirm
 You can check your entire version control history by using: 
 
 ```{bash, echo=-1, eval=T}
-cd ~/Rivers
+cd ../data/Rivers
 git log
 ```
 
@@ -208,12 +226,13 @@ This will use the unique 40-digit commit identifier (you can see these by callin
 
 Suppose that somebody accidentally puts a non-West Virginia River in your file, and overwrites it. Open up your WVRivers.txt and type “Wabash River” under “Blackwater River”
 
-```{text}
-Cheat River
+```{bash, echo=F, eval=TRUE}
+cd ../data/Rivers
+echo "Cheat River
 Monongahela River
 Dents Run
 Deckers Creek
-Blackwater River
+Blackwater River 
 Wabash River
 Tygart River
 Wheeling Creek
@@ -222,30 +241,30 @@ New River
 Big Sandy Creek
 Elk River
 Ohio River
-Scotts Run
 Greenbrier River
 South Branch Potomac River
+Scotts Run" > WVRivers.txt
 ```
 
 Now add and commit:
 ```{bash, echo=-1, eval=T}
-cd ~/Rivers
+cd ../data/Rivers
 git add WVRivers.txt
 git commit -m "The Wabash River might be in West Virginia"
 git log
 ```
 
- Somebody put the Wabash River in my list of West Virginia Rivers. But, being a savvy geographer, you know the Wabash River is in Indiana, not West Virginia. Therefore, you want to restore WVRivers.txt to a previous and correct version. You can do this by using ```git checkout``` and the same naming convention described before (```HEAD~N```):
+Somebody put the Wabash River in my list of West Virginia Rivers! But, being a savvy geographer, you know the Wabash River is in Indiana, not West Virginia. Therefore, you want to restore WVRivers.txt to a previous and correct version. You can do this by using ```git checkout``` and the same naming convention described before (```HEAD~N```):
 
 ```{bash, echo=-1, eval=T}
-cd ~/Rivers
+cd ../data//Rivers
 git checkout HEAD~1 WVRivers.txt
 ```
 
 If you open WVRivers.txt in the text editor, what do you see?  Which version of the list is now presented? If you are satisfied that is the most up to date (correct) version, then add and commit.
 
 ```{bash, echo=-1, eval=T}
-cd ~/Rivers
+cd ../data/Rivers
 git add WVRivers.txt
 git commit -m "Nope! Wabash River is in Indiana"
 git log
@@ -255,8 +274,8 @@ git log
 #### Branching
 What if you want to completely break the BMX bike to see if you can create a whole new drive train?  It's scary - what if you can't get it back together again?  No worries, you can use branching to isolate development work without affecting other branches in the repository. Each repository has one default branch and can add multiple other branches. You can merge a branch into another branch using a merge.
 
-You should use branches to:
-*	Develop new features  
+You should use branches to:  
+*	Develop new features   
 *	Fix bugs  
 *	Safely experiment with new ideas  
 
@@ -264,7 +283,7 @@ Be sure to branch if you are going to do anything that compromises the working p
 
 Let's make a new branch for Iowa Rivers and then do a checkout so that we are working on that branch.
 ```{bash, echo=-1, eval=T}
-cd ~/Rivers
+cd ../data/Rivers
 git branch IARivers
 git checkout IARivers
 ```
@@ -272,25 +291,35 @@ git checkout IARivers
 Now let's do a couple of commits on that branch.
 
 Create a new text file for IARivers.  Add some rivers. 
-```{text}
-Mississippi River
+```{bash, echo=F, eval=TRUE}
+cd ../data/Rivers
+touch IARivers.txt
+echo "Mississippi River
 Des Moines River
 Beaver River
 Peas Creek
 Boone River
 Skunk River
-Missouri River
+Missouri River" > IARivers.txt
 ```
 Add some more WV Rivers to its ```.txt``` file:
-```{text}
+```{bash, echo=F, eval=TRUE}
+cd ../data/Rivers
+echo "Mississippi River
+Des Moines River
+Beaver River
+Peas Creek
+Boone River
+Skunk River
+Missouri River 
 West Fork
-Buffalo Creek
+Buffalo Creek" > IARivers.txt
 ```
 
 Add and commit the files (you can do them at the same time or use a wildcard)
 
 ```{bash, echo=-1, eval=F}
-cd ~/Rivers
+cd ../data/Rivers
 git add IARivers.txt WVRivers.txt
 git commit *Rivers.txt -m "Added new file of Iowa Rivers"
 ```
@@ -299,38 +328,39 @@ What happens when you do a git status?
 
 Switch back to the master branch:
 ```{bash, echo=-1, eval=T}
-cd ~/Rivers
+cd ../data/Rivers
 git checkout master
 ```
 To see the current branches, try:
 
 ```{bash, echo=-1, eval=T}
-cd ~/Rivers
+cd ../data/Rivers
 git show-branch
 ```
 
 We are satisfied with our changes and have decided we want to keep the new Iowa file. How do we merge it all back together?
 
 ```{bash, echo=-1, eval=T}
-cd ~/Rivers
+cd ../data/Rivers
 git merge IARivers
 ```
 
 #### Removing a Repo
 One day you might want to remove an old repo.  To do this you will need to eliminate not just the files, but also the hidden files.  You can do this using rm with -rf flag from within the repo. This will eliminate the .git folder which holds all the changes and other git stuff. Don't actually run this as we want to keep the repo!
 
-```{bash rm git, eval=FALSE}
-rm -rf .git
-```
-
-Remove the ```/Rivers``` repo
+Remove the _/Rivers_ git repo, but still keep all your files:
 ```{bash rm rivers}
-cd ~/Rivers
+cd ../data/Rivers
 rm -rf .git
+ls -a
+```
+```{bash, echo=F}
+cd ../data
+rm -r Rivers
 ```
 
 #### RStudio and Git  
-Later in the semester, we will use the Git client in the RStudio IDE to work with git.  To make get this feature in RStudio, you must be working in an R-project with version control.
+Next time, we will use the Git client in the RStudio IDE to work with git.  To make get this feature work in RStudio, you must be working in an R-project with version control.
 
 ### Key Points  
 *	Git is a local version control system, the kid sister of GitHub, where you can keep track of changes to scripts, data, etc.  

@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="A Hessl" />
@@ -255,9 +256,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type="text/css">
 .main-container {
@@ -282,22 +281,80 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -307,8 +364,8 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Git</h1>
-<h4 class="author"><em>A Hessl</em></h4>
-<h4 class="date"><em>6/13/2019</em></h4>
+<h4 class="author">A Hessl</h4>
+<h4 class="date">6/13/2019</h4>
 
 </div>
 
@@ -357,89 +414,133 @@ $(document).ready(function () {
 <h3>Basic Usage of Git</h3>
 <div id="setting-up-a-repository" class="section level4">
 <h4>Setting up a repository</h4>
-<p>Let’s get started by making a repo in our home directory called <code>~/Rivers</code>.</p>
-<pre class="bash"><code>cd ~/
-mkdir Rivers
-
-cd ~/Rivers
+<p>Let’s get started by making a repo in our working directory called <em>./Rivers</em>.</p>
+<pre class="bash"><code>mkdir Rivers
+cd Rivers
 git init    </code></pre>
+<pre><code>## Initialized empty Git repository in /Users/amyhessl/Dropbox/Hessl/Teaching/Courses/EarthSciDigAge/OpenDataSci/data/Rivers/.git/</code></pre>
 <p><code>git init</code> initializes the folder <code>~/Rivers</code> as a repo. Any files or folders that undergo changes in this repository can now be tracked with version control.</p>
 <p>Use the list hidden files command (<code>ls -a</code>) in terminal to see that git has created a hidden directory within your new repo called <code>.git</code>:</p>
 <pre class="bash"><code>ls -a</code></pre>
 <pre><code>## .
 ## ..
-## .git
-## WVRivers.txt</code></pre>
+## .git</code></pre>
 <p>Here, you are using the <code>-a</code> option for “all files.” Try it without the `<code>-a</code> option, and you will see that the shell does not list the <code>.git</code> directory. This is because it is hidden. <code>-a</code> shows these hidden files.</p>
 <p>Check that your repository is set up correctly by checking the status:</p>
 <pre class="bash"><code>git status</code></pre>
-<pre><code>## On branch IARivers
-## nothing to commit, working tree clean</code></pre>
+<pre><code>## On branch master
+## 
+## No commits yet
+## 
+## nothing to commit (create/copy files and use &quot;git add&quot; to track)</code></pre>
 </div>
 <div id="tracking-changes" class="section level4">
 <h4>Tracking Changes:</h4>
-<p>First, create a text file that you can work with. In your terminal, create a file called “WVRivers.txt” and populate the file with some names of rivers in West Virginia. Later, we will make and track changes to this text file. You can create a new file in the terminal using the cat command:</p>
-<pre class="bash"><code>touch ~/Rivers/WVRivers.txt</code></pre>
+<p>First, create a text file that you can work with. In your terminal, create a file called “WVRivers.txt” and populate the file with some names of rivers in West Virginia. Later, we will make and track changes to this text file.</p>
 <p>Now you can edit the file. Find it in the Files tab of lower right RStudio IDE. Click on it and it will open in your RStudio text editor (upper left). Let’s add some rivers to the file:</p>
-<pre class="text"><code>Cheat
+<pre class="bash"><code>touch WVRivers.txt
+echo &quot;Cheat 
 Monongahela
 Dents Run
 Deckers Creek
-Blackwater River
+Blackwater River 
 Tygart River
 Wheeling Creek
 Kanawha River
 New River
 Big Sandy Creek
-Elk</code></pre>
+Elk&quot; &gt; WVRivers.txt</code></pre>
 <p>To check the status of <code>WVRivers.txt</code> in your git repository, use:</p>
-<pre class="bash"><code>cd ~/Rivers
-git status</code></pre>
-<pre><code>## On branch IARivers
-## nothing to commit, working tree clean</code></pre>
+<pre class="bash"><code>git status</code></pre>
+<pre><code>## On branch master
+## 
+## No commits yet
+## 
+## Untracked files:
+##   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+## 
+##  WVRivers.txt
+## 
+## nothing added to commit but untracked files present (use &quot;git add&quot; to track)</code></pre>
 </div>
 <div id="make-an-initial-commit" class="section level4">
 <h4>Make an Initial commit</h4>
 <p>This tells you that WVRivers.txt is an “untracked file.” This means that git isn’t keeping track of the file via version control. We have to tell git which files we want to track. To do this, use git add:</p>
 <pre class="bash"><code>git add WVRivers.txt
 git status</code></pre>
-<pre><code>## On branch IARivers
-## nothing to commit, working tree clean</code></pre>
+<pre><code>## On branch master
+## 
+## No commits yet
+## 
+## Changes to be committed:
+##   (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+## 
+##  new file:   WVRivers.txt</code></pre>
 <p>Note that the changes to WVRivers.txt still need to be committed with a message:</p>
 <pre class="bash"><code>git commit -m &quot;Started list of West Virginia rivers&quot;</code></pre>
+<pre><code>## [master (root-commit) e8ebbf5] Started list of West Virginia rivers
+##  1 file changed, 11 insertions(+)
+##  create mode 100644 WVRivers.txt</code></pre>
 <p>Using the <code>-m</code> option with <code>git commit</code> gives you the opportunity (required!) to add a notes message to your commit. This is an essential, brief comment that allows you and collaborators to remember what changes you made and why.</p>
 <p>Run git status again:</p>
 <pre class="bash"><code>git status</code></pre>
-<pre><code>## On branch IARivers
+<pre><code>## On branch master
 ## nothing to commit, working tree clean</code></pre>
 <p>This indicates that everything is up to date and committed correctly.</p>
 <p>Let’s say that you now wanted to go back into your <code>WVRivers.txt</code> and make changes. Open <code>WVRivers.txt</code> and add “River” after Cheat, Monongahela, and Elk.</p>
-<pre class="text"><code>Cheat River
+<pre class="bash"><code>touch WVRivers.txt
+echo &quot;Cheat River
 Monongahela River
 Dents Run
 Deckers Creek
-Blackwater River
+Blackwater River 
 Tygart River
 Wheeling Creek
 Kanawha River
 New River
 Big Sandy Creek
-Elk River</code></pre>
-<p>When you check git status, you will see that changes were made:</p>
+Elk River&quot; &gt; WVRivers.txt</code></pre>
+<p>When you check git status, you will see that changes were made.</p>
 <pre class="bash"><code>git status</code></pre>
-<pre><code>## On branch IARivers
-## nothing to commit, working tree clean</code></pre>
+<pre><code>## On branch master
+## Changes not staged for commit:
+##   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+##   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+## 
+##  modified:   WVRivers.txt
+## 
+## no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</code></pre>
 </div>
 <div id="viewing-changes-with-git-diff" class="section level4">
 <h4>Viewing Changes with <code>git diff</code></h4>
 <p>You can see which changes were made before adding and committing the changed file.</p>
 <pre class="bash"><code>git diff</code></pre>
+<pre><code>## diff --git a/WVRivers.txt b/WVRivers.txt
+## index 4633bfc..7ac7d4c 100644
+## --- a/WVRivers.txt
+## +++ b/WVRivers.txt
+## @@ -1,5 +1,5 @@
+## -Cheat 
+## -Monongahela
+## +Cheat River
+## +Monongahela River
+##  Dents Run
+##  Deckers Creek
+##  Blackwater River 
+## @@ -8,4 +8,4 @@ Wheeling Creek
+##  Kanawha River
+##  New River
+##  Big Sandy Creek
+## -Elk
+## +Elk River</code></pre>
 <blockquote>
 <p>Challenge: What do all the colors and symbols mean?</p>
 </blockquote>
 <p>Assuming you want to keep the change, you need to use <code>git add</code> and <code>git commit</code> to fully save the changes:</p>
 <pre class="bash"><code>git add WVRivers.txt
 git commit WVRivers.txt -m 'Added River to Monongahela, Cheat, and Elk'</code></pre>
+<pre><code>## [master 195809e] Added River to Monongahela, Cheat, and Elk
+##  1 file changed, 3 insertions(+), 3 deletions(-)</code></pre>
 <p>Now, assume you show your list of rivers to someone else, and they are disappointed that certain rivers were not included. Open up WVRivers.txt and add the following rivers after the last line:</p>
 <pre><code>Ohio River
 Greenbrier River
@@ -451,35 +552,31 @@ Scotts Run</code></pre>
 <p>Finally, finalize your changes using:</p>
 <pre class="bash"><code>git add WVRivers.txt
 git commit -m 'added four more rivers to the list'</code></pre>
+<pre><code>## [master cf1f346] added four more rivers to the list
+##  1 file changed, 4 insertions(+)</code></pre>
 <p>It is a good idea to check git status again, and as much as possible, to confirm the changes are committed.</p>
 </div>
 <div id="version-control-history-using-git-log" class="section level4">
 <h4>Version Control History using <code>git log</code></h4>
 <p>You can check your entire version control history by using:</p>
 <pre class="bash"><code>git log</code></pre>
-<pre><code>## commit d20c1cbf264dad72107d8ef04068865794cbb9a2
+<pre><code>## commit cf1f346c0352e8e09c48476f9db916f4b75a49ad
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:30:16 2019 -0400
+## Date:   Mon Sep 16 14:15:22 2019 -0400
 ## 
-##     Nope! Wabash River is in Indiana
+##     added four more rivers to the list
 ## 
-## commit a9ff0acd788b079cb3eb8ab9d6d4a7bc52cbfee1
+## commit 195809e858d2bcc6d874bbf94ecf48bba8eab2dd
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:21:54 2019 -0400
+## Date:   Mon Sep 16 14:15:22 2019 -0400
 ## 
 ##     Added River to Monongahela, Cheat, and Elk
 ## 
-## commit e077b5eb7c94c1dbd784b396c7aa1bd088ec1aa5
+## commit e8ebbf5c651ca14b2da5c3b1b534eb1373caa87d
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:09:15 2019 -0400
+## Date:   Mon Sep 16 14:15:21 2019 -0400
 ## 
-##     The Wabash River might be in West Virginia
-## 
-## commit 33a23efb6141c7e9c0ffa251d4b6337670b171e9
-## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:04:00 2019 -0400
-## 
-##     Added River to Monongahela, Cheat, and Elk</code></pre>
+##     Started list of West Virginia rivers</code></pre>
 <p><code>git log</code> lists all changes made with essential information, including who made changes, when changes were made, and what the changes were. Note that the “Author” information will display the information set up at the beginning when you used git config.</p>
 </div>
 <div id="view-and-restore-past-commits---travel-back-in-time" class="section level4">
@@ -495,113 +592,88 @@ git commit -m 'added four more rivers to the list'</code></pre>
 <p>This will use the unique 40-digit commit identifier (you can see these by calling git log) to show the difference between commits. Since 40 is a lot of digits, you can also abbreviate and usually get the same results:</p>
 <pre><code>    ```git diff 67ef9162 WVRivers.txt```</code></pre>
 <p>Suppose that somebody accidentally puts a non-West Virginia River in your file, and overwrites it. Open up your WVRivers.txt and type “Wabash River” under “Blackwater River”</p>
-<pre class="text"><code>Cheat River
-Monongahela River
-Dents Run
-Deckers Creek
-Blackwater River
-Wabash River
-Tygart River
-Wheeling Creek
-Kanawha River
-New River
-Big Sandy Creek
-Elk River
-Ohio River
-Scotts Run
-Greenbrier River
-South Branch Potomac River</code></pre>
 <p>Now add and commit:</p>
 <pre class="bash"><code>git add WVRivers.txt
 git commit -m &quot;The Wabash River might be in West Virginia&quot;
 git log</code></pre>
-<pre><code>## On branch IARivers
-## nothing to commit, working tree clean
-## commit d20c1cbf264dad72107d8ef04068865794cbb9a2
+<pre><code>## [master 05bb0ae] The Wabash River might be in West Virginia
+##  1 file changed, 1 insertion(+)
+## commit 05bb0ae12dba332d0e85846865ec4d6df9aa7764
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:30:16 2019 -0400
-## 
-##     Nope! Wabash River is in Indiana
-## 
-## commit a9ff0acd788b079cb3eb8ab9d6d4a7bc52cbfee1
-## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:21:54 2019 -0400
-## 
-##     Added River to Monongahela, Cheat, and Elk
-## 
-## commit e077b5eb7c94c1dbd784b396c7aa1bd088ec1aa5
-## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:09:15 2019 -0400
+## Date:   Mon Sep 16 14:15:22 2019 -0400
 ## 
 ##     The Wabash River might be in West Virginia
 ## 
-## commit 33a23efb6141c7e9c0ffa251d4b6337670b171e9
+## commit cf1f346c0352e8e09c48476f9db916f4b75a49ad
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:04:00 2019 -0400
+## Date:   Mon Sep 16 14:15:22 2019 -0400
 ## 
-##     Added River to Monongahela, Cheat, and Elk</code></pre>
-<p>Somebody put the Wabash River in my list of West Virginia Rivers. But, being a savvy geographer, you know the Wabash River is in Indiana, not West Virginia. Therefore, you want to restore WVRivers.txt to a previous and correct version. You can do this by using <code>git checkout</code> and the same naming convention described before (<code>HEAD~N</code>):</p>
+##     added four more rivers to the list
+## 
+## commit 195809e858d2bcc6d874bbf94ecf48bba8eab2dd
+## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
+## Date:   Mon Sep 16 14:15:22 2019 -0400
+## 
+##     Added River to Monongahela, Cheat, and Elk
+## 
+## commit e8ebbf5c651ca14b2da5c3b1b534eb1373caa87d
+## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
+## Date:   Mon Sep 16 14:15:21 2019 -0400
+## 
+##     Started list of West Virginia rivers</code></pre>
+<p>Somebody put the Wabash River in my list of West Virginia Rivers! But, being a savvy geographer, you know the Wabash River is in Indiana, not West Virginia. Therefore, you want to restore WVRivers.txt to a previous and correct version. You can do this by using <code>git checkout</code> and the same naming convention described before (<code>HEAD~N</code>):</p>
 <pre class="bash"><code>git checkout HEAD~1 WVRivers.txt</code></pre>
 <p>If you open WVRivers.txt in the text editor, what do you see? Which version of the list is now presented? If you are satisfied that is the most up to date (correct) version, then add and commit.</p>
 <pre class="bash"><code>git add WVRivers.txt
 git commit -m &quot;Nope! Wabash River is in Indiana&quot;
 git log</code></pre>
-<pre><code>## [IARivers dea0ad3] Nope! Wabash River is in Indiana
+<pre><code>## [master 597a02f] Nope! Wabash River is in Indiana
 ##  1 file changed, 1 deletion(-)
-## commit dea0ad3dce567f77705fe4190769c2fdf4de8721
+## commit 597a02f8999e9ac98d32ac16c444b67f1a17c24f
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:30:29 2019 -0400
+## Date:   Mon Sep 16 14:15:23 2019 -0400
 ## 
 ##     Nope! Wabash River is in Indiana
 ## 
-## commit d20c1cbf264dad72107d8ef04068865794cbb9a2
+## commit 05bb0ae12dba332d0e85846865ec4d6df9aa7764
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:30:16 2019 -0400
-## 
-##     Nope! Wabash River is in Indiana
-## 
-## commit a9ff0acd788b079cb3eb8ab9d6d4a7bc52cbfee1
-## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:21:54 2019 -0400
-## 
-##     Added River to Monongahela, Cheat, and Elk
-## 
-## commit e077b5eb7c94c1dbd784b396c7aa1bd088ec1aa5
-## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:09:15 2019 -0400
+## Date:   Mon Sep 16 14:15:22 2019 -0400
 ## 
 ##     The Wabash River might be in West Virginia
 ## 
-## commit 33a23efb6141c7e9c0ffa251d4b6337670b171e9
+## commit cf1f346c0352e8e09c48476f9db916f4b75a49ad
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Thu Jun 13 17:04:00 2019 -0400
+## Date:   Mon Sep 16 14:15:22 2019 -0400
 ## 
-##     Added River to Monongahela, Cheat, and Elk</code></pre>
+##     added four more rivers to the list
+## 
+## commit 195809e858d2bcc6d874bbf94ecf48bba8eab2dd
+## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
+## Date:   Mon Sep 16 14:15:22 2019 -0400
+## 
+##     Added River to Monongahela, Cheat, and Elk
+## 
+## commit e8ebbf5c651ca14b2da5c3b1b534eb1373caa87d
+## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
+## Date:   Mon Sep 16 14:15:21 2019 -0400
+## 
+##     Started list of West Virginia rivers</code></pre>
 </div>
 <div id="branching" class="section level4">
 <h4>Branching</h4>
 <p>What if you want to completely break the BMX bike to see if you can create a whole new drive train? It’s scary - what if you can’t get it back together again? No worries, you can use branching to isolate development work without affecting other branches in the repository. Each repository has one default branch and can add multiple other branches. You can merge a branch into another branch using a merge.</p>
-<p>You should use branches to: * Develop new features<br />
+<p>You should use branches to:<br />
+* Develop new features<br />
 * Fix bugs<br />
 * Safely experiment with new ideas</p>
 <p>Be sure to branch if you are going to do anything that compromises the working parts of a script. Especially branch when working with others - it’s the polite thing to do.</p>
 <p>Let’s make a new branch for Iowa Rivers and then do a checkout so that we are working on that branch.</p>
 <pre class="bash"><code>git branch IARivers
 git checkout IARivers</code></pre>
-<pre><code>## fatal: A branch named 'IARivers' already exists.
-## Already on 'IARivers'</code></pre>
+<pre><code>## Switched to branch 'IARivers'</code></pre>
 <p>Now let’s do a couple of commits on that branch.</p>
 <p>Create a new text file for IARivers. Add some rivers.</p>
-<pre class="text"><code>Mississippi River
-Des Moines River
-Beaver River
-Peas Creek
-Boone River
-Skunk River
-Missouri River</code></pre>
 <p>Add some more WV Rivers to its <code>.txt</code> file:</p>
-<pre class="text"><code>West Fork
-Buffalo Creek</code></pre>
 <p>Add and commit the files (you can do them at the same time or use a wildcard)</p>
 <pre class="bash"><code>git add IARivers.txt WVRivers.txt
 git commit *Rivers.txt -m &quot;Added new file of Iowa Rivers&quot;</code></pre>
@@ -612,30 +684,28 @@ git commit *Rivers.txt -m &quot;Added new file of Iowa Rivers&quot;</code></pre>
 <p>To see the current branches, try:</p>
 <pre class="bash"><code>git show-branch</code></pre>
 <pre><code>## ! [IARivers] Nope! Wabash River is in Indiana
-##  * [master] The Wabash River might be in West Virginia
+##  * [master] Nope! Wabash River is in Indiana
 ## --
-## +  [IARivers] Nope! Wabash River is in Indiana
-## +  [IARivers^] Nope! Wabash River is in Indiana
-## +  [IARivers~2] Added River to Monongahela, Cheat, and Elk
-## +* [master] The Wabash River might be in West Virginia</code></pre>
+## +* [IARivers] Nope! Wabash River is in Indiana</code></pre>
 <p>We are satisfied with our changes and have decided we want to keep the new Iowa file. How do we merge it all back together?</p>
 <pre class="bash"><code>git merge IARivers</code></pre>
-<pre><code>## Updating e077b5e..dea0ad3
-## Fast-forward
-##  WVRivers.txt | 1 -
-##  1 file changed, 1 deletion(-)</code></pre>
+<pre><code>## Already up to date.</code></pre>
 </div>
 <div id="removing-a-repo" class="section level4">
 <h4>Removing a Repo</h4>
 <p>One day you might want to remove an old repo. To do this you will need to eliminate not just the files, but also the hidden files. You can do this using rm with -rf flag from within the repo. This will eliminate the .git folder which holds all the changes and other git stuff. Don’t actually run this as we want to keep the repo!</p>
-<pre class="bash"><code>rm -rf .git</code></pre>
-<p>Remove the <code>/Rivers</code> repo</p>
-<pre class="bash"><code>cd ~/Rivers
-rm -rf .git</code></pre>
+<p>Remove the <em>/Rivers</em> git repo, but still keep all your files:</p>
+<pre class="bash"><code>cd ../data/Rivers
+rm -rf .git
+ls -a</code></pre>
+<pre><code>## .
+## ..
+## IARivers.txt
+## WVRivers.txt</code></pre>
 </div>
 <div id="rstudio-and-git" class="section level4">
 <h4>RStudio and Git</h4>
-<p>Later in the semester, we will use the Git client in the RStudio IDE to work with git. To make get this feature in RStudio, you must be working in an R-project with version control.</p>
+<p>Next time, we will use the Git client in the RStudio IDE to work with git. To make get this feature work in RStudio, you must be working in an R-project with version control.</p>
 </div>
 </div>
 <div id="key-points" class="section level3">
@@ -670,6 +740,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
