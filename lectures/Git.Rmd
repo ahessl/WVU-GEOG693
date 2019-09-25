@@ -62,10 +62,8 @@ git status
 ```
 
 
-#### Tracking Changes: 
-First, create a text file that you can work with. In your terminal, create a file called “WVRivers.txt” and populate the file with some names of rivers in West Virginia. Later, we will make and track changes to this text file. 
-
-Now you can edit the file.  Find it in the Files tab of lower right RStudio IDE. Click on it and it will open in your RStudio text editor (upper left). Let's add some rivers to the file:
+#### Tracking Changes:
+First, create a text file called _WVRivers.txt_ that you can work with. You can create it as I have below in your terminal, or you can create it in the RStudio IDE or another text editor. Either way, Let's add some rivers to the file:
 
 ```{bash, echo=-1, eval=TRUE}
 cd ../data/Rivers
@@ -84,14 +82,14 @@ Elk" > WVRivers.txt
 ```
 
 
-To check the status of ```WVRivers.txt``` in your git repository, use:
+To check the status of _WVRivers.txt_ in your git repository, use:
 ```{bash, echo=-1, eval=TRUE}
 cd ../data/Rivers
 git status
 ```
 
 #### Make an Initial commit
-This tells you that WVRivers.txt is an “untracked file.” This means that git isn’t keeping track of the file via version control. We have to tell git which files we want to track. To do this, use git add: 
+This tells you that _WVRivers.txt_ is an “untracked file.” This means that git isn’t keeping track of the file via version control. We have to tell git which files we want to track. To do this, use git add: 
 
 ```{bash, echo=-1, eval=TRUE}
 cd ../data/Rivers
@@ -99,14 +97,14 @@ git add WVRivers.txt
 git status
 ```
 
-Note that the changes to WVRivers.txt still need to be committed with a message:
+Note that the changes to _WVRivers.txt_ still need to be committed with a message:
 
 ```{bash, echo=-1, eval=TRUE}
 cd ../data/Rivers
 git commit -m "Started list of West Virginia rivers"
 ```
 
-Using the ```-m``` option with ```git commit``` gives you the opportunity (required!) to add a notes message to your commit. This is an essential, brief comment that allows you and collaborators to remember what changes you made and why. 
+Using the `-m` option with `git commit` gives you the opportunity (required!) to add a notes message to your commit. This is an essential, brief comment that allows you and collaborators to remember what changes you made and why. 
 
 Run git status again: 
 ```{bash, echo=-1, eval=TRUE}
@@ -116,7 +114,7 @@ git status
 
 This indicates that everything is up to date and committed correctly. 
 
-Let’s say that you now wanted to go back into your ```WVRivers.txt``` and make changes. Open ```WVRivers.txt``` and add “River” after Cheat, Monongahela, and Elk. 
+Let’s say that you now wanted to go back into your _WVRivers.txt_ and make changes. Open _WVRivers.txt_ and add “River” after Cheat, Monongahela, and Elk. 
 
 ```{bash, echo=-1, eval=TRUE}
 cd ../data/Rivers
@@ -151,7 +149,7 @@ git diff
 
 > Challenge: What do all the colors and symbols mean?
 
-Assuming you want to keep the change, you need to use ```git add``` and ```git commit``` to fully save the changes:
+Assuming you want to keep the change, you need to use `git add` and `git commit` to fully save the changes:
 
 ```{bash, echo=-1, eval=TRUE}
 cd ../data/Rivers
@@ -159,7 +157,7 @@ git add WVRivers.txt
 git commit WVRivers.txt -m 'Added River to Monongahela, Cheat, and Elk'
 ```
 
-Now, assume you show your list of rivers to someone else, and they are disappointed that certain rivers were not included. Open up WVRivers.txt and add the following rivers after the last line: 
+Now, assume you show your list of rivers to someone else, and they are disappointed that certain rivers were not included. Open up _WVRivers.txt_ and add the following rivers after the last line: 
 
 ```
 Ohio River
@@ -198,7 +196,7 @@ git commit -m 'added four more rivers to the list'
 It is a good idea to check git status again, and as much as possible, to confirm the changes are committed. 
 
 
-#### Version Control History using ```git log```
+#### Version Control History using `git log`
 You can check your entire version control history by using: 
 
 ```{bash, echo=-1, eval=T}
@@ -206,7 +204,7 @@ cd ../data/Rivers
 git log
 ```
 
-```git log``` lists all changes made with essential information, including who made changes, when changes were made, and what the changes were. Note that the “Author” information will display the information set up at the beginning when you used git config.  
+`git log` lists all changes made with essential information, including who made changes, when changes were made, and what the changes were. Note that the “Author” information will display the information set up at the beginning when you used `git config`.  
 
 #### View and Restore Past Commits - Travel Back in Time!!!
 
@@ -224,7 +222,7 @@ This will use the unique 40-digit commit identifier (you can see these by callin
 
 		```git diff 67ef9162 WVRivers.txt```
 
-Suppose that somebody accidentally puts a non-West Virginia River in your file, and overwrites it. Open up your WVRivers.txt and type “Wabash River” under “Blackwater River”
+Suppose that somebody accidentally puts a non-West Virginia River in your file, and overwrites it. Open up your _WVRivers.txt_ and type “Wabash River” under “Blackwater River”
 
 ```{bash, echo=F, eval=TRUE}
 cd ../data/Rivers
@@ -254,14 +252,14 @@ git commit -m "The Wabash River might be in West Virginia"
 git log
 ```
 
-Somebody put the Wabash River in my list of West Virginia Rivers! But, being a savvy geographer, you know the Wabash River is in Indiana, not West Virginia. Therefore, you want to restore WVRivers.txt to a previous and correct version. You can do this by using ```git checkout``` and the same naming convention described before (```HEAD~N```):
+Somebody put the Wabash River in my list of West Virginia Rivers! But, being a savvy geographer, you know the Wabash River is in Indiana, not West Virginia. Therefore, you want to restore _WVRivers.txt_ to a previous and correct version. You can do this by using ```git checkout``` and the same naming convention described before (```HEAD~N```):
 
 ```{bash, echo=-1, eval=T}
 cd ../data//Rivers
 git checkout HEAD~1 WVRivers.txt
 ```
 
-If you open WVRivers.txt in the text editor, what do you see?  Which version of the list is now presented? If you are satisfied that is the most up to date (correct) version, then add and commit.
+If you open _WVRivers.txt_ in the text editor, what do you see?  Which version of the list is now presented? If you are satisfied that is the most up to date (correct) version, then add and commit.
 
 ```{bash, echo=-1, eval=T}
 cd ../data/Rivers
@@ -302,7 +300,7 @@ Boone River
 Skunk River
 Missouri River" > IARivers.txt
 ```
-Add some more WV Rivers to its ```.txt``` file:
+Add some more IA Rivers to its _.txt_ file:
 ```{bash, echo=F, eval=TRUE}
 cd ../data/Rivers
 echo "Mississippi River

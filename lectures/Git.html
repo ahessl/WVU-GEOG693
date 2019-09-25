@@ -436,8 +436,7 @@ git init    </code></pre>
 </div>
 <div id="tracking-changes" class="section level4">
 <h4>Tracking Changes:</h4>
-<p>First, create a text file that you can work with. In your terminal, create a file called “WVRivers.txt” and populate the file with some names of rivers in West Virginia. Later, we will make and track changes to this text file.</p>
-<p>Now you can edit the file. Find it in the Files tab of lower right RStudio IDE. Click on it and it will open in your RStudio text editor (upper left). Let’s add some rivers to the file:</p>
+<p>First, create a text file called <em>WVRivers.txt</em> that you can work with. You can create it as I have below in your terminal, or you can create it in the RStudio IDE or another text editor. Either way, Let’s add some rivers to the file:</p>
 <pre class="bash"><code>touch WVRivers.txt
 echo &quot;Cheat 
 Monongahela
@@ -450,7 +449,7 @@ Kanawha River
 New River
 Big Sandy Creek
 Elk&quot; &gt; WVRivers.txt</code></pre>
-<p>To check the status of <code>WVRivers.txt</code> in your git repository, use:</p>
+<p>To check the status of <em>WVRivers.txt</em> in your git repository, use:</p>
 <pre class="bash"><code>git status</code></pre>
 <pre><code>## On branch master
 ## 
@@ -465,7 +464,7 @@ Elk&quot; &gt; WVRivers.txt</code></pre>
 </div>
 <div id="make-an-initial-commit" class="section level4">
 <h4>Make an Initial commit</h4>
-<p>This tells you that WVRivers.txt is an “untracked file.” This means that git isn’t keeping track of the file via version control. We have to tell git which files we want to track. To do this, use git add:</p>
+<p>This tells you that <em>WVRivers.txt</em> is an “untracked file.” This means that git isn’t keeping track of the file via version control. We have to tell git which files we want to track. To do this, use git add:</p>
 <pre class="bash"><code>git add WVRivers.txt
 git status</code></pre>
 <pre><code>## On branch master
@@ -476,9 +475,9 @@ git status</code></pre>
 ##   (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
 ## 
 ##  new file:   WVRivers.txt</code></pre>
-<p>Note that the changes to WVRivers.txt still need to be committed with a message:</p>
+<p>Note that the changes to <em>WVRivers.txt</em> still need to be committed with a message:</p>
 <pre class="bash"><code>git commit -m &quot;Started list of West Virginia rivers&quot;</code></pre>
-<pre><code>## [master (root-commit) e8ebbf5] Started list of West Virginia rivers
+<pre><code>## [master (root-commit) 0122073] Started list of West Virginia rivers
 ##  1 file changed, 11 insertions(+)
 ##  create mode 100644 WVRivers.txt</code></pre>
 <p>Using the <code>-m</code> option with <code>git commit</code> gives you the opportunity (required!) to add a notes message to your commit. This is an essential, brief comment that allows you and collaborators to remember what changes you made and why.</p>
@@ -487,7 +486,7 @@ git status</code></pre>
 <pre><code>## On branch master
 ## nothing to commit, working tree clean</code></pre>
 <p>This indicates that everything is up to date and committed correctly.</p>
-<p>Let’s say that you now wanted to go back into your <code>WVRivers.txt</code> and make changes. Open <code>WVRivers.txt</code> and add “River” after Cheat, Monongahela, and Elk.</p>
+<p>Let’s say that you now wanted to go back into your <em>WVRivers.txt</em> and make changes. Open <em>WVRivers.txt</em> and add “River” after Cheat, Monongahela, and Elk.</p>
 <pre class="bash"><code>touch WVRivers.txt
 echo &quot;Cheat River
 Monongahela River
@@ -539,9 +538,9 @@ Elk River&quot; &gt; WVRivers.txt</code></pre>
 <p>Assuming you want to keep the change, you need to use <code>git add</code> and <code>git commit</code> to fully save the changes:</p>
 <pre class="bash"><code>git add WVRivers.txt
 git commit WVRivers.txt -m 'Added River to Monongahela, Cheat, and Elk'</code></pre>
-<pre><code>## [master 195809e] Added River to Monongahela, Cheat, and Elk
+<pre><code>## [master cb55bef] Added River to Monongahela, Cheat, and Elk
 ##  1 file changed, 3 insertions(+), 3 deletions(-)</code></pre>
-<p>Now, assume you show your list of rivers to someone else, and they are disappointed that certain rivers were not included. Open up WVRivers.txt and add the following rivers after the last line:</p>
+<p>Now, assume you show your list of rivers to someone else, and they are disappointed that certain rivers were not included. Open up <em>WVRivers.txt</em> and add the following rivers after the last line:</p>
 <pre><code>Ohio River
 Greenbrier River
 South Branch Potomac River
@@ -552,7 +551,7 @@ Scotts Run</code></pre>
 <p>Finally, finalize your changes using:</p>
 <pre class="bash"><code>git add WVRivers.txt
 git commit -m 'added four more rivers to the list'</code></pre>
-<pre><code>## [master cf1f346] added four more rivers to the list
+<pre><code>## [master 4e40b5e] added four more rivers to the list
 ##  1 file changed, 4 insertions(+)</code></pre>
 <p>It is a good idea to check git status again, and as much as possible, to confirm the changes are committed.</p>
 </div>
@@ -560,24 +559,24 @@ git commit -m 'added four more rivers to the list'</code></pre>
 <h4>Version Control History using <code>git log</code></h4>
 <p>You can check your entire version control history by using:</p>
 <pre class="bash"><code>git log</code></pre>
-<pre><code>## commit cf1f346c0352e8e09c48476f9db916f4b75a49ad
+<pre><code>## commit 4e40b5e78fa96bd2b15abdf90add92f204ab772a
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:22 2019 -0400
+## Date:   Wed Sep 25 09:11:10 2019 -0400
 ## 
 ##     added four more rivers to the list
 ## 
-## commit 195809e858d2bcc6d874bbf94ecf48bba8eab2dd
+## commit cb55bef625c88de363722bccc53054004bdbc16f
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:22 2019 -0400
+## Date:   Wed Sep 25 09:11:10 2019 -0400
 ## 
 ##     Added River to Monongahela, Cheat, and Elk
 ## 
-## commit e8ebbf5c651ca14b2da5c3b1b534eb1373caa87d
+## commit 0122073ac3c4af6b462887a4b25be636c979a583
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:21 2019 -0400
+## Date:   Wed Sep 25 09:11:09 2019 -0400
 ## 
 ##     Started list of West Virginia rivers</code></pre>
-<p><code>git log</code> lists all changes made with essential information, including who made changes, when changes were made, and what the changes were. Note that the “Author” information will display the information set up at the beginning when you used git config.</p>
+<p><code>git log</code> lists all changes made with essential information, including who made changes, when changes were made, and what the changes were. Note that the “Author” information will display the information set up at the beginning when you used <code>git config</code>.</p>
 </div>
 <div id="view-and-restore-past-commits---travel-back-in-time" class="section level4">
 <h4>View and Restore Past Commits - Travel Back in Time!!!</h4>
@@ -591,71 +590,71 @@ git commit -m 'added four more rivers to the list'</code></pre>
 <pre><code>3. ```git diff 67ef9162ff65c8b3c57eeb85b1979000e26489ca WVRivers.txt```</code></pre>
 <p>This will use the unique 40-digit commit identifier (you can see these by calling git log) to show the difference between commits. Since 40 is a lot of digits, you can also abbreviate and usually get the same results:</p>
 <pre><code>    ```git diff 67ef9162 WVRivers.txt```</code></pre>
-<p>Suppose that somebody accidentally puts a non-West Virginia River in your file, and overwrites it. Open up your WVRivers.txt and type “Wabash River” under “Blackwater River”</p>
+<p>Suppose that somebody accidentally puts a non-West Virginia River in your file, and overwrites it. Open up your <em>WVRivers.txt</em> and type “Wabash River” under “Blackwater River”</p>
 <p>Now add and commit:</p>
 <pre class="bash"><code>git add WVRivers.txt
 git commit -m &quot;The Wabash River might be in West Virginia&quot;
 git log</code></pre>
-<pre><code>## [master 05bb0ae] The Wabash River might be in West Virginia
+<pre><code>## [master fdc44dc] The Wabash River might be in West Virginia
 ##  1 file changed, 1 insertion(+)
-## commit 05bb0ae12dba332d0e85846865ec4d6df9aa7764
+## commit fdc44dc178464e44c206d8456f7357edb22da675
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:22 2019 -0400
+## Date:   Wed Sep 25 09:11:10 2019 -0400
 ## 
 ##     The Wabash River might be in West Virginia
 ## 
-## commit cf1f346c0352e8e09c48476f9db916f4b75a49ad
+## commit 4e40b5e78fa96bd2b15abdf90add92f204ab772a
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:22 2019 -0400
+## Date:   Wed Sep 25 09:11:10 2019 -0400
 ## 
 ##     added four more rivers to the list
 ## 
-## commit 195809e858d2bcc6d874bbf94ecf48bba8eab2dd
+## commit cb55bef625c88de363722bccc53054004bdbc16f
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:22 2019 -0400
+## Date:   Wed Sep 25 09:11:10 2019 -0400
 ## 
 ##     Added River to Monongahela, Cheat, and Elk
 ## 
-## commit e8ebbf5c651ca14b2da5c3b1b534eb1373caa87d
+## commit 0122073ac3c4af6b462887a4b25be636c979a583
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:21 2019 -0400
+## Date:   Wed Sep 25 09:11:09 2019 -0400
 ## 
 ##     Started list of West Virginia rivers</code></pre>
-<p>Somebody put the Wabash River in my list of West Virginia Rivers! But, being a savvy geographer, you know the Wabash River is in Indiana, not West Virginia. Therefore, you want to restore WVRivers.txt to a previous and correct version. You can do this by using <code>git checkout</code> and the same naming convention described before (<code>HEAD~N</code>):</p>
+<p>Somebody put the Wabash River in my list of West Virginia Rivers! But, being a savvy geographer, you know the Wabash River is in Indiana, not West Virginia. Therefore, you want to restore <em>WVRivers.txt</em> to a previous and correct version. You can do this by using <code>git checkout</code> and the same naming convention described before (<code>HEAD~N</code>):</p>
 <pre class="bash"><code>git checkout HEAD~1 WVRivers.txt</code></pre>
-<p>If you open WVRivers.txt in the text editor, what do you see? Which version of the list is now presented? If you are satisfied that is the most up to date (correct) version, then add and commit.</p>
+<p>If you open <em>WVRivers.txt</em> in the text editor, what do you see? Which version of the list is now presented? If you are satisfied that is the most up to date (correct) version, then add and commit.</p>
 <pre class="bash"><code>git add WVRivers.txt
 git commit -m &quot;Nope! Wabash River is in Indiana&quot;
 git log</code></pre>
-<pre><code>## [master 597a02f] Nope! Wabash River is in Indiana
+<pre><code>## [master 3d73fe1] Nope! Wabash River is in Indiana
 ##  1 file changed, 1 deletion(-)
-## commit 597a02f8999e9ac98d32ac16c444b67f1a17c24f
+## commit 3d73fe1147ab305ee98316e8a0d67f00ccee673d
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:23 2019 -0400
+## Date:   Wed Sep 25 09:11:10 2019 -0400
 ## 
 ##     Nope! Wabash River is in Indiana
 ## 
-## commit 05bb0ae12dba332d0e85846865ec4d6df9aa7764
+## commit fdc44dc178464e44c206d8456f7357edb22da675
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:22 2019 -0400
+## Date:   Wed Sep 25 09:11:10 2019 -0400
 ## 
 ##     The Wabash River might be in West Virginia
 ## 
-## commit cf1f346c0352e8e09c48476f9db916f4b75a49ad
+## commit 4e40b5e78fa96bd2b15abdf90add92f204ab772a
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:22 2019 -0400
+## Date:   Wed Sep 25 09:11:10 2019 -0400
 ## 
 ##     added four more rivers to the list
 ## 
-## commit 195809e858d2bcc6d874bbf94ecf48bba8eab2dd
+## commit cb55bef625c88de363722bccc53054004bdbc16f
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:22 2019 -0400
+## Date:   Wed Sep 25 09:11:10 2019 -0400
 ## 
 ##     Added River to Monongahela, Cheat, and Elk
 ## 
-## commit e8ebbf5c651ca14b2da5c3b1b534eb1373caa87d
+## commit 0122073ac3c4af6b462887a4b25be636c979a583
 ## Author: Amy Hessl &lt;amy.hessl@mail.wvu.edu&gt;
-## Date:   Mon Sep 16 14:15:21 2019 -0400
+## Date:   Wed Sep 25 09:11:09 2019 -0400
 ## 
 ##     Started list of West Virginia rivers</code></pre>
 </div>
@@ -673,7 +672,7 @@ git checkout IARivers</code></pre>
 <pre><code>## Switched to branch 'IARivers'</code></pre>
 <p>Now let’s do a couple of commits on that branch.</p>
 <p>Create a new text file for IARivers. Add some rivers.</p>
-<p>Add some more WV Rivers to its <code>.txt</code> file:</p>
+<p>Add some more IA Rivers to its <em>.txt</em> file:</p>
 <p>Add and commit the files (you can do them at the same time or use a wildcard)</p>
 <pre class="bash"><code>git add IARivers.txt WVRivers.txt
 git commit *Rivers.txt -m &quot;Added new file of Iowa Rivers&quot;</code></pre>

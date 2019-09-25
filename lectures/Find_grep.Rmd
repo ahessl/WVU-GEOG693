@@ -108,7 +108,6 @@ grep has lots of other options. To find out what they are, we can type:
 man grep
 ```
 
->__Challenge:__ How can we return the haiku.txt file without blank lines? Which line numbers contain blank lines?
 
 > __Challenge:__ Which command would result in the following output:
 and the presence of absence:
@@ -127,6 +126,10 @@ grep -E '^.o' haiku.txt
 ```
 
 We use the `-E` flag and put the pattern in quotes to prevent the shell from trying to interpret it. (If the pattern contained a *, for example, the shell would try to expand it before running grep.) The `^` in the pattern anchors the match to the start of the line. The `.` matches a single character (just like `?` in the shell), while the `o` matches an actual ‘o’.
+
+>__Challenge:__ How can we return the haiku.txt file without blank lines? Which line numbers contain blank lines?
+
+_Hint:_ Find whole lines that are blank first, then invert that match.  Use `man` or `--help` to get started.
 
 #### Tracking a Species
 >__Challenge:__ Leah has several hundred data files saved in one directory, each of which is formatted like this:
@@ -272,7 +275,6 @@ It’s very common to use `find` and `grep` (or `egrep`) together. The first fin
 cd ../data/data-shell/
 grep "FE" $(find . -name '*.pdb')
 ```
-../data/pdb/heme.pdb:ATOM     25 FE           1      -0.924   0.535  -0.518
 
 #### Matching and Subtracting
 The `-v` flag to `grep` inverts pattern matching, so that only lines which do not match the pattern are printed. 
