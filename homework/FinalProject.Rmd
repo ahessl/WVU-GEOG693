@@ -1,7 +1,7 @@
 ---
-title: "FinalProject"
+title: "Final Project"
 author: "A Hessl"
-date: "6/7/2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 
@@ -49,7 +49,7 @@ __What makes a project earn an 'A'?__
 -	Functions are used and sourced from different files.  
 -	Loops or apply functions are implemented (rather than repeated sections of code).  
 -	Output (figures or data) are logical, clear.  
--	README.md clearly conveys the project and provides examples of code.  
+-	README.md clearly conveys the project and provides examples of code and products.   
 -	Code is clear, well-organized and commented. 
 
 
