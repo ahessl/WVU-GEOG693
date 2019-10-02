@@ -46,7 +46,7 @@ Please complete this before the first day of class.
 
 1) [Version Control Using Git](./lectures/Git.html) _09/20/19_
 
-2) [Collaboration and Sharing Using GitHub](./lectures/GitHub.html) _09/20/19_
+2) [Collaboration and Sharing Using GitHub](./lectures/GitHub.html) _10/02/19_
 
 3) Project Management in R Studio _09/25/19_
 
