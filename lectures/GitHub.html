@@ -365,7 +365,7 @@ summary {
 
 <h1 class="title toc-ignore">GitHub</h1>
 <h4 class="author">A Hessl</h4>
-<h4 class="date">6/14/2019</h4>
+<h4 class="date">02 October, 2019</h4>
 
 </div>
 
@@ -486,29 +486,70 @@ git commit -m “Added names of some rivers in Indiana to your list of state riv
 <p>Git should throw an error like:</p>
 <pre class="bash"><code>cd ../../Rivers
 git push origin master</code></pre>
-<p>To <a href="https://github.com/ahessl/Rivers.git" class="uri">https://github.com/ahessl/Rivers.git</a> ! [rejected] master -&gt; master (fetch first) error: failed to push some refs to ‘<a href="https://github.com/ahessl/Rivers.git" class="uri">https://github.com/ahessl/Rivers.git</a>’ hint: Updates were rejected because the remote contains work that you do hint: not have locally. This is usually caused by another repository pushing hint: to the same ref. You may want to first integrate the remote changes hint: (e.g., ‘git pull …’) before pushing again. hint: See the ‘Note about fast-forwards’ in ‘git push –help’ for details.</p>
+<pre><code>To https://github.com/ahessl/Rivers.git
+ ! [rejected]        master -&gt; master (fetch first)
+error: failed to push some refs to 'https://github.com/ahessl/Rivers.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.</code></pre>
 <p>Git rejects the push because it detects that the remote repository has new updates that have not been incorporated into the local branch. What we have to do is pull the changes from GitHub, merge them into the copy we’re currently working in, and then push that. Let’s start by pulling:</p>
 <p><code>git pull origin master</code></p>
-<p>remote: Counting objects: 3, done. remote: Compressing objects: 100% (2/2), done. remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 Unpacking objects: 100% (3/3), done. From <a href="https://github.com/ahessl/Rivers" class="uri">https://github.com/ahessl/Rivers</a> * branch master -&gt; FETCH_HEAD d3774b9..398e401 master -&gt; origin/master Auto-merging WVRivers.txt CONFLICT (content): Merge conflict in WVRivers.txt Automatic merge failed; fix conflicts and then commit the result.</p>
+<pre><code>remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/ahessl/Rivers
+ * branch            master     -&gt; FETCH_HEAD
+   d3774b9..398e401  master     -&gt; origin/master
+Auto-merging WVRivers.txt
+CONFLICT (content): Merge conflict in WVRivers.txt
+Automatic merge failed; fix conflicts and then commit the result.</code></pre>
 <p>To fix the conflict, I have to edit WVRivers.txt. If you open your conflicted file in a text editor, you will note that it now contains some strange symbols that denote the kinds of conflicts.</p>
 <p>To see the beginning of the merge conflict in your file, search the file for the conflict marker &lt;&lt;&lt;&lt;&lt;&lt;&lt;. When you open the file in your text editor, you’ll see the changes from the HEAD or base/master branch after the line &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD. Next, you’ll see =======, which divides your changes from the changes in the other version followed by &gt;&gt;&gt;&gt;&gt;&gt;&gt; BRANCH-NAME if there was a new branch.</p>
 <p>Decide if you want to keep only your changes, keep only the other version’s changes, or make a brand new change, which may incorporate changes from both branches. Delete the conflict markers &lt;&lt;&lt;&lt;&lt;&lt;&lt;, =======, &gt;&gt;&gt;&gt;&gt;&gt;&gt; and make the changes you want in the final merge. Save this file using the same name, in my case WVRivers.txt.</p>
 <p>Now check the status:</p>
 <pre class="bash"><code>git status</code></pre>
-<p>On branch master All conflicts fixed but you are still merging. (use “git commit” to conclude merge)</p>
-<p>Changes to be committed:</p>
-<pre><code>modified:   WVRivers.txt</code></pre>
-<p>I am ready to commit, but when I do, Git throws another error:</p>
-<p>fatal: cannot do a partial commit during a merge.</p>
 <p>A partial commit is when you are only committing some files, not all the files in a repo. If you got this error, you can add an <code>-i</code> flag that lets you commit a single file.</p>
 <p><code>git commit WVRivers.txt -i -m &quot;resolved conflict by including all rivers&quot;</code></p>
-<p>[master 0500531] resolved conflict by including all rivers Amys-MacBook-Pro-7:Rivers amyhessl$ git status On branch master nothing to commit, working tree clean</p>
+<p>Follow up with a <code>git status</code></p>
+<p>On branch master nothing to commit, working tree clean</p>
 <p><em>Don’t forget to PUSH!</em> At the bash terminal: <code>git push origin master</code> OR in RStudio using the green up arrow.</p>
-<p>Counting objects: 19, done. Delta compression using up to 8 threads. Compressing objects: 100% (19/19), done. Writing objects: 100% (19/19), 1.70 KiB | 0 bytes/s, done. Total 19 (delta 7), reused 0 (delta 0) remote: Resolving deltas: 100% (7/7), completed with 1 local object. To <a href="https://github.com/ahessl/Rivers.git" class="uri">https://github.com/ahessl/Rivers.git</a> 398e401..0500531 master -&gt; master</p>
+<pre><code>Counting objects: 19, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (19/19), done.
+Writing objects: 100% (19/19), 1.70 KiB | 0 bytes/s, done.
+Total 19 (delta 7), reused 0 (delta 0)
+remote: Resolving deltas: 100% (7/7), completed with 1 local object.
+To https://github.com/ahessl/Rivers.git
+   398e401..0500531  master -&gt; master</code></pre>
 <p>Ahhhh. All good.</p>
 </div>
-<div id="what-is-github-flow" class="section level4">
-<h4>What is GitHub Flow?</h4>
+<div id="a-project-example" class="section level4">
+<h4>A Project Example</h4>
+<p>It can be a challenge to create a workflow that eh, works. Here is one suggestion:</p>
+<ul>
+<li>Make a repo and invite collaborators on GitHub.com<br />
+</li>
+<li>Clone the repo to your local<br />
+</li>
+<li>Make a local branch as your personal sandbox and check it out:<br />
+<code>git checkout -b &lt;branch-name&gt;</code><br />
+</li>
+<li>Push that branch to the remote when ready to share:<br />
+<code>git push origin &lt;branch-name&gt;</code><br />
+</li>
+<li>When collaborators pull, they will get all the branches and they can check out any:<br />
+<code>git pull</code> <code>git checkout &lt;branch-name&gt;</code><br />
+</li>
+<li>Merge branch with master when your branch is ready to go:<br />
+From master branch:<br />
+<code>git merge &lt;branch-name&gt;</code></li>
+</ul>
+</div>
+<div id="rules-to-live-by-in-the-big-github-world" class="section level4">
+<h4>Rules to Live By in the Big GitHub World:</h4>
 <p>• Anything in the master branch is deployable<br />
 • To work on something new, create a descriptively named branch off of master (ie: CA-rivers)<br />
 • Commit to that branch locally and regularly push your work to the same named branch on GitHub<br />
