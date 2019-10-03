@@ -229,12 +229,12 @@ From master branch:
 `git merge <branch-name>`  
 
 #### Rules to Live By in the Big GitHub World: 
-•	Anything in the master branch is deployable  
-•	To work on something new, create a descriptively named branch off of master (ie: CA-rivers)  
-•	Commit to that branch locally and regularly push your work to the same named branch on GitHub  
-•	When you need feedback or help, or you think the branch is ready for merging, open a pull request. Pull request is performed at GitHub.com  
-•	After someone else has reviewed and signed off on the feature, you can merge it into master using merge pull request at GitHub.com  
-•	Once it is merged and pushed to ‘master’, you can and should deploy immediately  
+* Anything in the master branch is deployable  
+* To work on something new, create a descriptively named branch off of master (ie: CA-rivers)  
+* Commit to that branch locally and regularly push your work to the same named branch on GitHub  
+* When you need feedback or help, or you think the branch is ready for merging, open a pull request. Pull request is performed at GitHub.com  
+* After someone else has reviewed and signed off on the feature, you can merge it into master using merge pull request at GitHub.com  
+* Once it is merged and pushed to ‘master’, you can and should deploy immediately  
 
 #### Further Reading
 Git Basics: https://git-scm.com/book/en/v2/Getting-Started-Git-Basics

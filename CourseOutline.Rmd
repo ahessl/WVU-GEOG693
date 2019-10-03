@@ -48,33 +48,35 @@ Please complete this before the first day of class.
 
 2) [Collaboration and Sharing Using GitHub](./lectures/GitHub.html) _10/02/19_
 
-3) Project Management in R Studio _09/25/19_
+3) [Project Management in R Studio](./lectures/ProjManRStudio.html) _10/04/19_
 
 <br/>
 
 ### __Working with Data in R__  
 
-1) Data Structures  _10/02/19_
+1) Help in R _10/09/19_
 
-2) Data Frames  _10/04/19_
+2) Data Structures  _10/09/19_
 
-3) Subsetting/Indexing Data  _10/09/19_
+2) Data Frames  _10/16/19_
 
-4) Control Flow: Functions in R  _10/11/19_
+3) Subsetting/Indexing Data  _10/18/19_
 
-5) Control Flow: Apply  _10/16/19_
+4) Control Flow: Functions in R  _10/23/19_
 
-6) Control Flow: Loops  _10/18/19_
+5) Control Flow: Apply  _10/25/19_
 
-7) Split, Apply, Combine  _10/23/19_
+6) Control Flow: Loops  _10/30/19_
 
-8) Plotting Using Base R  _10/25/19_
+7) Split, Apply, Combine  _11/01/19_
 
-9) Plotting Using ggplot  _10/30/19_
+8) Plotting Using Base R  _11/06/19_
 
-10) APIs to Download Data  _11/01/19_
+9) Plotting Using ggplot  _11/08/19_
 
-11) Editing a Package  _11/06/19_
+10) APIs to Download Data  _11/13/19_
+
+11) Editing a Package  _11/15/19_
 
 #### __Acknowledgments__
 _These pages were derived in part from:Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University, and from [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_
