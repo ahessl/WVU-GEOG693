@@ -54,7 +54,9 @@ Please complete this before the first day of class.
 
 ### __Working with Data in R__  
 
-1) Help in R _10/09/19_
+1) [Intro to R](./lectures/IntroR.html) _10/09/19_
+
+2) Help in R
 
 2) Data Structures  _10/09/19_
 
