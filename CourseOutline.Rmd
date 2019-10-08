@@ -56,7 +56,7 @@ Please complete this before the first day of class.
 
 1) [Intro to R](./lectures/IntroR.html) _10/09/19_
 
-2) Help in R
+2) [Help in R](./lectures/HelpR.html) _10/09/10_
 
 2) Data Structures  _10/09/19_
 
