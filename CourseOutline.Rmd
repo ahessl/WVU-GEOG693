@@ -48,19 +48,19 @@ Please complete this before the first day of class.
 
 2) [Collaboration and Sharing Using GitHub](./lectures/GitHub.html) _10/02/19_
 
-3) [Project Management in R Studio](./lectures/ProjManRStudio.html) _10/04/19_
+3) [Project Management in R Studio](./lectures/RStudioProjMan.html) _10/04/19_
 
 <br/>
 
 ### __Working with Data in R__  
 
-1) [Intro to R](./lectures/IntroR.html) _10/09/19_
+1) [Intro to R](./lectures/RIntro.html) _10/09/19_
 
-2) [Help in R](./lectures/HelpR.html) _10/09/10_
+2) [Help in R](./lectures/RHelp.html) _10/16/10_
 
-2) Data Structures  _10/09/19_
+2) [Data Structures](./lectures/RDataStructures.html)  _10/16/19_
 
-2) Data Frames  _10/16/19_
+2) Data Frames  _10/18/19_
 
 3) Subsetting/Indexing Data  _10/18/19_
 

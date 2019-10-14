@@ -1,0 +1,45 @@
+---
+title: "Class Feedback"
+author: "Amy Hessl"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I requested feedback from the class on:
+
+* Difficulty of most recent homework  
+* What aspects of the class are going well
+* What aspects of the class could be improved to help students learn more effectively  
+
+#### Homework Difficulty
+
+```{r diff, echo=-1}
+HwDiff <- c(6.5, 7, 6, 7, 8, 7.5, 6, 5, 10, 7)
+paste("Mean =", mean(HwDiff), "St Dev =", round(sd(HwDiff), digits=2))
+```
+Some students find the homwework relatively easy, others find it quite challenging, but the mean is spot on '7', which is appropriate for class.
+
+#### What is going well...
+* Lectures, open lab xxx  
+* Bash script writing xx  
+* Workload is manageable, expectations reasonable, pace is good xxx  
+* Learning by doing, hands on  
+* Code reading comprehension improving  
+
+#### It would be great if you....
+* More info on homework expectations/deliverables  
+* Better notes on symbols  
+* More detail on project expectations xx 
+* Spend more time on each assignment xx
+* More links on outside resources  
+* Git is scary  
+* More on collaborating with other scientists  
+* Upload class content earlier  
+
+
+
+
