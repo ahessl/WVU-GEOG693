@@ -365,7 +365,7 @@ summary {
 
 <h1 class="title toc-ignore">Data Structures in R</h1>
 <h4 class="author">Amy Hessl</h4>
-<h4 class="date">14 October, 2019</h4>
+<h4 class="date">16 October, 2019</h4>
 
 </div>
 
@@ -385,7 +385,7 @@ summary {
 <ul>
 <li>To be aware of the different types of data.<br />
 </li>
-<li>To begin exploring data frames, and understand how it’s related to vectors, factors and lists.<br />
+<li>To begin exploring data frames, and understand how they are related to vectors, factors and lists.<br />
 </li>
 <li>To be able to ask questions from R about the type, class, and structure of an object.</li>
 </ul>
@@ -428,15 +428,15 @@ cats</code></pre>
 ## 1 calico    2.1            1
 ## 2  black    5.0            0
 ## 3  tabby    3.2            1</code></pre>
-<p>The <code>read.csv</code> function is used for reading in tabular data stored in a text file where the columns of data are delimited by commas (csv = comma separated values). Tabs are also commonly used to separated columns - if your data are in this format you can use the function <code>read.delim</code>. If the columns in your data are delimited by a character other than commas or tabs, you can use the more general and flexible <code>read.table</code> function.</p>
+<p>The <code>read.csv</code> function is used for reading in tabular data stored in a text file where the columns of data are delimited by commas (csv = comma separated values). Tabs are also commonly used to separated columns - if your data are in this format you can use the function <code>read.delim</code> or <code>read.table</code>.</p>
 <p>We can begin exploring our dataset right away, pulling out columns by specifying them using the <code>$</code> operator:</p>
 <pre class="r"><code>cats$weight</code></pre>
 <pre><code>## [1] 2.1 5.0 3.2</code></pre>
 <pre class="r"><code>cats$coat</code></pre>
 <pre><code>## [1] calico black  tabby 
 ## Levels: black calico tabby</code></pre>
-<p>Note, that the data with text values is recognized as a ‘factor’ by R.</p>
-<p>We can do other operations on the columns (remember these are vectors). Say we discovered that the scale weighs one Kg light:</p>
+<p>Note, that the data with text values is recognized as a ‘factor’ by R. More on factors later.</p>
+<p>We can do other operations on the columns (remember these are vectors). Say we discovered that the scale weighs 2 Kg light:</p>
 <pre class="r"><code>cats$weight + 2</code></pre>
 <pre><code>## [1] 4.1 7.0 5.2</code></pre>
 <p>Here we see again the power of R to operate over a vector.</p>
@@ -465,11 +465,13 @@ cats</code></pre>
 <blockquote>
 <p><strong>Challenge: How can we get R to return a TRUE in this case?</strong></p>
 </blockquote>
-<p>Values I rarely use, but you might:</p>
+<p>Data type I rarely use, but you might:</p>
 <pre class="r"><code>typeof(1+1i)</code></pre>
 <pre><code>## [1] &quot;complex&quot;</code></pre>
+<p>Data type I use all the time:</p>
 <pre class="r"><code>typeof(TRUE)</code></pre>
 <pre><code>## [1] &quot;logical&quot;</code></pre>
+<p>Data type we all use, even if we are super-quantitative:</p>
 <pre class="r"><code>typeof('banana')</code></pre>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>No matter how complicated our analyses become, all data in R is interpreted as one of these basic data types. This strictness has some really important consequences.</p>

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #### Objectives
 
 *	To be aware of the different types of data.  
-*	To begin exploring data frames, and understand how it’s related to vectors, factors and lists.  
+*	To begin exploring data frames, and understand how they are related to vectors, factors and lists.  
 *	To be able to ask questions from R about the type, class, and structure of an object.  
 
 #### Terms/Commands 
@@ -53,7 +53,7 @@ cats <- read.csv(file = "../data/feline-data.csv")
 cats
 ```
 
-The `read.csv` function is used for reading in tabular data stored in a text file where the columns of data are delimited by commas (csv = comma separated values). Tabs are also commonly used to separated columns - if your data are in this format you can use the function `read.delim`. If the columns in your data are delimited by a character other than commas or tabs, you can use the more general and flexible `read.table` function.
+The `read.csv` function is used for reading in tabular data stored in a text file where the columns of data are delimited by commas (csv = comma separated values). Tabs are also commonly used to separated columns - if your data are in this format you can use the function `read.delim` or `read.table`.  
 
 We can begin exploring our dataset right away, pulling out columns by specifying them using the `$` operator:
 
@@ -63,9 +63,9 @@ cats$weight
 ```{r}
 cats$coat
 ```
-Note, that the data with text values is recognized as a 'factor' by R.
+Note, that the data with text values is recognized as a 'factor' by R. More on factors later.
 
-We can do other operations on the columns (remember these are vectors). Say we discovered that the scale weighs one Kg light:
+We can do other operations on the columns (remember these are vectors). Say we discovered that the scale weighs 2 Kg light:
 
 ```{r}
 cats$weight + 2
@@ -110,15 +110,15 @@ is.integer(2)
 ```
 >__Challenge: How can we get R to return a TRUE in this case?__
 
-Values I rarely use, but you might:
+Data type I rarely use, but you might:
 ```{r}
 typeof(1+1i)
 ```
-
+Data type I use all the time:
 ```{r}
 typeof(TRUE)
 ```
-
+Data type we all use, even if we are super-quantitative:
 ```{r}
 typeof('banana')
 ```
