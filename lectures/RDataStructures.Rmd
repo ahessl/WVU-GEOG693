@@ -347,7 +347,8 @@ typeof(CATegories)
 
 > __Challenge: Is there a factor in our cats data.frame? what is its name?__
 
-Try using `?read.csv` to figure out how to keep text columns as character vectors instead of factors; then write a command or two to show that the factor in cats is actually a character vector when loaded in this way.
+Try using `?read.csv` to figure out how to keep text columns as character vectors instead of factors; then write a command or two to show that the factor in cats is actually a character vector when loaded in this way.  
+
 ***
 
 In modelling functions, it’s important to know what the baseline levels are. This is assumed to be the first factor, but by default factors are labelled in alphabetical order. You can change this by specifying the levels:
@@ -405,7 +406,8 @@ typeof(cats[1,])
 str(cats[1,])
 ```
 
-There are several subtly different ways to call variables, observations and elements from data.frames:
+There are several subtly different ways to call variables, observations and elements from data.frames:  
+
 *	cats[1]  
 *	cats[[1]]  
 *	cats$coat  
@@ -413,6 +415,7 @@ There are several subtly different ways to call variables, observations and elem
 *	cats[1, 1]  
 *	cats[, 1]  
 *	cats[1, ]  
+
 Try out these examples and explain what type of data are returned by each one.
 Hint: Use the function typeof() to examine what is returned in each case.
 

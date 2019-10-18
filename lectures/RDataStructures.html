@@ -365,7 +365,7 @@ summary {
 
 <h1 class="title toc-ignore">Data Structures in R</h1>
 <h4 class="author">Amy Hessl</h4>
-<h4 class="date">16 October, 2019</h4>
+<h4 class="date">18 October, 2019</h4>
 
 </div>
 
@@ -633,7 +633,8 @@ class(CATegories)</code></pre>
 <blockquote>
 <p><strong>Challenge: Is there a factor in our cats data.frame? what is its name?</strong></p>
 </blockquote>
-<p>Try using <code>?read.csv</code> to figure out how to keep text columns as character vectors instead of factors; then write a command or two to show that the factor in cats is actually a character vector when loaded in this way. ***</p>
+<p>Try using <code>?read.csv</code> to figure out how to keep text columns as character vectors instead of factors; then write a command or two to show that the factor in cats is actually a character vector when loaded in this way.</p>
+<hr />
 <p>In modelling functions, it’s important to know what the baseline levels are. This is assumed to be the first factor, but by default factors are labelled in alphabetical order. You can change this by specifying the levels:</p>
 <pre class="r"><code>mydata &lt;- c(&quot;case&quot;, &quot;control&quot;, &quot;control&quot;, &quot;case&quot;)
 factor_ordering_example &lt;- factor(mydata, levels = c(&quot;control&quot;, &quot;case&quot;))
@@ -694,14 +695,23 @@ another_list</code></pre>
 ##  $ coat        : Factor w/ 3 levels &quot;black&quot;,&quot;calico&quot;,..: 2
 ##  $ weight      : num 2.1
 ##  $ likes_string: logi TRUE</code></pre>
-<p>There are several subtly different ways to call variables, observations and elements from data.frames: * cats[1]<br />
-* cats[[1]]<br />
-* cats$coat<br />
-* cats[“coat”]<br />
-* cats[1, 1]<br />
-* cats[, 1]<br />
-* cats[1, ]<br />
-Try out these examples and explain what type of data are returned by each one. Hint: Use the function typeof() to examine what is returned in each case.</p>
+<p>There are several subtly different ways to call variables, observations and elements from data.frames:</p>
+<ul>
+<li>cats[1]<br />
+</li>
+<li>cats[[1]]<br />
+</li>
+<li>cats$coat<br />
+</li>
+<li>cats[“coat”]<br />
+</li>
+<li>cats[1, 1]<br />
+</li>
+<li>cats[, 1]<br />
+</li>
+<li>cats[1, ]</li>
+</ul>
+<p>Try out these examples and explain what type of data are returned by each one. Hint: Use the function typeof() to examine what is returned in each case.</p>
 </div>
 <div id="matrices" class="section level3">
 <h3>Matrices</h3>
