@@ -60,23 +60,23 @@ Please complete this before the first day of class.
 
 2) [Data Structures](./lectures/RDataStructures.html)  _10/16/19_
 
-2) Data Frames  _10/18/19_
+2) [Data Frames](./lectures/RDataframes.html)  _10/23/19_
 
-3) Subsetting/Indexing Data  _10/18/19_
+3) Subsetting/Indexing Data  _10/25/19_
 
-4) Control Flow: Functions in R  _10/23/19_
+4) Control Flow: Functions in R  _10/30/19_
 
-5) Control Flow: Apply  _10/25/19_
+5) Control Flow: Apply  _10/30/19_
 
-6) Control Flow: Loops  _10/30/19_
+6) Control Flow: Loops  _11/01/19_
 
-7) Split, Apply, Combine  _11/01/19_
+7) Split, Apply, Combine  _11/06/19_
 
-8) Plotting Using Base R  _11/06/19_
+8) Plotting Using Base R  _11/08/19_
 
-9) Plotting Using ggplot  _11/08/19_
+9) Plotting Using ggplot  _11/13/19_
 
-10) APIs to Download Data  _11/13/19_
+10) APIs to Download Data  _11/15/19_
 
 11) Editing a Package  _11/15/19_
 

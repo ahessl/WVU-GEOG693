@@ -1,0 +1,32 @@
+---
+title: "template"
+subtitle: "GEOG 693g"
+author: "Amy Hessl"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Motivation
+
+#### Questions  
+*	How do I find my way around RStudio?  
+*	How do I interact with R?  
+*	How can I manage my environment?  
+*	How do I install packages?  
+
+#### Objectives
+
+#### Terms/Commands 
+
+>__Challenge. Install the following packages: gapminder__ 
+
+#### Key Points 
+* Stuff
+* Stuff
+
+#### __Acknowledgments__
+_These pages were derived in part from:Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University, and from [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_
