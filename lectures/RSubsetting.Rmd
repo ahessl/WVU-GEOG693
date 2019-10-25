@@ -16,10 +16,9 @@ Marsha has a large dataset of data on Springs in the United States.  Though she 
 How can Marsha work with subsets of data in R?
 
 #### Questions  
-*	How do I find my way around RStudio?  
-*	How do I interact with R?  
-*	How can I manage my environment?  
-*	How do I install packages?  
+*	How do I extract elements from a vector? Data frame? List?  
+*	Can factors help me summarize data? 
+*	How can I leave particular observations out of my analysis?
 
 #### Objectives
 *	To be able to subset vectors, factors, matrices, lists, and data frames
@@ -444,26 +443,26 @@ gapminder[3,]
 But for a single column the result will be a vector (this can be changed with the third argument, drop = FALSE).
 
 
->_Challenge__ Fixing common data frame subsetting errors:
+>__Practice Problems__ 
 
 1.	Extract observations collected for Africa
 	  `gapminder[gapminder$continent = 'Africa',]`
 	  
-3.	Extract all columns except 1 through to 4
+2.	Extract all columns except 1 through to 4
     `gapminder[,-1:4]`
     
-5.	Extract the rows where the life expectancy is longer the 80 years
+3.	Extract the rows where the life expectancy is longer the 80 years
     `gapminder[gapminder$lifeExp > 80]`
     
-7.	Extract the first row, and the 5th and 6th columns (lifeExp, gpdPercap).
+4.	Extract the first row, and the 5th and 6th columns (lifeExp, gpdPercap).
     `gapminder[1, 5, 6]`
     
-9.	Advanced: extract rows that contain information for Cuba and Australia
+5.	Advanced: extract rows that contain information for Cuba and Australia
     `gapminder[gapminder$country == 'Cuba' | 'Australia',]`
 
->__More Challenges__ 
-1.	Why does `gapminder[1:20]` return an error? How does it differ from `gapminder[1:20, ]`?  
-2.	Create a new data frame called gapminder_small that only contains rows 1 through 9 and 19 through 23. You can do this in one or two steps.  
+6. Why does `gapminder[1:20]` return an error? How does it differ from `gapminder[1:20, ]`?  
+
+7.	Create a new data frame called gapminder_small that only contains rows 1 through 9 and 19 through 23. You can do this in one or two steps.  
 
 
 #### Key Points 

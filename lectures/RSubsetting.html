@@ -378,13 +378,10 @@ summary {
 <div id="questions" class="section level4">
 <h4>Questions</h4>
 <ul>
-<li>How do I find my way around RStudio?<br />
+<li>How do I extract elements from a vector? Data frame? List?<br />
 </li>
-<li>How do I interact with R?<br />
-</li>
-<li>How can I manage my environment?<br />
-</li>
-<li>How do I install packages?</li>
+<li>Can factors help me summarize data?</li>
+<li>How can I leave particular observations out of my analysis?</li>
 </ul>
 </div>
 <div id="objectives" class="section level4">
@@ -774,7 +771,7 @@ mod</code></pre>
 ## 3 3 Afghanistan      Asia 1962  31.997 10267083  853.1007</code></pre>
 <p>But for a single column the result will be a vector (this can be changed with the third argument, drop = FALSE).</p>
 <blockquote>
-<p>_Challenge__ Fixing common data frame subsetting errors:</p>
+<p><strong>Practice Problems</strong></p>
 </blockquote>
 <ol style="list-style-type: decimal">
 <li><p>Extract observations collected for Africa <code>gapminder[gapminder$continent = 'Africa',]</code></p></li>
@@ -782,11 +779,9 @@ mod</code></pre>
 <li><p>Extract the rows where the life expectancy is longer the 80 years <code>gapminder[gapminder$lifeExp &gt; 80]</code></p></li>
 <li><p>Extract the first row, and the 5th and 6th columns (lifeExp, gpdPercap). <code>gapminder[1, 5, 6]</code></p></li>
 <li><p>Advanced: extract rows that contain information for Cuba and Australia <code>gapminder[gapminder$country == 'Cuba' | 'Australia',]</code></p></li>
+<li><p>Why does <code>gapminder[1:20]</code> return an error? How does it differ from <code>gapminder[1:20, ]</code>?</p></li>
+<li><p>Create a new data frame called gapminder_small that only contains rows 1 through 9 and 19 through 23. You can do this in one or two steps.</p></li>
 </ol>
-<blockquote>
-<p><strong>More Challenges</strong> 1. Why does <code>gapminder[1:20]</code> return an error? How does it differ from <code>gapminder[1:20, ]</code>?<br />
-2. Create a new data frame called gapminder_small that only contains rows 1 through 9 and 19 through 23. You can do this in one or two steps.</p>
-</blockquote>
 </div>
 <div id="key-points" class="section level4">
 <h4>Key Points</h4>
