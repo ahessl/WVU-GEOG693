@@ -60,9 +60,9 @@ Please complete this before the first day of class.
 
 2) [Data Structures](./lectures/RDataStructures.html)  _10/16/19_
 
-2) [Data Frames](./lectures/RDataframes.html)  _10/23/19_
+2) [Subsetting/Indexing Data](./lectures/RSubsetting.html)  _10/25/19_
 
-3) Subsetting/Indexing Data  _10/25/19_
+3) [Data Frames](./lectures/RDataframes.html)  _10/23/19_
 
 4) Control Flow: Functions in R  _10/30/19_
 

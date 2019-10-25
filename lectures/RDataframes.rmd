@@ -114,7 +114,8 @@ str(cats)
 
 1.	Create a vector called human_age by multiplying cats$age by 7.  
 2.	Convert human_age to a factor.  
-3.	Convert human_age back to a numeric vector using the `as.numeric()` function. Now divide it by 7 to get the original ages back.
+3.	Convert human_age back to a numeric vector using the `as.numeric()` function. Now divide it by 7 to get the original ages back.  
+
 ***
 
 #### Removing Rows
@@ -177,7 +178,7 @@ rownames(cats) <- NULL
 cats
 ```
           
->__Challenge:__You can create a new data frame right from within R with the following syntax:
+>__Challenge:__ You can create a new data frame right from within R with the following syntax:
 
 ```{r}
 df <- data.frame(id = c("a", "b", "c"),
@@ -186,11 +187,13 @@ df <- data.frame(id = c("a", "b", "c"),
                  stringsAsFactors = FALSE)
 ```
 
-Make a data frame that holds the following information for yourself:
+Make a data frame that holds the following information for yourself:  
 *	first name  
 *	last name  
 *	lucky number  
-Then use `rbind` to add an entry for the people sitting beside you. Finally, use `cbind` to add a column with each person’s answer to the question, “Is it time for donuts?”
+Then use `rbind` to add an entry for the people sitting beside you. Use `cbind` to add a column with each person’s answer to the question, “Is it time for donuts?”
+
+Extra-challenge: use an index to extract only those rows for which the person's answer was "yes" - it's time for donuts!
 
 ***
 
@@ -268,11 +271,7 @@ Tip: There are several ways to achieve this.
 ***
 
 
->__Challenge__ Source a R Script
-
-Go to file -> new file -> R script, and write an R script to load in the gapminder dataset. Put it in the scripts/ directory and add it to version control.
-Run the script using the `source()` function, using the file path as its argument (or by pressing the “source” button in RStudio).
-
+>__Challenge__ Check Your Understanding of R Data Types
 
 Read the output of `str(gapminder)` again; this time, use what you’ve learned about factors, lists and vectors, as well as the output of functions like colnames and dim to explain what everything that str prints out for gapminder means. If there are any parts you can’t interpret, discuss with your neighbors!
 

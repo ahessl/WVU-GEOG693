@@ -3,6 +3,8 @@
 
 #grep -w rabbit -r animals.txt | cut -d : -f 2 | cut -d , -f 1,3 > rabbit.txt
 
+
+
 #Now replace "rabbit" and "animals.txt" with variables ($1, $2)
 
 #Solution:
