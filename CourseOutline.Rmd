@@ -64,13 +64,15 @@ Please complete this before the first day of class.
 
 3) [Data Frames](./lectures/RDataframes.html)  _10/23/19_
 
-4) Control Flow: Functions in R  _10/30/19_
+4) [Control Flow: If/Else](../lectures/RIfElse.html)  _10/30/19_
 
-5) Control Flow: Apply  _10/30/19_
+5) [Control Flow: Functions](../lectures/RFunctions.html) _10/30/19_
 
-6) Control Flow: Loops  _11/01/19_
+6) Control Flow: Apply  _11/01/19_
 
-7) Split, Apply, Combine  _11/06/19_
+6) Control Flow: Loops  _11/06/19_
+
+7) Split, Apply, Combine  _11/08/19_
 
 8) Plotting Using Base R  _11/08/19_
 
