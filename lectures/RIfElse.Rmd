@@ -1,0 +1,114 @@
+---
+title: "Control Flow: If/Else"
+subtitle: "GEOG 693g"
+author: "Amy Hessl"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Motivation
+Elizabeth has a large number of files from a Hobo weather station.  Some of those files are in Celsius and some are in Fahrenheit.  She needs to convert all of those file to Kelvin.  She thinks an if/else statement is the way to get started.
+
+#### Questions
+*	How can I make data-dependent choices in R?
+*	How can I repeat operations in R?
+
+#### Objectives
+*	Write conditional statements with if() and else().
+
+Often when we’re coding we want to control the flow of our actions. This can be done by setting actions to occur only if a condition or a set of conditions are met. Alternatively, we can also set an action to occur a particular number of times.
+There are several ways you can control flow in R. For conditional statements, the most commonly used approaches are the constructs if() and if()...else():  
+**if**
+```
+if (condition is true) {
+  perform action
+}
+```
+***if...else***
+```
+if (condition is true) {
+  perform action
+} else {  # that is, if the condition is false,
+  perform alternative action
+}
+```
+
+Say, for example, that we want R to print a message if a variable x has a particular value:
+```{r}
+x <- 8
+
+if (x >= 10) {
+  print("x is greater than or equal to 10")
+}
+```
+
+We get no response in the console because x is not greater than 10! To print a different message for numbers less than 10, we can add an else statement.
+```{r}
+x <- 8
+
+if (x >= 10) {
+  print("x is greater than or equal to 10")
+} else {
+  print("x is less than 10")
+}
+```
+
+You can also test multiple conditions by using `else if ()`:  
+```{r}
+x <- 8
+
+if (x >= 10) {
+  print("x is greater than or equal to 10")
+} else if (x > 5) {
+  print("x is greater than 5, but less than 10")
+} else {
+  print("x is less than 5")
+}
+```
+Important: when R evaluates the condition inside if() statements, it is looking for a logical element, i.e., TRUE or FALSE. This can cause some headaches for beginners. For example:
+```{r}
+x  <-  4 == 3
+if (x) {
+  "4 equals 3"
+} else {
+  "4 does not equal 3"          
+}
+```
+
+As we can see, the not equal message was printed because the vector x is FALSE
+```{r}
+x <- 4 == 3
+x
+```
+
+>__Challenge__
+
+Use an if() statement to print a suitable message reporting whether there are any records from 2002 in the gapminder dataset. Now do the same for 2012.
+
+*Did anyone get a warning message like this?*
+Warning in if (gapminder$year == 2012) {: the condition has length > 1 and
+only the first element will be used
+
+If your condition evaluates to a vector with more than one logical element, the function `if()` will still run, but will only evaluate the condition in the first element. Here you need to make sure your condition is of length 1.
+
+#### any() and all()
+The any() function will return TRUE if at least one TRUE value is found within a vector, otherwise it will return FALSE. This can be used in a similar way to the %in% operator. The function all(), as the name suggests, will only return TRUE if all values in the vector are TRUE.
+
+```{r}
+gapminder <-  read.csv("../data/gapminder.csv")
+(any(gapminder$year==2002)) 
+```
+Can you solve the challenge now?
+
+#### Key Points 
+* if() { } - structure of if, then statements  
+* else() { }  - structure for multiple alternate options  
+* any()  - returns TRUE if any of the elements in a vector are TRUE  
+* all()  - returns TRUE only if all of the elements in a vector are TRUE  
+
+#### __Acknowledgments__
+_These pages were derived in part from:Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University, and from [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_
