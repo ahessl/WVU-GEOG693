@@ -68,7 +68,7 @@ Please complete this before the first day of class.
 
 5) [Control Flow: Functions](./lectures/RFunctions.html) _10/30/19_
 
-6) Control Flow: Apply  _11/01/19_
+6) [Control Flow: Apply](./lectures/RApply.html)  _11/01/19_
 
 6) Control Flow: Loops  _11/06/19_
 
