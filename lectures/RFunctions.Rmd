@@ -69,11 +69,12 @@ When we call the function, the values we pass to it as arguments are assigned to
 One feature unique to R is that the return statement is not required. R automatically returns whichever variable is on the last line of the body of the function. But for clarity, we will explicitly define the return statement.
 Let’s try running our function. Calling our own function is no different from calling any other function:
 ```{r}
-# freezing point of water
+# Freezing point of water
 fahr_to_kelvin(32)
 ```
-# boiling point of water
+
 ```{r}
+# Boiling point of water:
 fahr_to_kelvin(212)
 ```
 
@@ -102,14 +103,16 @@ kelvin_to_celsius <- function(temp) {
 
 >__Challenge__
 
-Define a function to convert directly from Fahrenheit to Celsius, by reusing the two functions above (or using your own functions if you prefer).
+Define a function to convert directly from Fahrenheit to Celsius, by reusing the two functions above (or using your own functions if you prefer).  
+
 ***
 
 ### Interlude: Defensive Programming
 Now that we’ve begun to appreciate how writing functions provides an efficient way to make R code re-usable and modular, we should note that it is important to ensure that functions only work in their intended use-cases. Checking function parameters is related to the concept of defensive programming. Defensive programming encourages us to frequently check conditions and throw an error if something is wrong. These checks are referred to as *assertion statements* because we want to assert some condition is TRUE before proceeding. They make it easier to debug because they give us a better idea of where the errors originate.
 
 #### Checking conditions with `stopifnot()`
-Let’s start by re-examining fahr_to_kelvin(), our function for converting temperatures from Fahrenheit to Kelvin. It was defined like so:
+Let’s start by re-examining fahr_to_kelvin(), our function for converting temperatures from Fahrenheit to Kelvin. It was defined like so:  
+
 ```
 fahr_to_kelvin <- function(temp) {
   kelvin <- ((temp - 32) * (5 / 9)) + 273.15
@@ -151,7 +154,8 @@ fahr_to_kelvin(temp = as.factor(32))
 ```
 >__Challenge__
 
-Use defensive programming to ensure that our `fahr_to_celsius()` function throws an error immediately if the argument `temp` is specified inappropriately.
+Use defensive programming to ensure that our `fahr_to_celsius()` function throws an error immediately if the argument `temp` is specified inappropriately.  
+
 ***
 
 ####  More on combining functions
@@ -160,6 +164,7 @@ Now, we’re going to define a function that calculates the Gross Domestic Produ
 ```{r}
 # Takes a dataset and multiplies the population column
 # with the GDP per capita column.
+
 calcGDP <- function(dat) {
   gdp <- dat$pop * dat$gdpPercap
   return(gdp)
@@ -167,11 +172,13 @@ calcGDP <- function(dat) {
 ```
 We define calcGDP() by assigning it to the output of function. The list of argument names are contained within parentheses. Next, the body of the function – the statements executed when you call the function – is contained within curly braces ({}).
 
+Try it out:
 ```{r}
 gapminder <- read.csv("../data/gapminder.csv")
 calcGDP(head(gapminder))
 ```
-That’s not very informative. Let’s add some more arguments so we can extract that per year and country.
+That’s not very informative. Let’s add some more arguments so we can extract that per year and by country. Now we will have more than one argument (year and country).  We might want to use it for only year or only country.  We can add a default NULL argument so that the function will still run if we call the function with only country or only year.  
+Remembering the %in% operator and if(){}, we can do it!
 ```{r}
 # Takes a dataset and multiplies the population column
 # with the GDP per capita column.
@@ -200,7 +207,7 @@ Let’s take a look at what happens when we specify the year:
 head(calcGDP(gapminder, year=2007))
 ```      
 
-Or both:
+Or both a country and a year:
 ```{r}
 calcGDP(gapminder, year=2007, country="Australia")
 ```
@@ -225,7 +232,7 @@ I did this so that our function is more flexible for later. We can ask it to cal
 *	A single year;  
 *	A single country;  
 *	A single combination of year and country.  
-By using %in% instead, we can also give multiple years or countries to those arguments!
+By using %in% instead, we can also give multiple years or countries to those arguments!  Try Australia and New Zealand for 2007.
 
 #### Pass by value
 Functions in R almost always make copies of the data to operate on inside of a function body. When we modify dat inside the function we are modifying the copy of the gapminder dataset stored in dat, not the original variable we gave as the first argument.
@@ -242,10 +249,6 @@ Another important concept is scoping: any variables (or functions!) you create o
 
 Finally, we calculated the GDP on our new subset, and created a new data frame with that column added (but note this dataframe is not saved, only returned to console). This means when we call the function later we can see the context for the returned GDP values, which is much better than in our first attempt where we got a vector of numbers.
 
->__Challenge__
-
-Test out your GDP function by calculating the GDP for New Zealand in 1987. How does this differ from New Zealand’s GDP in 1952?
-***
 
 >__Challenge__
 
@@ -257,19 +260,23 @@ paste(best_practice, collapse=" ")
 
 Write a function called fence() that takes two vectors as arguments, called text and wrapper, and prints out the text wrapped with the wrapper:
 `fence(text=best_practice, wrapper="***")`
+would return:
+`***best_practice***`
 
-Note: the paste() function has an argument called sep, which specifies the separator between text. The default is a space: “ “. The default for paste0() is no space “”.
+Note: the paste() function has an argument called sep, which specifies the separator between text. The default is a space: “ “. The default for paste0() is no space “”.  
+
 ***
 
 #### Testing and documenting
 It’s important to both test functions and document them: documentation helps you, and others, understand what the purpose of your function is, and how to use it, and it's important to make sure that your function actually does what you think.
-When you first start out, your workflow will probably look a lot like this:
+When you first start out, your workflow will probably look a lot like this:   
 1.	Write a function  
 2.	Comment parts of the function to document its behavior  
 3.	Load in the source file  
 4.	Experiment with it in the console to make sure it behaves as you expect  
 5.	Make any necessary bug fixes  
-6.	Rinse and repeat.  
+6.	Rinse and repeat. 
+
 Formal documentation for functions, written in separate _.Rd_ files, gets turned into the documentation you see in help files. The roxygen2 package allows R coders to write documentation alongside the function code and then process it into the appropriate .Rd files. You will want to switch to this more formal method of writing documentation when you start writing more complicated R projects.
 Formal automated tests can be written using the testthat package.
 
@@ -279,7 +286,7 @@ Formal automated tests can be written using the testthat package.
 *	Use stopifnot() to flexibly check function arguments in R.  
 *	Load functions into programs using source().  
 
-####mFurther Reading:
+#### Further Reading:
 You can learn more by reading the [R Language Definitions](https://cran.r-project.org/doc/manuals/r-release/R-lang.html) or this [chapter](https://adv-r.hadley.nz/environments.html) from [Advanced R Programming](https://adv-r.hadley.nz/) by Hadley Wickham.
 
 #### __Acknowledgments__

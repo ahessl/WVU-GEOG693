@@ -1,0 +1,134 @@
+---
+title: "RApply"
+subtitle: "GEOG 693g"
+author: "Amy Hessl"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Split Apply Combine in Base R
+### Questions: 
+1.  How do we summarize data by group in R?
+2.  Can we summarize by row?  By column?
+
+### Terms/Functions
+  * grep - extracting text strings that match a pattern
+  * apply - applys a function across a row and/or across a column, returning value(s) 
+  * cbind - combines objects by column or by row (rbind)
+  * data.frame - creates a data frame combining in column-wise fashion
+  * aggregate - splits data into subsets, computes summary statistics for each and then returns the results
+  * split - splits data into a list
+ 
+### Review:
+Previously we looked at how you can use functions to simplify your code. We defined the calcGDP function, which takes the gapminder dataset, and multiplies the population and GDP per capita column. We also defined additional arguments so we could filter by year and country.
+
+Today, we will use a dataset similar to gapminder, but more complex in its structure called [gapminder_wide.csv](../data/gapminder_wide.csv):
+
+```{r gapminder_w}
+#Housekeeping
+rm(list=ls())
+
+#Read in gapminder dataset
+gap <- read.csv("../data/gapminder_wide.csv")
+
+#Get the column names
+colnames(gap)
+
+```
+
+This dataset poses some typical problems in data wrangling.  It is not tidy!  A **tidy** data set has observations as rows and columns as variables.  This dataset mixes observations and variables in columns.  
+
+### grep in R
+Imagine we want to find the max and min gdp for each country.  We could start by extracting only the gdp columns:
+
+```{r grep}
+#View the column names
+cols <- colnames(gap)
+
+#Use grep to make a list of all the colnames that include 'gdp'
+gdp_cols <- grep("gdp", colnames(gap), value=TRUE)
+
+#Use logical index to pull just the gdp columns
+gdp_gap <- gap[, colnames(gap) %in% gdp_cols]
+head(gdp_gap)
+```
+
+### Apply Functions
+R provides a set of functions called apply() that apply a function across all elements of an object.  There is a general apply as well as lapply (for lists). 
+
+*Usage*
+`apply(X, MARGIN, FUN, ...)`
+
+We need a dataframe, we need know if we are applying it across rows or columns, and we need a function.
+
+To solve our problem, we can use apply across rows to get the min and max values of gdp for each country.  :
+
+```{r apply}
+#Use apply to 'apply' the function 'min' across all rows of the dataframe:
+min_gdp <- apply(gdp_gap, 1, min)
+max_gpd <- apply(gdp_gap, 1, max)
+
+#Use cbind to append the columns together:
+gdp_rnge <- cbind(continent=gap$continent, country=gap$country, minGDP = min_gdp, maxGDP = max_gpd)
+head(gdp_rnge)
+#What happened? Why?
+```
+
+Instead we should append the columns together using data.frame(), thus preserving the factor levels.
+
+``` {r data.frame}
+#Use data.frame to combine the gdp columns with original continent and country (as factors)
+gdp_rnge <- data.frame(continent=gap$continent, country=gap$country, minGDP = min_gdp, maxGDP = max_gpd)
+
+#View object gdp_rnge.  What kind of object is it?  Why are continent, country numbers?
+head(gdp_rnge)
+```
+
+>__Challenge__
+
+What is the mean life expectancy for the last two sampling intervals (2002 and 2007) across all countries?  
+
+***
+
+
+### Aggregate
+What if we wanted to know the mean values of all variables by continent? What we need to do is aggregate data by some method (mean, sum, or other function) across a factor. the by= argument requires a list, not a vector, but you can easily coerce a vector to be a list!
+
+`aggregate(x, by, FUN, ..., simplify = TRUE, drop = TRUE)`
+
+```{r aggregate, message=FALSE, warning=FALSE}
+cont_mn <- aggregate(gap, by=list(gap$continent), mean)
+cont_mn
+```
+
+Or life expectancy in 2007 by continent:
+```{r aggregate formula}
+cont_le <- aggregate(lifeExp_2007 ~ continent, data=gap, mean)
+cont_le
+```
+
+### Split
+Occassionally we want to split data frames into pieces based on values in a factor.  We can use split(). Though note that this grows your data - it is better to keep the dataframes entire and subset inside a command (as in apply above) - unless you know you will be working with these subsets frequently. 
+
+```{r split}
+conts <- split(gap, gap$continent)
+```
+
+What did this produce?  How can we extract just the dataframe for Africa?
+
+### TBC...
+
+Apply across a list
+Merge co2
+
+### Key Points
+  * Extracting text strings that match a pattern just like in bash using grep()  
+  * Apply a function across a row and/or across a column and return the results  
+  * data.frame - creates a data frame combining in column-wise fashion - keeps special info from data frames like factors  
+  * aggregate - splits data into subsets, computes summary statistics for each subset and then returns the results  
+  * split - splits data into a list.  Useful if you plan to do many different applys on the same subsets of your data  
+  
