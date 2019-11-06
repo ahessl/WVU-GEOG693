@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
   * data.frame - creates a data frame combining in column-wise fashion
   * aggregate - splits data into subsets, computes summary statistics for each and then returns the results
   * split - splits data into a list
- 
+  
 ### Review:
 Previously we looked at how you can use functions to simplify your code. We defined the calcGDP function, which takes the gapminder dataset, and multiplies the population and GDP per capita column. We also defined additional arguments so we could filter by year and country.
 
