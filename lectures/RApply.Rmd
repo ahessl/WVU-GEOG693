@@ -187,3 +187,4 @@ You can click on the points to identify which countries are the outliers.
   * aggregate - splits data into subsets, computes summary statistics for each subset and then returns the results  
   * split - splits data into a list.  Useful if you plan to do many different applys on the same subsets of your data  
   
+#### Resources
