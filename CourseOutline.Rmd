@@ -68,11 +68,9 @@ Please complete this before the first day of class.
 
 5) [Control Flow: Functions](./lectures/RFunctions.html) _10/30/19_
 
-6) [Control Flow: Apply](./lectures/RApply.html)  _11/01/19_
+6) [Control Flow: Apply](./lectures/RApply.html)  _11/06/19_
 
-6) Control Flow: Loops  _11/06/19_
-
-7) Split, Apply, Combine  _11/08/19_
+7) [Control Flow: Apply_Loops](./lectures/RApply_Loops.html)  _11/08/19_
 
 8) Plotting Using Base R  _11/08/19_
 

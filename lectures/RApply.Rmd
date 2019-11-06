@@ -120,10 +120,65 @@ conts <- split(gap, gap$continent)
 
 What did this produce?  How can we extract just the dataframe for Africa?
 
-### TBC...
+A common task in data analysis is to combine two datasets based on a common variable - the data merge. We will merge the original long-form gapminder data for 2007 with a dataset of CO2 emissions by country from the same year.
 
-Apply across a list
-Merge co2
+
+```{r merge}
+#Read in the CO2 data
+co2 <- read.csv("../data/co2_emissions_tonnes_per_person_gapminder.csv")
+head(co2)
+```
+
+
+>__Challenge:__
+
+Pull out just the 2007 data to merge, be sure to include country your dataframe:
+```{r}
+year <- "2007"
+year_name <- paste0("X", year)
+year_i <- names(co2) %in% year_name
+co2_2007 <- co2[,year_i]
+co2_2007_df <- data.frame(country=co2$country, co2_2007=co2_2007)
+head(co2_2007_df)
+```
+
+***
+
+>Challenge:__
+
+Pull out just the gapminder (country data) 2007 to merge:
+```{r}
+gapminder <- read.csv("../data/gapminder.csv")
+gap_2007 <- gapminder[gapminder$year==2007,-1]
+rownames <- NULL
+head(gap_2007)
+```
+What do you notice about the number of countries? How should we merge?  Keep all countries in gapminder? In CO2? Keep all countries from both datasets?
+
+##### Finally merge:
+merge(x, y, by = intersect(names(x), names(y)),
+      by.x = by, by.y = by, all = FALSE, all.x = all, all.y = all,
+      sort = TRUE, suffixes = c(".x",".y"), no.dups = TRUE,
+      incomparables = NULL, ...)
+      
+```{r}
+gap2007_co2 <- merge (gap_2007, co2_2007_df, by.x="country", all=TRUE)
+head(gap2007_co2)
+```
+
+But the gdp is on a per capita basis, so let's multiply it by the population to get a more realistic look at how gdp affects emmissions.
+
+```{r gdp}
+gap2007_co2$gdp_tot <- gap2007_co2$gdpPercap*gap2007_co2$pop
+
+```
+
+#### First Base-R Plot
+```{r co2, echo=TRUE}
+plot(gap2007_co2$gdp_tot, gap2007_co2$mtCO2, type="p", xlab="GDP", ylab="CO2")
+identify(gap2007_co2$gdp_tot, gap2007_co2$mtCO2, labels=gap2007_co2$country)
+```
+You can click on the points to identify which countries are the outliers.
 
 ### Key Points
   * Extracting text strings that match a pattern just like in bash using grep()  

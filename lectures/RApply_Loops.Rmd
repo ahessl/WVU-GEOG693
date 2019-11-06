@@ -1,0 +1,163 @@
+---
+title: "Control Flow: More Apply/Loops"
+subtitle: "GEOG 693g"
+author: "Amy Hessl"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Motivation
+A very common data problem is called 'data munging' - needing to clean or reshape a lot of files that are all broken or mishapen in a similar way.  Instead of correcting each one, it would be easier to solve the problem once, then iterate your solution over all the files you have.  Then you can save your munging function to be used on future files of the same crummy format.
+
+In this lesson, we will create a function to read in multiple csv files, then repeat some data munging over them using apply. We will use a small set of three [Prism data files](../data/prism/prism.zip). You will need to unzip them before we begin.
+
+WE can report the files we have:
+```{r}
+prism.files <- list.files(path="../data/prism")
+prism.files
+```
+What do they look like? What special arguments do we need to read them into R?
+```{r}
+testFile <- read.csv(file="../data/prism/cv_grid1_monthly.csv", skip=11, head=F)
+head(testFile)
+```
+Okay, so let's apply that function over the files.  Remember apply:
+Usage
+apply(X, MARGIN, FUN, ...), here the function is read.csv along with its special argument and because we are iterating over a vector of file names, we do not need to designate the margin.
+```{r, eval=FALSE}
+   dataFiles <- lapply(prism.files, read.csv, skip=11, head=F)
+```
+ Why won't this work? We will need to add a path to each file if we are not working directly in the data directory - which I am not!
+ 
+```{r}
+    data.path <- "../data/prism/"
+    glob.path <- paste0(data.path, "*", ".csv")  
+    dataFiles <- lapply(Sys.glob(glob.path), read.csv, skip=11, head=F)
+```
+What is glob.path?  What does Sys.glob() do?
+
+Let's add to our function a way to rename all the columns at once:
+```{r}
+    climvars <- c("pdate", "ppt", "tmin", "tmean", "tmax")
+    dataFiles <- lapply(dataFiles, setNames, climvars)
+    head(dataFiles[[1]])
+```
+>__Challenge__
+
+Turn that set of operations into a function called prismDat(), where you can designate the path as the argument.  For example:
+```prismDat("../data/prism/")```
+would produce a list of data frames with each one having the appropriate column names.  What else could you do with this list now that you have it?  What functions might you apply on it?
+
+#### Repeating operations - for loop
+If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a for() loop will do the job. We saw for() loops in the shell lessons earlier. This is the most flexible of looping operations, but therefore also the hardest to use correctly. Avoid using for() loops unless the order of iteration is important: i.e. the calculation at each iteration depends on the results of previous iterations.
+
+The basic structure of a for() loop is:
+```
+for(iterator in set of values){
+  do a thing
+}
+```
+
+For example:
+```{r}
+for(i in 1:10){
+  print(i)
+}
+```
+
+The 1:10 bit creates a vector on the fly; you can iterate over any other vector as well.
+We can use a for() loop nested within another for() loop to iterate over two things at once.
+```{r}
+for(number in 1:5){
+  for(letter in c('a', 'b', 'c', 'd', 'e')){
+    print(paste(number,letter))
+  }
+}
+```
+
+Rather than printing the results, we could write the loop output to a new object.
+
+```{r}
+output_vector <- c()
+for(number in 1:5){
+  for(letter in c('a', 'b', 'c', 'd', 'e')){
+    temp_output <- paste(number, letter)
+    output_vector <- c(output_vector, temp_output)
+  }
+}
+output_vector
+```
+ 
+This approach can be useful, but ‘growing your results’ (building the result object incrementally) is computationally inefficient, so avoid it when you are iterating through a lot of values.
+
+#### Tip: don’t grow your results
+One of the biggest things that trips up novices and experienced R users alike, is building a results object (vector, list, matrix, data frame) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an empty results object before hand of the appropriate dimensions. So if you know the end result will be stored in a matrix like above, create an empty matrix with 5 row and 5 columns, then at each iteration store the results in the appropriate location.
+
+```{r}
+# Define matrix first
+output_matrix <- matrix(nrow=5, ncol=5)
+j_vector <- c('a', 'b', 'c', 'd', 'e')
+
+#run loop that fills output_matrix
+for(i in 1:5){
+  for(j in 1:5){
+    temp_j_value <- j_vector[j]
+    temp_output <- paste(i, temp_j_value)
+    output_matrix[i, j] <- temp_output
+  }
+}
+output_vector2 <- as.vector(output_matrix)
+output_vector2
+```
+
+>__Challenge__
+
+Compare the objects output_vector and output_vector2. Are they the same? If not, why not? How would you change the last block of code to make output_vector2 the same as output_vector?
+
+#### Getting Loop Output Using print, return, list, and assign
+R only returns the last object produced by a loop.  Here are some ways to save objects you make:
+* `print()` # Prints to console  
+* `return(list())` # Returning a list offers the greatest flexibility  
+* `list(object1, object2, object3…)` # Return the list  
+* `assign (x, value,…)` # *value* is an object made in the local environment of the loop, x is the name of the object to be saved to your global environment  
+
+#### While loops
+Sometimes you will find yourself needing to repeat an operation until a certain condition is met. You can do this with a while() loop.
+```
+while(this condition is true){
+  do a thing
+}
+```
+
+As an example, here’s a while loop that generates random numbers from a uniform distribution (the `runif()` function) between 0 and 1 until it gets one that’s less than 0.1.
+
+```{r}
+z <- 1
+while(z > 0.1){
+  z <- runif(1)
+  print(z)
+}
+```
+
+while() loops will not always be appropriate. You have to be particularly careful that you don’t end up in an infinite loop because your condition is never met.
+
+>__Challenge__
+
+Write a script that loops through the gapminder data by continent and prints out whether the mean life expectancy is smaller or larger than 50 years.
+
+>__Challenge__
+
+Modify the script from Challenge 3 to loop over each country. This time print out whether the life expectancy is smaller than 50, between 50 and 70, or greater than 70.
+
+
+#### Key Points
+*	Use apply with a function if at all possible - it's faster, easier, and more flexible  
+*	Use a loop if results are dependent  
+* Fill an object with results of iterations in a loop to improve computation time
+
+#### __Acknowledgments__
+_These pages were derived in part from:Benjamin Soltoff's MACS 30500 - [Computing for the Social Sciences](https://cfss.uchicago.edu/) at University, and from [Software Carpentry](software-carpentry.org), licensed under the CC BY-NC 3.0 Creative Commons_

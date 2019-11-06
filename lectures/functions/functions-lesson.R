@@ -55,3 +55,11 @@ calcGDP <- function(dat, year=NULL, country=NULL) {
   return(new)
 }
 
+
+####fence()
+
+fence <- function(text, wrapper) {
+  sentence <- paste (text, collapse=" ")
+  text_output <- paste0(wrapper, sentence, wrapper)
+  return(text_output)
+}

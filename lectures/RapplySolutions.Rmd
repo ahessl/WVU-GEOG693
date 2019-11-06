@@ -1,0 +1,14 @@
+# RApply Solutions
+```{r Challenge 1 Solution}
+#Read in gapminder dataset
+gap <- read.csv("../data/gapminder_wide.csv")
+le_cols <- c("lifeExp_2002", "lifeExp_2007")
+
+#Use logical index to pull just the gdp columns
+le_gap <- gap[, colnames(gap) %in% le_cols]
+
+#Use apply to apply mean function across columns
+le_02_09 <- apply(le_gap, 2, mean)
+
+head(le_02_09)
+```
