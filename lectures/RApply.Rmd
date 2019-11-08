@@ -65,7 +65,7 @@ R provides a set of functions called apply() that apply a function across all el
 
 We need a dataframe, we need know if we are applying it across rows or columns, and we need a function.
 
-To solve our problem, we can use apply across rows to get the min and max values of gdp for each country.  :
+To solve our problem, we can use apply across rows to get the min and max values of gdp for each country. 
 
 ```{r apply}
 #Use apply to 'apply' the function 'min' across all rows of the dataframe:
@@ -144,7 +144,7 @@ head(co2_2007_df)
 
 ***
 
->Challenge:__
+>__Challenge:__
 
 Pull out just the gapminder (country data) 2007 to merge:
 ```{r}
