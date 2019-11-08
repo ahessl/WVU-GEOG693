@@ -13,14 +13,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Motivation
 A very common data problem is called 'data munging' - needing to clean or reshape a lot of files that are all broken or mishapen in a similar way.  Instead of correcting each one, it would be easier to solve the problem once, then iterate your solution over all the files you have.  Then you can save your munging function to be used on future files of the same crummy format.
 
-In this lesson, we will create a function to read in multiple csv files, then repeat some data munging over them using apply. We will use a small set of three [Prism data files](../data/prism.zip). You will need to unzip them before we begin.
+In this lesson, we will create a function to read in multiple csv files, then repeat some data munging over them using apply. We will use a small set of three [Prism data files](https://github.com/ahessl/WVU-GEOG693/tree/master/data/prism.zip). You will need to unzip them before we begin.
 
 WE can report the files we have:
 ```{r}
 prism.files <- list.files(path="../data/prism")
 prism.files
 ```
-What do they look like? What special arguments do we need to read them into R?
+What do they look like? We might want to skip some lines and probably rename the headers. What special arguments do we need to read them into R?
 ```{r}
 testFile <- read.csv(file="../data/prism/cv_grid1_monthly.csv", skip=11, head=F)
 head(testFile)
@@ -38,7 +38,7 @@ apply(X, MARGIN, FUN, ...), here the function is read.csv along with its special
     glob.path <- paste0(data.path, "*", ".csv")  
     dataFiles <- lapply(Sys.glob(glob.path), read.csv, skip=11, head=F)
 ```
-What is glob.path?  What does Sys.glob() do?
+"Globbing" is expanding a file name with a wildcard to get access to a set of files. What is glob.path?  What does Sys.glob() do?
 
 Let's add to our function a way to rename all the columns at once:
 ```{r}
@@ -50,7 +50,18 @@ Let's add to our function a way to rename all the columns at once:
 
 Turn that set of operations into a function called prismDat(), where you can designate the path as the argument.  For example:
 ```prismDat("../data/prism/")```
-would produce a list of data frames with each one having the appropriate column names.  What else could you do with this list now that you have it?  What functions might you apply on it?
+would produce a list of data frames with each one having the appropriate column names.
+
+```{r}
+source("functions/functions_apply_loops.R")
+test <- prismDat("../data/prism/")
+head(test[[3]])
+```
+>__Challenge:__
+
+What else could you do with this list now that you have it?  What functions might you apply on it?  Add another feature to your apply function script.
+
+***
 
 #### Repeating operations - for loop
 If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a for() loop will do the job. We saw for() loops in the shell lessons earlier. This is the most flexible of looping operations, but therefore also the hardest to use correctly. Avoid using for() loops unless the order of iteration is important: i.e. the calculation at each iteration depends on the results of previous iterations.

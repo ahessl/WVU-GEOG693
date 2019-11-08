@@ -366,7 +366,7 @@ summary {
 <h1 class="title toc-ignore">Control Flow: More Apply/Loops</h1>
 <h3 class="subtitle">GEOG 693g</h3>
 <h4 class="author">Amy Hessl</h4>
-<h4 class="date">05 November, 2019</h4>
+<h4 class="date">08 November, 2019</h4>
 
 </div>
 
@@ -374,13 +374,12 @@ summary {
 <div id="motivation" class="section level3">
 <h3>Motivation</h3>
 <p>A very common data problem is called ‘data munging’ - needing to clean or reshape a lot of files that are all broken or mishapen in a similar way. Instead of correcting each one, it would be easier to solve the problem once, then iterate your solution over all the files you have. Then you can save your munging function to be used on future files of the same crummy format.</p>
-<p>In this lesson, we will create a function to read in multiple csv files, then repeat some data munging over them using apply. We will use a small set of three <a href="../data/prism/prism.zip">Prism data files</a>. You will need to unzip them before we begin.</p>
+<p>In this lesson, we will create a function to read in multiple csv files, then repeat some data munging over them using apply. We will use a small set of three <a href="https://github.com/ahessl/WVU-GEOG693/tree/master/data/prism.zip">Prism data files</a>. You will need to unzip them before we begin.</p>
 <p>WE can report the files we have:</p>
 <pre class="r"><code>prism.files &lt;- list.files(path=&quot;../data/prism&quot;)
 prism.files</code></pre>
-<pre><code>## [1] &quot;cv_grid1_monthly.csv&quot; &quot;cv_grid2_monthly.csv&quot; &quot;cv_grid3_monthly.csv&quot;
-## [4] &quot;prism.zip&quot;</code></pre>
-<p>What do they look like? What special arguments do we need to read them into R?</p>
+<pre><code>## [1] &quot;cv_grid1_monthly.csv&quot; &quot;cv_grid2_monthly.csv&quot; &quot;cv_grid3_monthly.csv&quot;</code></pre>
+<p>What do they look like? We might want to skip some lines and probably rename the headers. What special arguments do we need to read them into R?</p>
 <pre class="r"><code>testFile &lt;- read.csv(file=&quot;../data/prism/cv_grid1_monthly.csv&quot;, skip=11, head=F)
 head(testFile)</code></pre>
 <pre><code>##        V1     V2    V3   V4   V5
@@ -396,7 +395,7 @@ head(testFile)</code></pre>
 <pre class="r"><code>    data.path &lt;- &quot;../data/prism/&quot;
     glob.path &lt;- paste0(data.path, &quot;*&quot;, &quot;.csv&quot;)  
     dataFiles &lt;- lapply(Sys.glob(glob.path), read.csv, skip=11, head=F)</code></pre>
-<p>What is glob.path? What does Sys.glob() do?</p>
+<p>“Globbing” is expanding a file name with a wildcard to get access to a set of files. What is glob.path? What does Sys.glob() do?</p>
 <p>Let’s add to our function a way to rename all the columns at once:</p>
 <pre class="r"><code>    climvars &lt;- c(&quot;pdate&quot;, &quot;ppt&quot;, &quot;tmin&quot;, &quot;tmean&quot;, &quot;tmax&quot;)
     dataFiles &lt;- lapply(dataFiles, setNames, climvars)
@@ -411,14 +410,29 @@ head(testFile)</code></pre>
 <blockquote>
 <p><strong>Challenge</strong></p>
 </blockquote>
-<p>Turn that set of operations into a function called prismDat(), where you can designate the path as the argument. For example:</p>
-<pre class="prismdat(&quot;../data/prism/&quot;)```"><code>would produce a list of data frames with each one having the appropriate column names.  What else could you do with this list now that you have it?  What functions might you apply on it?
-
-#### Repeating operations - for loop
-If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a for() loop will do the job. We saw for() loops in the shell lessons earlier. This is the most flexible of looping operations, but therefore also the hardest to use correctly. Avoid using for() loops unless the order of iteration is important: i.e. the calculation at each iteration depends on the results of previous iterations.
-
-The basic structure of a for() loop is:</code></pre>
-<p>for(iterator in set of values){ do a thing } ```</p>
+<p>Turn that set of operations into a function called prismDat(), where you can designate the path as the argument. For example: <code>prismDat(&quot;../data/prism/&quot;)</code> would produce a list of data frames with each one having the appropriate column names.</p>
+<pre class="r"><code>source(&quot;functions/functions_apply_loops.R&quot;)
+test &lt;- prismDat(&quot;../data/prism/&quot;)
+head(test[[3]])</code></pre>
+<pre><code>##     pdate    ppt  tmin tmean tmax
+## 1 1895-01 140.91 -10.4  -5.4 -0.4
+## 2 1895-02  31.21 -13.6  -8.6 -3.6
+## 3 1895-03 133.01  -5.8   0.6  7.1
+## 4 1895-04  93.72  -0.3   6.1 12.6
+## 5 1895-05  77.79   5.9  12.3 18.7
+## 6 1895-06  91.12  10.5  18.2 25.8</code></pre>
+<blockquote>
+<p><strong>Challenge:</strong></p>
+</blockquote>
+<p>What else could you do with this list now that you have it? What functions might you apply on it? Add another feature to your apply function script.</p>
+<hr />
+<div id="repeating-operations---for-loop" class="section level4">
+<h4>Repeating operations - for loop</h4>
+<p>If you want to iterate over a set of values, when the order of iteration is important, and perform the same operation on each, a for() loop will do the job. We saw for() loops in the shell lessons earlier. This is the most flexible of looping operations, but therefore also the hardest to use correctly. Avoid using for() loops unless the order of iteration is important: i.e. the calculation at each iteration depends on the results of previous iterations.</p>
+<p>The basic structure of a for() loop is:</p>
+<pre><code>for(iterator in set of values){
+  do a thing
+}</code></pre>
 <p>For example:</p>
 <pre class="r"><code>for(i in 1:10){
   print(i)
@@ -477,6 +491,7 @@ output_vector</code></pre>
 ## [12] &quot;3 b&quot; &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot;
 ## [23] &quot;5 c&quot; &quot;5 d&quot; &quot;5 e&quot;</code></pre>
 <p>This approach can be useful, but ‘growing your results’ (building the result object incrementally) is computationally inefficient, so avoid it when you are iterating through a lot of values.</p>
+</div>
 <div id="tip-dont-grow-your-results" class="section level4">
 <h4>Tip: don’t grow your results</h4>
 <p>One of the biggest things that trips up novices and experienced R users alike, is building a results object (vector, list, matrix, data frame) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It’s much better to define an empty results object before hand of the appropriate dimensions. So if you know the end result will be stored in a matrix like above, create an empty matrix with 5 row and 5 columns, then at each iteration store the results in the appropriate location.</p>
@@ -521,23 +536,27 @@ while(z &gt; 0.1){
   z &lt;- runif(1)
   print(z)
 }</code></pre>
-<pre><code>## [1] 0.3460131
-## [1] 0.6887737
-## [1] 0.560281
-## [1] 0.2041504
-## [1] 0.1716882
-## [1] 0.7519291
-## [1] 0.7884934
-## [1] 0.9828895
-## [1] 0.3178783
-## [1] 0.5142187
-## [1] 0.4745096
-## [1] 0.4749908
-## [1] 0.5545526
-## [1] 0.8800994
-## [1] 0.3439024
-## [1] 0.1843905
-## [1] 0.01985526</code></pre>
+<pre><code>## [1] 0.2413925
+## [1] 0.1881944
+## [1] 0.6733064
+## [1] 0.705502
+## [1] 0.2997952
+## [1] 0.7739503
+## [1] 0.8465907
+## [1] 0.8291275
+## [1] 0.344155
+## [1] 0.6550053
+## [1] 0.9060359
+## [1] 0.2871108
+## [1] 0.6652142
+## [1] 0.2526622
+## [1] 0.868629
+## [1] 0.2143289
+## [1] 0.6103433
+## [1] 0.3392685
+## [1] 0.7620803
+## [1] 0.3631096
+## [1] 0.06738119</code></pre>
 <p>while() loops will not always be appropriate. You have to be particularly careful that you don’t end up in an infinite loop because your condition is never met.</p>
 <blockquote>
 <p><strong>Challenge</strong></p>
