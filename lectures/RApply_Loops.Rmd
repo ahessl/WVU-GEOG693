@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Motivation
 A very common data problem is called 'data munging' - needing to clean or reshape a lot of files that are all broken or mishapen in a similar way.  Instead of correcting each one, it would be easier to solve the problem once, then iterate your solution over all the files you have.  Then you can save your munging function to be used on future files of the same crummy format.
 
-In this lesson, we will create a function to read in multiple csv files, then repeat some data munging over them using apply. We will use a small set of three [Prism data files](https://github.com/ahessl/WVU-GEOG693/tree/master/data/prism.zip). You will need to unzip them before we begin.
+In this lesson, we will create a function to read in multiple csv files, then repeat some data munging over them using apply. We will use a small set of three [Prism data files](https://github.com/ahessl/WVU-GEOG693/blob/master/data/prism.zip). You will need to unzip them before we begin.
 
 WE can report the files we have:
 ```{r}

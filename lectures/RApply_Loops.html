@@ -374,7 +374,7 @@ summary {
 <div id="motivation" class="section level3">
 <h3>Motivation</h3>
 <p>A very common data problem is called ‘data munging’ - needing to clean or reshape a lot of files that are all broken or mishapen in a similar way. Instead of correcting each one, it would be easier to solve the problem once, then iterate your solution over all the files you have. Then you can save your munging function to be used on future files of the same crummy format.</p>
-<p>In this lesson, we will create a function to read in multiple csv files, then repeat some data munging over them using apply. We will use a small set of three <a href="https://github.com/ahessl/WVU-GEOG693/tree/master/data/prism.zip">Prism data files</a>. You will need to unzip them before we begin.</p>
+<p>In this lesson, we will create a function to read in multiple csv files, then repeat some data munging over them using apply. We will use a small set of three <a href="https://github.com/ahessl/WVU-GEOG693/blob/master/data/prism.zip">Prism data files</a>. You will need to unzip them before we begin.</p>
 <p>WE can report the files we have:</p>
 <pre class="r"><code>prism.files &lt;- list.files(path=&quot;../data/prism&quot;)
 prism.files</code></pre>
@@ -536,27 +536,23 @@ while(z &gt; 0.1){
   z &lt;- runif(1)
   print(z)
 }</code></pre>
-<pre><code>## [1] 0.2413925
-## [1] 0.1881944
-## [1] 0.6733064
-## [1] 0.705502
-## [1] 0.2997952
-## [1] 0.7739503
-## [1] 0.8465907
-## [1] 0.8291275
-## [1] 0.344155
-## [1] 0.6550053
-## [1] 0.9060359
-## [1] 0.2871108
-## [1] 0.6652142
-## [1] 0.2526622
-## [1] 0.868629
-## [1] 0.2143289
-## [1] 0.6103433
-## [1] 0.3392685
-## [1] 0.7620803
-## [1] 0.3631096
-## [1] 0.06738119</code></pre>
+<pre><code>## [1] 0.8037894
+## [1] 0.2717506
+## [1] 0.9573944
+## [1] 0.416532
+## [1] 0.2247107
+## [1] 0.3299867
+## [1] 0.2028658
+## [1] 0.5131742
+## [1] 0.2414325
+## [1] 0.3545853
+## [1] 0.1747299
+## [1] 0.2169263
+## [1] 0.3456232
+## [1] 0.4862417
+## [1] 0.1939782
+## [1] 0.9950456
+## [1] 0.05158084</code></pre>
 <p>while() loops will not always be appropriate. You have to be particularly careful that you don’t end up in an infinite loop because your condition is never met.</p>
 <blockquote>
 <p><strong>Challenge</strong></p>
