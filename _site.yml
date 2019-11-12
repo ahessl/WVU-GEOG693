@@ -11,7 +11,7 @@ navbar:
       href: CourseRequirements.html
     - text: "Homework Guidelines"
       href: HomeworkGuidelines.html
-      right:
+  right:
     - text: "Contact Info"
       href: contact.html
     - icon: fa-github fa-lg
@@ -23,5 +23,4 @@ output:
   html_document:
     theme: paper
     css: 'styles.css'
-      
-      
+    
