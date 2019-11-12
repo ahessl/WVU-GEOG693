@@ -72,7 +72,7 @@ Please complete this before the first day of class.
 
 7) [Control Flow: Apply_Loops](./lectures/RApply_Loops.html)  _11/08/19_
 
-8) Plotting Using Base R  _11/08/19_
+8) [Plotting Using Base R](./lectures/RBaseRPlotting.html)  _11/13/19_
 
 9) Plotting Using ggplot  _11/13/19_
 
