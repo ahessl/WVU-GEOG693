@@ -74,7 +74,7 @@ Please complete this before the first day of class.
 
 8) [Plotting Using Base R](./lectures/RBaseRPlotting.html)  _11/13/19_
 
-9) Plotting Using ggplot  _11/13/19_
+9) [Plotting Using ggplot](./lectures/Rggplot.html)  _11/15/19_
 
 10) APIs to Download Data  _11/15/19_
 
