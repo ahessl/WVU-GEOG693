@@ -1,0 +1,373 @@
+---
+title: "ggplot"
+subtitle: "GEOG 693g"
+author: "Amy Hessl"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+#### Why Use ggplot?
+
+* Easy to edit individual features separately  
+* Iteratively update each plot  
+* Aesthetically pleasing default settings  
+* Conducive for designing plots to fit specific problems  
+* Can incorporate statistical transformations in the plot command   
+* Great for plotting features by group  
+* You can save graphics settings and templates to apply later  
+
+#### Might be some disadvantages:
+
+* Can't plot data on two axes (apparently this violates fundamental graphics theory. give me a break.)  
+* Learning curve is steep initially and requires some basic familiarity with R  
+* Constructing a graph takes thought, therefore not best option for quick data exploration  
+* Works best with data frames (advantage mostly, disadvantage if you work with lists and  vectors)  
+
+#### Functions and Arguments
+
+* ggplot() - all plots in ggplot2 start with ggplot() 
+* geom_point - line, bar etc - the type of plot 
+* aes() - describes how variables are mapped/visualized  
+* gradients - color or size based on a variable
+* facets - plotting multiple figures based on factor
+* subset() - subsets data based on a variable
+
+### Let's build some graphs
+
+Now we need to load some packages
+The ggplot2 package is required to create graphs.
+
+```{r,warning=FALSE}
+library(ggplot2)
+```
+
+Now, we need some data.  Data are from NCAA champions lists available at:  
+
+https://www.ncaa.com/history/basketball-men/d1  
+https://www.ncaa.com/history/basketball-women/d1  
+GGplot likes data organized as data frames with factors for groupings. We will add a column for gender then combine the data frames together.
+
+```{r,warning=FALSE}
+mTable <- read.csv("../data/Bballmens.csv",header=TRUE)
+mTable$gender = "Men"
+wTable <- read.csv("../data/BballWomens.csv",header=TRUE)
+wTable$gender = "Women"
+
+Basketball <- rbind(mTable, wTable)
+colnames(Basketball) <- c("Year","Champion","Coach","Score","RunnerUp","Site","Gender")
+```
+
+Let's convert some of those data types into useful things:
+```{r}
+Basketball$Champion <- as.character(as.factor(Basketball$Champion))
+Basketball$Champion <- substr(Basketball$Champion, 1, nchar(Basketball$Champion) - 7)
+
+Basketball$WinningScore <- substr(Basketball$Score, 1, 2)
+Basketball$LosingScore <- substr(Basketball$Score,4,5)
+
+Basketball$WinningScore<-as.numeric(Basketball$WinningScore)
+Basketball$LosingScore<-as.numeric(Basketball$LosingScore)
+Basketball$Year<- as.numeric(Basketball$Year)
+
+Basketball <- subset(Basketball, Champion != "UNLV")  #Note: I removed UNLV because they scored over #100 points and I didn't want to reformat.
+
+Basketball$Site <- sub(",.*$", "", Basketball$Site)
+
+head(Basketball)
+```
+
+### geoms and aesthetics
+The basic component of ggplot graphs are *geoms*. Each geom requires at minimum a data frame from which to draw data, and specification of aesthetics. *Aesthetics*, aes(), require at minimum an x and y series to plot. Within aes(), you can also group by category, color by category, fill by category, and calculate basic stats by group. aes() is extremely important as it allows you to customize your plot by mapping graphical attributes to data. Anything specified in aes() is joined to your data and appears in legends. 
+
+### All plots start with ggplot()
+Here is a scatterplot of winning scores vs. losing scores from the Basketball dataset. 
+Note: all plots start with ggplot(). Use + to iteratively add new features.
+```{r}
+Scatter <- ggplot() +  
+  geom_point(data = Basketball, aes(x=WinningScore, y = LosingScore))
+Scatter
+```
+
+### Add new features using '+'
+#### Change color of points: 
+```{r}
+Scatter2 <- ggplot() +  
+  geom_point(data = Basketball, aes(x = WinningScore, y = LosingScore), color="purple") 
+Scatter2
+```
+Notice that color is specified outside of aes().This tells ggplot to apply "purple" to all points. When assigning colors outside aes(), you will use "". Do not use "" for anything within aes() that you want connected to data, this will disconnect from the data.
+
+#### Color by Factor
+But, if don't want all point purple and want to color by whether it was a Men's or Women's game, we specify color WITHIN aes().:
+```{r}
+ScatterGroup <- ggplot() +  
+  geom_point(data = Basketball, aes(x = WinningScore, y = LosingScore, color = Gender)) 
+ScatterGroup
+```
+
+
+### geom_line:
+
+```{r}
+
+TimeSeries <- ggplot()+
+  geom_line(data = Basketball, aes(x = Year, y = WinningScore, color = Gender))
+TimeSeries
+```
+
+
+### geom bar
+If we only want to graph a subset of the data frame, in this case, frequent championship winner, we can use the base R subset() function within ggplot.
+```{r,warning=FALSE,message=FALSE}
+Bar <- ggplot(subset(Basketball, Champion %in% c("North Carolina","Duke","Connecticut","Tennessee","UCLA","Kentucky","Indiana","Lousiville")))+
+  geom_bar(aes(x = Champion)) 
+Bar 
+```
+
+Bar plot of winning scores:
+```{r}
+Bar2<-ggplot()+
+  geom_bar(data = Basketball, aes(x = WinningScore)) 
+Bar2
+```
+
+geom_histogram with stat="count" is identical to geom_bar:
+```{r}
+Hist <- ggplot() +
+  geom_histogram(data = Basketball, aes(x = WinningScore), stat="count")  
+Hist
+```
+
+```{r}
+Hist2 <- ggplot()+
+  geom_histogram(data = Basketball, aes(x = WinningScore))
+Hist2
+```
+
+We can change binwidth:
+```{r}
+Hist3 <- ggplot() +
+  geom_histogram(data=Basketball, aes(x=WinningScore),binwidth=10) 
+
+Hist3
+```
+
+#### Group by category
+```{r}
+Hist4 <- ggplot() +
+  geom_histogram(data = Basketball, aes(x = WinningScore, fill = Gender), binwidth=3) 
+
+Hist4
+```
+Above we use fill to group. For histogram or any areal geoms, fill specifies inside color, color specifies the border. Example:
+
+```{r}
+Hist5 <- ggplot() +
+  geom_histogram(data = Basketball, aes(x = WinningScore, fill = Gender), color = "black") 
+Hist5
+```
+
+#### Density Plots
+```{r}
+DensPlot <- ggplot() +
+  geom_density(data = Basketball, aes(x = WinningScore), fill = "green", alpha = 0.3) + #alpha is a transparency command (0 totally transparent to 1 totally opaque)
+  geom_density(data = Basketball, aes(x = LosingScore), fill = "red", alpha = 0.3)
+DensPlot
+```  
+
+#### geom_violin and geom_boxplot
+
+```{r,warning=FALSE}
+Boxplot <- ggplot(subset(Basketball, Champion %in% c("North Carolina","Duke","Connecticut","Tennessee","UCLA","Kentucky","Indiana","Lousiville"))) +
+  geom_boxplot(aes(x = Champion, y = WinningScore))
+Boxplot
+```
+
+#### OR 
+```{r}
+Violin <- ggplot() +
+  geom_violin(data=Basketball, aes(x=Gender, y=WinningScore), fill="red", alpha=0.4) #alpha is a transparency setting
+Violin
+```
+
+#### Combine Plot Types
+Violin + boxplot
+```{r}
+Violin + geom_boxplot(data=Basketball, aes(Gender, WinningScore), fill=NA, width=.5)
+
+```
+
+
+
+### Scales 
+#You can manually adjust scales:
+```{r,warning=FALSE}
+Scatter+
+  scale_x_continuous(name="Winning Score", limits=c(30,100), breaks=c(30,40,50,60,70,80,90,100)) +
+  scale_y_continuous(name="Losing Score", limits=c(30,100),breaks=c(30,40,50,60,70,80,90,100)) +
+  labs(title="NCAA Championships Winning vs Losing Scores") 
+```
+#### Labels
+We can change labels to anything you might want. Here, using the \n to add line break to axis label. Using scale_discrete for team names and scale_y_continous for scores
+```{r}
+Boxplot2 <- Boxplot +
+  scale_x_discrete(name="NCAA basketball champion",labels=c("Connecticut\nHuskies","Duke\nBlue Devils","Indiana\nHoosiers","Kentucky\nWildcats","Louisville\nCardinals","Maryland\nTerrapins","North Carolina\nTarHeels","Tennessee\nVolunteers","UCLA\nBruins")) + 
+  scale_y_continuous(name="Winning Scores") 
+Boxplot2
+```
+
+
+
+### Colors And Legends
+Before, when plots had groups on them legends were added automatically. For example, see the TimeSeries graph grouped by gender. ggplot added a default legend with default colors. You can change these colors to something different:
+```{r,warning=FALSE,message=FALSE}
+BetterColors <- c("brown4", "royalblue4")
+TimeSeries + scale_color_manual(values=BetterColors) 
+```
+Colors are controlled in scale_color_manual. For fills, use scale_fill_manual. 
+
+But, the above only works for "grouped" data. For example, when we made the Density plot that had both Winning Scores and Losing Scores (DensPlot), these are not grouped as each is a separate variable. If we want to control the colors of both density curves and get those changes to appear in a legend, we have to do it manually by mapping to aes(). See below:
+
+```{r}
+DensPlot2 <- ggplot() +
+  geom_density(data=Basketball, aes(x=WinningScore, fill="WinningPoints"), alpha=0.3) + 
+  geom_density(data=Basketball,aes(x=LosingScore,fill="LosingPoints"), alpha=0.3) +
+  scale_fill_manual(name="Legend", values = c(WinningPoints = "brown", LosingPoints = "midnightblue"),labels=c("Losers","Winners")) + 
+  xlab("Points") +
+  ylab("Density")
+
+DensPlot2
+```
+"WinningPoints" is in aes(). This will map it to a scale. But, it is in parentheses to indicate not a variable. Here, the two fills we put in aes() earlier are mapped to scale_fill and we can make a name, specify colors, and labels for the legend. 
+
+Put mean line in density plots
+```{r}
+DensPlot2 +
+  geom_vline(data=Basketball, aes(xintercept=mean(WinningScore), na.rm=T), color="brown", size=0.8, linetype = "dashed") +
+   geom_vline(data=Basketball, aes(xintercept = mean(LosingScore), na.rm=T), color="midnightblue", size=0.8, linetype="dashed")
+```
+
+#### Scale_color_gradient
+```{r}
+ggplot() +  
+  geom_point(data=Basketball,aes(x=WinningScore,y=LosingScore,color=Year),size=10) +
+  scale_color_gradient(name="Year", low="black", high="red")
+```
+
+
+
+#### Some basic statistical visualizations (huge advantage of gg)
+Basic arithmetic transformations:
+```{r,warning=FALSE,message=FALSE}
+
+Line2 <- ggplot() +
+  geom_line(data=Basketball,aes(x=Year, y=WinningScore-LosingScore, color=Gender)) +
+  scale_color_manual(values=BetterColors) +
+  ylab("Point Differential")
+
+Line2
+```
+
+Smooth the time series graph to make it easier to read
+```{r}
+Line3 <- ggplot() +
+  geom_smooth(data=Basketball, aes(x=Year, y=WinningScore-LosingScore, color=Gender), se=F) 
+
+Line3
+```
+What does the se=F argument mean?
+
+#### Lines of best fits:
+```{r}
+Scatter2 +
+  geom_smooth(data=Basketball, aes(WinningScore, LosingScore), method="lm")
+```
+Get a separate linear fit by group:
+```{r}
+WinningScore <- ScatterGroup + geom_smooth(data=Basketball, aes(WinningScore, LosingScore,color=Gender), method="lm", se=FALSE, size=1) 
+WinningScore
+```
+
+### Themes
+You can save themes for later use.
+
+```{r,warning=FALSE}
+
+Theme1 <- theme(panel.border=element_rect(color="black",fill=NA,),panel.grid.minor=element_blank())
+Theme2 <- theme(panel.border=element_rect(color="black",fill=NA),panel.background=element_blank())
+Theme3 <- theme(panel.border=element_rect(color="black",fill=NA),panel.background=element_blank(), axis.text.x=element_text(size=11,angle=90,color="midnightblue"))
+
+Boxplot2 + Theme1
+Boxplot2 + Theme2
+Boxplot2 + Theme3
+```
+
+### Facets
+
+```{r,warning=FALSE}
+Sites <- subset(Basketball, Site=="Houston"|Site=="Indianapolis"|Site=="Atlanta"|Site=="San Antonio"|Site=="New Orleans"|Site=="St. Louis")
+
+Facet1 <- ggplot() +
+  geom_density(data=Sites, aes(x=WinningScore), fill="black", alpha=0.4) +
+  facet_wrap(~Site,ncol=2) + Theme2 +
+  labs(title="Winning Scores by Site",x="Winning Score")
+
+Facet1
+```
+
+Since it won't always make sense for all facets to have identical scales, you can use scales="free" to give each facet an appropriate scale. You can also use individualized themes within the ggplot call
+
+```{r}
+Facet2 <- ggplot() +
+  geom_density(data=Sites, aes(x=WinningScore), fill="black", alpha=0.2, linetype="dashed") +
+  facet_wrap(~Site,ncol=2,scales="free_y") +
+  Theme2+theme(strip.background=element_blank()) +
+  labs(title="Winning Scores by Site",x="Winning Score")
+
+Facet2
+
+```
+
+### Saving plots
+
+```{r}
+ggsave("WinningScore", plot = WinningScore, device = "jpeg", path = ".",
+  scale = 1, width = 7, height = 5, units = "cm",
+  dpi = 800, limitsize = TRUE)
+```
+
+### Further Information
+There is plenty of information on the web regarding ggplot2 with so many examples and community input. For example: 
+[Cran Manual](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf)
+
+Some basics with geoms and aesthetics:
+GEOM_POINT
+[geom_point help page](http://docs.ggplot2.org/0.9.3.1/geom_point.html)
+
+GEOM LINE
+[geom_line](http://docs.ggplot2.org/0.9.3.1/geom_line.html)
+
+GEOM BOXPLOT
+[geom_boxplot](http://docs.ggplot2.org/0.9.3.1/geom_boxplot.html)
+
+VIOLIN PLOT
+[geom_violin](http://docs.ggplot2.org/current/geom_violin.html)
+
+SCALES
+[continuous scales](http://docs.ggplot2.org/current/scale_continuous.html)
+
+COLORS AND LEGENDS
+[legends](http://docs.ggplot2.org/0.9.3.1/guide_legend.html)
+[Color reference](http://sape.inf.usi.ch/quick-reference/ggplot2/colour)
+
+THEMES
+[All the themes you can apply](http://docs.ggplot2.org/current/theme.html)
+
+FACETS
+[facet_grid](http://docs.ggplot2.org/0.9.3.1/facet_grid.html)
+[facet_wrap](http://docs.ggplot2.org/0.9.3.1/facet_wrap.html)
