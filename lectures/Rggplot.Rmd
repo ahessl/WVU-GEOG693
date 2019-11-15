@@ -46,10 +46,11 @@ The ggplot2 package is required to create graphs.
 library(ggplot2)
 ```
 
-Now, we need some data.  Data are from NCAA champions lists available at:  
+Now, we need some data.  Data are from NCAA history: [NCAA_Champions](https://github.com/ahessl/WVU-GEOG693/blob/master/data/Bball.zip)
 
 https://www.ncaa.com/history/basketball-men/d1  
 https://www.ncaa.com/history/basketball-women/d1  
+
 GGplot likes data organized as data frames with factors for groupings. We will add a column for gender then combine the data frames together.
 
 ```{r,warning=FALSE}
