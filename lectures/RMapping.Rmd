@@ -28,9 +28,7 @@ library("lwgeom")
 ```
 
 ### Base Map: The World
-First, let us start with creating a base map of the world using ggplot2. This base map will then be extended with different map elements, as well as change the scale to focus on an area of interest. We can check that the world map was properly retrieved and converted into an sf object. 
-
-The package `rnaturalearth` provides a map of countries of the entire world. Use `ne_countries` to pull country data and choose the scale (rnaturalearthhires is necessary for scale = "large"). The function can return `sp` classes (default) or directly `sf` classes, as defined in the argument returnclass:
+First, let us start with creating a base map of the world using ggplot2. This base map will then be extended with different map elements, as well as change the scale to focus on an area of interest. The package `rnaturalearth` provides a map of countries of the entire world. Use `ne_countries` to pull country data and choose the scale (rnaturalearthhires is necessary for scale = "large"). The function can return `sp` classes (default) or directly `sf` classes, as defined in the argument class():
 ```{r, warning=FALSE}
 world <- ne_countries(scale = "medium", returnclass = "sf")
 class(world)
