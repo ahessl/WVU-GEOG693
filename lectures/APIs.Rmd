@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r, include=FALSE}
-source("../.Rprofile")
+#source("../.Rprofile")
 ```
 
 You will need to install these libraries for this unit:
@@ -81,21 +81,34 @@ At that link, you can see a page like this:
 
 The data already look to be organized in a data frame! rebird allows us to read these data directly into R.
 
-The ID code for Core Arboretum is L723492.  We will also need a 'key'.  This is required by eBird and many other APIs to ensure that we are a registered user and not a bot.  You can get an account and a key for eBird [here](https://help.ebird.org/customer/en/portal/articles/1010524-can-i-download-raw-data-from-ebird-?b_id=1928).  If you plant to use it again, you can save it in your .Renviron file that is read on startup of R.  (Alternatively you can use your .Rprofile file).  Either way, you can locate this in your project directory and everytime you start that project, R will read those variables upon startup.
+The ID code for Core Arboretum is L723492.  We will also need a 'key'.  This is required by eBird and many other APIs to ensure that we are a registered user and not a bot.  You can get an [account](https://secure.birds.cornell.edu/cassso/login) and a [key](https://ebird.org/data/request) for eBird.  If you plant to use it again, you can save it in your .Renviron file that is read on startup of R.  You can locate this in your user directory and everytime you start that project, R will read those variables upon startup.
+
+`atom ~/.Renviron`
+
 All you need to put in that hidden text file is:
 
 `EBIRD_KEY = 'yourcode'`
+And a blank line.
+
+OR you can use Sys.setenv:
+```{r, eval=FALSE}
+Sys.setenv(EBIRD_KEY = "yourcode")
+```
 
 Now you must restart RStudio for R to read .Renviron file on startup.  It's a useful place to store any variable you wish to use often.  If you are having trouble getting R to read it at startup, you can always source it:
 
 ```{r, eval=FALSE}
-source(".Rprofile")
+readRenviron("~/.Renviron")
 ```
 
+To check that you can retrieve that key from the system environment, use:
+```{r, eval=F}
+Sys.getenv("EBIRD_KEY")
+```
 We can use the function ebirdgeo() to get a list for an area and then use dplyr to use pipes to make a tibble and take glimpse of the data:
 
 ```{r ebrirdgeo}
-arbobirds <- ebirdgeo(lat = 39.645810, lng = -79.978924, key = getOption("EBIRD_KEY"))
+arbobirds <- ebirdgeo(lat = 39.645810, lng = -79.978924, key = Sys.getenv("EBIRD_KEY"))
 arbobirds %>%
   as_tibble() %>%
   glimpse()
@@ -107,7 +120,7 @@ Note: Check the defaults on this function. e.g. radius of circle, time of year.
 We can also search by “region”, which refers to short codes which serve as common shorthands for different political units. For example, Washington DC is represented by the letters US-DC:
 
 ```{r ebirdregion}
-DCbirds <- ebirdregion("US-DC", key = getOption("EBIRD_KEY"))
+DCbirds <- ebirdregion("US-DC", key = Sys.getenv("EBIRD_KEY"))
 
 head(DCbirds)
 ```
@@ -121,8 +134,11 @@ There are a few things we need to do to be able to use this package to access th
 * Go to the geonames site and register an account.  
 * Add your geonames username to your R your geonames username to your .Renviron in your .Rproj directory. 
 
-```
-geonamesUsername = "my_user_name"
+```options(geonamesUsername="myusernamehere")```
+
+Since I placed my username in my .Renviron file, I do the following:
+```{r}
+options(geonamesUsername = Sys.getenv("geonamesUsername"))
 ```
 
 _Important_  
@@ -135,7 +151,7 @@ This is a simple means to keep your keys and usernames private, especially if yo
 
 #### Using `geonames`
 Get access to lots of geographical information via the various “web services”
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 countryInfo <- GNcountryInfo()
 head(countryInfo)
 ```
@@ -149,8 +165,8 @@ The Manifesto Project collects and organizes political party manifestos from aro
 Accessing data from the Manifesto Project API requires an authentication key. You can create an account and key [here.](https://manifesto-project.wzb.eu/signup) Here I store my key in .Rprofile and retrieve it using mp_setapikey().
 
 ##### retrieve API key stored in .Rprofile
-```{r, eval=FALSE}
-mp_setapikey(key=manifesto_key)
+```{r, eval=TRUE}
+mp_setapikey(key=Sys.getenv("manifesto_key"))
 #Retrieve the database
 (mpds <- mp_maindataset())
 ```
@@ -159,7 +175,7 @@ mp_maindataset() includes a data frame describing each manifesto included in the
 
 Using piping in dplyr and ggplot2, we can do this pretty quickly.
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 mpds %>%
   filter(countryname == "Sweden") %>%
   count(partyname) %>%
@@ -173,7 +189,7 @@ mpds %>%
 
 Or we can use scaling functions to identify each party manifesto on an ideological dimension. For example, how have the Democratic and Republican Party manifestos in the United States changed over time?
 
-```{r, eval=FALSE}
+```{r, eval=T}
 mpds %>%
   filter(party == 61320 | party == 61620) %>%
   mutate(ideo = mp_scale(.)) %>%
@@ -192,7 +208,7 @@ mp_scale is a scaling function built in to manifestoR...
 #### Download manifestos
 mp_corpus() can be used to download the original manifestos as full text documents stored as a corpus. Once you obtain the corpus, you can perform text analysis. As an example, let’s compare the most common words in the Democratic and Republican Party manifestos from the 2016 U.S. presidential election:
 
-```{r, eval=FALSE, wqrning=FALSE}
+```{r, eval=T, warning=FALSE}
 (docs <- mp_corpus(countryname == "United States" & edate > as.Date("2015-01-01")))
 
 # generate wordcloud of most common terms
@@ -210,15 +226,12 @@ docs %>%
 Try comparing to the 2012 election!
 
 #### Census data with `tidycensus`
-tidycensus provides an interface with the US Census Bureau’s decennial census and American Community APIs and returns tidy data frames with optional simple feature geometry. These APIs require a free key you can obtain [here.](https://api.census.gov/data/key_signup.html) Rather than storing your key in .Rprofile, tidycensus includes census_api_key() which automatically stores your key in .Renviron, which is basically a global version of .Rprofile. Anything stored in .Renviron is automatically loaded anytime you initiate R on your computer, regardless of the project or file location. Once you get your key, load it:
+tidycensus provides an interface with the US Census Bureau’s decennial census and American Community APIs and returns tidy data frames with optional simple feature geometry. These APIs require a free key you can obtain [here.](https://api.census.gov/data/key_signup.html) Rather than storing your key in .Rprofile, tidycensus includes census_api_key() which automatically stores your key in .Renviron, which is basically a global version of .Rprofile. Anything stored in .Renviron is automatically loaded anytime you initiate R on your computer, regardless of the project or file location. Once you get your key, load it to your .Renviron file:
 
 ```census_api_key("census_key", install = TRUE)```
+Or since I have my census_api_key stored in .Renviron
 
-```{r, echo=-1}
-census_api_key("276a059cd500acab894b955e287b221dbd4bcde8", install=TRUE, overwrite=TRUE)
-readRenviron("~/.Renviron")
-```
-If you don't want to restrat R, you can use readRenviron() to read the installed key.
+If you don't want to restart R, you can use readRenviron() to read the installed key.
 
 #### Obtaining data
 get_decennial() allows you to obtain data from the 1990, 2000, and 2010 decennial US censuses. Let’s look at the number of individuals of Asian ethnicity by state in 2010:
@@ -309,7 +322,7 @@ This looks similar to the previous output but because we set geometry = TRUE it 
 ```{r}
 ggplot(data = monongalia) +
   geom_sf(aes(fill = estimate, color = estimate)) + 
-  coord_sf(crs = 26911) +  #coord ref system
+  #coord_sf(crs = 26911) +  #coord ref system
   scale_fill_viridis(option = "magma") + 
   scale_color_viridis(option = "magma") 
   
